@@ -7,7 +7,7 @@ package elgranhotel;
 
 /**
  *
- * @author Lucas
+ * @author Grupo7
  */
 public class ElGranHotel {
 
