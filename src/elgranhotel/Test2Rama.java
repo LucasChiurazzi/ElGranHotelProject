@@ -10,5 +10,6 @@ package elgranhotel;
  * @author Lucas
  */
 public class Test2Rama {
+    private int atributo;
     
 }
