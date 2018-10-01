@@ -5,6 +5,9 @@
  */
 package elgranhotel;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Grupo7
@@ -15,7 +18,14 @@ public class ElGranHotel {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            Conexion conexion=new Conexion("hotel","root","");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ElGranHotel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Huesped huesped= new Huesped("juancito",12321234,"calle falsa 123","juanci@gmail.com","2664212121");
+        
     }
     
 }
