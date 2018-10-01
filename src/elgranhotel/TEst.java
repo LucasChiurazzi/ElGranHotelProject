@@ -10,5 +10,5 @@ package elgranhotel;
  * @author Lucas
  */
 public class TEst {
-    
+    //comentario de prueba
 }
