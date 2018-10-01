@@ -17,7 +17,7 @@ public class Conexion {
         this.usuario = usuario;
         this.password = password;
 
-        //Cargamos las clases de mariadb que implementan JDBC
+        //Aqui Cargamos las clases de mariadb que implementan JDBC
         Class.forName("org.mariadb.jdbc.Driver");
 
     }
