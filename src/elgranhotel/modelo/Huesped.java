@@ -1,14 +1,16 @@
 
-package elgranhotel;
+package elgranhotel.modelo;
 
 
 public class Huesped {
+    //atributos
     private String nombre;
     private long dni;
     private String domicilio;
     private String correo;
     private String celular;
-
+    
+    //constructor
     public Huesped(String nombre, long dni, String domicilio, String correo, String celular) {
         this.nombre = nombre;
         this.dni = dni;
@@ -16,7 +18,11 @@ public class Huesped {
         this.correo = correo;
         this.celular = celular;
     }
-
+    
+    public Huesped(){
+    }
+    
+    //getters y setters
     public String getNombre() {
         return nombre;
     }
