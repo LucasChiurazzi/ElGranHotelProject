@@ -48,13 +48,56 @@ public class HuespedData {
         }
     }
     
-    public List<Huesped> mostrarHuesped(){
+    public void modificarHuesped(Huesped huesped){
+    
+        try {
+            
+            String sql = "UPDATE huesped SET nombreHuesped = ?, domicilioHuesped = ? , correoHuesped = ? , celularHuesped = ? WHERE dniHuesped = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, huesped.getNombre());
+            statement.setString(2, huesped.getDomicilio());
+            statement.setString(3, huesped.getCorreo());
+            statement.setString(4, huesped.getCelular());
+            statement.setLong(5, huesped.getDni());
+            statement.executeUpdate();
+            
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar un huesped: " + ex.getMessage());
+        }
+    
+}
+ 
+    public void eliminarHuesped(long dni){
+    try {
+            
+            String sql = "DELETE FROM huesped WHERE dniHuesped =?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setLong(1, dni);
+                       
+            statement.executeUpdate();
+             
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar un huesped: " + ex.getMessage());
+        }
+        
+    
+    }
+    
+    public List<Huesped> mostrarHuesped(long dni){
         List<Huesped> huespedes = new ArrayList<Huesped>();
             
 
         try {
-            String sql = "SELECT * FROM huesped;";
+            String sql = "SELECT * FROM huesped WHERE dniHuesped = ? ;";
             PreparedStatement statement = connection.prepareStatement(sql);
+            Huesped huespedDni= new Huesped();
+            statement.setLong(1, huespedDni.getDni());
             ResultSet resultSet = statement.executeQuery();
             Huesped huesped;
             while(resultSet.next()){
@@ -75,5 +118,6 @@ public class HuespedData {
         
         return huespedes;
     }
+    
 }
     
