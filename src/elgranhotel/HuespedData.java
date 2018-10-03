@@ -12,8 +12,10 @@ import java.util.List;
 
 
 public class HuespedData {
+    //atributo
     private Connection connection = null;
 
+    //constructor
     public HuespedData(Conexion conexion) {
         try {
             connection = conexion.getConexion();
@@ -22,7 +24,9 @@ public class HuespedData {
         }
     }
     
+    //metodos
     
+    //creo un nuevo huesped
     public void crearHuesped(Huesped huesped){
         try {
             
@@ -44,7 +48,7 @@ public class HuespedData {
             System.out.println("Error al insertar un huesped: " + ex.getMessage());
         }
     }
-    
+    //modifico todos los campos de un huesped
     public void modificarHuesped(Huesped huesped){
     
         try {
@@ -66,7 +70,7 @@ public class HuespedData {
         }
     
 }
- 
+    //elimino huesped filtrando por dni
     public void eliminarHuesped(long dni){
     try {
             
@@ -85,7 +89,7 @@ public class HuespedData {
         
     
     }
-    
+    //muestro huesped filtrado por dni
     public List<Huesped> mostrarHuesped(long dni){
         List<Huesped> huespedes = new ArrayList<Huesped>();
             
