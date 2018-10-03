@@ -10,10 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author ma
- */
+
 public class HuespedData {
     private Connection connection = null;
 
