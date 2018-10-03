@@ -1,20 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package elgranhotel;
 
-/**
- *
- * @author ma
- */
+//atributos
 public class Huesped {
     private String nombre;
-private long dni;
-private String domicilio;
-private String correo;
-private String celular;
+    private long dni;
+    private String domicilio;
+    private String correo;
+    private String celular;
 
 // constructor
 public Huesped(String nombre, long dni, String domicilio, String correo, String celular){
@@ -25,6 +18,8 @@ public Huesped(String nombre, long dni, String domicilio, String correo, String 
     this.celular=celular;
 } 
 
+public Huesped(){
+}
    
 
     /**
