@@ -66,7 +66,7 @@ public class HuespedData {
             statement.close();
     
         } catch (SQLException ex) {
-            System.out.println("Error al insertar un huesped: " + ex.getMessage());
+            System.out.println("Error al modificar un huesped: " + ex.getMessage());
         }
     
 }
@@ -84,7 +84,7 @@ public class HuespedData {
             statement.close();
     
         } catch (SQLException ex) {
-            System.out.println("Error al insertar un huesped: " + ex.getMessage());
+            System.out.println("Error al eliminar un huesped: " + ex.getMessage());
         }
         
     

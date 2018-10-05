@@ -9,7 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,7 +21,7 @@ public class HabitacionData {
 
 
 //constructor toma una conexion
-public HabitacionData (Conexion conexion) {
+    public HabitacionData (Conexion conexion) {
         try {
             connection = conexion.getConexion();
         } catch (SQLException ex) {
@@ -28,11 +29,11 @@ public HabitacionData (Conexion conexion) {
         }
     }
 
-public void mostrarHabitacion(){
+//metodos
     
-}
+    //creo una nueva habitacion
         
-public void agregarHabitacion(Habitacion habitacion){try {
+    public void agregarHabitacion(Habitacion habitacion){try {
                      
             String sql = "INSERT INTO habitacion (idHabitacion, pisoHabitacion, estadoHabitacion, TipoHabitacion_idTipoHabitacion)";
 
@@ -40,7 +41,7 @@ public void agregarHabitacion(Habitacion habitacion){try {
             statement.setInt(1, habitacion.getNumeroHabitacion());
             statement.setInt(2, habitacion.getPiso());
             statement.setBoolean(3, habitacion.getEstadoHabitacion());
-            statement.setInt(4, habitacion.getTipohabitacion().getIdTipoHabitacion());
+            statement.setInt(4, habitacion.getTipoHabitacion().getIdTipoHabitacion());
                       
             
             statement.executeUpdate();
@@ -49,15 +50,102 @@ public void agregarHabitacion(Habitacion habitacion){try {
             statement.close();
     
         } catch (SQLException ex) {
-            System.out.println("Error al insertar un habitacion: " + ex.getMessage());
+            System.out.println("Error al insertar una habitacion: " + ex.getMessage());
         }
     
     
 }
-public void cambiarHabitacion(Habitacion habitacion){
+
+
+//modifica todos los campos de una habitacion
+    public void cambiarHabitacion(Habitacion habitacion){
+    
+       try {
+            
+            String sql = "UPDATE habitacion SET  pisoHabitacion = ?, estadoHabitacion = ?, TipoHabitacion_idTipoHabitacion = ? WHERE idHabitacion = ?;";
+// where tipode habitacion id??
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, habitacion.getPiso());
+            statement.setBoolean(2, habitacion.getEstadoHabitacion());
+            statement.setInt(3, habitacion.getTipoHabitacion().getIdTipoHabitacion());
+            statement.setInt(4, habitacion.getNumeroHabitacion());
+            
+            statement.executeUpdate();
+            
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar una habitacion: " + ex.getMessage());
+        }
+    
+    
+}
+//elimino habitacion filtrando por dni
+    public void eliminarHabitacion(int nroHabitacion){
+    
+    try {
+            
+            String sql = "DELETE FROM habitacion WHERE idHabitacion =?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, nroHabitacion);
+                       
+            statement.executeUpdate();
+             
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar una habitacion: " + ex.getMessage());
+        }
+        
+    
+    
+}
+
+public List<Habitacion> mostrarHabitacion(){
+ List<Habitacion> habitaciones = new ArrayList<Habitacion>();
+            
+
+        try {
+            String sql = "SELECT * FROM habitacion, tipohabitacion, tipocama \n" +
+                         "WHERE habitacion.TipoHabitacion_idTipoHabitacion = tipohabitacion.idTipoHabitacion\n" +
+                         "AND tipocama.idTipoCama = tipohabitacion.TipoCama_idTipoCama ;";
+            
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            Habitacion habitacionNro= new Habitacion();
+            
+            statement.setInt(1, habitacionNro.getNumeroHabitacion());
+            ResultSet resultSet = statement.executeQuery();
+            
+            Habitacion habitacion;
+            
+                        
+            while(resultSet.next()){
+                
+                TipoHabitacion tipoHabitacion = new TipoHabitacion(resultSet.getInt("TipoHabitacion_idTipoHabitacion"));
+                TipoCama tipoCama = new TipoCama();
+                
+                habitacion = new Habitacion();
+                habitacion.setNumeroHabitacion(resultSet.getInt("idHabitacion"));
+                habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
+                habitacion.setPiso(resultSet.getInt("pisoHabitacion"));
+                
+                habitacion.setTipoHabitacion(tipoHabitacion);
+                
+              
+                habitaciones.add(habitacion);
+            }      
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los habitaciones: " + ex.getMessage());
+        }
+        
+        
+        return habitaciones;
+    }
     
 }
 
 
 
-}

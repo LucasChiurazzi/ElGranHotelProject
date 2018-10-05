@@ -11,6 +11,15 @@ package elgranhotel;
  */
 public class TipoHabitacion {
     private int idTipoHabitacion;
+    private String categoriaTipoHabitacion;
+    private int cantPersonasTipoHabitacin;
+    private double precioNocheTipoHabitacion;
+    private TipoCama tipoCama;
+
+    public TipoHabitacion(int idTipoHabitacion) {
+        this.idTipoHabitacion = idTipoHabitacion;
+    }
+    
 
     
     
