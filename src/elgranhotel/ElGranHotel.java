@@ -5,6 +5,9 @@
  */
 package elgranhotel;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Grupo7
@@ -16,6 +19,20 @@ public class ElGranHotel {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+       
+     Conexion conexion = null;
+     HuespedData huespedDataTest;
+     
+        try {
+            conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ElGranHotel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     huespedDataTest = new HuespedData(conexion);
+     
+        
+  
+     
     }
     
 }
