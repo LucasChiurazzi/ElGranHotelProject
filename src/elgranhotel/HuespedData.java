@@ -33,7 +33,7 @@ public class HuespedData {
     public void crearHuesped(Huesped huesped){
         try {
             
-            String sql = "INSERT INTO huesped (dniHuesped, nombreHuesped, domicilioHuesped, correoHuesped, celularHuesped) VALUES ( ? , ? , ? , ? , ?)";
+            String sql = "INSERT INTO huesped (dniHuesped, nombreHuesped, domicilioHuesped, correoHuesped, celularHuesped) VALUES ( ? , ? , ? , ? , ?);";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, huesped.getDni());
