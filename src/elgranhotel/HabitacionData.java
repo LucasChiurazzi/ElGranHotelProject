@@ -123,8 +123,10 @@ public List<Habitacion> mostrarHabitacion(){
                         
             while(resultSet.next()){
                 
-                TipoHabitacion tipoHabitacion = new TipoHabitacion(resultSet.getInt("TipoHabitacion_idTipoHabitacion"));
+                
                 TipoCama tipoCama = new TipoCama();
+                TipoHabitacion tipoHabitacion = new TipoHabitacion(resultSet.getInt("TipoHabitacion_idTipoHabitacion"));
+                
                 
                 habitacion = new Habitacion();
                 habitacion.setNumeroHabitacion(resultSet.getInt("idHabitacion"));
