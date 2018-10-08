@@ -3,16 +3,16 @@ package elgranhotel;
 
 //atributos
 public class Huesped {
-    private String nombre;
     private long dni;
+    private String nombre;
     private String domicilio;
     private String correo;
     private String celular;
 
 // constructor
-public Huesped(String nombre, long dni, String domicilio, String correo, String celular){
-    this.nombre=nombre;
+public Huesped(long dni, String nombre, String domicilio, String correo, String celular){
     this.dni=dni;
+    this.nombre=nombre;
     this.domicilio=domicilio;
     this.correo=correo;
     this.celular=celular;
