@@ -14,7 +14,7 @@ public class TipoHabitacion {
     private String categoriaTipoHabitacion;
     private int cantPersonasTipoHabitacin;
     private double precioNocheTipoHabitacion;
-    private TipoCama tipoCama;
+    
 
     public TipoHabitacion(int idTipoHabitacion) {
         this.idTipoHabitacion = idTipoHabitacion;

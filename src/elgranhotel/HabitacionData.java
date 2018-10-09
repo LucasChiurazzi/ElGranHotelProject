@@ -124,7 +124,7 @@ public List<Habitacion> mostrarHabitacion(){
             while(resultSet.next()){
                 
                 
-                TipoCama tipoCama = new TipoCama();
+               
                 TipoHabitacion tipoHabitacion = new TipoHabitacion(resultSet.getInt("TipoHabitacion_idTipoHabitacion"));
                 
                 
