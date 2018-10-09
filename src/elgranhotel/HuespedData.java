@@ -36,11 +36,11 @@ public class HuespedData {
             String sql = "INSERT INTO huesped (dniHuesped, nombreHuesped, domicilioHuesped, correoHuesped, celularHuesped) VALUES ( ? , ? , ? , ? , ?);";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, huesped.getDni());
-            statement.setString(2, huesped.getNombre());
-            statement.setString(3, huesped.getDomicilio());
-            statement.setString(4, huesped.getCorreo());
-            statement.setString(5, huesped.getCelular());
+            statement.setLong(1, huesped.getDniHuesped());
+            statement.setString(2, huesped.getNombreHuesped());
+            statement.setString(3, huesped.getDomicilioHuesped());
+            statement.setString(4, huesped.getCorreoHuesped());
+            statement.setString(5, huesped.getCelularHuesped());
             
             statement.executeUpdate();
             
@@ -59,11 +59,11 @@ public class HuespedData {
             String sql = "UPDATE huesped SET nombreHuesped = ?, domicilioHuesped = ? , correoHuesped = ? , celularHuesped = ? WHERE dniHuesped = ?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, huesped.getNombre());
-            statement.setString(2, huesped.getDomicilio());
-            statement.setString(3, huesped.getCorreo());
-            statement.setString(4, huesped.getCelular());
-            statement.setLong(5, huesped.getDni());
+            statement.setString(1, huesped.getNombreHuesped());
+            statement.setString(2, huesped.getDomicilioHuesped());
+            statement.setString(3, huesped.getCorreoHuesped());
+            statement.setString(4, huesped.getCelularHuesped());
+            statement.setLong(5, huesped.getDniHuesped());
             statement.executeUpdate();
             
             statement.close();
@@ -107,11 +107,11 @@ public class HuespedData {
             
             while(resultSet.next()){
                 huesped = new Huesped();
-                huesped.setDni(resultSet.getLong("dniHuesped"));
-                huesped.setNombre(resultSet.getString("nombreHuesped"));
-                huesped.setDomicilio(resultSet.getString("domicilioHuesped"));
-                huesped.setCorreo(resultSet.getString("correoHuesped"));
-                huesped.setCelular(resultSet.getString("celularHuesped"));
+                huesped.setDniHuesped(resultSet.getLong("dniHuesped"));
+                huesped.setNombreHuesped(resultSet.getString("nombreHuesped"));
+                huesped.setDomicilioHuesped(resultSet.getString("domicilioHuesped"));
+                huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
+                huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
 
                 huespedes.add(huesped);
             }      
