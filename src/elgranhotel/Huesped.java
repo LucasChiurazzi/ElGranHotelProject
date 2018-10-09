@@ -3,94 +3,63 @@ package elgranhotel;
 
 //atributos
 public class Huesped {
-    private String nombre;
-    private long dni;
-    private String domicilio;
-    private String correo;
-    private String celular;
+    private long dniHuesped;
+    private String nombreHuesped;
+    private String domicilioHuesped;
+    private String correoHuesped;
+    private String celularHuesped;
 
 // constructor
-public Huesped(String nombre, long dni, String domicilio, String correo, String celular){
-    this.nombre=nombre;
-    this.dni=dni;
-    this.domicilio=domicilio;
-    this.correo=correo;
-    this.celular=celular;
+public Huesped(long dniHuesped, String nombreHuesped, String domicilioHuesped, String correoHuesped, String celularHuesped){
+    this.dniHuesped=dniHuesped;
+    this.nombreHuesped=nombreHuesped;
+    this.domicilioHuesped=domicilioHuesped;
+    this.correoHuesped=correoHuesped;
+    this.celularHuesped=celularHuesped;
 } 
 
 public Huesped(){
 }
-   
 
-    /**
-     * @return the nombre
-     */
-    public String getNombre() {
-        return nombre;
+//getters and setters
+    public long getDniHuesped() {
+        return dniHuesped;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getNombreHuesped() {
+        return nombreHuesped;
     }
 
-    /**
-     * @return the dni
-     */
-    public long getDni() {
-        return dni;
+    public String getDomicilioHuesped() {
+        return domicilioHuesped;
     }
 
-    /**
-     * @param dni the dni to set
-     */
-    public void setDni(long dni) {
-        this.dni = dni;
+    public String getCorreoHuesped() {
+        return correoHuesped;
     }
 
-    /**
-     * @return the domicilio
-     */
-    public String getDomicilio() {
-        return domicilio;
+    public String getCelularHuesped() {
+        return celularHuesped;
     }
 
-    /**
-     * @param domicilio the domicilio to set
-     */
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
+    public void setDniHuesped(long dniHuesped) {
+        this.dniHuesped = dniHuesped;
     }
 
-    /**
-     * @return the correo
-     */
-    public String getCorreo() {
-        return correo;
+    public void setNombreHuesped(String nombreHuesped) {
+        this.nombreHuesped = nombreHuesped;
     }
 
-    /**
-     * @param correo the correo to set
-     */
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setDomicilioHuesped(String domicilioHuesped) {
+        this.domicilioHuesped = domicilioHuesped;
     }
 
-    /**
-     * @return the celular
-     */
-    public String getCelular() {
-        return celular;
+    public void setCorreoHuesped(String correoHuesped) {
+        this.correoHuesped = correoHuesped;
     }
 
-    /**
-     * @param celular the celular to set
-     */
-    public void setCelular(String celular) {
-        this.celular = celular;
+    public void setCelularHuesped(String celularHuesped) {
+        this.celularHuesped = celularHuesped;
     }
-
    
 }
