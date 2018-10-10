@@ -150,7 +150,7 @@ public class TipoHabitacionData {
         try {
             
             String sql = "INSERT INTO  tipohabitacion ( idTipoHabitacion, categoriaTipoHabitacion, cantPersonasTipoHabitacion, "
-                    + "precioNocheTipoHabitacion, tipoCamaTipoHabitacion, cantCamasTipoHabitacion) VALUES (, ? , ? , ? , ? , ? , ? );";
+                    + "precioNocheTipoHabitacion, tipoCamaTipoHabitacion, cantCamasTipoHabitacion) VALUES ( ? , ? , ? , ? , ? , ? );";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             
