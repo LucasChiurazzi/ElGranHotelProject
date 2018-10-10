@@ -107,15 +107,16 @@ public List<Habitacion> mostrarHabitacion(){
             
 
         try {
-            String sql = "SELECT * FROM habitacion, tipohabitacion, tipocama \n" +
-                         "WHERE habitacion.TipoHabitacion_idTipoHabitacion = tipohabitacion.idTipoHabitacion\n" +
-                         "AND tipocama.idTipoCama = tipohabitacion.TipoCama_idTipoCama ;";
+            String sql = "SELECT * FROM habitacion, tipohabitacion \n" +
+                         "WHERE habitacion.idTipoHabitacion = tipohabitacion.idTipoHabitacion ;";
+                         
             
             PreparedStatement statement = connection.prepareStatement(sql);
             
             Habitacion habitacionNro= new Habitacion();
             
             statement.setInt(1, habitacionNro.getNumeroHabitacion());
+            
             ResultSet resultSet = statement.executeQuery();
             
             Habitacion habitacion;
@@ -125,10 +126,11 @@ public List<Habitacion> mostrarHabitacion(){
                 
                 
                
-                TipoHabitacion tipoHabitacion = new TipoHabitacion(resultSet.getInt("TipoHabitacion_idTipoHabitacion"));
+                TipoHabitacion tipoHabitacion = new TipoHabitacion();
                 
                 
                 habitacion = new Habitacion();
+                
                 habitacion.setNumeroHabitacion(resultSet.getInt("idHabitacion"));
                 habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
                 habitacion.setPiso(resultSet.getInt("pisoHabitacion"));
