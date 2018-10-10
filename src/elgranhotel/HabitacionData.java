@@ -102,20 +102,20 @@ public class HabitacionData {
     
 }
 
-public List<Habitacion> mostrarHabitacion(){
+public List<Habitacion> mostrarHabitacion(int nroHabitacion){
  List<Habitacion> habitaciones = new ArrayList<Habitacion>();
             
 
         try {
             String sql = "SELECT * FROM habitacion, tipohabitacion \n" +
-                         "WHERE habitacion.idTipoHabitacion = tipohabitacion.idTipoHabitacion ;";
-                         
+                         "WHERE habitacion.idTipoHabitacion = tipohabitacion.idTipoHabitacion \n"
+                         + "AND nroHabitacion = ? ;";
             
             PreparedStatement statement = connection.prepareStatement(sql);
             
             Habitacion habitacionNro= new Habitacion();
             
-            statement.setInt(1, habitacionNro.getNumeroHabitacion());
+            statement.setInt(1, nroHabitacion);
             
             ResultSet resultSet = statement.executeQuery();
             
