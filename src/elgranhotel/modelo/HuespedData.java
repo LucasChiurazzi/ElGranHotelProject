@@ -1,3 +1,4 @@
+
 package elgranhotel.modelo;
 
 import java.sql.Connection;
@@ -11,66 +12,70 @@ import java.util.List;
 
 public class HuespedData {
     //atributo
-private Connection connection = null;
+    private Connection connection = null;
 
-//Constructor
-public HuespedData(Conexion conexion) {
+    //constructor
+    public HuespedData(Conexion conexion) {
         try {
             connection = conexion.getConexion();
         } catch (SQLException ex) {
             System.out.println("Error al abrir al obtener la conexion");
         }
     }
-
-//metodos
-public void crearHuesped(Huesped huesped){
+    
+    //metodos
+    
+    //creo un nuevo huesped
+    public void crearHuesped(Huesped huesped){
         try {
             
-            String sql = "INSERT INTO huesped (dniHuesped, nombreHuesped, domicilioHuesped, correoHuesped, celularHuesped) VALUES ( ? , ? , ? , ? , ? );";
+            String sql = "INSERT INTO huesped (dniHuesped, nombreHuesped, domicilioHuesped, correoHuesped, celularHuesped) VALUES ( ? , ? , ? , ? , ?);";
 
-            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setLong(1, huesped.getDni());
-            statement.setString(2, huesped.getNombre());
-            statement.setString(3, huesped.getDomicilio());
-            statement.setString(4, huesped.getCorreo());
-            statement.setString(5, huesped.getCelular());
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, huesped.getDniHuesped());
+            statement.setString(2, huesped.getNombreHuesped());
+            statement.setString(3, huesped.getDomicilioHuesped());
+            statement.setString(4, huesped.getCorreoHuesped());
+            statement.setString(5, huesped.getCelularHuesped());
+            
             statement.executeUpdate();
-           
+            
+            
             statement.close();
     
         } catch (SQLException ex) {
             System.out.println("Error al insertar un huesped: " + ex.getMessage());
         }
     }
-
-public void modificarHuesped(Huesped huesped){
+    //modifico todos los campos de un huesped
+    public void modificarHuesped(Huesped huesped){
     
         try {
             
             String sql = "UPDATE huesped SET nombreHuesped = ?, domicilioHuesped = ? , correoHuesped = ? , celularHuesped = ? WHERE dniHuesped = ?;";
 
-            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, huesped.getNombre());
-            statement.setString(2, huesped.getDomicilio());
-            statement.setString(3, huesped.getCorreo());
-            statement.setString(4, huesped.getCelular());
-            statement.setLong(5, huesped.getDni());
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, huesped.getNombreHuesped());
+            statement.setString(2, huesped.getDomicilioHuesped());
+            statement.setString(3, huesped.getCorreoHuesped());
+            statement.setString(4, huesped.getCelularHuesped());
+            statement.setLong(5, huesped.getDniHuesped());
             statement.executeUpdate();
             
             statement.close();
     
         } catch (SQLException ex) {
-            System.out.println("Error al insertar un huesped: " + ex.getMessage());
+            System.out.println("Error al actualizar un huesped: " + ex.getMessage());
         }
     
-    }
-
-public void eliminarHuesped(long dni){
+}
+    //elimino huesped filtrando por dni
+    public void eliminarHuesped(long dni){
     try {
             
             String sql = "DELETE FROM huesped WHERE dniHuesped =?;";
 
-            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, dni);
                        
             statement.executeUpdate();
@@ -78,35 +83,44 @@ public void eliminarHuesped(long dni){
             statement.close();
     
         } catch (SQLException ex) {
-            System.out.println("Error al insertar un huesped: " + ex.getMessage());
+            System.out.println("Error al borrar un huesped: " + ex.getMessage());
         }
         
     
     }
-
+    //muestro huesped filtrado por dni
     public List<Huesped> mostrarHuesped(long dni){
         List<Huesped> huespedes = new ArrayList<Huesped>();
             
 
         try {
-            String sql = "SELECT * FROM huesped;";
+            String sql = "SELECT * FROM huesped WHERE dniHuesped = "+ dni + " ;" ;
             PreparedStatement statement = connection.prepareStatement(sql);
+            
             ResultSet resultSet = statement.executeQuery();
+            
             Huesped huesped;
+            
             while(resultSet.next()){
                 huesped = new Huesped();
-                huesped.setNombre(resultSet.getString("nombreHuesped"));
-                huesped.setDni(resultSet.getLong("dniHuesped"));
-                huesped.setDomicilio(resultSet.getString("domicilioHuesped"));
-                huesped.setCorreo(resultSet.getString("correoHuesped"));
-                huesped.setCelular(resultSet.getString("celularHuesped"));
+                huesped.setDniHuesped(resultSet.getLong("dniHuesped"));
+                huesped.setNombreHuesped(resultSet.getString("nombreHuesped"));
+                huesped.setDomicilioHuesped(resultSet.getString("domicilioHuesped"));
+                huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
+                huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
+
                 huespedes.add(huesped);
             }      
+            
+            
             statement.close();
         } catch (SQLException ex) {
             System.out.println("Error al obtener los huespedes: " + ex.getMessage());
         }
         
+        
         return huespedes;
-    } 
+    }
+    
 }
+    
