@@ -44,7 +44,6 @@ public class HuespedData {
             
             statement.executeUpdate();
             
-            ;
             statement.close();
     
         } catch (SQLException ex) {
