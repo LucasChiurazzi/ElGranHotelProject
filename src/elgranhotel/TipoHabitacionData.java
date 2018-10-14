@@ -48,7 +48,7 @@ public class TipoHabitacionData {
            tipoHabitacion.setCategoriaTipoHabitacion(rs.getString("categoriaTipoHabitacion"));
            tipoHabitacion.setCantPersonasTipoHabitacion(rs.getInt("cantPersonasTipoHabitacion"));
            tipoHabitacion.setPrecioNocheTipoHabitacion(rs.getDouble("precioNocheTipoHabitacion"));
-           tipoHabitacion.setTipoCamaTipoHabitacion(rs.getString("tipoCamaTipoCamaTipoHabitacion"));
+           tipoHabitacion.setTipoCamaTipoHabitacion(rs.getString("tipoCamaTipoHabitacion"));
            tipoHabitacion.setCantidadCamasTipoHabitacion(rs.getInt("cantCamasTipoHabitacion"));
 
                 tipoHabitaciones.add(tipoHabitacion);
@@ -82,7 +82,7 @@ public class TipoHabitacionData {
            tipoHabitacion.setCategoriaTipoHabitacion(rs.getString("categoriaTipoHabitacion"));
            tipoHabitacion.setCantPersonasTipoHabitacion(rs.getInt("cantPersonasTipoHabitacion"));
            tipoHabitacion.setPrecioNocheTipoHabitacion(rs.getDouble("precioNocheTipoHabitacion"));
-           tipoHabitacion.setTipoCamaTipoHabitacion(rs.getString("tipoCamaTipoCamaTipoHabitacion"));
+           tipoHabitacion.setTipoCamaTipoHabitacion(rs.getString("tipoCamaTipoHabitacion"));
            tipoHabitacion.setCantidadCamasTipoHabitacion(rs.getInt("cantCamasTipoHabitacion"));
 
                 tipoHabitaciones.add(tipoHabitacion);
@@ -171,14 +171,14 @@ public class TipoHabitacionData {
         }
     }
 //metodo exclusivo para actualiar solamente el precio de un tipo de habitacion, pedido en el enunciado.   
-   public void cambiarPrecioTipoHabitacion(int precio, TipoHabitacion tipoHabitacion){
+   public void cambiarPrecioTipoHabitacion(double precio, int idTipoHabitacion){
        try {
             
             String sql = "UPDATE tipohabitacion SET precioNocheTipoHabitacion= ? \n WHERE idTipoHabitacion = ? ;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setDouble(1, tipoHabitacion.getPrecioNocheTipoHabitacion());
-            statement.setInt(2, tipoHabitacion.getIdTipoHabitacion());
+            statement.setDouble(1, precio);
+            statement.setInt(2, idTipoHabitacion);
          
             statement.executeUpdate();
                                     
