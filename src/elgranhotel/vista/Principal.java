@@ -25,6 +25,7 @@ public class Principal extends javax.swing.JFrame {
         jmiReserva = new javax.swing.JMenuItem();
         jMenuHabitacion = new javax.swing.JMenu();
         jMenuABMHabitacion = new javax.swing.JMenuItem();
+        jMenuTipoHabitacion = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +83,14 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuHabitacion);
 
+        jMenuTipoHabitacion.setText("Tipo Habitacion");
+        jMenuTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuTipoHabitacionActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenuTipoHabitacion);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,6 +138,15 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(vistaReserva);
     }//GEN-LAST:event_jmiReservaActionPerformed
 
+    private void jMenuTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTipoHabitacionActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaTipoHabitacion vistaTipoHabitacion =new VistaTipoHabitacion();
+        vistaTipoHabitacion.setVisible(true);
+        escritorio.add(vistaTipoHabitacion);
+        escritorio.moveToFront(vistaTipoHabitacion);
+    }//GEN-LAST:event_jMenuTipoHabitacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -172,6 +190,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuHabitacion;
     private javax.swing.JMenu jMenuHuesped;
     private javax.swing.JMenu jMenuReserva;
+    private javax.swing.JMenu jMenuTipoHabitacion;
     private javax.swing.JMenuItem jmiReserva;
     // End of variables declaration//GEN-END:variables
 }
