@@ -22,6 +22,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuHuesped = new javax.swing.JMenu();
         jMenuABMHuesped = new javax.swing.JMenuItem();
         jMenuReserva = new javax.swing.JMenu();
+        jmiReserva = new javax.swing.JMenuItem();
         jMenuHabitacion = new javax.swing.JMenu();
         jMenuABMHabitacion = new javax.swing.JMenuItem();
 
@@ -58,6 +59,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenuHuesped);
 
         jMenuReserva.setText("Reserva");
+
+        jmiReserva.setText("Reservar");
+        jmiReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiReservaActionPerformed(evt);
+            }
+        });
+        jMenuReserva.add(jmiReserva);
+
         jMenuBar1.add(jMenuReserva);
 
         jMenuHabitacion.setText("Habitación");
@@ -110,6 +120,15 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(vistaHabitacion);
     }//GEN-LAST:event_jMenuABMHabitacionActionPerformed
 
+    private void jmiReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReservaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaReserva vistaReserva =new VistaReserva();
+        vistaReserva.setVisible(true);
+        escritorio.add(vistaReserva);
+        escritorio.moveToFront(vistaReserva);
+    }//GEN-LAST:event_jmiReservaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -153,5 +172,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuHabitacion;
     private javax.swing.JMenu jMenuHuesped;
     private javax.swing.JMenu jMenuReserva;
+    private javax.swing.JMenuItem jmiReserva;
     // End of variables declaration//GEN-END:variables
 }
