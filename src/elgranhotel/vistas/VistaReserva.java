@@ -9,12 +9,12 @@ package elgranhotel.vistas;
  *
  * @author Lucas
  */
-public class VisaReserva extends javax.swing.JInternalFrame {
+public class VistaReserva extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VisaReserva
      */
-    public VisaReserva() {
+    public VistaReserva() {
         initComponents();
     }
 
