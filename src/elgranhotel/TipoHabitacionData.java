@@ -102,7 +102,7 @@ public class TipoHabitacionData {
        public void eliminarTipoHabitacion (int idTipoHabitacion){
     try {
             
-            String sql = "DELETE FROM tipoHabitacion \n WHERE idTipoHabitacion =?;";
+            String sql = "DELETE FROM tipohabitacion \n WHERE idTipoHabitacion =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, idTipoHabitacion);
