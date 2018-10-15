@@ -171,16 +171,29 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFCategoriaTipoHabitacion">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Ingrese Nombre de la categoria"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFTipoCamaTipoHabitacion">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Ingrese el nombre de la categoria de cama"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFCantidadCamasTipoHabitacion">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Ingrese numero de camas"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFCantPersonasTipoHabitacion">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Ingrese el numero de la cantidad maxima de personas"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBLimpiarTipoHabitacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="LIMPIAR"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Limpia los campos, &lt;br&gt;puede usarlo antes de hacer un NUEVO tipo&lt;/html&gt;&#xa;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBLimpiarTipoHabitacionActionPerformed"/>
@@ -189,6 +202,7 @@
     <Component class="javax.swing.JButton" name="jBBorrarTipoHabitacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="BORRAR"/>
+        <Property name="toolTipText" type="java.lang.String" value="Borra el tipo de habitacion seleccionado"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBBorrarTipoHabitacionActionPerformed"/>
@@ -197,6 +211,7 @@
     <Component class="javax.swing.JButton" name="jBActualizarTipoHabitacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="ACTUALIZAR"/>
+        <Property name="toolTipText" type="java.lang.String" value="Modifica los campos del tipo de habitacion seleccionado"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBActualizarTipoHabitacionActionPerformed"/>
@@ -205,6 +220,7 @@
     <Component class="javax.swing.JButton" name="jBNuevoTipoHabitacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="NUEVO"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Crea un nuevo tipo de habitacion,&lt;br&gt; antes de escribir puede LIMPIAR los campos&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBNuevoTipoHabitacionActionPerformed"/>
@@ -249,6 +265,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFPrecioNocheTipoHabitacion">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Ingrese el precio, puede usar decimales."/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
@@ -256,10 +275,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFCodigoTipoHabitacion">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Ingrese Nro Codigo"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBActualizarPrecioTipoHabitacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="ACTUALIZAR PRECIO"/>
+        <Property name="toolTipText" type="java.lang.String" value="Util cuando solo se quiere ACTUALIZAR el PRECIO"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBActualizarPrecioTipoHabitacionActionPerformed"/>

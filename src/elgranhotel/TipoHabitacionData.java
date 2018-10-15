@@ -97,8 +97,9 @@ public class TipoHabitacionData {
        
        return tipoHabitaciones;
     }
+
 //elimina un tipo de habitacion con su id
-   public void eliminarTipoHabitacion (int idTipoHabitacion){
+       public void eliminarTipoHabitacion (int idTipoHabitacion){
     try {
             
             String sql = "DELETE FROM tipoHabitacion \n WHERE idTipoHabitacion =?;";
@@ -116,6 +117,7 @@ public class TipoHabitacionData {
    
    
 }
+
 //modifica los tipos de habitacion    
    public void cambiarTipoHabitacion (TipoHabitacion tipoHabitacion){
     
@@ -145,6 +147,7 @@ public class TipoHabitacionData {
         }
     
 } 
+
 //agrega los tipos de habitacion   
    public void agregarTipoHabitacion(TipoHabitacion tipoHabitacion){
         try {
@@ -170,6 +173,7 @@ public class TipoHabitacionData {
             System.out.println("Error al crear un tipo de habitacion: " + ex.getMessage());
         }
     }
+
 //metodo exclusivo para actualiar solamente el precio de un tipo de habitacion, pedido en el enunciado.   
    public void cambiarPrecioTipoHabitacion(double precio, int idTipoHabitacion){
        try {

@@ -89,7 +89,16 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
 
         jLabel2.setText("TIPO");
 
+        jTFCategoriaTipoHabitacion.setToolTipText("Ingrese Nombre de la categoria");
+
+        jTFTipoCamaTipoHabitacion.setToolTipText("Ingrese el nombre de la categoria de cama");
+
+        jTFCantidadCamasTipoHabitacion.setToolTipText("Ingrese numero de camas");
+
+        jTFCantPersonasTipoHabitacion.setToolTipText("Ingrese el numero de la cantidad maxima de personas");
+
         jBLimpiarTipoHabitacion.setText("LIMPIAR");
+        jBLimpiarTipoHabitacion.setToolTipText("<html>Limpia los campos, <br>puede usarlo antes de hacer un NUEVO tipo</html>\n");
         jBLimpiarTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLimpiarTipoHabitacionActionPerformed(evt);
@@ -97,6 +106,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         });
 
         jBBorrarTipoHabitacion.setText("BORRAR");
+        jBBorrarTipoHabitacion.setToolTipText("Borra el tipo de habitacion seleccionado");
         jBBorrarTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBorrarTipoHabitacionActionPerformed(evt);
@@ -104,6 +114,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         });
 
         jBActualizarTipoHabitacion.setText("ACTUALIZAR");
+        jBActualizarTipoHabitacion.setToolTipText("Modifica los campos del tipo de habitacion seleccionado");
         jBActualizarTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBActualizarTipoHabitacionActionPerformed(evt);
@@ -111,6 +122,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         });
 
         jBNuevoTipoHabitacion.setText("NUEVO");
+        jBNuevoTipoHabitacion.setToolTipText("<html>Crea un nuevo tipo de habitacion,<br> antes de escribir puede LIMPIAR los campos</html>");
         jBNuevoTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBNuevoTipoHabitacionActionPerformed(evt);
@@ -133,9 +145,14 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
 
         jLabel6.setText("TIPO DE CAMA");
 
+        jTFPrecioNocheTipoHabitacion.setToolTipText("Ingrese el precio, puede usar decimales.");
+
         jLabel8.setText("CODIGO");
 
+        jTFCodigoTipoHabitacion.setToolTipText("Ingrese Nro Codigo");
+
         jBActualizarPrecioTipoHabitacion.setText("ACTUALIZAR PRECIO");
+        jBActualizarPrecioTipoHabitacion.setToolTipText("Util cuando solo se quiere ACTUALIZAR el PRECIO");
         jBActualizarPrecioTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBActualizarPrecioTipoHabitacionActionPerformed(evt);
@@ -263,28 +280,35 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         
         TipoHabitacion tipoHabitacion= new TipoHabitacion(idTipoHabitacion, nombreTipoHabitacion, cantMaxPersonas, precioPorNoche, nombreTipoCama, cantidadCamas);
         tipoHabitacionData.agregarTipoHabitacion(tipoHabitacion);
-        
+        limpiarComboBox();
         
     }//GEN-LAST:event_jBNuevoTipoHabitacionActionPerformed
 
-    //Borrar un tipo de habitacion seleccionado
+    
+     //Borrar un tipo de habitacion seleccionado
     private void jBBorrarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarTipoHabitacionActionPerformed
       int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
         
         tipoHabitacionData.eliminarTipoHabitacion(idTipoHabitacion);
         
+        limpiarComboBox();
     }//GEN-LAST:event_jBBorrarTipoHabitacionActionPerformed
 
+    
      //COMBOBOX Tipos de Habitacion
     private void jCBTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoHabitacionActionPerformed
-        // TODO add your handling code here:
+        
+        
        cargarDatosDesdeElComboBox();
+       
+       
        
         
         
         
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
 
+    
     //actualizar los tipos de habitacion 
     private void jBActualizarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarTipoHabitacionActionPerformed
 
@@ -293,10 +317,14 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         String nombreTipoCama = jTFTipoCamaTipoHabitacion.getText();
         int cantidadCamas = Integer.parseInt(jTFCantidadCamasTipoHabitacion.getText());
         int cantMaxPersonas= Integer.parseInt(jTFCantPersonasTipoHabitacion.getText());
-        double precioPorNoche= Double.parseDouble(jTFCantPersonasTipoHabitacion.getText());
+        double precioPorNoche= Double.parseDouble(jTFPrecioNocheTipoHabitacion.getText());
 
         TipoHabitacion tipoHabitacion= new TipoHabitacion(idTipoHabitacion, nombreTipoHabitacion, cantMaxPersonas, precioPorNoche, nombreTipoCama, cantidadCamas);
         tipoHabitacionData.cambiarTipoHabitacion(tipoHabitacion);
+        
+       
+        limpiarComboBox();
+        
         
         
     }//GEN-LAST:event_jBActualizarTipoHabitacionActionPerformed
@@ -304,8 +332,10 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
     //actualizar solamente el precio 
     private void jBActualizarPrecioTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarPrecioTipoHabitacionActionPerformed
        int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
-       double precioPorNoche= Double.parseDouble(jTFCantPersonasTipoHabitacion.getText());
+       double precioPorNoche= Double.parseDouble(jTFPrecioNocheTipoHabitacion.getText());
         tipoHabitacionData.cambiarPrecioTipoHabitacion(precioPorNoche, idTipoHabitacion);
+        limpiarComboBox();
+        
     }//GEN-LAST:event_jBActualizarPrecioTipoHabitacionActionPerformed
 
     //limpia la interfaz  
@@ -326,9 +356,12 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
 //metodos combobox
     public void cargarTiposHabitacionEnComboBox(){
     //Carga los tipos de habitacion  al ComboBox
+    if(jCBTipoHabitacion.getItemCount()==0){
      for(TipoHabitacion item: tipoHabitacionData.mostrarTipoHabitacion()){
             jCBTipoHabitacion.addItem(item.getIdTipoHabitacion() +" "+ item.getCategoriaTipoHabitacion());
-    }
+                }
+          
+            }
     }
     
     public void cargarDatosDesdeElComboBox(){
@@ -336,10 +369,11 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
             //Obtengo el tipo  q esta seleccionada en el ComboBox
             //TipoHabitacion tH=(TipoHabitacion)jCBTipoHabitacion.getSelectedItem();
             //cargarDatos(tH);
-            String objetCb= (String)jCBTipoHabitacion.getSelectedItem();
+            if(jCBTipoHabitacion.getItemCount()>0){
+                String objetCb= (String)jCBTipoHabitacion.getSelectedItem();
             
-            cargarDatos(searchDeStringATipoHabitacion(objetCb));
-            
+                cargarDatos(searchDeStringATipoHabitacion(objetCb));
+            }
     }
     
     public TipoHabitacion searchDeStringATipoHabitacion(String selectedItemComboBox){
@@ -368,6 +402,9 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
     }
     
     public void limpiarComboBox(){
+        
+        jCBTipoHabitacion.removeAllItems();
+        cargarTiposHabitacionEnComboBox();
         
       
         
