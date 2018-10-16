@@ -30,7 +30,7 @@ public class ReservaData {
         //List<Huesped> huespedes = new ArrayList<Huesped>();
         
         try {
-            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped and habitacion.idHabitacion=reserva.idHabitacion and dniHuesped = "+ dni + "= ;" ;
+            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped and habitacion.idHabitacion=reserva.idHabitacion and dniHuesped = "+ dni + ";" ;
             PreparedStatement statement = connection.prepareStatement(sql);
             
             ResultSet resultSet = statement.executeQuery();
@@ -45,8 +45,8 @@ public class ReservaData {
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
                 List<Huesped> huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
                 reserva.setHuesped((Huesped) huesped);
-                List<Habitacion> habiacion=mostrarHabitacion(resultSet.getInt("idHabitacion"));
-                reserva.setHabitacion((Habitacion) habiacion);
+                List<Habitacion> habitacion=mostrarHabitacion(resultSet.getInt("idHabitacion"));
+                reserva.setHabitacion((Habitacion) habitacion);
                 reservas.add(reserva);
             }      
             
