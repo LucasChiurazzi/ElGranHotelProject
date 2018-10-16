@@ -22,6 +22,34 @@ public class ReservaData {
         }
     }
 
+      public List<Reserva> obtenerHuespedes(){
+        List<Huesped> huespedes = new ArrayList<Huesped>();
+            
+
+        try {
+            String sql = "SELECT * FROM huesped;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            Huesped huesped;
+            while(resultSet.next()){
+                huesped = new Huesped();
+                huesped.setDniHuesped(resultSet.getLong("dniHuesped"));
+                huesped.setNombreHuesped(resultSet.getString("nombreHuesped"));
+                huesped.setDomicilioHuesped(resultSet.getString("domicilioHuesped"));
+                huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
+                huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
+
+                huespedes.add(huesped);
+            }      
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los huespedes: " + ex.getMessage());
+        }
+        
+        
+        return huespedes;
+    }
+    
     public List<Reserva> buscarReserva(long dni){
         //recibo un huesped
         //busco en la base de datos si el dniHuesped esta en alguna reserva y en
