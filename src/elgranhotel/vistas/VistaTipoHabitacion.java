@@ -83,6 +83,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Gestion Yipos De Habitacion - El Gran Hotel 1.0");
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setText("TIPOS DE HABITACION");
