@@ -30,7 +30,7 @@ public class ReservaData {
         //List<Huesped> huespedes = new ArrayList<Huesped>();
         
         try {
-            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped-dniHuesped and habitacion.idHabitacion=reserva.idHabitacion and dniHuesped = "+ dni + "= ;" ;
+            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped and habitacion.idHabitacion=reserva.idHabitacion and dniHuesped = "+ dni + "= ;" ;
             PreparedStatement statement = connection.prepareStatement(sql);
             
             ResultSet resultSet = statement.executeQuery();
