@@ -19,6 +19,8 @@ public class Principal extends javax.swing.JFrame {
 
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuArchivo = new javax.swing.JMenu();
+        jMenuItemSalir = new javax.swing.JMenuItem();
         jMenuHuesped = new javax.swing.JMenu();
         jMenuABMHuesped = new javax.swing.JMenuItem();
         jMenuReserva = new javax.swing.JMenu();
@@ -26,6 +28,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuHabitacion = new javax.swing.JMenu();
         jMenuABMHabitacion = new javax.swing.JMenuItem();
         jMenuTipoHabitacion = new javax.swing.JMenu();
+        jMenuItemABMTipoHabitacion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +44,18 @@ public class Principal extends javax.swing.JFrame {
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 577, Short.MAX_VALUE)
         );
+
+        jMenuArchivo.setText("Archivo");
+
+        jMenuItemSalir.setText("Salir");
+        jMenuItemSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSalirActionPerformed(evt);
+            }
+        });
+        jMenuArchivo.add(jMenuItemSalir);
+
+        jMenuBar1.add(jMenuArchivo);
 
         jMenuHuesped.setText("Huesped");
         jMenuHuesped.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +104,15 @@ public class Principal extends javax.swing.JFrame {
                 jMenuTipoHabitacionActionPerformed(evt);
             }
         });
+
+        jMenuItemABMTipoHabitacion.setText("ABM tipo Habitacion");
+        jMenuItemABMTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemABMTipoHabitacionActionPerformed(evt);
+            }
+        });
+        jMenuTipoHabitacion.add(jMenuItemABMTipoHabitacion);
+
         jMenuBar1.add(jMenuTipoHabitacion);
 
         setJMenuBar(jMenuBar1);
@@ -139,13 +163,21 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiReservaActionPerformed
 
     private void jMenuTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTipoHabitacionActionPerformed
+        
+    }//GEN-LAST:event_jMenuTipoHabitacionActionPerformed
+
+    private void jMenuItemABMTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemABMTipoHabitacionActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
         VistaTipoHabitacion vistaTipoHabitacion =new VistaTipoHabitacion();
         vistaTipoHabitacion.setVisible(true);
         escritorio.add(vistaTipoHabitacion);
         escritorio.moveToFront(vistaTipoHabitacion);
-    }//GEN-LAST:event_jMenuTipoHabitacionActionPerformed
+    }//GEN-LAST:event_jMenuItemABMTipoHabitacionActionPerformed
+
+    private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,9 +218,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem jMenuABMHabitacion;
     private javax.swing.JMenuItem jMenuABMHuesped;
+    private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHabitacion;
     private javax.swing.JMenu jMenuHuesped;
+    private javax.swing.JMenuItem jMenuItemABMTipoHabitacion;
+    private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenu jMenuReserva;
     private javax.swing.JMenu jMenuTipoHabitacion;
     private javax.swing.JMenuItem jmiReserva;

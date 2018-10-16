@@ -350,6 +350,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
     public void cargarTiposHabitacionEnComboBox(){
     //Carga los tipos de habitacion  al ComboBox
     if(jCBTipoHabitacion.getItemCount()==0){
+        
      for(TipoHabitacion item: tipoHabitacionData.mostrarTipoHabitacion()){
             jCBTipoHabitacion.addItem(item.getIdTipoHabitacion() +" "+ item.getCategoriaTipoHabitacion());
                 }

@@ -31,6 +31,11 @@ public class Reserva {
         this.habitacion = habitacion;
     }
 
+    public Reserva() {
+    }
+
+    
+    
     public int getIdReserva() {
         return idReserva;
     }

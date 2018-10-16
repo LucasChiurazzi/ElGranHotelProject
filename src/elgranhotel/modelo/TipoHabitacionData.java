@@ -27,7 +27,7 @@ public class TipoHabitacionData {
        List<TipoHabitacion> tipoHabitaciones = new ArrayList<>();
        
   try{
-       String sql= "SELECT * FROM tipohabitacion \n WHERE idTipoHabitacion = " +idTipoHabitacion + ";";
+       String sql= "SELECT * FROM tipohabitacion WHERE idTipoHabitacion = " +idTipoHabitacion + ";";
           
        PreparedStatement st = connection.prepareStatement(sql);
        
@@ -61,7 +61,7 @@ public class TipoHabitacionData {
        List<TipoHabitacion> tipoHabitaciones = new ArrayList<>();
        
   try{
-       String sql= "SELECT * FROM tipohabitacion ;";
+       String sql= "SELECT * FROM tipohabitacion;";
           
        PreparedStatement st = connection.prepareStatement(sql);
        
