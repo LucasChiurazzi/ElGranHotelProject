@@ -27,11 +27,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuArchivo = new javax.swing.JMenu();
         jMenuItemSalir = new javax.swing.JMenuItem();
         jMenuHuesped = new javax.swing.JMenu();
-        jMenuABMHuesped = new javax.swing.JMenuItem();
+        jMenuItemABMHuesped = new javax.swing.JMenuItem();
         jMenuReserva = new javax.swing.JMenu();
-        jmiReserva = new javax.swing.JMenuItem();
+        jMenuItemABMReserva = new javax.swing.JMenuItem();
         jMenuHabitacion = new javax.swing.JMenu();
-        jMenuABMHabitacion = new javax.swing.JMenuItem();
+        jMenuItemABMHabitacion = new javax.swing.JMenuItem();
         jMenuTipoHabitacion = new javax.swing.JMenu();
         jMenuItemABMTipoHabitacion = new javax.swing.JMenuItem();
 
@@ -69,37 +69,37 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jMenuABMHuesped.setText("ABM Huesped");
-        jMenuABMHuesped.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemABMHuesped.setText("ABM Huesped");
+        jMenuItemABMHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuABMHuespedActionPerformed(evt);
+                jMenuItemABMHuespedActionPerformed(evt);
             }
         });
-        jMenuHuesped.add(jMenuABMHuesped);
+        jMenuHuesped.add(jMenuItemABMHuesped);
 
         jMenuBar1.add(jMenuHuesped);
 
         jMenuReserva.setText("Reserva");
 
-        jmiReserva.setText("Reservar");
-        jmiReserva.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemABMReserva.setText("Reservar");
+        jMenuItemABMReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiReservaActionPerformed(evt);
+                jMenuItemABMReservaActionPerformed(evt);
             }
         });
-        jMenuReserva.add(jmiReserva);
+        jMenuReserva.add(jMenuItemABMReserva);
 
         jMenuBar1.add(jMenuReserva);
 
         jMenuHabitacion.setText("Habitación");
 
-        jMenuABMHabitacion.setText("ABM Habitación");
-        jMenuABMHabitacion.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemABMHabitacion.setText("ABM Habitación");
+        jMenuItemABMHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuABMHabitacionActionPerformed(evt);
+                jMenuItemABMHabitacionActionPerformed(evt);
             }
         });
-        jMenuHabitacion.add(jMenuABMHabitacion);
+        jMenuHabitacion.add(jMenuItemABMHabitacion);
 
         jMenuBar1.add(jMenuHabitacion);
 
@@ -140,32 +140,32 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuHuespedActionPerformed
 
-    private void jMenuABMHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuABMHuespedActionPerformed
+    private void jMenuItemABMHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemABMHuespedActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
         VistaHuesped vistaHuesped =new VistaHuesped();
         vistaHuesped.setVisible(true);
         escritorio.add(vistaHuesped);
         escritorio.moveToFront(vistaHuesped);
-    }//GEN-LAST:event_jMenuABMHuespedActionPerformed
+    }//GEN-LAST:event_jMenuItemABMHuespedActionPerformed
 
-    private void jMenuABMHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuABMHabitacionActionPerformed
+    private void jMenuItemABMHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemABMHabitacionActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
         VistaHabitacion vistaHabitacion =new VistaHabitacion();
         vistaHabitacion.setVisible(true);
         escritorio.add(vistaHabitacion);
         escritorio.moveToFront(vistaHabitacion);
-    }//GEN-LAST:event_jMenuABMHabitacionActionPerformed
+    }//GEN-LAST:event_jMenuItemABMHabitacionActionPerformed
 
-    private void jmiReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReservaActionPerformed
+    private void jMenuItemABMReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemABMReservaActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
         VistaReserva vistaReserva =new VistaReserva();
         vistaReserva.setVisible(true);
         escritorio.add(vistaReserva);
         escritorio.moveToFront(vistaReserva);
-    }//GEN-LAST:event_jmiReservaActionPerformed
+    }//GEN-LAST:event_jMenuItemABMReservaActionPerformed
 
     private void jMenuTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTipoHabitacionActionPerformed
         
@@ -224,16 +224,16 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenuItem jMenuABMHabitacion;
-    private javax.swing.JMenuItem jMenuABMHuesped;
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHabitacion;
     private javax.swing.JMenu jMenuHuesped;
+    private javax.swing.JMenuItem jMenuItemABMHabitacion;
+    private javax.swing.JMenuItem jMenuItemABMHuesped;
+    private javax.swing.JMenuItem jMenuItemABMReserva;
     private javax.swing.JMenuItem jMenuItemABMTipoHabitacion;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenu jMenuReserva;
     private javax.swing.JMenu jMenuTipoHabitacion;
-    private javax.swing.JMenuItem jmiReserva;
     // End of variables declaration//GEN-END:variables
 }

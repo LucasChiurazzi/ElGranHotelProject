@@ -27,12 +27,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuHuespedActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuABMHuesped">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemABMHuesped">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ABM Huesped"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuABMHuespedActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemABMHuespedActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -42,12 +42,12 @@
             <Property name="text" type="java.lang.String" value="Reserva"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiReserva">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemABMReserva">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reservar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiReservaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemABMReservaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -57,12 +57,12 @@
             <Property name="text" type="java.lang.String" value="Habitaci&#xf3;n"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuABMHabitacion">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemABMHabitacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ABM Habitaci&#xf3;n"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuABMHabitacionActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemABMHabitacionActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
