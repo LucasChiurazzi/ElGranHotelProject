@@ -30,6 +30,7 @@ public class Reserva {
         this.habitacion = habitacion;
     }
 
+    
     public Reserva(LocalDate fechaInicioReserva, LocalDate fechaFinReserva, boolean estadoReserva, Huesped huesped, Habitacion habitacion) {
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaFinReserva = fechaFinReserva;
@@ -37,6 +38,11 @@ public class Reserva {
         this.huesped = huesped;
         this.habitacion = habitacion;
     }
+
+    public Reserva() {
+    }
+    
+    
 
     public int getIdReserva() {
         return idReserva;

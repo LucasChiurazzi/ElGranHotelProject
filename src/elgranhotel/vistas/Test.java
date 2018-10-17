@@ -5,6 +5,8 @@
  */
 package elgranhotel.vistas;
 
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author Lucas
@@ -106,6 +108,13 @@ public class Test extends javax.swing.JFrame {
         escritorio.moveToFront(vm);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    public void ventanas(JInternalFrame vista){
+        
+          
+          vista.setVisible(true);
+        escritorio.add(vista);
+        escritorio.moveToFront(vista);
+    }
     /**
      * @param args the command line arguments
      */
@@ -142,11 +151,11 @@ public class Test extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
+    public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
+    public static javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
