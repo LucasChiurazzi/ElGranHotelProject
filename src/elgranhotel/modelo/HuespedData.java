@@ -1,5 +1,5 @@
 
-package elgranhotel;
+package elgranhotel.modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,7 +43,6 @@ public class HuespedData {
             statement.setString(5, huesped.getCelularHuesped());
             
             statement.executeUpdate();
-            
             
             statement.close();
     

@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elgranhotel.vistas;
+package elgranhotel.vista;
 
 /**
  *
  * @author Lucas
  */
-public class VistaPopupHuesped extends javax.swing.JInternalFrame {
+public class VistaHuesped extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VistaPopupHuesped
+     * Creates new form VistaHuesped
      */
-    public VistaPopupHuesped() {
+    public VistaHuesped() {
         initComponents();
     }
 
@@ -31,11 +31,11 @@ public class VistaPopupHuesped extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 525, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 367, Short.MAX_VALUE)
         );
 
         pack();

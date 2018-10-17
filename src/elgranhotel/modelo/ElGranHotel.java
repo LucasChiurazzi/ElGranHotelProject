@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elgranhotel;
+package elgranhotel.modelo;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -23,7 +23,6 @@ public class ElGranHotel {
        
      Conexion conexion = null;
      HuespedData huespedDataTest;
-     TipoHabitacionData tipoHabitacionDataTest;
      
         try {
             conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
@@ -35,15 +34,28 @@ public class ElGranHotel {
      //instanciamos un objeto huespedDataTest que recibe un objeto conexion
      huespedDataTest = new HuespedData(conexion);
      //usamos Scanner para que pueda usar la consola de java para recibir valores por teclado
-    tipoHabitacionDataTest = new TipoHabitacionData(conexion);
-    
-    TipoHabitacion tipoHabitacionTest;
-    
-    //tipoHabitacionTest= new TipoHabitacion(2, "Estandar simple", 1, 200, "Simple", 1);
-    
-    //tipoHabitacionDataTest.agregarTipoHabitacion(tipoHabitacionTest);
-    
-    System.out.println(tipoHabitacionDataTest.mostrarTipoHabitacion());
+     Scanner scanner = new Scanner(System.in);
+     
+     //pedimos valores para el huesped
+     System.out.println("--Nuevo huesped--");
+     System.out.print("Ingrese dni: ");
+     long dni=Long.parseLong(scanner.nextLine());
+     System.out.print("Ingrese nombre: ");
+     String nombre = scanner.nextLine();
+     System.out.print("Ingrese domicilio: ");
+     String domicilio = scanner.nextLine();
+     System.out.print("Ingrese correo: ");
+     String correo = scanner.nextLine();
+     System.out.print("Ingrese celular: ");
+     String celular = scanner.nextLine();
+     
+     //una vez que recibimos todos los valores
+     //instanciamos un objeto huesped con los valores ingresados
+     //en el constructor
+     Huesped huesped = new Huesped(dni, nombre, domicilio, correo, celular);
+     //por ultimo usamos el metodo crear huesped de la clase Huesped data
+     // a traves del objeto huespedDataTest
+     huespedDataTest.crearHuesped(huesped);
         
   
      

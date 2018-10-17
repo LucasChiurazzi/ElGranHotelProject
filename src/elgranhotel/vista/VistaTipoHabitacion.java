@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elgranhotel.vistas;
+package elgranhotel.vista;
 
-import elgranhotel.Conexion;
-import elgranhotel.TipoHabitacion;
-import elgranhotel.TipoHabitacionData;
+import elgranhotel.modelo.Conexion;
+import elgranhotel.modelo.TipoHabitacion;
+import elgranhotel.modelo.TipoHabitacionData;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;

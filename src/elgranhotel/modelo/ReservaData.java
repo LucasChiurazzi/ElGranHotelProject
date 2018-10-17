@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package elgranhotel;
+package elgranhotel.modelo;
 
 
 import java.sql.Connection;
