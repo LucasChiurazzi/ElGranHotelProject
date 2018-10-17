@@ -30,8 +30,9 @@ public class TipoHabitacionData {
 //   metodos
    
 //muestra un tipo de habitacion filtrado por su codigo o id.   
-   public List<TipoHabitacion> mostrarTipoHabitacion(int idTipoHabitacion){
-       List<TipoHabitacion> tipoHabitaciones = new ArrayList<>();
+   public TipoHabitacion mostrarTipoHabitacion(int idTipoHabitacion){
+       TipoHabitacion tipoHabitacion= null;
+       
        
   try{
        String sql= "SELECT * FROM tipohabitacion \n WHERE idTipoHabitacion = " +idTipoHabitacion + ";";
@@ -39,10 +40,8 @@ public class TipoHabitacionData {
        PreparedStatement st = connection.prepareStatement(sql);
        
        ResultSet rs = st.executeQuery();
-       
-       TipoHabitacion tipoHabitacion;
-       
-       while (rs.next()){
+                
+      while (rs.next()){
            tipoHabitacion = new TipoHabitacion();
            tipoHabitacion.setIdTipoHabitacion(rs.getInt("idTipoHabitacion"));
            tipoHabitacion.setCategoriaTipoHabitacion(rs.getString("categoriaTipoHabitacion"));
@@ -51,18 +50,21 @@ public class TipoHabitacionData {
            tipoHabitacion.setTipoCamaTipoHabitacion(rs.getString("tipoCamaTipoHabitacion"));
            tipoHabitacion.setCantidadCamasTipoHabitacion(rs.getInt("cantCamasTipoHabitacion"));
 
-                tipoHabitaciones.add(tipoHabitacion);
+               
            }
+       
        
        st.close();
        
       } catch (SQLException ex) {
             System.out.println("Error al obtener los tipoHabitaciones: " + ex.getMessage());
-        } 
+        }
+             
        
-       
-       return tipoHabitaciones;
+       return tipoHabitacion;
     }
+   
+   
 //muestra todos los tipos de habitacion   
     public List<TipoHabitacion> mostrarTipoHabitacion(){
        List<TipoHabitacion> tipoHabitaciones = new ArrayList<>();

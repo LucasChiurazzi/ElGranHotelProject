@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import elgranhotel.Huesped;
 import elgranhotel.HuespedData;
 import javax.swing.JInternalFrame;
-import elgranhotel.vistas.Test;
+
 /**
  *
  * @author Lucas
@@ -381,7 +381,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private void jBCargarPopUpHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarPopUpHuespedReservaActionPerformed
 
          VistaHuesped vh=new VistaHuesped();
-         Test.escritorio.add(vh);
+         Principal.escritorio.add(vh);
          vh.toFront();
          vh.setVisible(true);
          

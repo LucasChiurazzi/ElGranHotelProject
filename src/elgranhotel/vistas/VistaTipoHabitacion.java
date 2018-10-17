@@ -381,7 +381,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         //sacar el id y pasarlo a int, buscar con el id en la base de datos y sacarlo como un tipoHabitacion completo
         int idTipoHabitacion= Integer.parseInt(selectedItemComboBox.substring(0, 1));
         
-       TipoHabitacion tH=(tipoHabitacionData.mostrarTipoHabitacion(idTipoHabitacion)).get(0);
+       TipoHabitacion tH=(tipoHabitacionData.mostrarTipoHabitacion(idTipoHabitacion));
     
         return tH;
     }
