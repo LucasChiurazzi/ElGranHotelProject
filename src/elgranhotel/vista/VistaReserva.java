@@ -13,8 +13,11 @@ import elgranhotel.modelo.HuespedData;
 import elgranhotel.modelo.Reserva;
 import elgranhotel.modelo.ReservaData;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,47 +34,11 @@ private ReservaData reservaData;
 private HuespedData huespedData;
 private HabitacionData habitacionData;
 private Conexion conexion;
-    
+//public JTable jTable1;    
     
     public VistaReserva() {
         initComponents();
-    }
-
-      public void armaCabeceraTabla(){
-  
-        //Titulos de Columnas
-        ArrayList<Object> columnas=new ArrayList<Object>();
-        columnas.add("IDRESERVA");
-        columnas.add("FI");
-        columnas.add("FS");
-        columnas.add("ESTAD0");
-        columnas.add("DNIH");
-        columnas.add("IDHABIT");
-        for(Object it:columnas){
-        
-            modelo.addColumn(it);
-        }
-        jTable1.setModel(modelo);
-  }
-      
-      public void cargaDatos(){
-            
-        
-        //Llenar filas
-         ReservaData rd =new ReservaData(conexion);
-        //Alumno seleccionado=(Alumno)cbAlumnos.getSelectedItem();
-        listaReserva= (ArrayList)rd.buscarReserva(33333333);
-        
-        for(Reserva r:listaReserva){
-            
-            modelo.addRow(new Object[]{r.getIdReserva(),r.getFechaInicioReserva(),r.getFechaFinReserva(),r.getEstadoReserva(),r.getHuesped().getDniHuesped(),r.getHabitacion().getNumeroHabitacion()});
-        
-            
-            //modelo.addRow(new Object[]{r.getMateria().getId(),m.getMateria().getNombre(),m.getNota()});
-        }
-        
-        
-    }
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,10 +55,12 @@ private Conexion conexion;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID RESERVA", "FECHA INGRESO", "FECHA SALIDA", "ESTADO", "DNI HUESPED", "ID HABITACION"
+                "Título 1", "Título 2", "Título 3", "Título 4", "Título 5", "Título 6"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -103,7 +72,11 @@ private Conexion conexion;
             }
         });
 
-        jtfDni.setText(" ");
+        jtfDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfDniActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,29 +110,56 @@ private Conexion conexion;
     }// </editor-fold>//GEN-END:initComponents
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        //recibo dni pero aun no lo uso
-        long dnihuesped=Long.parseLong(jtfDni.getText());
+        modelo=new DefaultTableModel();
+        jTable1 = new JTable();
+        
+        //creo columnas REVISAR SI FUNCIONA ESPACIO
+  
+        //Titulos de Columnas NO SE MUESTRAN
+        ArrayList<Object> columnas=new ArrayList<>();
+        columnas.add("IDRESERVA");
+        columnas.add("FI");
+        columnas.add("FS");
+        columnas.add("ESTAD0");
+        columnas.add("DNIH");
+        columnas.add("IDHABIT");
+        for(Object it:columnas){
+        
+            modelo.addColumn(it);
+        }
+        jTable1.setModel(modelo);
+  
+//recibo dni
+        
+        long dniHuesped;
+        dniHuesped = Long.parseLong(jtfDni.getText());
+        
         try {
         conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
-        modelo=new DefaultTableModel();
+        
+        
         reservaData= new ReservaData(conexion);
-        listaReserva =(ArrayList) reservaData.obtenerReservas();
-        habitacionData= new HabitacionData(conexion);
-        listaHabitaciones =(ArrayList) habitacionData.obtenerHabitaciones();
-        huespedData= new HuespedData(conexion);
-        listaHuespedes= (ArrayList) huespedData.obtenerHuespedes();
-        //reservaData.mostrarHuesped(33333333);
-         // combobox cargaAlumnos();
-        armaCabeceraTabla();
+        System.out.println("antes de lista");
+        listaReserva = (ArrayList<Reserva>) reservaData.buscarReserva(dniHuesped);
         
-        cargaDatos();
+        for (Reserva h: listaReserva){
+       
+    System.out.println(Arrays.toString(new Object[]{h.getIdReserva(),h.getFechaInicioReserva(),h.getFechaFinReserva(),h.getEstadoReserva(),h.getHuesped().getNombreHuesped(),h.getHabitacion().getNumeroHabitacion()}));
+
         
+         
+    } 
+           
     } catch (ClassNotFoundException ex) {
         Logger.getLogger(VistaReserva.class.getName()).log(Level.SEVERE, null, ex);
     }
     
       
     }//GEN-LAST:event_BuscarActionPerformed
+
+    private void jtfDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfDniActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

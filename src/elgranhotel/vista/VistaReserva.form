@@ -62,13 +62,13 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="0">
-                <Column editable="true" title="ID RESERVA" type="java.lang.Object"/>
-                <Column editable="true" title="FECHA INGRESO" type="java.lang.Object"/>
-                <Column editable="true" title="FECHA SALIDA" type="java.lang.Object"/>
-                <Column editable="true" title="ESTADO" type="java.lang.Object"/>
-                <Column editable="true" title="DNI HUESPED" type="java.lang.Object"/>
-                <Column editable="true" title="ID HABITACION" type="java.lang.Object"/>
+              <Table columnCount="6" rowCount="3">
+                <Column editable="true" title="T&#xed;tulo 1" type="java.lang.Object"/>
+                <Column editable="true" title="T&#xed;tulo 2" type="java.lang.Object"/>
+                <Column editable="true" title="T&#xed;tulo 3" type="java.lang.Object"/>
+                <Column editable="true" title="T&#xed;tulo 4" type="java.lang.Object"/>
+                <Column editable="true" title="T&#xed;tulo 5" type="java.lang.Object"/>
+                <Column editable="true" title="T&#xed;tulo 6" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -121,9 +121,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfDni">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=" "/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfDniActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

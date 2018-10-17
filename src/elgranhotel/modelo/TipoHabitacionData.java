@@ -32,18 +32,24 @@ public class TipoHabitacionData {
        PreparedStatement st = connection.prepareStatement(sql);
        st.setInt(1, idTipoHabitacion);
        ResultSet rs = st.executeQuery();
-       
+       System.out.println("estoy en tipohabitacion");
        
        while (rs.next()){
            tipoHabitacion = new TipoHabitacion();
+            System.out.println("aqui termina tipohabitacio1ndata");  
            tipoHabitacion.setIdTipoHabitacion(rs.getInt("idTipoHabitacion"));
+            System.out.println("aqui termina tipohabitacion2data");  
            tipoHabitacion.setCategoriaTipoHabitacion(rs.getString("categoriaTipoHabitacion"));
+            System.out.println("aqui termina tipohabitaciond3ata");  
            tipoHabitacion.setCantPersonasTipoHabitacion(rs.getInt("cantPersonasTipoHabitacion"));
+            System.out.println("aqui termina tipohabitacionda4ta");  
            tipoHabitacion.setPrecioNocheTipoHabitacion(rs.getDouble("precioNocheTipoHabitacion"));
+            System.out.println("aqui termina tipohabitaciondat5a");  
            tipoHabitacion.setTipoCamaTipoHabitacion(rs.getString("tipoCamaTipoHabitacion"));
+            System.out.println("aqui termina tipohabitaciondat6a");  
            tipoHabitacion.setCantidadCamasTipoHabitacion(rs.getInt("cantCamasTipoHabitacion"));
 
-                
+             System.out.println("aqui termina tipohabitaciondata");   
            }
        
        st.close();

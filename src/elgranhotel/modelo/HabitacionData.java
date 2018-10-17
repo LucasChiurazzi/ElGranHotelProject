@@ -86,14 +86,14 @@ public class HabitacionData {
     
 }
 //elimino habitacion filtrando por dni
-    public void eliminarHabitacion(int nroHabitacion){
+    public void eliminarHabitacion(int numeroHabitacion){
     
     try {
             
             String sql = "DELETE FROM habitacion WHERE idHabitacion =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, nroHabitacion);
+            statement.setInt(1, numeroHabitacion);
                        
             statement.executeUpdate();
              
@@ -107,28 +107,26 @@ public class HabitacionData {
     
 }
 
-public Habitacion mostrarHabitacion(int nroHabitacion){
+public Habitacion mostrarHabitacion(int numeroHabitacion){
         Habitacion habitacion = null;
             
-
+            System.out.println("estoy en mostrar habitacion");
         try {
-            String sql = "SELECT * FROM habitacion, tipohabitacion " +
-                         "WHERE habitacion.idTipoHabitacion = tipohabitacion.idTipoHabitacion "
-                         + "AND numeroHabitacion = ? ;";
-            
+            String sql = "SELECT * FROM habitacion WHERE numeroHabitacion = ? ;";
+           
             PreparedStatement statement = connection.prepareStatement(sql);
             
-            statement.setInt(1, nroHabitacion);
+            statement.setInt(1, numeroHabitacion);
             
             ResultSet resultSet = statement.executeQuery();
             
-            
+            System.out.println("asdasdascasc");
                         
             while(resultSet.next()){
                 
                 
                
-               // TipoHabitacion tipoHabitacion = new TipoHabitacion();
+                TipoHabitacion tipoHabitacion = new TipoHabitacion();
                 
                 
                 habitacion = new Habitacion();
@@ -136,7 +134,7 @@ public Habitacion mostrarHabitacion(int nroHabitacion){
                 habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
                 habitacion.setPiso(resultSet.getInt("pisoHabitacion"));
                 habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
-                TipoHabitacion th=mostrarTipoHabitacion(resultSet.getInt("idTipoHabitacion"));
+                TipoHabitacion th=mostrarTipoHabitacion(resultSet.getInt("TipoHabitacion_idTipoHabitacion"));
                 habitacion.setTipoHabitacion(th);
                 
               
@@ -144,7 +142,7 @@ public Habitacion mostrarHabitacion(int nroHabitacion){
             }      
             statement.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener los habitaciones: " + ex.getMessage());
+            System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
         }
         
         

@@ -4,7 +4,7 @@ package elgranhotel.vista;
 import elgranhotel.vista.VistaHabitacion;
 import elgranhotel.vista.VistaHuesped;
 import elgranhotel.vista.VistaReserva;
-import elgranhotel.vista.VistaTipoHabitacion;
+//import elgranhotel.vista.VistaTipoHabitacion;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -174,10 +174,10 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItemABMTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemABMTipoHabitacionActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        VistaTipoHabitacion vistaTipoHabitacion =new VistaTipoHabitacion();
-        vistaTipoHabitacion.setVisible(true);
-        escritorio.add(vistaTipoHabitacion);
-        escritorio.moveToFront(vistaTipoHabitacion);
+  //      VistaTipoHabitacion vistaTipoHabitacion =new VistaTipoHabitacion();
+    //    vistaTipoHabitacion.setVisible(true);
+      //  escritorio.add(vistaTipoHabitacion);
+       // escritorio.moveToFront(vistaTipoHabitacion);
     }//GEN-LAST:event_jMenuItemABMTipoHabitacionActionPerformed
 
     private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed

@@ -23,7 +23,7 @@ public class ReservaData {
     }
 
       public List<Reserva> obtenerReservas(){
-        List<Reserva> reservas = new ArrayList<Reserva>();
+        List<Reserva> reservas = new ArrayList<>();
             
 
         try {
@@ -31,15 +31,20 @@ public class ReservaData {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             Reserva reserva;
+            System.out.println("antes de while");
             while(resultSet.next()){
                 reserva = new Reserva();
+                System.out.println("ja");
                 reserva.setIdReserva(resultSet.getInt("idReserva"));
                 reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
-                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                System.out.println("jejee");
+                Huesped huesped=mostrarHuesped(resultSet.getLong("Huesped_dniHuesped"));
+                System.out.println("antes de huesped");
                 reserva.setHuesped(huesped);
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("idHabitacion"));
+                System.out.println("despues de huesped");
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("Habitacion_idHabitacion"));
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
@@ -56,11 +61,11 @@ public class ReservaData {
         //recibo un huesped
         //busco en la base de datos si el dniHuesped esta en alguna reserva y en
         //alguna habitacion
-        List<Reserva> reservas = new ArrayList<Reserva>();
+        List<Reserva> reservas = new ArrayList<>();
         //List<Huesped> huespedes = new ArrayList<Huesped>();
         
         try {
-            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped and habitacion.idHabitacion=reserva.idHabitacion and dniHuesped = "+ dni + ";" ;
+            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.Huesped_dniHuesped=huesped.dniHuesped AND habitacion.numeroHabitacion=reserva.Habitacion_idHabitacion AND dniHuesped = "+ dni + ";" ;
             PreparedStatement statement = connection.prepareStatement(sql);
             
             ResultSet resultSet = statement.executeQuery();
@@ -73,9 +78,9 @@ public class ReservaData {
                 reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
-                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("Huesped_dniHuesped"));
                 reserva.setHuesped(huesped);
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("idHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("Habitacion_idHabitacion"));
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
