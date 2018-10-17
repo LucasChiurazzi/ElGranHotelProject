@@ -48,7 +48,7 @@ public class Reserva {
         return fechaFinReserva;
     }
 
-    public boolean isEstadoReserva() {
+    public boolean getEstadoReserva() {
         return estadoReserva;
     }
 

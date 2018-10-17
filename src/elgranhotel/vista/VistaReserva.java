@@ -6,6 +6,8 @@
 package elgranhotel.vista;
 
 import elgranhotel.modelo.Conexion;
+import elgranhotel.modelo.Habitacion;
+import elgranhotel.modelo.HabitacionData;
 import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
 import elgranhotel.modelo.Reserva;
@@ -17,65 +19,59 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Hugo
+ * @author hugo
  */
 public class VistaReserva extends javax.swing.JInternalFrame {
-private ArrayList<Reserva> listaReservas;
+
+private DefaultTableModel modelo;    
+private ArrayList<Reserva> listaReserva;
 private ArrayList<Huesped> listaHuespedes;
-private DefaultTableModel modelo;
-private HuespedData huespedData;
+private ArrayList<Habitacion> listaHabitaciones;
 private ReservaData reservaData;
+private HuespedData huespedData;
+private HabitacionData habitacionData;
 private Conexion conexion;
-/**
-     * Creates new form VistaReserva
-     */
+    
+    
     public VistaReserva() {
-       initComponents();
-        
-        try {
-        conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
-        modelo=new DefaultTableModel();
-        
-        huespedData = new HuespedData(conexion);
-        listaHuespedes =(ArrayList)huespedData.obtenerHuespedes();
-        
-        reservaData = new ReservaData(conexion);
-        listaReservas =(ArrayList)reservaData;
-        
-        huespedData = new HuespedData(conexion);
-        listaHuespedes =(ArrayList)huespedData.obtenerHuespedes();
-        
-      
-        
-        //Método encargado de llenar el combobox
-        cargaMaterias();
-         
-        armaCabeceraTabla();
-        cargaDatos();
-        
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(VistaAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        initComponents();
     }
-    }
-    
-     public void armaCabeceraTabla(){
-    
+
+      public void armaCabeceraTabla(){
+  
         //Titulos de Columnas
         ArrayList<Object> columnas=new ArrayList<Object>();
-        columnas.add("idReserva");
-        columnas.add("fechaInicioReserva");
-        columnas.add("fechaFinReserva");
-        columnas.add("estadoReserva");
-        columnas.add("dniHuesped");
-        columnas.add("idHabitacion");
-        
+        columnas.add("IDRESERVA");
+        columnas.add("FI");
+        columnas.add("FS");
+        columnas.add("ESTAD0");
+        columnas.add("DNIH");
+        columnas.add("IDHABIT");
         for(Object it:columnas){
         
             modelo.addColumn(it);
         }
-        tReservas.setModel(modelo);
+        jTable1.setModel(modelo);
   }
-
+      
+      public void cargaDatos(){
+            
+        
+        //Llenar filas
+         ReservaData rd =new ReservaData(conexion);
+        //Alumno seleccionado=(Alumno)cbAlumnos.getSelectedItem();
+        listaReserva= (ArrayList)rd.buscarReserva(33333333);
+        
+        for(Reserva r:listaReserva){
+            
+            modelo.addRow(new Object[]{r.getIdReserva(),r.getFechaInicioReserva(),r.getFechaFinReserva(),r.getEstadoReserva(),r.getHuesped().getDniHuesped(),r.getHabitacion().getNumeroHabitacion()});
+        
+            
+            //modelo.addRow(new Object[]{r.getMateria().getId(),m.getMateria().getNombre(),m.getNota()});
+        }
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,86 +81,91 @@ private Conexion conexion;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
-        jTextFieldDniHuesped = new javax.swing.JTextField();
-        jButtonDniHuesped = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tReservas = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
+        Buscar = new javax.swing.JButton();
+        jtfDni = new javax.swing.JTextField();
 
-        jLabel4.setText("Reserva");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jButtonDniHuesped.setText("Buscar Huesped");
-        jButtonDniHuesped.addActionListener(new java.awt.event.ActionListener() {
+            },
+            new String [] {
+                "ID RESERVA", "FECHA INGRESO", "FECHA SALIDA", "ESTADO", "DNI HUESPED", "ID HABITACION"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDniHuespedActionPerformed(evt);
+                BuscarActionPerformed(evt);
             }
         });
 
-        tReservas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tReservas);
+        jtfDni.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonDniHuesped)
-                    .addComponent(jTextFieldDniHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtfDni))
+                        .addGap(152, 152, 152))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel4)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextFieldDniHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Buscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonDniHuesped)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonDniHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDniHuespedActionPerformed
-        buscarDatos();
-    }//GEN-LAST:event_jButtonDniHuespedActionPerformed
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        //recibo dni pero aun no lo uso
+        long dnihuesped=Long.parseLong(jtfDni.getText());
+        try {
+        conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+        modelo=new DefaultTableModel();
+        reservaData= new ReservaData(conexion);
+        listaReserva =(ArrayList) reservaData.obtenerReservas();
+        habitacionData= new HabitacionData(conexion);
+        listaHabitaciones =(ArrayList) habitacionData.obtenerHabitaciones();
+        huespedData= new HuespedData(conexion);
+        listaHuespedes= (ArrayList) huespedData.obtenerHuespedes();
+        //reservaData.mostrarHuesped(33333333);
+         // combobox cargaAlumnos();
+        armaCabeceraTabla();
+        
+        cargaDatos();
+        
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(VistaReserva.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+      
+    }//GEN-LAST:event_BuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonDniHuesped;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton Buscar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFieldDniHuesped;
-    private javax.swing.JTable tReservas;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jtfDni;
     // End of variables declaration//GEN-END:variables
-public void buscarDatos(){
-    //Carga las materias al ComboBox
-     for(Reserva item:listaReservas){
-            cbReservas.addItem(item);
-    }
-
-}
 }

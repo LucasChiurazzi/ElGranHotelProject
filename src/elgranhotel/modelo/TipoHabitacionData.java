@@ -23,17 +23,16 @@ public class TipoHabitacionData {
 //   metodos
    
 //muestra un tipo de habitacion filtrado por su codigo o id.   
-   public List<TipoHabitacion> mostrarTipoHabitacion(int idTipoHabitacion){
-       List<TipoHabitacion> tipoHabitaciones = new ArrayList<>();
+   public TipoHabitacion mostrarTipoHabitacion(int idTipoHabitacion){
+       TipoHabitacion tipoHabitacion = null;
        
   try{
-       String sql= "SELECT * FROM tipohabitacion WHERE idTipoHabitacion = " +idTipoHabitacion + ";";
+       String sql= "SELECT * FROM tipohabitacion WHERE idTipoHabitacion = ? ;";
           
        PreparedStatement st = connection.prepareStatement(sql);
-       
+       st.setInt(1, idTipoHabitacion);
        ResultSet rs = st.executeQuery();
        
-       TipoHabitacion tipoHabitacion;
        
        while (rs.next()){
            tipoHabitacion = new TipoHabitacion();
@@ -44,7 +43,7 @@ public class TipoHabitacionData {
            tipoHabitacion.setTipoCamaTipoHabitacion(rs.getString("tipoCamaTipoHabitacion"));
            tipoHabitacion.setCantidadCamasTipoHabitacion(rs.getInt("cantCamasTipoHabitacion"));
 
-                tipoHabitaciones.add(tipoHabitacion);
+                
            }
        
        st.close();
@@ -54,7 +53,7 @@ public class TipoHabitacionData {
         } 
        
        
-       return tipoHabitaciones;
+       return tipoHabitacion;
     }
 //muestra todos los tipos de habitacion   
     public List<TipoHabitacion> mostrarTipoHabitacion(){
