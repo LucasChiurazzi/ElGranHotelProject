@@ -1,5 +1,5 @@
 
-package elgranhotel;
+package elgranhotel.modelo;
 
 //atributos
 public class Huesped {
