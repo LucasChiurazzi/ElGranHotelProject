@@ -161,10 +161,10 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItemABMReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemABMReservaActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        //VistaReserva vistaReserva =new VistaReserva();
-        //vistaReserva.setVisible(true);
-        //escritorio.add(vistaReserva);
-        //escritorio.moveToFront(vistaReserva);
+        VistaReserva vistaReserva =new VistaReserva();
+        vistaReserva.setVisible(true);
+        escritorio.add(vistaReserva);
+        escritorio.moveToFront(vistaReserva);
     }//GEN-LAST:event_jMenuItemABMReservaActionPerformed
 
     private void jMenuTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTipoHabitacionActionPerformed
@@ -174,10 +174,10 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItemABMTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemABMTipoHabitacionActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        //VistaTipoHabitacion vistaTipoHabitacion =new VistaTipoHabitacion();
-        //vistaTipoHabitacion.setVisible(true);
-        //escritorio.add(vistaTipoHabitacion);
-        //escritorio.moveToFront(vistaTipoHabitacion);
+        VistaTipoHabitacion vistaTipoHabitacion =new VistaTipoHabitacion();
+        vistaTipoHabitacion.setVisible(true);
+        escritorio.add(vistaTipoHabitacion);
+        escritorio.moveToFront(vistaTipoHabitacion);
     }//GEN-LAST:event_jMenuItemABMTipoHabitacionActionPerformed
 
     private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed

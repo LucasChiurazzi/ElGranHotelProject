@@ -77,8 +77,8 @@ public class ReservaData {
                 reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
-                List<Huesped> huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
-                reserva.setHuesped((Huesped) huesped);
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                reserva.setHuesped(huesped);
                 List<Habitacion> habitacion=mostrarHabitacion(resultSet.getInt("idHabitacion"));
                 reserva.setHabitacion((Habitacion) habitacion);
                 reservas.add(reserva);
@@ -96,7 +96,7 @@ public class ReservaData {
 
     
     
-    public List<Huesped> mostrarHuesped(long dni) {
+    public Huesped mostrarHuesped(long dni) {
         HuespedData huespedData = new HuespedData(conexion);
         
         return huespedData.mostrarHuesped(dni);

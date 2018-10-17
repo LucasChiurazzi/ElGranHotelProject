@@ -92,8 +92,8 @@ public class HuespedData {
     
     }
     //muestro huesped filtrado por dni
-    public List<Huesped> mostrarHuesped(long dni){
-        List<Huesped> huespedes = new ArrayList<Huesped>();
+    public Huesped mostrarHuesped(long dni){
+       Huesped huesped= null;
             
 
         try {
@@ -102,7 +102,7 @@ public class HuespedData {
             
             ResultSet resultSet = statement.executeQuery();
             
-            Huesped huesped;
+            
             
             while(resultSet.next()){
                 huesped = new Huesped();
@@ -112,7 +112,7 @@ public class HuespedData {
                 huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
                 huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
 
-                huespedes.add(huesped);
+                
             }      
             
             
@@ -122,7 +122,7 @@ public class HuespedData {
         }
         
         
-        return huespedes;
+        return huesped;
     }
     
 }
