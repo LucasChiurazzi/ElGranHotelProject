@@ -9,12 +9,25 @@ package elgranhotel.vista;
  *
  * @author Lucas
  */
-public class NewJDialog extends javax.swing.JDialog {
+public class DialogoReservaHuesped extends javax.swing.JDialog {
+   //atributo necesario para cargar el dni en huesped directamente
+    private long dniHuesped;
+    
+    public long getDniHuesped() {
+        return dniHuesped;
+    }
+
+    public void setDniHuesped(long dniHuesped) {
+        this.dniHuesped = dniHuesped;
+    }
+    
+    
+    
 
     /**
-     * Creates new form NewJDialog
+     * Creates new form Test
      */
-    public NewJDialog(java.awt.Frame parent, boolean modal) {
+    public DialogoReservaHuesped(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -28,12 +41,20 @@ public class NewJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jBCancelarPopUpHuespedReserva = new javax.swing.JButton();
         jBCargarPopUpHuespedReserva = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jBCancelarPopUpHuespedReserva = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jBCancelarPopUpHuespedReserva.setText("CANCELAR");
+        jBCancelarPopUpHuespedReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jBCancelarPopUpHuespedReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarPopUpHuespedReservaActionPerformed(evt);
+            }
+        });
 
         jBCargarPopUpHuespedReserva.setText("CARGAR");
         jBCargarPopUpHuespedReserva.setToolTipText("");
@@ -48,9 +69,6 @@ public class NewJDialog extends javax.swing.JDialog {
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel12.setText("ERROR AL BUSCAR HUESPED");
-
-        jBCancelarPopUpHuespedReserva.setText("CANCELAR");
-        jBCancelarPopUpHuespedReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +92,7 @@ public class NewJDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -88,21 +106,68 @@ public class NewJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBCargarPopUpHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarPopUpHuespedReservaActionPerformed
+    private void jBCancelarPopUpHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarPopUpHuespedReservaActionPerformed
 
+        DialogoReservaHuesped.this.dispose();
+
+    }//GEN-LAST:event_jBCancelarPopUpHuespedReservaActionPerformed
+
+    private void jBCargarPopUpHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarPopUpHuespedReservaActionPerformed
+        //crea una vista nueva de huesped igual que hace Principal, para eso escritorio tiene que ser publico
         VistaHuesped vh=new VistaHuesped();
         Principal.escritorio.add(vh);
         vh.toFront();
         vh.setVisible(true);
+        // toma el dni que buscaron en reserva y lo setea en el text field de dni 
+        vh.jtDni.setText(dniHuesped+"");
+        dispose();
     }//GEN-LAST:event_jBCargarPopUpHuespedReservaActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(DialogoReservaHuesped.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(DialogoReservaHuesped.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(DialogoReservaHuesped.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DialogoReservaHuesped.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                DialogoReservaHuesped dialog = new DialogoReservaHuesped(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBCancelarPopUpHuespedReserva;
+    public javax.swing.JButton jBCancelarPopUpHuespedReserva;
     private javax.swing.JButton jBCargarPopUpHuespedReserva;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel8;

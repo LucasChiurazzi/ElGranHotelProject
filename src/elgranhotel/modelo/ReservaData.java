@@ -28,6 +28,48 @@ public class ReservaData {
         }
     }
 
+    
+    //copiado de Hugo
+    public List<Reserva> obtenerReservas(){
+        List<Reserva> reservas = new ArrayList<>();
+            
+
+        try {
+            String sql = "SELECT * FROM reserva;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            Reserva reserva;
+     
+            while(resultSet.next()){
+                reserva = new Reserva();
+               
+                reserva.setIdReserva(resultSet.getInt("idReserva"));
+                reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
+                reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
+                reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
+               
+                Huesped huesped=mostrarHuesped(resultSet.getLong("Huesped_dniHuesped"));
+               
+                reserva.setHuesped(huesped);
+                
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("Habitacion_idHabitacion"));
+               
+                
+                
+                reserva.setHabitacion(habitacion);
+                reservas.add(reserva);
+            }      
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener las reservas: " + ex.getMessage());
+        }
+        
+        
+        return reservas;
+    }
+
+    
+    
       public List<Huesped> obtenerHuespedes(){
         List<Huesped> huespedes = new ArrayList<>();
             
@@ -79,7 +121,7 @@ public class ReservaData {
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
                 Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
                 reserva.setHuesped(huesped);
-                List<Habitacion> habitacion=mostrarHabitacion(resultSet.getInt("idHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("idHabitacion"));
                 reserva.setHabitacion((Habitacion) habitacion);
                 reservas.add(reserva);
             }      
@@ -102,7 +144,7 @@ public class ReservaData {
         return huespedData.mostrarHuesped(dni);
     }
 
-    public List<Habitacion> mostrarHabitacion(int idHabitacion) {
+    public Habitacion mostrarHabitacion(int idHabitacion) {
         HabitacionData habitacionData = new HabitacionData(conexion);
         return habitacionData.mostrarHabitacion(idHabitacion);
     }

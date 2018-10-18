@@ -102,8 +102,8 @@ public class HabitacionData {
     
 }
 
-public List<Habitacion> mostrarHabitacion(int nroHabitacion){
- List<Habitacion> habitaciones = new ArrayList<Habitacion>();
+public Habitacion mostrarHabitacion(int nroHabitacion){
+ Habitacion habitacion = null;
             
 
         try {
@@ -119,8 +119,7 @@ public List<Habitacion> mostrarHabitacion(int nroHabitacion){
             
             ResultSet resultSet = statement.executeQuery();
             
-            Habitacion habitacion;
-            
+                       
                         
             while(resultSet.next()){
                 
@@ -138,7 +137,7 @@ public List<Habitacion> mostrarHabitacion(int nroHabitacion){
                 habitacion.setTipoHabitacion(tipoHabitacion);
                 
               
-                habitaciones.add(habitacion);
+                
             }      
             statement.close();
         } catch (SQLException ex) {
@@ -146,7 +145,7 @@ public List<Habitacion> mostrarHabitacion(int nroHabitacion){
         }
         
         
-        return habitaciones;
+        return habitacion;
     }
     
 }

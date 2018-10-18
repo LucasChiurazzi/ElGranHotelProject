@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class HuespedData {
@@ -112,7 +111,7 @@ public class HuespedData {
                 huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
                 huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
 
-                
+               
             }      
             
             
