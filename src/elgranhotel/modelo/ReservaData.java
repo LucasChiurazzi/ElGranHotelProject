@@ -31,19 +31,19 @@ public class ReservaData {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             Reserva reserva;
-            System.out.println("antes de while");
+     
             while(resultSet.next()){
                 reserva = new Reserva();
-                System.out.println("ja");
+               
                 reserva.setIdReserva(resultSet.getInt("idReserva"));
                 reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
-                System.out.println("jejee");
+               
                 Huesped huesped=mostrarHuesped(resultSet.getLong("Huesped_dniHuesped"));
-                System.out.println("antes de huesped");
+               
                 reserva.setHuesped(huesped);
-                System.out.println("despues de huesped");
+                
                 Habitacion habitacion=mostrarHabitacion(resultSet.getInt("Habitacion_idHabitacion"));
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);

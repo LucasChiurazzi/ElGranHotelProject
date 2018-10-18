@@ -139,7 +139,6 @@ private Conexion conexion;
         
         
         reservaData= new ReservaData(conexion);
-        System.out.println("antes de lista");
         listaReserva = (ArrayList<Reserva>) reservaData.buscarReserva(dniHuesped);
         
         for (Reserva h: listaReserva){

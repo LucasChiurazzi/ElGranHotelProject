@@ -110,7 +110,7 @@ public class HabitacionData {
 public Habitacion mostrarHabitacion(int numeroHabitacion){
         Habitacion habitacion = null;
             
-            System.out.println("estoy en mostrar habitacion");
+            
         try {
             String sql = "SELECT * FROM habitacion WHERE numeroHabitacion = ? ;";
            
@@ -120,7 +120,7 @@ public Habitacion mostrarHabitacion(int numeroHabitacion){
             
             ResultSet resultSet = statement.executeQuery();
             
-            System.out.println("asdasdascasc");
+           
                         
             while(resultSet.next()){
                 
