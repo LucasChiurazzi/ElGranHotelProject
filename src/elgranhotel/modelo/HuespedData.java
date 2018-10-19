@@ -90,7 +90,7 @@ public class HuespedData {
     }
     //muestro huesped filtrado por dni
     public Huesped mostrarHuesped(long dni){
-        Huesped huesped = null;
+        Huesped huesped=null;
             
 
         try {
