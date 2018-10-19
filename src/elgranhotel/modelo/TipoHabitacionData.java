@@ -55,7 +55,7 @@ public class TipoHabitacionData {
        st.close();
        
       } catch (SQLException ex) {
-            System.out.println("Error al obtener los tipoHabitaciones: " + ex.getMessage());
+            System.out.println("Error al obtener los tipo de habitaciones: " + ex.getMessage());
         } 
        
        
@@ -89,7 +89,7 @@ public class TipoHabitacionData {
        st.close();
        
       } catch (SQLException ex) {
-            System.out.println("Error al obtener los tipoHabitaciones: " + ex.getMessage());
+            System.out.println("Error al obtener los tipos de habitaciones: " + ex.getMessage());
         } 
        
        

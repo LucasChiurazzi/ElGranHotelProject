@@ -40,7 +40,7 @@ public class HabitacionData {
         
     public void agregarHabitacion(Habitacion habitacion){try {
                      
-            String sql = "INSERT INTO habitacion (idHabitacion, pisoHabitacion, estadoHabitacion, TipoHabitacion_idTipoHabitacion)";
+            String sql = "INSERT INTO habitacion (numeroHabitacion, pisoHabitacion, estadoHabitacion, idTipoHabitacion) VALUES ( ? , ? , ? , ? , ?);";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, habitacion.getNumeroHabitacion());
@@ -67,7 +67,7 @@ public class HabitacionData {
     
        try {
             
-            String sql = "UPDATE habitacion SET  pisoHabitacion = ?, estadoHabitacion = ?, TipoHabitacion_idTipoHabitacion = ? WHERE numeroHabitacion = ?;";
+            String sql = "UPDATE habitacion SET  pisoHabitacion = ?, estadoHabitacion = ?, idTipoHabitacion = ? WHERE numeroHabitacion = ?;";
 // where tipode habitacion id??
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, habitacion.getPiso());
@@ -90,7 +90,7 @@ public class HabitacionData {
     
     try {
             
-            String sql = "DELETE FROM habitacion WHERE idHabitacion =?;";
+            String sql = "DELETE FROM habitacion WHERE numeroHabitacion =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, numeroHabitacion);
@@ -134,7 +134,7 @@ public Habitacion mostrarHabitacion(int numeroHabitacion){
                 habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
                 habitacion.setPiso(resultSet.getInt("pisoHabitacion"));
                 habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
-                TipoHabitacion th=mostrarTipoHabitacion(resultSet.getInt("TipoHabitacion_idTipoHabitacion"));
+                TipoHabitacion th=mostrarTipoHabitacion(resultSet.getInt("idTipoHabitacion"));
                 habitacion.setTipoHabitacion(th);
                 
               

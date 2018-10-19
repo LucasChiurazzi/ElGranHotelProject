@@ -40,11 +40,11 @@ public class ReservaData {
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
                
-                Huesped huesped=mostrarHuesped(resultSet.getLong("Huesped_dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
                
                 reserva.setHuesped(huesped);
                 
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("Habitacion_idHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
@@ -65,7 +65,7 @@ public class ReservaData {
         //List<Huesped> huespedes = new ArrayList<Huesped>();
         
         try {
-            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.Huesped_dniHuesped=huesped.dniHuesped AND habitacion.numeroHabitacion=reserva.Habitacion_idHabitacion AND dniHuesped = "+ dni + ";" ;
+            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped AND habitacion.numeroHabitacion=reserva.numeroHabitacion AND reserva.dniHuesped = "+ dni + ";" ;
             PreparedStatement statement = connection.prepareStatement(sql);
             
             ResultSet resultSet = statement.executeQuery();
@@ -78,9 +78,9 @@ public class ReservaData {
                 reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
-                Huesped huesped=mostrarHuesped(resultSet.getLong("Huesped_dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
                 reserva.setHuesped(huesped);
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("Habitacion_idHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
