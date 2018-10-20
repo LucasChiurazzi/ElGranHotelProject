@@ -35,7 +35,7 @@ public class HabitacionData {
         
     public void agregarHabitacion(Habitacion habitacion){try {
                      
-            String sql = "INSERT INTO habitacion (idHabitacion, pisoHabitacion, estadoHabitacion, TipoHabitacion_idTipoHabitacion)";
+            String sql = "INSERT INTO habitacion (numeroHabitacion, pisoHabitacion, estadoHabitacion, TipoHabitacion_idTipoHabitacion)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, habitacion.getNumeroHabitacion());
@@ -62,7 +62,7 @@ public class HabitacionData {
     
        try {
             
-            String sql = "UPDATE habitacion SET  pisoHabitacion = ?, estadoHabitacion = ?, TipoHabitacion_idTipoHabitacion = ? WHERE idHabitacion = ?;";
+            String sql = "UPDATE habitacion SET  pisoHabitacion = ?, estadoHabitacion = ?, TipoHabitacion_idTipoHabitacion = ? WHERE numeroHabitacion = ?;";
 // where tipode habitacion id??
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, habitacion.getPiso());
@@ -102,20 +102,20 @@ public class HabitacionData {
     
 }
 
-public Habitacion mostrarHabitacion(int nroHabitacion){
+public Habitacion mostrarHabitacion(int numeroHabitacion){
  Habitacion habitacion = null;
             
 
         try {
             String sql = "SELECT * FROM habitacion, tipohabitacion \n" +
                          "WHERE habitacion.idTipoHabitacion = tipohabitacion.idTipoHabitacion \n"
-                         + "AND nroHabitacion = ? ;";
+                         + "AND numeroHabitacion = ? ;";
             
             PreparedStatement statement = connection.prepareStatement(sql);
             
             Habitacion habitacionNro= new Habitacion();
             
-            statement.setInt(1, nroHabitacion);
+            statement.setInt(1, numeroHabitacion);
             
             ResultSet resultSet = statement.executeQuery();
             

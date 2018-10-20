@@ -394,6 +394,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         // guarda el dni en una variable en el jdialog para usar en huesped 
         dialogo.setDniHuesped(dni);
         dialogo.setVisible(true);       
+        dispose();
         
          } else{
              

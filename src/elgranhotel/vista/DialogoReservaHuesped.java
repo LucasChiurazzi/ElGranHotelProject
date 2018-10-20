@@ -107,13 +107,19 @@ public class DialogoReservaHuesped extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCancelarPopUpHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarPopUpHuespedReservaActionPerformed
-
+        VistaReserva vr=new VistaReserva();
+        Principal.escritorio.add(vr);
+        vr.toFront();
+        vr.setVisible(true);
+        // toma el dni que buscaron en reserva y lo setea en el text field de dni 
+        vr.jTHuespedReserva.setText(dniHuesped +"");
         DialogoReservaHuesped.this.dispose();
 
     }//GEN-LAST:event_jBCancelarPopUpHuespedReservaActionPerformed
 
     private void jBCargarPopUpHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarPopUpHuespedReservaActionPerformed
         //crea una vista nueva de huesped igual que hace Principal, para eso escritorio tiene que ser publico
+        
         VistaHuesped vh=new VistaHuesped();
         Principal.escritorio.add(vh);
         vh.toFront();
