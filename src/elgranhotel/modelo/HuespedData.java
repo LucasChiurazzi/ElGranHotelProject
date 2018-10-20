@@ -7,11 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class HuespedData {
     //atributo
+    
     private Connection connection = null;
+    private ReservaData reservaData;
+    private HabitacionData habitacionData;
+    private Conexion conexion;
 
     //constructor
     public HuespedData(Conexion conexion) {
@@ -122,6 +127,77 @@ public class HuespedData {
         
         
         return huesped;
+    }
+    //muestro todos los huespedes
+     public List<Huesped> mostrarHuespedes(){
+      List<Huesped> huespedes = new ArrayList<>();
+            
+
+        try {
+            String sql = "SELECT * FROM huesped; " ;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+             Huesped huesped;
+            
+            while(resultSet.next()){
+                huesped = new Huesped();
+                huesped.setDniHuesped(resultSet.getLong("dniHuesped"));
+                huesped.setNombreHuesped(resultSet.getString("nombreHuesped"));
+                huesped.setDomicilioHuesped(resultSet.getString("domicilioHuesped"));
+                huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
+                huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
+
+                huespedes.add(huesped);
+               
+            }      
+            
+            
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los huespedes: " + ex.getMessage());
+        }
+        
+        
+        return huespedes;
+    }
+    
+    
+    //muestra una lista de todos los huespedes en el hotel
+    public List<Huesped> mostrarHuespedesActivos(){
+        List<Huesped> huespedes = new ArrayList<>();
+            
+
+        try {
+            String sql = "SELECT huesped.dniHuesped, huesped.nombreHuesped, huesped.celularHuesped, habitacion.numeroHabitacion, reserva.fechaFinReserva FROM huesped, habitacion, reserva WHERE huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion AND habitacion.estadoHabitacion= 1 ;" ;
+            
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            Huesped huesped;
+            
+            while(resultSet.next()){
+                huesped = new Huesped();
+                huesped.setDniHuesped(resultSet.getLong("dniHuesped"));
+                huesped.setNombreHuesped(resultSet.getString("nombreHuesped"));
+                huesped.setDomicilioHuesped(resultSet.getString("domicilioHuesped"));
+                huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
+                huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
+
+               
+                huespedes.add(huesped);
+            }      
+            
+            
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los huespedes: " + ex.getMessage());
+        }
+        
+        
+        return huespedes;
     }
     
     

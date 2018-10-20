@@ -147,6 +147,12 @@ public Habitacion mostrarHabitacion(int numeroHabitacion){
         
         return habitacion;
     }
+
+public List<Habitacion> mostrarHabitaciones(){
+     List<Habitacion> habitaciones= new ArrayList<>();
+    
+    return habitaciones;
+}
     
 }
 

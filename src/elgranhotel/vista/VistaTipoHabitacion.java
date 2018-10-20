@@ -98,7 +98,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
 
         jTFCantPersonasTipoHabitacion.setToolTipText("Ingrese el numero de la cantidad maxima de personas");
 
-        jBLimpiarTipoHabitacion.setText("LIMPIAR");
+        jBLimpiarTipoHabitacion.setText("Limpiar");
         jBLimpiarTipoHabitacion.setToolTipText("<html>Limpia los campos, <br>puede usarlo antes de hacer un NUEVO tipo</html>\n");
         jBLimpiarTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +106,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jBBorrarTipoHabitacion.setText("BORRAR");
+        jBBorrarTipoHabitacion.setText("Borrar");
         jBBorrarTipoHabitacion.setToolTipText("Borra el tipo de habitacion seleccionado");
         jBBorrarTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jBActualizarTipoHabitacion.setText("ACTUALIZAR");
+        jBActualizarTipoHabitacion.setText("Actualizar");
         jBActualizarTipoHabitacion.setToolTipText("Modifica los campos del tipo de habitacion seleccionado");
         jBActualizarTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +122,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jBNuevoTipoHabitacion.setText("NUEVO");
+        jBNuevoTipoHabitacion.setText("Nuevo");
         jBNuevoTipoHabitacion.setToolTipText("<html>Crea un nuevo tipo de habitacion,<br> antes de escribir puede LIMPIAR los campos</html>");
         jBNuevoTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +152,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
 
         jTFCodigoTipoHabitacion.setToolTipText("Ingrese Nro Codigo");
 
-        jBActualizarPrecioTipoHabitacion.setText("ACTUALIZAR PRECIO");
+        jBActualizarPrecioTipoHabitacion.setText("Actualizar Precio");
         jBActualizarPrecioTipoHabitacion.setToolTipText("Util cuando solo se quiere ACTUALIZAR el PRECIO");
         jBActualizarPrecioTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,16 +164,6 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBLimpiarTipoHabitacion)
-                .addGap(56, 56, 56)
-                .addComponent(jBBorrarTipoHabitacion)
-                .addGap(66, 66, 66)
-                .addComponent(jBActualizarTipoHabitacion)
-                .addGap(37, 37, 37)
-                .addComponent(jBNuevoTipoHabitacion)
-                .addGap(61, 61, 61))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -225,6 +215,16 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
                                         .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(jBLimpiarTipoHabitacion)
+                .addGap(56, 56, 56)
+                .addComponent(jBBorrarTipoHabitacion)
+                .addGap(66, 66, 66)
+                .addComponent(jBActualizarTipoHabitacion)
+                .addGap(55, 55, 55)
+                .addComponent(jBNuevoTipoHabitacion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -12,6 +12,8 @@ package elgranhotel.vista;
 import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
+import elgranhotel.modelo.Reserva;
+import elgranhotel.modelo.ReservaData;
 import elgranhotel.modelo.TipoHabitacion;
 import elgranhotel.modelo.TipoHabitacionData;
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     private Conexion conexion;
     private HuespedData huespedData;
     private ArrayList<Huesped> listaHuespedes;
+    private ReservaData reservaData;
+    private Reserva reserva;
     
     
     
@@ -82,7 +86,6 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         jTFDiasReserva = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jBBorrarReserva = new javax.swing.JButton();
-        jBActualizarReserva = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jTFEstadoReserva = new javax.swing.JTextField();
         jBBuscarXFechaReserva = new javax.swing.JButton();
@@ -91,19 +94,21 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jBActualizarReserva1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel10.setText("Dias");
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel1.setText("RESERVA");
+        jLabel1.setText("BUSCAR RESERVA");
 
         jLabel11.setText("Monto Total");
 
         jLabel2.setText("Huesped");
 
-        jBLimpiarReserva.setText("LIMPIAR");
+        jBLimpiarReserva.setText("Limpiar");
 
-        jBBuscarHuespedReserva.setText("BUSCAR");
+        jBBuscarHuespedReserva.setText("Buscar");
         jBBuscarHuespedReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarHuespedReservaActionPerformed(evt);
@@ -122,13 +127,11 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Cantidad de Personas");
 
-        jBBorrarReserva.setText("BORRAR");
-
-        jBActualizarReserva.setText("ACTUALIZAR");
+        jBBorrarReserva.setText("Borrar");
 
         jLabel7.setText("Estado");
 
-        jBBuscarXFechaReserva.setText("BUSCAR");
+        jBBuscarXFechaReserva.setText("Buscar");
         jBBuscarXFechaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarXFechaReservaActionPerformed(evt);
@@ -150,15 +153,30 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jBActualizarReserva1.setText("Actualizar");
+        jBActualizarReserva1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActualizarReserva1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Fin Reserva");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(jLabel1)
+                .addContainerGap(669, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,26 +203,24 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(jBActualizarReserva))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTFEstadoReserva1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jBBorrarReserva)
-                                    .addComponent(jLabel11))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTFEstadoReserva1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jLabel11)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jTFMontoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(69, 69, 69)
-                                        .addComponent(jBLimpiarReserva))
-                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jBActualizarReserva1)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTFMontoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jBBorrarReserva)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jBLimpiarReserva)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(jLabel8)
@@ -215,7 +231,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTFCantPersonasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTFEstadoReserva))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -223,10 +239,10 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTHuespedReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,13 +271,13 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                             .addComponent(jLabel11)
                             .addComponent(jTFMontoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBBorrarReserva)
+                            .addComponent(jBActualizarReserva1)
                             .addComponent(jBLimpiarReserva)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jBActualizarReserva)
-                                .addComponent(jBBorrarReserva)))
+                            .addComponent(jButton1))
                         .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
         );
@@ -300,13 +316,22 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBBuscarXFechaReservaActionPerformed
 
+    private void jBActualizarReserva1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarReserva1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBActualizarReserva1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBActualizarReserva;
+    private javax.swing.JButton jBActualizarReserva1;
     private javax.swing.JButton jBBorrarReserva;
     private javax.swing.JButton jBBuscarHuespedReserva;
     private javax.swing.JButton jBBuscarXFechaReserva;
     private javax.swing.JButton jBLimpiarReserva;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

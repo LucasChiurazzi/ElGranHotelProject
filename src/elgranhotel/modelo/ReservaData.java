@@ -30,18 +30,6 @@ public class ReservaData {
     }
 
    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //copiado de Hugo
     public List<Reserva> obtenerReservas(){
         List<Reserva> reservas = new ArrayList<>();
@@ -256,9 +244,7 @@ public class ReservaData {
         }
    
     }
-    
      
-    
     
     public Huesped mostrarHuesped(long dni) {
         HuespedData huespedData = new HuespedData(conexion);

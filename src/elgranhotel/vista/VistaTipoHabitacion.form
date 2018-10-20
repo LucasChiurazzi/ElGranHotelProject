@@ -30,17 +30,6 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jBLimpiarTipoHabitacion" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-              <Component id="jBBorrarTipoHabitacion" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-              <Component id="jBActualizarTipoHabitacion" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Component id="jBNuevoTipoHabitacion" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -109,6 +98,17 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+              <Component id="jBLimpiarTipoHabitacion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+              <Component id="jBBorrarTipoHabitacion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+              <Component id="jBActualizarTipoHabitacion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Component id="jBNuevoTipoHabitacion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -193,7 +193,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBLimpiarTipoHabitacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="LIMPIAR"/>
+        <Property name="text" type="java.lang.String" value="Limpiar"/>
         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Limpia los campos, &lt;br&gt;puede usarlo antes de hacer un NUEVO tipo&lt;/html&gt;&#xa;"/>
       </Properties>
       <Events>
@@ -202,7 +202,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBBorrarTipoHabitacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="BORRAR"/>
+        <Property name="text" type="java.lang.String" value="Borrar"/>
         <Property name="toolTipText" type="java.lang.String" value="Borra el tipo de habitacion seleccionado"/>
       </Properties>
       <Events>
@@ -211,7 +211,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBActualizarTipoHabitacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ACTUALIZAR"/>
+        <Property name="text" type="java.lang.String" value="Actualizar"/>
         <Property name="toolTipText" type="java.lang.String" value="Modifica los campos del tipo de habitacion seleccionado"/>
       </Properties>
       <Events>
@@ -220,7 +220,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBNuevoTipoHabitacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="NUEVO"/>
+        <Property name="text" type="java.lang.String" value="Nuevo"/>
         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Crea un nuevo tipo de habitacion,&lt;br&gt; antes de escribir puede LIMPIAR los campos&lt;/html&gt;"/>
       </Properties>
       <Events>
@@ -282,7 +282,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBActualizarPrecioTipoHabitacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ACTUALIZAR PRECIO"/>
+        <Property name="text" type="java.lang.String" value="Actualizar Precio"/>
         <Property name="toolTipText" type="java.lang.String" value="Util cuando solo se quiere ACTUALIZAR el PRECIO"/>
       </Properties>
       <Events>
