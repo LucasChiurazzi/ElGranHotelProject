@@ -23,10 +23,12 @@ public class HabitacionData {
     private Habitacion habitacion;
     private TipoHabitacion tipoHabitacion;
     private Conexion conexion;
+    private TipoHabitacionData tipoHabitacionData;
 
 
 //constructor toma una conexion
     public HabitacionData (Conexion conexion) {
+        
         try {
             connection = conexion.getConexion();
         } catch (SQLException ex) {
@@ -106,7 +108,7 @@ public class HabitacionData {
     
     
 }
-
+//sin terminar
 public Habitacion mostrarHabitacion(int numeroHabitacion){
  Habitacion habitacion = null;
             
@@ -135,7 +137,7 @@ public Habitacion mostrarHabitacion(int numeroHabitacion){
                 
                 habitacion = new Habitacion();
                 
-                habitacion.setNumeroHabitacion(resultSet.getInt("idHabitacion"));
+                habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
                 habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
                 habitacion.setPiso(resultSet.getInt("pisoHabitacion"));
                 
@@ -156,41 +158,77 @@ public Habitacion mostrarHabitacion(int numeroHabitacion){
 //o filtrar dsp de obtener la data?? MEtodo que filtre puede servir para cualquier parametro
 public List<Habitacion> mostrarHabitaciones(){
      List<Habitacion> habitaciones= new ArrayList<>();
-     String sql = "SELECT * FROM habitacion;";
-            PreparedStatement statement;
+     
+     
+            
         try {
-            statement = connection.prepareStatement(sql);
-        
+            String sql = "SELECT * FROM habitacion;";
+            PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            Habitacion habitacion;
+            Habitacion h;
             
             while(resultSet.next()){
-                habitacion= new Habitacion();
-                habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
-                habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
-                TipoHabitacion tipoHabitacion=mostrarTipoHabitacion(resultSet.getInt("idTipoHabitacion"));
                 
+                h= new Habitacion();
                 
-                habitacion.setTipoHabitacion(tipoHabitacion);
-                habitacion.setPiso(resultSet.getInt("pisoHabitacion"));
-                habitaciones.add(habitacion);
-              
-            }
+                h.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
+                h.setPiso(resultSet.getInt("pisoHabitacion"));
+                h.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
+                
+                                            
+                TipoHabitacion tH=mostrarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"));
+                                
+                h.setTipoHabitacion(tH);
+                habitaciones.add(h);
+             }
             
                 statement.close();
             } catch (SQLException ex) {
-            Logger.getLogger(HabitacionData.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al obtener las Habitaciones: " + ex.getMessage());
         }
      
-     
-     
-     
-    
     return habitaciones;
 }
 
-  public TipoHabitacion mostrarTipoHabitacion(int idTipoHabitacion) {
+
+public List<Habitacion> obtenerHabitacionesXTipo(int idTipoHabitacion){
+        List<Habitacion> habitaciones = new ArrayList<Habitacion>();
+            
+
+        try {
+            String sql = "SELECT * FROM habitacion WHERE idTipoHabitacion=" + idTipoHabitacion + ";";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            Habitacion habitacion;
+            while(resultSet.next()){
+                habitacion = new Habitacion();
+                habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
+                habitacion.setPiso(resultSet.getInt("pisoHabitacion"));
+                habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
+                TipoHabitacion th=mostrarTipoHabitacion(resultSet.getInt(idTipoHabitacion));
+                habitacion.setTipoHabitacion(th);
+                
+                habitaciones.add(habitacion);
+            }      
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
+        }
+        
+        
+        return habitaciones;
+    }
+
+
+
+public TipoHabitacion mostrarTipoHabitacion(int idTipoHabitacion) {
+        try {
+            conexion= new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
+        }
         TipoHabitacionData tipohabitacionData = new TipoHabitacionData(conexion);
+        
         return tipohabitacionData.mostrarTipoHabitacion(idTipoHabitacion);
     }
     

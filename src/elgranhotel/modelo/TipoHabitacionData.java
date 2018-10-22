@@ -17,7 +17,8 @@ import java.util.List;
  * @author Lucas
  */
 public class TipoHabitacionData {
-   private Connection connection;
+    
+   private Connection connection= null;
    
 //constructor
    public TipoHabitacionData(Conexion conexion) {

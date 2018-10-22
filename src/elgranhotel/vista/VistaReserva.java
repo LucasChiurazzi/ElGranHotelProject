@@ -527,14 +527,13 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         habitacionData= new HabitacionData(conexion);
         listaHabitaciones= new ArrayList<>();
         
+        //OK
         String objetCb= (String)jCBTipoHabitacionReserva.getSelectedItem();
-        
         TipoHabitacion tpHabSelec=searchDeStringATipoHabitacion(objetCb);
-        
-        
-      
-        List<Habitacion> todasLasHabitaciones= (ArrayList)habitacionData.mostrarHabitaciones();
+                      
+        List<Habitacion> todasLasHabitaciones= habitacionData.mostrarHabitaciones();
         System.out.println(todasLasHabitaciones);
+        
         
         for(Habitacion h: todasLasHabitaciones){
             if(h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion()){
