@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,9 +96,7 @@ public class ReservaData {
         
         
         return huespedes;
-    }
-    
-      
+    }   
       
     public List<Reserva> buscarReserva(long dni){
         //recibo un huesped
@@ -178,18 +177,26 @@ public class ReservaData {
     public void hacerReserva(Reserva reserva){
         try {
             
-            String sql = "INSERT INTO reserva(idReserva, fechaInicioReserva, fechaFinReserva, estadoReserva, Huesped_dniHuesped, Habitacion_numeroHabitacion) VALUES ( ? , ? , ? , ? , ? , ? );";
+            String sql = "INSERT INTO reserva( fechaInicioReserva, fechaFinReserva, estadoReserva, Huesped_dniHuesped, Habitacion_numeroHabitacion) VALUES ( ? , ? , ? , ? , ? , ? );";
 
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, reserva.getIdReserva());
-            statement.setDate(2,  java.sql.Date.valueOf(reserva.getFechaInicioReserva()));
-            statement.setDate(3, java.sql.Date.valueOf(reserva.getFechaFinReserva()));
-            statement.setBoolean(4, reserva.getEstadoReserva());
-            statement.setLong(5, reserva.getHuesped().getDniHuesped());
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            statement.setDate(1,  java.sql.Date.valueOf(reserva.getFechaInicioReserva()));
+            statement.setDate(2, java.sql.Date.valueOf(reserva.getFechaFinReserva()));
+            statement.setBoolean(3, reserva.getEstadoReserva());
+            statement.setLong(4, reserva.getHuesped().getDniHuesped());
             statement.setInt(5, reserva.getHabitacion().getNumeroHabitacion());
             
             statement.executeUpdate();
             
+            ResultSet rs = statement.getGeneratedKeys();
+            
+             if (rs.next()) {
+                reserva.setIdReserva(rs.getInt(1));
+            } else {
+                System.out.println("No se pudo obtener el id luego de insertar una reserva");
+            }
+          
             statement.close();
     
         } catch (SQLException ex) {

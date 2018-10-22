@@ -17,8 +17,14 @@ import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
 import elgranhotel.modelo.Reserva;
 import elgranhotel.modelo.ReservaData;
+import static elgranhotel.vista.Principal.escritorio;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.BadLocationException;
 
 
 /**
@@ -27,6 +33,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VistaReserva extends javax.swing.JInternalFrame {
     
+    private TipoHabitacion tipoHabitacion;
     private TipoHabitacionData tipoHabitacionData;
     private List<TipoHabitacion> listaTiposHabitacion;
     private List<Habitacion> listaHabitaciones;
@@ -38,6 +45,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private DefaultTableModel modeloReserva;
     private Habitacion habitacion;
     private HabitacionData habitacionData;
+   
     
     
     
@@ -51,6 +59,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
           try {   
             conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
             
+             modeloReserva=new DefaultTableModel();
+            
             tipoHabitacionData = new TipoHabitacionData(conexion);
             huespedData= new HuespedData(conexion);
             
@@ -59,7 +69,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                        
             //Método encargado de llenar el combobox
            cargarTiposHabitacionEnComboBox();
-            
+          
+           armaCabeceraTabla();
             
             
             
@@ -99,7 +110,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jCBTipoHabitacionReserva = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jBBorrarReserva = new javax.swing.JButton();
         jBConfitmarReserva = new javax.swing.JButton();
         jBBuscarHabitacionesReserva = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -191,9 +201,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Tipo de Habitacion");
 
-        jBBorrarReserva.setText("Borrar");
-
         jBConfitmarReserva.setText("Confirmar");
+        jBConfitmarReserva.setEnabled(false);
         jBConfitmarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBConfitmarReservaActionPerformed(evt);
@@ -201,6 +210,11 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         });
 
         jBBuscarHabitacionesReserva.setText("Habitaciones Disponibles");
+        jBBuscarHabitacionesReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarHabitacionesReservaActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Estado");
 
@@ -248,11 +262,9 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(165, 165, 165)
+                                .addGap(194, 194, 194)
                                 .addComponent(jBConfitmarReserva)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBBorrarReserva)
-                                .addGap(18, 18, 18)
+                                .addGap(48, 48, 48)
                                 .addComponent(jBLimpiarReserva))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
@@ -286,8 +298,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTFEstadoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(12, 12, 12)
@@ -299,7 +311,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                                 .addComponent(jBBuscarHuespedReserva)
                                 .addGap(44, 44, 44)
                                 .addComponent(jLabel9)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 390, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jBBuscarHabitacionesReserva)
@@ -346,7 +358,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                             .addComponent(jTFMontoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBBorrarReserva)
                             .addComponent(jBBuscarHabitacionesReserva)
                             .addComponent(jBConfitmarReserva)
                             .addComponent(jBLimpiarReserva)))
@@ -385,25 +396,52 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBBuscarHuespedReservaActionPerformed
         
-        
-                
+
+      
+    
+    //Crea una nueva reserva
     private void jBConfitmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfitmarReservaActionPerformed
+        long dni= Long.parseLong(jTHuespedReserva.getText().substring(0,8).trim());
+      
+      LocalDate fechaInicio=convertToLocalDateViaInstant((Date)jXDPInicioReserva.getDate());
+      LocalDate fechaFin= convertToLocalDateViaInstant((Date)jXDPFinReserva.getDate());
+        
+        int filaSeleccionada= jTHabitacionesReserva.getSelectedRow();
+        
+        if(filaSeleccionada!=-1){
+          
+            int numeroHabitacion= (Integer)modeloReserva.getValueAt(filaSeleccionada,0);
+           
+            //HABITACION seleccionada por la lista, filtrada del data por el numeroHabitacion
+              Habitacion habitacion= habitacionData.mostrarHabitacion(numeroHabitacion);
        
-        jTHuespedReserva
-        jXDPInicioReserva
-        jXDPFinReserva      
-        jTFCantPersonasReserva        
+               //HUESPED
+            Huesped huesped= huespedData.mostrarHuesped(dni);
+                //carga la reserva con los datos
+                //el estado es por defecto true
+            reserva= new Reserva(fechaInicio, fechaFin, true, huesped, habitacion);
+            reservaData.hacerReserva(reserva);
+        }
+             
         
-        jCBTipoHabitacionReserva        
+      
+      
+      JOptionPane.showMessageDialog(escritorio, "La reserva se guardo correctamente");
+      
+           
         
-        jTHabitacionesReserva       
-        //setteo el estado y el monto         
-        jTFEstadoReserva        
-        jTFMontoReserva
-                
+        //depende de la fecha?
+        //jTFEstadoReserva
+       
+        //setteo  el monto         
+        //jTFEstadoReserva;        
+        //jTFMontoReserva;
+               
         
     }//GEN-LAST:event_jBConfitmarReservaActionPerformed
 
+    
+    
     private void jBCargarPopUpHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarPopUpHuespedReservaActionPerformed
 
         VistaHuesped vh=new VistaHuesped();
@@ -421,6 +459,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private void jXDPInicioReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDPInicioReservaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jXDPInicioReservaActionPerformed
+
+    //carga la lista de habitaciones segun el tipo
+    private void jBBuscarHabitacionesReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarHabitacionesReservaActionPerformed
+
+        cargatablaHabitacionesSeguntipo();
+        
+        
+    }//GEN-LAST:event_jBBuscarHabitacionesReservaActionPerformed
 
 
     //metodos combobox
@@ -470,34 +516,51 @@ public class VistaReserva extends javax.swing.JInternalFrame {
        
      }
     
-    public void cargaDatosInscriptas(){
-    
+    //metodos tabla
+    public void cargatablaHabitacionesSeguntipo(){
+    //no sale
         borraFilasTabla();
    
         //Llenar filas
    
         reservaData =new ReservaData(conexion);
         habitacionData= new HabitacionData(conexion);
-        TipoHabitacion tpHabSelec=(TipoHabitacion)jCBTipoHabitacionReserva.getSelectedItem();
+        listaHabitaciones= new ArrayList<>();
+        
+        String objetCb= (String)jCBTipoHabitacionReserva.getSelectedItem();
+        
+        TipoHabitacion tpHabSelec=searchDeStringATipoHabitacion(objetCb);
         
         
+      
+        List<Habitacion> todasLasHabitaciones= (ArrayList)habitacionData.mostrarHabitaciones();
+        System.out.println(todasLasHabitaciones);
         
-        listaHabitaciones = (ArrayList)habitacionData.mostrarTipoHabitacion(tpHabSelec.getIdTipoHabitacion());
+        for(Habitacion h: todasLasHabitaciones){
+            if(h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion()){
+                listaHabitaciones.add(h);
+            }
+        }
         
-        for(Materia m:listaMaterias){
+        System.out.println(listaHabitaciones);
         
-            modelo.addRow(new Object[]{m.getId(),m.getNombre()});
+        
+        //listaHabitaciones = habitacionData.mostrarTipoHabitacion(tpHabSelec.getIdTipoHabitacion());
+        
+        for(Habitacion h:listaHabitaciones){
+        
+            modeloReserva.addRow(new Object[]{h.getNumeroHabitacion(), h.getPiso(), h.getTipoHabitacion().getCategoriaTipoHabitacion(),h.getTipoHabitacion().getTipoCamaTipoHabitacion(), h.getTipoHabitacion().getCantidadCamasTipoHabitacion()});
         }
     }
     
     public void armaCabeceraTabla(){
   
-        ArrayList<Object> columnas=new ArrayList<Object>();
+        ArrayList<Object> columnas=new ArrayList<>();
         columnas.add("Numero Habitacion");
         columnas.add("Piso");
         columnas.add("Tipo");
+        columnas.add("Tipo Cama");
         columnas.add("Cant Camas");
-        columnas.add("Tipo de Cama");
         for(Object it:columnas){
         
             modeloReserva.addColumn(it);
@@ -514,10 +577,23 @@ for(int i=a;i>=0;i--){
 modeloReserva.removeRow(i );
 }
 }
+    
+     public  TipoHabitacion searchDeStringATipoHabitacion(String selectedItemComboBox){
+        //sacar el id y pasarlo a int, buscar con el id en la base de datos y sacarlo como un tipoHabitacion completo
+        int idTipoHabitacion= Integer.parseInt(selectedItemComboBox.substring(0, 2).trim());
+      
+       TipoHabitacion tH=(tipoHabitacionData.mostrarTipoHabitacion(idTipoHabitacion));
+    
+        return tH;
+    }
    
+     public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+    return dateToConvert.toInstant()
+      .atZone(ZoneId.systemDefault())
+      .toLocalDate();
+}      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jBBorrarReserva;
     private javax.swing.JButton jBBuscarHabitacionesReserva;
     private javax.swing.JButton jBBuscarHuespedReserva;
     private javax.swing.JButton jBBuscarTipoHabitacion;

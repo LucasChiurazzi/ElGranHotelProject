@@ -13,7 +13,7 @@ import java.time.LocalDate;
  */
 public class Reserva {
     //atributos
-    private int idReserva;
+    private int idReserva= -1;
     private LocalDate fechaInicioReserva;
     private LocalDate fechaFinReserva;
     private boolean estadoReserva;
@@ -32,6 +32,7 @@ public class Reserva {
 
     
     public Reserva(LocalDate fechaInicioReserva, LocalDate fechaFinReserva, boolean estadoReserva, Huesped huesped, Habitacion habitacion) {
+        this.idReserva = -1;
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaFinReserva = fechaFinReserva;
         this.estadoReserva = estadoReserva;
@@ -40,14 +41,14 @@ public class Reserva {
     }
 
     public Reserva() {
+    this.idReserva= -1;
     }
-    
     
 
     public int getIdReserva() {
         return idReserva;
     }
-
+    
     public LocalDate getFechaInicioReserva() {
         return fechaInicioReserva;
     }

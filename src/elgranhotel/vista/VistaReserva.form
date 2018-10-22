@@ -114,11 +114,9 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
                               <Component id="jBConfitmarReserva" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jBBorrarReserva" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                               <Component id="jBLimpiarReserva" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -163,8 +161,8 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="437" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -179,7 +177,7 @@
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="390" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -236,7 +234,6 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jBBorrarReserva" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBBuscarHabitacionesReserva" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBConfitmarReserva" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBLimpiarReserva" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -312,14 +309,10 @@
         <Property name="text" type="java.lang.String" value="Tipo de Habitacion"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jBBorrarReserva">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Borrar"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jBConfitmarReserva">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBConfitmarReservaActionPerformed"/>
@@ -329,6 +322,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Habitaciones Disponibles"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBBuscarHabitacionesReservaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
