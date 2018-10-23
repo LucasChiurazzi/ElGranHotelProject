@@ -466,6 +466,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         cargatablaHabitacionesSeguntipo();
         
         
+        
     }//GEN-LAST:event_jBBuscarHabitacionesReservaActionPerformed
 
 
