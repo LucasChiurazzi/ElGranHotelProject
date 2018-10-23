@@ -19,9 +19,17 @@ import elgranhotel.modelo.Reserva;
 import elgranhotel.modelo.ReservaData;
 import static elgranhotel.vista.Principal.escritorio;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import static java.time.temporal.ChronoUnit.DAYS;
+import java.util.Calendar;
 import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.BadLocationException;
@@ -72,6 +80,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
           
            armaCabeceraTabla();
             
+           
+         
             
             
             
@@ -197,6 +207,12 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Fecha Fin");
 
+        jTFDiasReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFDiasReservaActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Cantidad de Personas");
 
         jLabel6.setText("Tipo de Habitacion");
@@ -239,6 +255,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         jBLimpiarReserva.setText("Limpiar");
 
+        jXDPFinReserva.setFormats("d/M/yyyy");
+        jXDPFinReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXDPFinReservaActionPerformed(evt);
+            }
+        });
+
+        jXDPInicioReserva.setFormats("d/M/yyyy");
         jXDPInicioReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jXDPInicioReservaActionPerformed(evt);
@@ -275,14 +299,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jXDPInicioReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jXDPInicioReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel4))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel10)
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTFDiasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
+                                        .addGap(96, 96, 96)
                                         .addComponent(jLabel5)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -292,12 +316,12 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                                         .addComponent(jBBuscarTipoHabitacion))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTFEstadoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(19, 19, 19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -457,7 +481,13 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBBuscarTipoHabitacionActionPerformed
 
     private void jXDPInicioReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDPInicioReservaActionPerformed
-        // TODO add your handling code here:
+        
+
+
+   
+
+
+
     }//GEN-LAST:event_jXDPInicioReservaActionPerformed
 
     //carga la lista de habitaciones segun el tipo
@@ -468,6 +498,16 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jBBuscarHabitacionesReservaActionPerformed
+
+    private void jTFDiasReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDiasReservaActionPerformed
+       
+        
+        
+    }//GEN-LAST:event_jTFDiasReservaActionPerformed
+
+    private void jXDPFinReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDPFinReservaActionPerformed
+cargarDias();       
+    }//GEN-LAST:event_jXDPFinReservaActionPerformed
 
 
     //metodos combobox
@@ -586,12 +626,40 @@ modeloReserva.removeRow(i );
     
         return tH;
     }
-   
      public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
     return dateToConvert.toInstant()
       .atZone(ZoneId.systemDefault())
       .toLocalDate();
-}      
+}   
+     
+     
+     //cargar dias en diasreserva
+     public void cargarDias(){
+         
+         
+    Calendar cals = Calendar.getInstance();
+    SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+    
+    String toLocalDate= formater.format(jXDPInicioReserva.getDate());
+    LocalDate fechaInicio= LocalDate.parse(toLocalDate);
+    
+    
+    SimpleDateFormat formater2 = new SimpleDateFormat("yyyy-MM-dd");
+    
+    String toLocalDateFin= formater2.format(jXDPFinReserva.getDate());
+    LocalDate fechaFin = LocalDate.parse(toLocalDateFin);
+    
+    System.out.println(fechaInicio);
+    System.out.println(fechaFin);
+    
+    long diasReserva=fechaInicio.until(fechaFin, DAYS);
+    System.out.println(diasReserva);
+    jTFDiasReserva.setText(diasReserva +"");
+       
+     }
+     
+   
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBBuscarHabitacionesReserva;
