@@ -215,10 +215,15 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Cantidad de Personas");
 
+        jCBTipoHabitacionReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBTipoHabitacionReservaActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Tipo de Habitacion");
 
         jBConfitmarReserva.setText("Confirmar");
-        jBConfitmarReserva.setEnabled(false);
         jBConfitmarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBConfitmarReservaActionPerformed(evt);
@@ -248,6 +253,12 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTHabitacionesReserva);
 
         jLabel9.setText("Habitaciones disponibles");
+
+        jTFCantPersonasReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCantPersonasReservaActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Dias");
 
@@ -425,25 +436,31 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     
     //Crea una nueva reserva
     private void jBConfitmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfitmarReservaActionPerformed
-        long dni= Long.parseLong(jTHuespedReserva.getText().substring(0,8).trim());
-      
-      LocalDate fechaInicio=convertToLocalDateViaInstant((Date)jXDPInicioReserva.getDate());
-      LocalDate fechaFin= convertToLocalDateViaInstant((Date)jXDPFinReserva.getDate());
-        
-        int filaSeleccionada= jTHabitacionesReserva.getSelectedRow();
+    long dni= Long.parseLong(jTHuespedReserva.getText().substring(0,8).trim());
+              
+    SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+    String toLocalDate= formater.format(jXDPInicioReserva.getDate());
+    LocalDate fechaInicio= LocalDate.parse(toLocalDate);
+    
+    SimpleDateFormat formater2 = new SimpleDateFormat("yyyy-MM-dd");
+    String toLocalDateFin= formater2.format(jXDPFinReserva.getDate());
+    LocalDate fechaFin = LocalDate.parse(toLocalDateFin);
+     
+    int filaSeleccionada= jTHabitacionesReserva.getSelectedRow();
         
         if(filaSeleccionada!=-1){
           
             int numeroHabitacion= (Integer)modeloReserva.getValueAt(filaSeleccionada,0);
            
             //HABITACION seleccionada por la lista, filtrada del data por el numeroHabitacion
-              Habitacion habitacion= habitacionData.mostrarHabitacion(numeroHabitacion);
+           Habitacion h= habitacionData.mostrarHabitacion(numeroHabitacion);
        
                //HUESPED
+               
             Huesped huesped= huespedData.mostrarHuesped(dni);
                 //carga la reserva con los datos
                 //el estado es por defecto true
-            reserva= new Reserva(fechaInicio, fechaFin, true, huesped, habitacion);
+            reserva= new Reserva(fechaInicio, fechaFin, true, huesped, h);
             reservaData.hacerReserva(reserva);
         }
              
@@ -478,10 +495,11 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     
     private void jBBuscarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarTipoHabitacionActionPerformed
        cargarTiposHabitacionEnComboBoxXCP();
+        precioReserva();
     }//GEN-LAST:event_jBBuscarTipoHabitacionActionPerformed
 
     private void jXDPInicioReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDPInicioReservaActionPerformed
-        
+        cargarDias();
 
 
    
@@ -508,6 +526,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private void jXDPFinReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDPFinReservaActionPerformed
 cargarDias();       
     }//GEN-LAST:event_jXDPFinReservaActionPerformed
+
+    private void jCBTipoHabitacionReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoHabitacionReservaActionPerformed
+      
+    }//GEN-LAST:event_jCBTipoHabitacionReservaActionPerformed
+
+    private void jTFCantPersonasReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCantPersonasReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFCantPersonasReservaActionPerformed
 
 
     //metodos combobox
@@ -639,24 +665,30 @@ modeloReserva.removeRow(i );
          
     Calendar cals = Calendar.getInstance();
     SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-    
     String toLocalDate= formater.format(jXDPInicioReserva.getDate());
     LocalDate fechaInicio= LocalDate.parse(toLocalDate);
     
     
     SimpleDateFormat formater2 = new SimpleDateFormat("yyyy-MM-dd");
-    
     String toLocalDateFin= formater2.format(jXDPFinReserva.getDate());
     LocalDate fechaFin = LocalDate.parse(toLocalDateFin);
-    
-    System.out.println(fechaInicio);
-    System.out.println(fechaFin);
-    
+       
     long diasReserva=fechaInicio.until(fechaFin, DAYS);
     System.out.println(diasReserva);
     jTFDiasReserva.setText(diasReserva +"");
        
      }
+     
+     public void precioReserva(){
+        String objetCb= (String)jCBTipoHabitacionReserva.getSelectedItem();
+        TipoHabitacion tpHabSelec=searchDeStringATipoHabitacion(objetCb);
+         
+         
+         int dias=Integer.parseInt(jTFDiasReserva.getText());
+         double precioXnoche=tpHabSelec.getPrecioNocheTipoHabitacion();
+         double monto= dias*precioXnoche;
+         jTFMontoReserva.setText(monto + "");
+}
      
    
      

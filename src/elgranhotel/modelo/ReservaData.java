@@ -177,7 +177,7 @@ public class ReservaData {
     public void hacerReserva(Reserva reserva){
         try {
             
-            String sql = "INSERT INTO reserva( fechaInicioReserva, fechaFinReserva, estadoReserva, Huesped_dniHuesped, Habitacion_numeroHabitacion) VALUES ( ? , ? , ? , ? , ? , ? );";
+            String sql = "INSERT INTO reserva (fechaInicioReserva, fechaFinReserva, estadoReserva, dniHuesped, numeroHabitacion) VALUES ( ? , ? , ? , ? , ? );";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
