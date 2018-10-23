@@ -28,8 +28,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuItemSalir = new javax.swing.JMenuItem();
         jMenuHuesped = new javax.swing.JMenu();
         jMenuABMHuesped = new javax.swing.JMenuItem();
-        jMenuReserva = new javax.swing.JMenu();
+        jmiBuscarReservaPorFecha = new javax.swing.JMenu();
         jmiReserva = new javax.swing.JMenuItem();
+        jmiBuscarReservaPorHuesped = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuHabitacion = new javax.swing.JMenu();
         jMenuABMHabitacion = new javax.swing.JMenuItem();
         jMenuTipoHabitacion = new javax.swing.JMenu();
@@ -79,7 +81,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuHuesped);
 
-        jMenuReserva.setText("Reserva");
+        jmiBuscarReservaPorFecha.setText("Reserva");
 
         jmiReserva.setText("Reservar");
         jmiReserva.addActionListener(new java.awt.event.ActionListener() {
@@ -87,9 +89,20 @@ public class Principal extends javax.swing.JFrame {
                 jmiReservaActionPerformed(evt);
             }
         });
-        jMenuReserva.add(jmiReserva);
+        jmiBuscarReservaPorFecha.add(jmiReserva);
 
-        jMenuBar1.add(jMenuReserva);
+        jmiBuscarReservaPorHuesped.setText("Buscar Reserva por Huesped");
+        jmiBuscarReservaPorHuesped.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBuscarReservaPorHuespedActionPerformed(evt);
+            }
+        });
+        jmiBuscarReservaPorFecha.add(jmiBuscarReservaPorHuesped);
+
+        jMenuItem2.setText("Buescar Reserva por Fecha");
+        jmiBuscarReservaPorFecha.add(jMenuItem2);
+
+        jMenuBar1.add(jmiBuscarReservaPorFecha);
 
         jMenuHabitacion.setText("Habitación");
 
@@ -184,6 +197,15 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
+    private void jmiBuscarReservaPorHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBuscarReservaPorHuespedActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaBuscarReserva vBuscarReserva =new VistaBuscarReserva();
+        vBuscarReserva.setVisible(true);
+        escritorio.add(vBuscarReserva);
+        escritorio.moveToFront(vBuscarReserva);
+    }//GEN-LAST:event_jmiBuscarReservaPorHuespedActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -228,10 +250,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHabitacion;
     private javax.swing.JMenu jMenuHuesped;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemABMTipoHabitacion;
     private javax.swing.JMenuItem jMenuItemSalir;
-    private javax.swing.JMenu jMenuReserva;
     private javax.swing.JMenu jMenuTipoHabitacion;
+    private javax.swing.JMenu jmiBuscarReservaPorFecha;
+    private javax.swing.JMenuItem jmiBuscarReservaPorHuesped;
     private javax.swing.JMenuItem jmiReserva;
     // End of variables declaration//GEN-END:variables
 }

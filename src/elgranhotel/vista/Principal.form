@@ -37,7 +37,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuReserva">
+        <Menu class="javax.swing.JMenu" name="jmiBuscarReservaPorFecha">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reserva"/>
           </Properties>
@@ -49,6 +49,19 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiReservaActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiBuscarReservaPorHuesped">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buscar Reserva por Huesped"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiBuscarReservaPorHuespedActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buescar Reserva por Fecha"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

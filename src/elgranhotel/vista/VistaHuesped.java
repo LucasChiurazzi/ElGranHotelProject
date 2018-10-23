@@ -113,13 +113,13 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
 
         jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Dni", "Nombre", "Domicilio", "Correo", "Celular"
             }
         ));
         jScrollPane1.setViewportView(jTableHuesped);
