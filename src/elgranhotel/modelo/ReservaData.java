@@ -50,14 +50,12 @@ public class ReservaData {
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
                
-                Huesped huesped=mostrarHuesped(resultSet.getLong("Huesped_dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
                
                 reserva.setHuesped(huesped);
                 
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("Habitacion_idHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
                
-                
-                
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
@@ -167,7 +165,7 @@ public class ReservaData {
             
             statement.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener los huespedes: " + ex.getMessage());
+            System.out.println("Error al obtener una reserva por fecha: " + ex.getMessage());
         }
         
         
@@ -208,7 +206,7 @@ public class ReservaData {
             
         try {
             
-            String sql = "UPDATE reserva SET fechaInicioReserva= ? ,fechaFinReserva= ? ,estadoReserva= ? ,Huesped_dniHuesped= ? ,Habitacion_numeroHabitacion= ?  WHERE idReserva= ?;";
+            String sql = "UPDATE reserva SET fechaInicioReserva= ? ,fechaFinReserva= ? ,estadoReserva= ? ,dniHuesped= ? ,numeroHabitacion= ?  WHERE idReserva= ?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             
