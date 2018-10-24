@@ -398,8 +398,10 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
        //inserto en textfield
        jTFIdReserva.setText(id);
        jTFEstadoReserva1.setText(estado);
-       jXDPInicioReserva.setFormats(localDateFechaI.format(fLocalDate));
-       jXDPFinReserva.setFormats(localDateFechaF.format(fLocalDate));
+       Date dateInicio=java.sql.Date.valueOf(localDateFechaI);
+       jXDPInicioReserva.setDate(dateInicio);
+       Date dateFin=java.sql.Date.valueOf(localDateFechaF);
+       jXDPFinReserva.setDate(dateFin);
        
 //Date inicio=jXDPInicioReserva.getDate();
       // System.out.println(inicio);
