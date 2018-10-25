@@ -36,7 +36,8 @@ public class HabitacionData {
          int rta=0;
     try {
                      
-            String sql = "INSERT INTO habitacion (numeroHabitacion, pisoHabitacion, estadoHabitacion, IdTipoHabitacion)";
+            String sql = "INSERT INTO habitacion (numeroHabitacion, pisoHabitacion, estadoHabitacion, IdTipoHabitacion) VALUES ( ? , ? , ? , ? ) ;";
+            
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, habitacion.getNumeroHabitacion());
             statement.setInt(2, habitacion.getPisoHabitacion());

@@ -460,8 +460,11 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                 //carga la reserva con los datos
                 //el estado es por defecto true
             reserva= new Reserva(fechaInicio, fechaFin, true, huesped, h);
-            reservaData.hacerReserva(reserva);
             h.setEstadoHabitacion(true);
+                        
+            reservaData.hacerReserva(reserva);
+            habitacionData.actualizarHabitacion(h);
+            
             JOptionPane.showMessageDialog(escritorio, "La reserva se guardo correctamente");
         }
           

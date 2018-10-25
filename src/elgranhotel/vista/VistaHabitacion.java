@@ -8,8 +8,11 @@ package elgranhotel.vista;
 import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.Habitacion;
 import elgranhotel.modelo.HabitacionData;
+import elgranhotel.modelo.Reserva;
+import elgranhotel.modelo.ReservaData;
 import elgranhotel.modelo.TipoHabitacion;
 import elgranhotel.modelo.TipoHabitacionData;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static org.jdesktop.swingx.plaf.basic.CalendarState.TODAY;
 
 /**
  *
@@ -29,6 +33,7 @@ private HabitacionData habitacionData;
 private Conexion conexion;  
 DefaultTableModel modelo;
 private ArrayList<Habitacion> listaHabitacion;
+private ReservaData reservaData;
 
     public VistaHabitacion() {
         initComponents();
@@ -260,9 +265,9 @@ private ArrayList<Habitacion> listaHabitacion;
         {
             int nro= Integer.parseInt(jTFNroHabitacion.getText());
             int piso=Integer.parseInt(campoPiso.getText());
-            boolean estado=cbEstado.isSelected();
+            
             TipoHabitacion tpHabSelec=deJCBaTipo(jCBTipoHabitacion);
-            Habitacion habitacion=new Habitacion(nro, piso,estado,tpHabSelec);
+            Habitacion habitacion=new Habitacion(nro, piso, false, tpHabSelec); 
             rta=habitacionData.guardarHabitacion(habitacion);
             if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
             else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
@@ -365,12 +370,24 @@ public void mostrarHabitacion(Habitacion habitacion){
  jTFNroHabitacion.setText(id); 
  String piso= String.valueOf(habitacion.getPisoHabitacion());
  campoPiso.setText(piso);
- 
+
+ reservaData= new ReservaData(conexion);
+ List <Reserva> reservasHabitacion= reservaData.obtenerReservas();
+ LocalDate hoy=  LocalDate.now();
+ Reserva rH = null;
+ for (Reserva r:reservasHabitacion){
+        if(r.getHabitacion().getNumeroHabitacion()==habitacion.getNumeroHabitacion()){
+           rH= r;
+           }
+    }
+    System.out.println(rH);
  boolean estado=habitacion.getEstadoHabitacion();
- if(estado) {jTFEstadoHabitacion.setText("OCUPADA");
+  if(estado && rH.getFechaFinReserva().plusDays(1).isAfter(hoy) && rH.getFechaInicioReserva().plusDays(1).isBefore(hoy) ||rH.getFechaFinReserva().plusDays(1).equals(hoy) || rH.getFechaInicioReserva().plusDays(1).isBefore(hoy)) {
+     jTFEstadoHabitacion.setText("OCUPADA");
          cbEstado.setSelected(true);
  }else {jTFEstadoHabitacion.setText("LIBRE");
       cbEstado.setSelected(false);}
+ 
  
  String idTH= String.valueOf(habitacion.getTipoHabitacion().getIdTipoHabitacion());
  String tipoTH= String.valueOf(habitacion.getTipoHabitacion().getCategoriaTipoHabitacion());
