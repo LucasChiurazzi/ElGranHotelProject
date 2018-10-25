@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +90,46 @@ public class ReservaData {
             statement.close();
         } catch (SQLException ex) {
             System.out.println("Error al obtener los huespedes: " + ex.getMessage());
+        }
+        
+        
+        return reservas;
+    }
+    
+    public List<Reserva> buscarReserva(LocalDate fechaI, LocalDate fechaF){
+        //recibo una fecha de inicio de la reserva
+        //busco en la base de datos si hay alguna reserva para esa fecha 
+        //alguna habitacion
+        List<Reserva> reservas = new ArrayList<>();
+        System.out.println(fechaI);
+        System.out.println(fechaF);
+        //List<Huesped> huespedes = new ArrayList<Huesped>();
+        
+        try {
+            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped and habitacion.numeroHabitacion=reserva.numeroHabitacion and fechaInicioReserva>='"+fechaI.toString()+"' and fechaFinReserva<='"+fechaF.toString()+"';";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            Reserva reserva;
+            
+            while(resultSet.next()){
+                reserva = new Reserva();
+                reserva.setIdReserva(resultSet.getInt("idReserva"));
+                reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
+                reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
+                reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                reserva.setHuesped(huesped);
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
+                reserva.setHabitacion(habitacion);
+                reservas.add(reserva);
+            }      
+            
+            
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener una reserva por esas fecha: " + ex.getMessage());
         }
         
         

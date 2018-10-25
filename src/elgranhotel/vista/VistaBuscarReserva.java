@@ -41,7 +41,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     private ReservaData reservaData;
     private Reserva reserva;
     private List<Reserva> listaBuscarReservaDni;
-    
+    private List<Reserva> listaBuscarReservaFecha;
     
     
     
@@ -105,6 +105,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         jTFIdReserva = new javax.swing.JTextField();
         jXDPInicioReserva = new org.jdesktop.swingx.JXDatePicker();
         jXDPFinReserva = new org.jdesktop.swingx.JXDatePicker();
+        jBBuscarFecha = new javax.swing.JButton();
 
         jLabel10.setText("Dias");
 
@@ -176,6 +177,13 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
 
         jLabel6.setText("ID");
 
+        jBBuscarFecha.setText("Buscar");
+        jBBuscarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarFechaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,16 +194,6 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jBActualizarReserva1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBBorrarReserva)
-                        .addGap(26, 26, 26)
-                        .addComponent(jBLimpiarReserva)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -205,49 +203,62 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                                         .addGap(103, 103, 103)
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTHuespedReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                                        .addComponent(jTHuespedReserva)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jBBuscarHuespedReserva))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(3, 3, 3)
-                                                .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTFEstadoReserva1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(jLabel11)
-                                                .addGap(34, 34, 34)
-                                                .addComponent(jTFMontoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(3, 3, 3)
+                                            .addComponent(jLabel7)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTFEstadoReserva1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(30, 30, 30)
+                                            .addComponent(jLabel11)
+                                            .addGap(34, 34, 34)
+                                            .addComponent(jTFMontoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(layout.createSequentialGroup()
                                                     .addComponent(jLabel10)
-                                                    .addComponent(jLabel6))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jTFDiasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jTFIdReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(41, 41, 41)
-                                                        .addComponent(jLabel3)
-                                                        .addGap(8, 8, 8)
-                                                        .addComponent(jXDPInicioReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jLabel4)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(136, 136, 136)
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTFCantPersonasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGap(6, 6, 6)
+                                                    .addComponent(jTFDiasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel6)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jTFIdReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(130, 130, 130)
+                                                    .addComponent(jLabel5)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jTFCantPersonasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jLabel3)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jXDPInicioReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jLabel4)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jBBuscarFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(46, 46, 46)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTFTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jBActualizarReserva1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBBorrarReserva)
+                        .addGap(26, 26, 26)
+                        .addComponent(jBLimpiarReserva)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -259,7 +270,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTHuespedReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,8 +282,9 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jXDPInicioReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
+                            .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBBuscarFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTFDiasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTFCantPersonasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,32 +394,29 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         String fechaIngreso=jTableBuscarReservaPorHuesped.getValueAt(row, 1).toString();
         LocalDate localDateFechaI = LocalDate.parse(fechaIngreso);
         DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern( "dd/MM/yyyy" );
-        //System.out.println(localDateFechaI.format(fLocalDate));
         String fechaFin=jTableBuscarReservaPorHuesped.getValueAt(row, 2).toString();
         LocalDate localDateFechaF = LocalDate.parse(fechaFin);
 
-        //anio mes dia
-        //String fn = new SimpleDateFormat("dd-MM-yyyy").format();
-        //System.out.println("lo nuevo");
-        //System.out.println(fn);
-        //
         String estado=jTableBuscarReservaPorHuesped.getValueAt(row, 3).toString();
-        //String dniHuesped=jTableBuscarReservaPorHuesped.getValueAt(row, 4).toString();
+        String dniHuesped=jTableBuscarReservaPorHuesped.getValueAt(row, 4).toString();
         String habitacion=jTableBuscarReservaPorHuesped.getValueAt(row, 5).toString();
        
        //inserto en textfield
+       //id reserva
        jTFIdReserva.setText(id);
+       //estado
        jTFEstadoReserva1.setText(estado);
-       Date dateInicio=java.sql.Date.valueOf(localDateFechaI);
+       //fecha inicio
+       Date dateInicio=java.sql.Date.valueOf(localDateFechaI); 
        jXDPInicioReserva.setDate(dateInicio);
+       //fecha fin
        Date dateFin=java.sql.Date.valueOf(localDateFechaF);
        jXDPFinReserva.setDate(dateFin);
        
-//Date inicio=jXDPInicioReserva.getDate();
-      // System.out.println(inicio);
-     //jXDPInicioReserva.setDate(c); //anio mes dia a dia mes anio
+       //si tengo vacio dni, cargarlo segun fecha elegida
+       jTHuespedReserva.setText(dniHuesped);
        
-     
+       
      
      //recuperar de selected a jxdpinicioreserva
      
@@ -440,10 +449,94 @@ System.out.println( "output: " + output );
      
     }//GEN-LAST:event_jTableBuscarReservaPorHuespedMouseClicked
 
+    private void jBBuscarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarFechaActionPerformed
+       //recibo ambas fechas
+       String fechaIBuscar=jXDPInicioReserva.getDate().toString();
+       String fechaFBuscar=jXDPFinReserva.getDate().toString();
+       
+       //convertirlas  aaaa-mm-dd
+       
+       DateTimeFormatter f = DateTimeFormatter.ofPattern( "E MMM dd HH:mm:ss z uuuu" ).withLocale( Locale.US );
+       ZonedDateTime zdtInicio = ZonedDateTime.parse( fechaIBuscar , f );
+       ZonedDateTime zdtFin = ZonedDateTime.parse( fechaFBuscar , f );
+      //System.out.println(zdt);
+       LocalDate fechaIDB = zdtInicio.toLocalDate();
+       LocalDate fechaFDB = zdtFin.toLocalDate();
+       
+/*       
+       String finput = "Mon Jun 18 00:00:00 IST 2012";
+DateTimeFormatter f = DateTimeFormatter.ofPattern( "E MMM dd HH:mm:ss z uuuu" )
+                                       .withLocale( Locale.US );
+ZonedDateTime zdt = ZonedDateTime.parse( input , f );
+
+Extract a date-only object, a LocalDate, without any time-of-day and without any time zone.
+
+LocalDate ld = zdt.toLocalDate();
+DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern( "dd/MM/uuuu" );
+String output = ld.format( fLocalDate) ;
+
+Dump to console.
+
+System.out.println( "input: " + input );
+System.out.println( "zdt: " + zdt );
+System.out.println( "ld: " + ld );
+System.out.println( "output: " + output );
+       */
+       
+        //controlar que fecha inicio sea menor o igual que fecha fin
+       
+
+        //consulto en db
+        try {
+        conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+        
+        reservaData = new ReservaData(conexion);
+        System.out.println("aqui1");
+            System.out.println(fechaIDB);
+            System.out.println(fechaFDB);
+        listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB);
+        
+        //1 es la fila y 6 son las columnas
+            System.out.println(listaBuscarReservaFecha.size());
+        String filaBusquedaFecha[][]=new String[listaBuscarReservaFecha.size()][6];
+        int i;
+            System.out.println("aqui");
+        //muestro los valores en tabla
+        for (i=0; i<listaBuscarReservaFecha.size(); i++){
+       
+         filaBusquedaFecha[i][0] = String.valueOf(listaBuscarReservaFecha.get(i).getIdReserva());
+         filaBusquedaFecha[i][1] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaInicioReserva());
+         filaBusquedaFecha[i][2] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaFinReserva());
+         filaBusquedaFecha[i][3] = String.valueOf(listaBuscarReservaFecha.get(i).getEstadoReserva());
+         filaBusquedaFecha[i][4] = String.valueOf(listaBuscarReservaFecha.get(i).getHuesped().getDniHuesped());
+         filaBusquedaFecha[i][5] = String.valueOf(listaBuscarReservaFecha.get(i).getHabitacion().getNumeroHabitacion());
+
+        }
+      
+      jTableBuscarReservaPorHuesped.setModel(new javax.swing.table.DefaultTableModel(
+            filaBusquedaFecha,
+            new String [] {
+                "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
+            }
+        ));    
+  } catch (ClassNotFoundException ex) {
+        Logger.getLogger(VistaBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
+   }
+        
+        
+        
+        //si selecciono me llena el jxdatepiker esta hecho esto en evento clic
+        
+        
+        
+        
+    }//GEN-LAST:event_jBBuscarFechaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarReserva1;
     private javax.swing.JButton jBBorrarReserva;
+    private javax.swing.JButton jBBuscarFecha;
     private javax.swing.JButton jBBuscarHuespedReserva;
     private javax.swing.JButton jBLimpiarReserva;
     private javax.swing.JButton jButton1;
