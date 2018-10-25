@@ -30,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItemABMHuesped = new javax.swing.JMenuItem();
         jMenuReserva = new javax.swing.JMenu();
         jMenuItemABMReserva = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuHabitacion = new javax.swing.JMenu();
         jMenuItemABMHabitacion = new javax.swing.JMenuItem();
         jMenuTipoHabitacion = new javax.swing.JMenu();
@@ -43,11 +44,11 @@ public class Principal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 1920, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
+            .addGap(0, 1057, Short.MAX_VALUE)
         );
 
         jMenuArchivo.setText("Archivo");
@@ -89,6 +90,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenuReserva.add(jMenuItemABMReserva);
 
+        jMenuItem1.setText("Buscar Reserva");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuReserva.add(jMenuItem1);
+
         jMenuBar1.add(jMenuReserva);
 
         jMenuHabitacion.setText("Habitación");
@@ -126,11 +135,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1920, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE)
         );
 
         pack();
@@ -189,6 +198,15 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    escritorio.removeAll();
+        escritorio.repaint();
+        VistaBuscarReserva vistaBuscarReserva =new VistaBuscarReserva();
+        vistaBuscarReserva.setVisible(true);
+        escritorio.add(vistaBuscarReserva);
+        escritorio.moveToFront(vistaBuscarReserva);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -233,6 +251,7 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHabitacion;
     private javax.swing.JMenu jMenuHuesped;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemABMHabitacion;
     private javax.swing.JMenuItem jMenuItemABMHuesped;
     private javax.swing.JMenuItem jMenuItemABMReserva;

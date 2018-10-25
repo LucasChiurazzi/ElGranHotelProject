@@ -95,8 +95,7 @@ public class ReservaData {
         
         return huespedes;
     }   
-      
-    public List<Reserva> buscarReserva(long dni){
+         public List<Reserva> buscarReserva(long dni){
         //recibo un huesped
         //busco en la base de datos si el dniHuesped esta en alguna reserva y en
         //alguna habitacion
@@ -104,7 +103,7 @@ public class ReservaData {
         //List<Huesped> huespedes = new ArrayList<Huesped>();
         
         try {
-            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped and habitacion.idHabitacion=reserva.idHabitacion and dniHuesped = "+ dni + ";" ;
+            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped AND habitacion.numeroHabitacion=reserva.numeroHabitacion AND reserva.dniHuesped = "+ dni + ";" ;
             PreparedStatement statement = connection.prepareStatement(sql);
             
             ResultSet resultSet = statement.executeQuery();
@@ -119,21 +118,22 @@ public class ReservaData {
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
                 Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
                 reserva.setHuesped(huesped);
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("idHabitacion"));
-                reserva.setHabitacion((Habitacion) habitacion);
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
+                reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
             
             
             statement.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener la reserva por dni del huesped: " + ex.getMessage());
+            System.out.println("Error al obtener los huespedes: " + ex.getMessage());
         }
         
         
         return reservas;
     }
-    
+
+   
     public List<Reserva> buscarReserva(LocalDate fecha){
         //recibo una fecha de inicio de la reserva
         //busco en la base de datos si hay alguna reserva para esa fecha 
@@ -171,7 +171,47 @@ public class ReservaData {
         
         return reservas;
     }    
-       
+      
+    public List<Reserva> buscarReserva(LocalDate fechaI, LocalDate fechaF){
+        //recibo una fecha de inicio de la reserva
+        //busco en la base de datos si hay alguna reserva para esa fecha 
+        //alguna habitacion
+        List<Reserva> reservas = new ArrayList<>();
+        System.out.println(fechaI);
+        System.out.println(fechaF);
+        //List<Huesped> huespedes = new ArrayList<Huesped>();
+        
+        try {
+            String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped and habitacion.numeroHabitacion=reserva.numeroHabitacion and fechaInicioReserva>='"+fechaI.toString()+"' and fechaFinReserva<='"+fechaF.toString()+"';";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            Reserva reserva;
+            
+            while(resultSet.next()){
+                reserva = new Reserva();
+                reserva.setIdReserva(resultSet.getInt("idReserva"));
+                reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
+                reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
+                reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                reserva.setHuesped(huesped);
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
+                reserva.setHabitacion(habitacion);
+                reservas.add(reserva);
+            }      
+            
+            
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener una reserva por esas fecha: " + ex.getMessage());
+        }
+        
+        
+        return reservas;
+}
+    
     public void hacerReserva(Reserva reserva){
         try {
             
