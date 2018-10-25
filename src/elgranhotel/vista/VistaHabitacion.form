@@ -70,7 +70,7 @@
                                       <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="campoId1" min="-2" pref="131" max="-2" attributes="0"/>
+                                      <Component id="jTFEstadoHabitacion" min="-2" pref="131" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jCBTipoHabitacion" alignment="0" min="-2" pref="268" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -110,7 +110,7 @@
                       <Component id="cbEstado" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="campoId1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTFEstadoHabitacion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -261,7 +261,10 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="campoId1">
+    <Component class="javax.swing.JTextField" name="jTFEstadoHabitacion">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

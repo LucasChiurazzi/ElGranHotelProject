@@ -453,7 +453,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             int numeroHabitacion= (Integer)modeloReserva.getValueAt(filaSeleccionada,0);
            
             //HABITACION seleccionada por la lista, filtrada del data por el numeroHabitacion
-           Habitacion h= habitacionData.mostrarHabitacion(numeroHabitacion);
+           Habitacion h= habitacionData.buscarHabitacion(numeroHabitacion, conexion);
                   
                //HUESPED
            Huesped huesped= huespedData.mostrarHuesped(dni);
@@ -595,7 +595,7 @@ cargarDias();
      }*/
     
     
-    List<Habitacion> todasLasHabitaciones= habitacionData.mostrarHabitaciones();
+    List<Habitacion> todasLasHabitaciones= habitacionData.obtenerHabitaciones(conexion);
     
     todasLasHabitaciones.stream().filter((h) -> (h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())).forEachOrdered((h) -> {
         listaHabitaciones.add(h);
@@ -624,7 +624,7 @@ cargarDias();
     }
     for(Habitacion h:listaHabitaciones){
           
-          modeloReserva.addRow(new Object[]{h.getNumeroHabitacion(), h.getPiso(), h.getTipoHabitacion().getCategoriaTipoHabitacion(),h.getTipoHabitacion().getTipoCamaTipoHabitacion(), h.getTipoHabitacion().getCantidadCamasTipoHabitacion()});
+          modeloReserva.addRow(new Object[]{h.getNumeroHabitacion(), h.getPisoHabitacion(), h.getTipoHabitacion().getCategoriaTipoHabitacion(),h.getTipoHabitacion().getTipoCamaTipoHabitacion(), h.getTipoHabitacion().getCantidadCamasTipoHabitacion()});
         }
     }
     

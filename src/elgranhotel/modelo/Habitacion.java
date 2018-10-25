@@ -11,7 +11,7 @@ package elgranhotel.modelo;
  */
 public class Habitacion {
     private int numeroHabitacion;
-    private int piso;
+    private int pisoHabitacion;
     private boolean estadoHabitacion;
     private TipoHabitacion tipoHabitacion;
 
@@ -19,19 +19,21 @@ public class Habitacion {
     }
     
    
-    public Habitacion(int numeroHabitacion, int piso, boolean estadoHabitacion, TipoHabitacion tipoHabitacion) {
+    public Habitacion(int numeroHabitacion, int pisoHabitacion, boolean estadoHabitacion, TipoHabitacion tipoHabitacion) {
         this.numeroHabitacion = numeroHabitacion;
-        this.piso = piso;
+        this.pisoHabitacion = pisoHabitacion;
         this.estadoHabitacion = estadoHabitacion;
         this.tipoHabitacion = tipoHabitacion;
     }
 
+
+      
     public int getNumeroHabitacion() {
         return numeroHabitacion;
     }
 
-    public int getPiso() {
-        return piso;
+    public int getPisoHabitacion() {
+        return pisoHabitacion;
     }
 
     public boolean getEstadoHabitacion() {
@@ -54,8 +56,8 @@ public class Habitacion {
         this.tipoHabitacion = tipoHabitacion;
     }
  
-    public void setPiso(int piso) {
-       this.piso = piso;
+    public void setPisoHabitacion(int pisoHabitacion) {
+       this.pisoHabitacion = pisoHabitacion;
     }
     
 }

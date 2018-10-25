@@ -269,7 +269,7 @@ public class ReservaData {
             System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
         }
         HabitacionData habitacionData = new HabitacionData(conexion);
-        return habitacionData.mostrarHabitacion(idHabitacion);
+        return habitacionData.buscarHabitacion(idHabitacion, conexion);
     }
     //innecesario?
     //modifica el estado de una reserva 1 activa por lo que debe tomar una reserva como parametro

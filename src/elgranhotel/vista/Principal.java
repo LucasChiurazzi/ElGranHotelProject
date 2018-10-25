@@ -152,10 +152,10 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItemABMHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemABMHabitacionActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        //VistaHabitacion vistaHabitacion =new VistaHabitacion();
-        //vistaHabitacion.setVisible(true);
-        //escritorio.add(vistaHabitacion);
-        //escritorio.moveToFront(vistaHabitacion);
+        VistaHabitacion vistaHabitacion =new VistaHabitacion();
+        vistaHabitacion.setVisible(true);
+        escritorio.add(vistaHabitacion);
+        escritorio.moveToFront(vistaHabitacion);
     }//GEN-LAST:event_jMenuItemABMHabitacionActionPerformed
 
     private void jMenuItemABMReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemABMReservaActionPerformed

@@ -38,6 +38,8 @@ private ArrayList<Habitacion> listaHabitacion;
         tipoHabitacionData= new TipoHabitacionData(conexion);
         //inicializa la tabla    
        
+        cargarTiposHabitacionEnComboBox();
+        
         modelo=new DefaultTableModel();
         modelo.addColumn("Numero");
         modelo.addColumn("Piso");
@@ -72,7 +74,7 @@ private ArrayList<Habitacion> listaHabitacion;
         Tabla = new javax.swing.JTable();
         cbEstado = new javax.swing.JCheckBox();
         jCBTipoHabitacion = new javax.swing.JComboBox<>();
-        campoId1 = new javax.swing.JTextField();
+        jTFEstadoHabitacion = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -150,6 +152,8 @@ private ArrayList<Habitacion> listaHabitacion;
             }
         });
 
+        jTFEstadoHabitacion.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,7 +195,7 @@ private ArrayList<Habitacion> listaHabitacion;
                                         .addGap(68, 68, 68)
                                         .addComponent(jLabel8)
                                         .addGap(18, 18, 18)
-                                        .addComponent(campoId1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTFEstadoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(botonBuscar)
@@ -219,7 +223,7 @@ private ArrayList<Habitacion> listaHabitacion;
                         .addComponent(cbEstado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFEstadoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -259,7 +263,7 @@ private ArrayList<Habitacion> listaHabitacion;
             boolean estado=cbEstado.isSelected();
             TipoHabitacion tpHabSelec=deJCBaTipo(jCBTipoHabitacion);
             Habitacion habitacion=new Habitacion(nro, piso,estado,tpHabSelec);
-            rta=habitacionData.agregarHabitacion(habitacion);
+            rta=habitacionData.guardarHabitacion(habitacion);
             if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
             else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
         }
@@ -271,7 +275,7 @@ private ArrayList<Habitacion> listaHabitacion;
         if (!jTFNroHabitacion.getText().equals(""))
         {
             int id=Integer.parseInt(jTFNroHabitacion.getText());
-            Habitacion habitacion= habitacionData.mostrarHabitacion(id);
+            Habitacion habitacion= habitacionData.buscarHabitacion(id, conexion);
             if(habitacion!=null)
             {
                 limpiar();
@@ -280,8 +284,9 @@ private ArrayList<Habitacion> listaHabitacion;
             else
             JOptionPane.showMessageDialog(this, "NO EXISTE  la Habitación que busca");
         }
-        else
+        else 
         JOptionPane.showMessageDialog(this, "Complete el ID");
+        
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
@@ -289,10 +294,10 @@ private ArrayList<Habitacion> listaHabitacion;
         if(!jTFNroHabitacion.getText().equals(""))
         {
             int id=Integer.parseInt(jTFNroHabitacion.getText());
-            Habitacion habitacion= habitacionData.mostrarHabitacion(id);
+            Habitacion habitacion= habitacionData.buscarHabitacion(id, conexion);
             if(habitacion!=null)
             {
-                rta=habitacionData.eliminarHabitacion(id);
+                rta=habitacionData.borrarHabitacion(id);
                 if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
                 else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
             }
@@ -313,15 +318,13 @@ private ArrayList<Habitacion> listaHabitacion;
             int id=Integer.parseInt(jTFNroHabitacion.getText());
             int piso=Integer.parseInt(campoPiso.getText());
             boolean estado=cbEstado.isSelected();
-            
-            int idTH=Integer.parseInt(campoTipoHabitacion.getText());
-            th=tipoHabitacionData. (idTH);
+             th=deJCBaTipo(jCBTipoHabitacion);
             
             habitacion=new Habitacion(id,piso,estado,th);
-            thAux= habitacionData.mostrarHabitacion(id);
+            thAux= habitacionData.buscarHabitacion(id, conexion);
             if(thAux!=null)
             {
-                rta=habitacionData.cambiarHabitacion(habitacion);
+                rta=habitacionData.actualizarHabitacion(habitacion);
                 if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
                 else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
             }
@@ -334,9 +337,9 @@ private ArrayList<Habitacion> listaHabitacion;
 
     private void botonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarActionPerformed
         borraFilasTabla();
-        listaHabitacion=(ArrayList)habitacionData.mostrarHabitaciones();
+        listaHabitacion=(ArrayList)habitacionData.obtenerHabitaciones(conexion);
         for(Habitacion m:listaHabitacion)
-        modelo.addRow(new Object[]{m.getNumeroHabitacion(), m.getPiso(), m.getEstadoHabitacion(),m.getTipoHabitacion().getIdTipoHabitacion()  });
+        modelo.addRow(new Object[]{m.getNumeroHabitacion(), m.getPisoHabitacion(), m.getEstadoHabitacion(),m.getTipoHabitacion().getIdTipoHabitacion()  });
     }//GEN-LAST:event_botonListarActionPerformed
 
     private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
@@ -355,15 +358,19 @@ public void borraFilasTabla(){
         System.out.println("Tabla "+i);
     }
 }
-public void mostrarHabitacion(Habitacion habitacion)
-{
+
+public void mostrarHabitacion(Habitacion habitacion){
+
  String id= String.valueOf(habitacion.getNumeroHabitacion());
  jTFNroHabitacion.setText(id); 
- String piso= String.valueOf(habitacion.getPiso());
+ String piso= String.valueOf(habitacion.getPisoHabitacion());
  campoPiso.setText(piso);
+ 
  boolean estado=habitacion.getEstadoHabitacion();
- if(estado) cbEstado.setSelected(true);
- else cbEstado.setSelected(false);
+ if(estado) {jTFEstadoHabitacion.setText("OCUPADA");
+         cbEstado.setSelected(true);
+ }else {jTFEstadoHabitacion.setText("LIBRE");
+      cbEstado.setSelected(false);}
  
  String idTH= String.valueOf(habitacion.getTipoHabitacion().getIdTipoHabitacion());
  String tipoTH= String.valueOf(habitacion.getTipoHabitacion().getCategoriaTipoHabitacion());
@@ -372,9 +379,9 @@ public void mostrarHabitacion(Habitacion habitacion)
 }
 public void limpiar(){
     limpiarComboBox();
+    cargarTiposHabitacionEnComboBox();
     jTFNroHabitacion.setText("");
     campoPiso.setText("");
-    
     cbEstado.setSelected(false);
   }
 
@@ -398,7 +405,7 @@ public void limpiar(){
             }
     }
     
-    public void cargarTiposHabitacionEnComboBoxXCP(){
+   /* public void cargarTiposHabitacionEnComboBoxXCP(){
     //Carga los tipos de habitacion  al ComboBox
     
     //Limpiar comboBox
@@ -412,12 +419,14 @@ public void limpiar(){
           
             }
     }
+    */
    
     public void limpiarComboBox(){
         
         jCBTipoHabitacion.removeAllItems();
        
      }
+    
     
     public TipoHabitacion deJCBaTipo(JComboBox jcomobox){
         
@@ -436,7 +445,6 @@ public void limpiar(){
     private javax.swing.JButton botonGuardar;
     private javax.swing.JButton botonLimpiar;
     private javax.swing.JButton botonListar;
-    private javax.swing.JTextField campoId1;
     private javax.swing.JTextField campoPiso;
     private javax.swing.JCheckBox cbEstado;
     private javax.swing.JComboBox<String> jCBTipoHabitacion;
@@ -446,6 +454,7 @@ public void limpiar(){
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTFEstadoHabitacion;
     private javax.swing.JTextField jTFNroHabitacion;
     // End of variables declaration//GEN-END:variables
 }
