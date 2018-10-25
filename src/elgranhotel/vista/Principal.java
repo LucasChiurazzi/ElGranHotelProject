@@ -31,7 +31,6 @@ public class Principal extends javax.swing.JFrame {
         jmiBuscarReservaPorFecha = new javax.swing.JMenu();
         jmiReserva = new javax.swing.JMenuItem();
         jmiBuscarReservaPorHuesped = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuHabitacion = new javax.swing.JMenu();
         jMenuABMHabitacion = new javax.swing.JMenuItem();
         jMenuTipoHabitacion = new javax.swing.JMenu();
@@ -91,16 +90,13 @@ public class Principal extends javax.swing.JFrame {
         });
         jmiBuscarReservaPorFecha.add(jmiReserva);
 
-        jmiBuscarReservaPorHuesped.setText("Buscar Reserva por Huesped");
+        jmiBuscarReservaPorHuesped.setText("Buscar Reserva");
         jmiBuscarReservaPorHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiBuscarReservaPorHuespedActionPerformed(evt);
             }
         });
         jmiBuscarReservaPorFecha.add(jmiBuscarReservaPorHuesped);
-
-        jMenuItem2.setText("Buescar Reserva por Fecha");
-        jmiBuscarReservaPorFecha.add(jMenuItem2);
 
         jMenuBar1.add(jmiBuscarReservaPorFecha);
 
@@ -250,7 +246,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHabitacion;
     private javax.swing.JMenu jMenuHuesped;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemABMTipoHabitacion;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenu jMenuTipoHabitacion;
