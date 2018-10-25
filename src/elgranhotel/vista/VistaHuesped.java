@@ -63,11 +63,12 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         jBtBuscarDniHuesped = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHuesped = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jBbuscarTodosH = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Gestion de Huespedes- El Gran Hotel 1.0");
 
         jLabel6.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel6.setText("HUESPED");
@@ -125,10 +126,10 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTableHuesped);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBbuscarTodosH.setText("Todos");
+        jBbuscarTodosH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBbuscarTodosHActionPerformed(evt);
             }
         });
 
@@ -169,7 +170,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jBtBuscarDniHuesped)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton1))))
+                                        .addComponent(jBbuscarTodosH))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -193,7 +194,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtBuscarDniHuesped)
-                    .addComponent(jButton1))
+                    .addComponent(jBbuscarTodosH))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -305,7 +306,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
          
     }//GEN-LAST:event_jBtBuscarDniHuespedActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBbuscarTodosHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarTodosHActionPerformed
        
         //hago la consulta
         //devuelvo la busqueda en la tabla
@@ -332,16 +333,16 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             }
             )
       );     
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBbuscarTodosHActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBbuscarTodosH;
     private javax.swing.JButton jBtBorrar;
     private javax.swing.JButton jBtBuscarDniHuesped;
     private javax.swing.JButton jBtGuardar;
     private javax.swing.JButton jBtModificar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

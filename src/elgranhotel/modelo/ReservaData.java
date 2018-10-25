@@ -127,7 +127,7 @@ public class ReservaData {
             
             statement.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener los huespedes: " + ex.getMessage());
+            System.out.println("Error al obtener la reserva por dni del huesped: " + ex.getMessage());
         }
         
         
@@ -271,9 +271,6 @@ public class ReservaData {
         HabitacionData habitacionData = new HabitacionData(conexion);
         return habitacionData.mostrarHabitacion(idHabitacion);
     }
-     
-    
-    
     //innecesario?
     //modifica el estado de una reserva 1 activa por lo que debe tomar una reserva como parametro
     
@@ -293,13 +290,5 @@ public class ReservaData {
         } catch (SQLException ex) {            System.out.println("Error al actualizar una reserva: " + ex.getMessage());
         }
     }
-    
-    
-    // lo calcula la UI?
-   // public int diasReserva(){}
-       
-   //public double montoReserva(){}
-    
-    
-    
+   
 }

@@ -40,7 +40,7 @@ public class HabitacionData {
     
     //creo una nueva habitacion
         
-    public void agregarHabitacion(Habitacion habitacion){try {
+ public void agregarHabitacion(Habitacion habitacion){try {
                      
             String sql = "INSERT INTO habitacion (numeroHabitacion, pisoHabitacion, estadoHabitacion, TipoHabitacion_idTipoHabitacion)";
 
@@ -62,7 +62,6 @@ public class HabitacionData {
     
     
 }
-
 
 //modifica todos los campos de una habitacion
     public void cambiarHabitacion(Habitacion habitacion){

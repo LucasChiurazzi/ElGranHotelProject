@@ -407,10 +407,6 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         jCBTipoHabitacion.removeAllItems();
         cargarTiposHabitacionEnComboBox();
         
-      
-        
-         
-        
     }
     
     
