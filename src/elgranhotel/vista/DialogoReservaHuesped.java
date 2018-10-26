@@ -47,6 +47,10 @@ public class DialogoReservaHuesped extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(0, 0));
+        setLocationByPlatform(true);
 
         jBCancelarPopUpHuespedReserva.setText("CANCELAR");
         jBCancelarPopUpHuespedReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -79,7 +83,7 @@ public class DialogoReservaHuesped extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jBCargarPopUpHuespedReserva)
-                        .addGap(39, 39, 39)
+                        .addGap(35, 35, 35)
                         .addComponent(jBCancelarPopUpHuespedReserva))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)

@@ -420,7 +420,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         
         // guarda el dni en una variable en el jdialog para usar en huesped 
         dialogo.setDniHuesped(dni);
-        dialogo.setVisible(true);       
+        dialogo.setVisible(true);  
+        dialogo.setLocation(1000, 1000);
         dispose();
         
          } else{
@@ -521,7 +522,8 @@ cargarDias();
     private void jBLimpiarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarReservaActionPerformed
         limpiarComboBox();
         cargarTiposHabitacionEnComboBox();
-        armaCabeceraTabla();
+        borraFilasTabla();
+      
         jTHuespedReserva.setText("");
      
         jTFDiasReserva.setText("");

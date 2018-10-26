@@ -37,6 +37,8 @@ public class Principal extends javax.swing.JFrame {
         jMenuItemABMTipoHabitacion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("El Gran Hotel 1.0-Grupo 7");
+        setAlwaysOnTop(true);
 
         escritorio.setPreferredSize(new java.awt.Dimension(800, 577));
 
@@ -50,6 +52,8 @@ public class Principal extends javax.swing.JFrame {
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1057, Short.MAX_VALUE)
         );
+
+        jMenuBar1.setToolTipText("");
 
         jMenuArchivo.setText("Archivo");
 

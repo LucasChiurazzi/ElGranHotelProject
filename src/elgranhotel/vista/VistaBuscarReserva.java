@@ -107,6 +107,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         jXDPFinReserva = new org.jdesktop.swingx.JXDatePicker();
         jBBuscarFecha = new javax.swing.JButton();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -335,8 +336,8 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         for (i=0; i<listaBuscarReservaDni.size(); i++){
        
          filaBusquedaDni[i][0] = String.valueOf(listaBuscarReservaDni.get(i).getIdReserva());
-         filaBusquedaDni[i][1] = String.valueOf(listaBuscarReservaDni.get(i).getFechaInicioReserva());
-         filaBusquedaDni[i][2] = String.valueOf(listaBuscarReservaDni.get(i).getFechaFinReserva());
+         filaBusquedaDni[i][1] = String.valueOf(listaBuscarReservaDni.get(i).getFechaInicioReserva().plusDays(1));
+         filaBusquedaDni[i][2] = String.valueOf(listaBuscarReservaDni.get(i).getFechaFinReserva().plusDays(1));
          filaBusquedaDni[i][3] = String.valueOf(listaBuscarReservaDni.get(i).getEstadoReserva());
          filaBusquedaDni[i][4] = String.valueOf(listaBuscarReservaDni.get(i).getHuesped().getDniHuesped());
          filaBusquedaDni[i][5] = String.valueOf(listaBuscarReservaDni.get(i).getHabitacion().getNumeroHabitacion());
@@ -407,10 +408,10 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
        //estado
        jTFEstadoReserva1.setText(estado);
        //fecha inicio
-       Date dateInicio=java.sql.Date.valueOf(localDateFechaI); 
+       Date dateInicio=java.sql.Date.valueOf(localDateFechaI.plusDays(1)); 
        jXDPInicioReserva.setDate(dateInicio);
        //fecha fin
-       Date dateFin=java.sql.Date.valueOf(localDateFechaF);
+       Date dateFin=java.sql.Date.valueOf(localDateFechaF.plusDays(1));
        jXDPFinReserva.setDate(dateFin);
        
        //si tengo vacio dni, cargarlo segun fecha elegida
@@ -505,8 +506,8 @@ System.out.println( "output: " + output );
         for (i=0; i<listaBuscarReservaFecha.size(); i++){
        
          filaBusquedaFecha[i][0] = String.valueOf(listaBuscarReservaFecha.get(i).getIdReserva());
-         filaBusquedaFecha[i][1] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaInicioReserva());
-         filaBusquedaFecha[i][2] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaFinReserva());
+         filaBusquedaFecha[i][1] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaInicioReserva().plusDays(1));
+         filaBusquedaFecha[i][2] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaFinReserva().plusDays(1));
          filaBusquedaFecha[i][3] = String.valueOf(listaBuscarReservaFecha.get(i).getEstadoReserva());
          filaBusquedaFecha[i][4] = String.valueOf(listaBuscarReservaFecha.get(i).getHuesped().getDniHuesped());
          filaBusquedaFecha[i][5] = String.valueOf(listaBuscarReservaFecha.get(i).getHabitacion().getNumeroHabitacion());

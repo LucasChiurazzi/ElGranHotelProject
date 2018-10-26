@@ -33,6 +33,7 @@ public class DialogoHuespedReserva extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         jButton1.setText("CARGAR");
 
