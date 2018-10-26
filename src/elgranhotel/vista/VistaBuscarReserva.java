@@ -442,6 +442,8 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         String tipoTH= String.valueOf(h.getTipoHabitacion().getCategoriaTipoHabitacion());
         jTFTipoHabitacion.setText(idTH+" "+tipoTH);
         
+        setCantPersonas(jTFCantPersonasReserva, idTipoHab, conexion);
+        
         //carga los dias que dura la reserva
         cargarDias(localDateFechaI,localDateFechaF );
         
@@ -592,7 +594,12 @@ System.out.println( "output: " + output );
          double monto= dias*precioXnoche;
          jtf.setText(monto + "");
 }
-     
+
+   public void setCantPersonas(JTextField jtf, int idTipoHabitacion, Conexion conexion){
+       TipoHabitacion tpHabSelec=habitacionData.mostrarTipoHabitacion(idTipoHabitacion, conexion);
+       int cantP= tpHabSelec.getCantPersonasTipoHabitacion();
+       jtf.setText(cantP+"");
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarReserva1;
