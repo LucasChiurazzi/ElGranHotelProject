@@ -231,6 +231,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFDiasReserva">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFDiasReservaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -248,6 +251,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFTipoHabitacion">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFCantPersonasReserva">
       <AuxValues>

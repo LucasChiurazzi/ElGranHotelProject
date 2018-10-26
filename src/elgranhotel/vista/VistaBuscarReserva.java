@@ -10,6 +10,8 @@ package elgranhotel.vista;
 
 
 import elgranhotel.modelo.Conexion;
+import elgranhotel.modelo.Habitacion;
+import elgranhotel.modelo.HabitacionData;
 import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
 import elgranhotel.modelo.Reserva;
@@ -21,12 +23,15 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
+import org.jdesktop.swingx.JXDatePicker;
 
 /**
  *
@@ -42,6 +47,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     private Reserva reserva;
     private List<Reserva> listaBuscarReservaDni;
     private List<Reserva> listaBuscarReservaFecha;
+    private HabitacionData habitacionData;
     
     
     
@@ -56,6 +62,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
             
             tipoHabitacionData = new TipoHabitacionData(conexion);
             huespedData= new HuespedData(conexion);
+            habitacionData= new HabitacionData(conexion);
             
             
             listaTiposHabitacion =(ArrayList)tipoHabitacionData.mostrarTipoHabitacion();
@@ -142,11 +149,19 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Fecha Fin");
 
+        jTFDiasReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFDiasReservaActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Cantidad de Personas");
 
         jBBorrarReserva.setText("Borrar");
 
         jLabel7.setText("Estado");
+
+        jTFTipoHabitacion.setEnabled(false);
 
         jLabel8.setText("Tipo De Habitacion");
 
@@ -400,7 +415,10 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
 
         String estado=jTableBuscarReservaPorHuesped.getValueAt(row, 3).toString();
         String dniHuesped=jTableBuscarReservaPorHuesped.getValueAt(row, 4).toString();
-        String habitacion=jTableBuscarReservaPorHuesped.getValueAt(row, 5).toString();
+        int numHab=Integer.parseInt(jTableBuscarReservaPorHuesped.getValueAt(row, 5).toString());
+        Habitacion h=habitacionData.buscarHabitacion(numHab, conexion);
+        
+        
        
        //inserto en textfield
        //id reserva
@@ -417,7 +435,16 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
        //si tengo vacio dni, cargarlo segun fecha elegida
        jTHuespedReserva.setText(dniHuesped);
        
-       
+       //toma el numero de habitacion para setear el tipo
+        int idTipoHab= h.getTipoHabitacion().getIdTipoHabitacion();
+        String idTH= String.valueOf(idTipoHab);
+        
+        String tipoTH= String.valueOf(h.getTipoHabitacion().getCategoriaTipoHabitacion());
+        jTFTipoHabitacion.setText(idTH+" "+tipoTH);
+        //setea el precio de la reserva en el jtfield
+        precioReserva(jTFMontoReserva, idTipoHab);
+        //carga los dias que dura la reserva
+        cargarDias(localDateFechaI,localDateFechaF );
      
      //recuperar de selected a jxdpinicioreserva
      
@@ -533,6 +560,37 @@ System.out.println( "output: " + output );
         
     }//GEN-LAST:event_jBBuscarFechaActionPerformed
 
+    private void jTFDiasReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDiasReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFDiasReservaActionPerformed
+
+    
+     public void cargarDias(LocalDate fechaInicio, LocalDate fechaFin){
+
+    long diasReserva=fechaInicio.until(fechaFin, DAYS);
+    System.out.println(diasReserva);
+    jTFDiasReserva.setText(diasReserva +"");
+       
+     }
+      public LocalDate fromPickerToLocalDate(JXDatePicker datePicker){
+    SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+    
+    String toLocalDate= formater.format(datePicker.getDate());
+    LocalDate fechaInLD= LocalDate.parse(toLocalDate);
+        
+    return fechaInLD;
+   }
+      
+   public void precioReserva(JTextField jtf, int idTipoHabitacion){
+        
+         TipoHabitacion tpHabSelec=habitacionData.mostrarTipoHabitacion(idTipoHabitacion, conexion);
+                  
+         int dias=Integer.parseInt(jTFDiasReserva.getText());
+         double precioXnoche=tpHabSelec.getPrecioNocheTipoHabitacion();
+         double monto= dias*precioXnoche;
+         jtf.setText(monto + "");
+}
+     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarReserva1;
