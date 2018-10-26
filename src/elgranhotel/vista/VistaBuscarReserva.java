@@ -441,10 +441,12 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         
         String tipoTH= String.valueOf(h.getTipoHabitacion().getCategoriaTipoHabitacion());
         jTFTipoHabitacion.setText(idTH+" "+tipoTH);
-        //setea el precio de la reserva en el jtfield
-        precioReserva(jTFMontoReserva, idTipoHab);
+        
         //carga los dias que dura la reserva
         cargarDias(localDateFechaI,localDateFechaF );
+        
+        //setea el precio de la reserva en el jtfield
+        precioReserva(jTFMontoReserva, idTipoHab, conexion);
      
      //recuperar de selected a jxdpinicioreserva
      
@@ -581,7 +583,7 @@ System.out.println( "output: " + output );
     return fechaInLD;
    }
       
-   public void precioReserva(JTextField jtf, int idTipoHabitacion){
+   public void precioReserva(JTextField jtf, int idTipoHabitacion, Conexion conexion){
         
          TipoHabitacion tpHabSelec=habitacionData.mostrarTipoHabitacion(idTipoHabitacion, conexion);
                   
