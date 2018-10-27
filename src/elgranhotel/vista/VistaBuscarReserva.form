@@ -72,13 +72,9 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jXDPInicioReserva" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jXDPFinReserva" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                               <Component id="jBBuscarFecha" min="-2" pref="82" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -131,8 +127,6 @@
                           <Component id="jLabel6" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jXDPInicioReserva" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jXDPFinReserva" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBBuscarFecha" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -345,10 +339,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFIdReserva">
-    </Component>
-    <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDPInicioReserva">
-    </Component>
-    <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDPFinReserva">
     </Component>
     <Component class="javax.swing.JButton" name="jBBuscarFecha">
       <Properties>

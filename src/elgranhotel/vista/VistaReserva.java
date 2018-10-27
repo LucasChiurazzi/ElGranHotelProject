@@ -129,8 +129,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jTFMontoReserva = new javax.swing.JTextField();
         jBLimpiarReserva = new javax.swing.JButton();
-        jXDPFinReserva = new org.jdesktop.swingx.JXDatePicker();
-        jXDPInicioReserva = new org.jdesktop.swingx.JXDatePicker();
         jBBuscarTipoHabitacion = new javax.swing.JButton();
 
         jBCancelarPopUpHuespedReserva.setText("CANCELAR");
@@ -266,20 +264,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             }
         });
 
-        jXDPFinReserva.setFormats("d/M/yyyy");
-        jXDPFinReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jXDPFinReservaActionPerformed(evt);
-            }
-        });
-
-        jXDPInicioReserva.setFormats("d/M/yyyy");
-        jXDPInicioReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jXDPInicioReservaActionPerformed(evt);
-            }
-        });
-
         jBBuscarTipoHabitacion.setText("Buscar");
         jBBuscarTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,13 +309,9 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                                 .addGap(61, 61, 61))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jXDPInicioReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)))
+                                .addGap(205, 205, 205)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -372,10 +352,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jXDPInicioReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(23, 23, 23)
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTFDiasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
@@ -725,7 +703,5 @@ modeloReserva.removeRow(i );
     private javax.swing.JTextField jTFMontoReserva;
     private javax.swing.JTable jTHabitacionesReserva;
     public javax.swing.JTextField jTHuespedReserva;
-    private org.jdesktop.swingx.JXDatePicker jXDPFinReserva;
-    private org.jdesktop.swingx.JXDatePicker jXDPInicioReserva;
     // End of variables declaration//GEN-END:variables
 }
