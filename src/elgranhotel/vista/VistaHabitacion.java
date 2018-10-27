@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static org.jdesktop.swingx.plaf.basic.CalendarState.TODAY;
+
 
 /**
  *
@@ -77,9 +77,9 @@ private ReservaData reservaData;
         botonLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
-        cbEstado = new javax.swing.JCheckBox();
         jCBTipoHabitacion = new javax.swing.JComboBox<>();
         jTFEstadoHabitacion = new javax.swing.JTextField();
+        JRBLibre = new javax.swing.JRadioButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -92,9 +92,9 @@ private ReservaData reservaData;
 
         jLabel2.setText("Piso");
 
-        jLabel8.setText("ESTADO");
+        jLabel8.setText("Estado");
 
-        jLabel4.setText("TIPO HABITACION");
+        jLabel4.setText("Tipo Habitacion");
 
         botonGuardar.setText("GUARDAR");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -159,17 +159,23 @@ private ReservaData reservaData;
 
         jTFEstadoHabitacion.setEnabled(false);
 
+        JRBLibre.setText("Libre");
+        JRBLibre.setActionCommand("Libre");
+        JRBLibre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JRBLibreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,47 +195,40 @@ private ReservaData reservaData;
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(54, 54, 54)
-                                        .addComponent(jLabel4))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(33, 33, 33)
-                                        .addComponent(botonBorrar)))
+                                        .addComponent(botonBorrar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(54, 54, 54)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel4))))
                                 .addGap(9, 9, 9)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(68, 68, 68)
-                                        .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTFEstadoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(botonBuscar)
                                         .addGap(31, 31, 31)
                                         .addComponent(botonListar)
                                         .addGap(33, 33, 33)
-                                        .addComponent(botonLimpiar)))))
-                        .addGap(75, 75, 75))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cbEstado)
-                .addGap(117, 117, 117))
+                                        .addComponent(botonLimpiar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTFEstadoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(JRBLibre)))))))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTFNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(cbEstado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTFEstadoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)))
+                            .addComponent(jLabel8)
+                            .addComponent(jTFNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(JRBLibre)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
@@ -250,8 +249,8 @@ private ReservaData reservaData;
                     .addComponent(botonBuscar)
                     .addComponent(botonBorrar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -322,7 +321,7 @@ private ReservaData reservaData;
         {
             int id=Integer.parseInt(jTFNroHabitacion.getText());
             int piso=Integer.parseInt(campoPiso.getText());
-            boolean estado=cbEstado.isSelected();
+            boolean estado=!JRBLibre.isSelected();
              th=deJCBaTipo(jCBTipoHabitacion);
             
             habitacion=new Habitacion(id,piso,estado,th);
@@ -354,6 +353,10 @@ private ReservaData reservaData;
     private void jCBTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoHabitacionActionPerformed
 
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
+
+    private void JRBLibreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBLibreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JRBLibreActionPerformed
 public void borraFilasTabla(){
 
     int a =modelo.getRowCount()-1;
@@ -384,9 +387,9 @@ public void mostrarHabitacion(Habitacion habitacion){
  boolean estado=habitacion.getEstadoHabitacion();
   if(estado && rH.getFechaFinReserva().plusDays(1).isAfter(hoy) && rH.getFechaInicioReserva().plusDays(1).isBefore(hoy) ||rH.getFechaFinReserva().plusDays(1).equals(hoy) || rH.getFechaInicioReserva().plusDays(1).isBefore(hoy)) {
      jTFEstadoHabitacion.setText("OCUPADA");
-         cbEstado.setSelected(true);
+         JRBLibre.setSelected(false);
  }else {jTFEstadoHabitacion.setText("LIBRE");
-      cbEstado.setSelected(false);}
+     JRBLibre.setSelected(true);}
  
  
  String idTH= String.valueOf(habitacion.getTipoHabitacion().getIdTipoHabitacion());
@@ -397,9 +400,11 @@ public void mostrarHabitacion(Habitacion habitacion){
 public void limpiar(){
     limpiarComboBox();
     cargarTiposHabitacionEnComboBox();
+    borraFilasTabla();
     jTFNroHabitacion.setText("");
     campoPiso.setText("");
-    cbEstado.setSelected(false);
+    jTFEstadoHabitacion.setText("");
+    JRBLibre.setSelected(false);
   }
 
  public  TipoHabitacion searchDeStringATipoHabitacion(String selectedItemComboBox){
@@ -455,6 +460,7 @@ public void limpiar(){
     
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton JRBLibre;
     private javax.swing.JTable Tabla;
     private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonBorrar;
@@ -463,7 +469,6 @@ public void limpiar(){
     private javax.swing.JButton botonLimpiar;
     private javax.swing.JButton botonListar;
     private javax.swing.JTextField campoPiso;
-    private javax.swing.JCheckBox cbEstado;
     private javax.swing.JComboBox<String> jCBTipoHabitacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

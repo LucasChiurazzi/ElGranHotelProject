@@ -99,7 +99,7 @@ public class HabitacionData {
  public int borrarHabitacion(int numeroHabitacion){
     int rta=0;
     try {
-            String sql = "DELETE FROM habitacion WHERE idHabitacion = ? ;";
+            String sql = "DELETE FROM habitacion WHERE numeroHabitacion = ? ;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, numeroHabitacion);
             rta=statement.executeUpdate();

@@ -10,7 +10,6 @@ import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
 import static elgranhotel.vista.Principal.escritorio;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,6 +63,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHuesped = new javax.swing.JTable();
         jBbuscarTodosH = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -124,6 +124,11 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableHuesped.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableHuespedMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableHuesped);
 
         jBbuscarTodosH.setText("Todos");
@@ -133,56 +138,67 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             }
         });
 
+        jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jBtGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtModificar)
-                .addGap(68, 68, 68)
-                .addComponent(jBtBorrar)
-                .addGap(57, 57, 57))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(24, 24, 24)
-                                .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(166, 166, 166)
+                                .addComponent(jLabel6))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jBtBuscarDniHuesped)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
                                         .addGap(18, 18, 18)
-                                        .addComponent(jBbuscarTodosH))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(45, 45, 45))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jBtBuscarDniHuesped)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jBbuscarTodosH))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addGap(24, 24, 24)
+                                                .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jBtGuardar)
+                                                .addGap(45, 45, 45)
+                                                .addComponent(jBtModificar)))
+                                        .addGap(24, 24, 24)
+                                        .addComponent(jBtBorrar)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(jBLimpiar)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +223,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,8 +231,9 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtGuardar)
                     .addComponent(jBtModificar)
-                    .addComponent(jBtBorrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBtBorrar)
+                    .addComponent(jBLimpiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -329,15 +346,59 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
       jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
            fila,
             new String [] {
-               "DNI Huesped", "nombre", "domicilio" , "Correo", "celular"
+               "DNI" , "Nombre", "Domicilio" , "Correo", "Celular"
             }
             )
       );     
     }//GEN-LAST:event_jBbuscarTodosHActionPerformed
 
-    
+    private void jTableHuespedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHuespedMouseClicked
+       
+        cargarDatosDesdeTabla();
+        
+        
+    }//GEN-LAST:event_jTableHuespedMouseClicked
 
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiar();
+        
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    
+    public void cargarDatosDesdeTabla(){
+    
+         //obtener fila seleccionada    
+        int row = jTableHuesped.getSelectedRow();
+        
+        //Creo variables que van a almacenar lo que hay en la fila
+        String dni=jTableHuesped.getValueAt(row, 0).toString();
+        String nombre=jTableHuesped.getValueAt(row, 1).toString();
+        String domicilio=jTableHuesped.getValueAt(row, 2).toString();
+        String correo=jTableHuesped.getValueAt(row, 3).toString();
+        String celular=jTableHuesped.getValueAt(row, 4).toString();
+        //inserto en textfield
+         jtDni.setText(dni);
+         jtNombre.setText(nombre);
+         jtDomicilio.setText(domicilio);
+         jtCorreo.setText(correo);
+         jtCelular.setText(celular);
+       
+    
+    }
+
+    public void limpiar(){
+         jtDni.setText("");
+         jtNombre.setText("");
+         jtDomicilio.setText("");
+         jtCorreo.setText("");
+         jtCelular.setText("");
+        
+    }
+    
+   
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBbuscarTodosH;
     private javax.swing.JButton jBtBorrar;
     private javax.swing.JButton jBtBuscarDniHuesped;
