@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +135,36 @@ public class ReservaData {
         
         
         return reservas;
+    }
+    
+     public void hacerReserva(Reserva reserva){
+        try {
+            
+            String sql = "INSERT INTO reserva (fechaInicioReserva, fechaFinReserva, estadoReserva, dniHuesped, numeroHabitacion) VALUES ( ? , ? , ? , ? , ? );";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            statement.setDate(1,  java.sql.Date.valueOf(reserva.getFechaInicioReserva()));
+            statement.setDate(2, java.sql.Date.valueOf(reserva.getFechaFinReserva()));
+            statement.setBoolean(3, reserva.getEstadoReserva());
+            statement.setLong(4, reserva.getHuesped().getDniHuesped());
+            statement.setInt(5, reserva.getHabitacion().getNumeroHabitacion());
+            
+            statement.executeUpdate();
+            
+            ResultSet rs = statement.getGeneratedKeys();
+            
+             if (rs.next()) {
+                reserva.setIdReserva(rs.getInt(1));
+            } else {
+                System.out.println("No se pudo obtener el id luego de insertar una reserva");
+            }
+          
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar una reserva: " + ex.getMessage());
+        }
     }
 
        public Huesped mostrarHuesped(long dni){

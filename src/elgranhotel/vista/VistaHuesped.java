@@ -53,7 +53,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jtfDni = new javax.swing.JTextField();
+        jtDni = new javax.swing.JTextField();
         jtNombre = new javax.swing.JTextField();
         jtDomicilio = new javax.swing.JTextField();
         jtCorreo = new javax.swing.JTextField();
@@ -148,7 +148,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(43, 43, 43)
-                        .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBtBuscarDniHuesped))
                     .addGroup(layout.createSequentialGroup()
@@ -173,7 +173,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtBuscarDniHuesped))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -206,7 +206,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtGuardarActionPerformed
-        long dni= Long.parseLong(jtfDni.getText());
+        long dni= Long.parseLong(jtDni.getText());
         String nombre=jtNombre.getText();
         String domicilio=jtDomicilio.getText();
         String correo=jtCorreo.getText();
@@ -219,8 +219,8 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtGuardarActionPerformed
 
     private void jBtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtModificarActionPerformed
-         if (jtfDni.getText()!=null){
-            long dni=Long.parseLong(jtfDni.getText()); 
+         if (jtDni.getText()!=null){
+            long dni=Long.parseLong(jtDni.getText()); 
             String nombre=jtNombre.getText();
             String domicilio=jtDomicilio.getText();
             String correo=jtCorreo.getText();
@@ -231,7 +231,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtModificarActionPerformed
     }
     private void jBtBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBorrarActionPerformed
-        long dni=Long.parseLong(jtfDni.getText());
+        long dni=Long.parseLong(jtDni.getText());
         huespedData.eliminarHuesped(dni);
     }//GEN-LAST:event_jBtBorrarActionPerformed
 
@@ -242,7 +242,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         //devuelvo la busqueda en la tabla
         
          long dniHuesped;
-        dniHuesped = Long.parseLong(jtfDni.getText());
+        dniHuesped = Long.parseLong(jtDni.getText());
         //mostrarConsulta();
         try {
         conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
@@ -258,7 +258,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         filaBusquedaDni[0][3] =String.valueOf(Vhuesped.getCorreoHuesped());
         filaBusquedaDni[0][4] =String.valueOf(Vhuesped.getCelularHuesped());
         
-        jtfDni.setText("");
+        jtDni.setText("");
        /* 
         //listaHuespedes = (ArrayList<Huesped>)huespedData.obtenerHuespedes();
         
@@ -304,8 +304,8 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jetiquetaHusped;
     private javax.swing.JTextField jtCelular;
     private javax.swing.JTextField jtCorreo;
+    public javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtDomicilio;
     private javax.swing.JTextField jtNombre;
-    private javax.swing.JTextField jtfDni;
     // End of variables declaration//GEN-END:variables
 }

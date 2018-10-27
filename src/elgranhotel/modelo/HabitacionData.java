@@ -44,7 +44,7 @@ public class HabitacionData {
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, habitacion.getNumeroHabitacion());
-            statement.setInt(2, habitacion.getPiso());
+            statement.setInt(2, habitacion.getPisoHabitacion());
             statement.setBoolean(3, habitacion.getEstadoHabitacion());
             statement.setInt(4, habitacion.getTipoHabitacion().getIdTipoHabitacion());
                       
@@ -70,7 +70,7 @@ public class HabitacionData {
             String sql = "UPDATE habitacion SET  pisoHabitacion = ?, estadoHabitacion = ?, idTipoHabitacion = ? WHERE numeroHabitacion = ?;";
 // where tipode habitacion id??
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, habitacion.getPiso());
+            statement.setInt(1, habitacion.getPisoHabitacion());
             statement.setBoolean(2, habitacion.getEstadoHabitacion());
             statement.setInt(3, habitacion.getTipoHabitacion().getIdTipoHabitacion());
             statement.setInt(4, habitacion.getNumeroHabitacion());
@@ -182,6 +182,10 @@ public Habitacion mostrarHabitacion(int numeroHabitacion){
         
         
         return habitaciones;
+    }
+
+    public List<Habitacion> obtenerHabitaciones(Conexion conexion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 
