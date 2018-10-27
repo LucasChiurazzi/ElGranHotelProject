@@ -8,9 +8,9 @@ package elgranhotel.vista;
 import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.TipoHabitacion;
 import elgranhotel.modelo.TipoHabitacionData;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +18,6 @@ import java.util.logging.Logger;
  */
 public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
     private TipoHabitacionData tipoHabitacionData;
-    private ArrayList<TipoHabitacion> listaTiposHabitacion;
     private Conexion conexion;
     
     
@@ -31,18 +30,12 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         
         try {   
             conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
-            
             tipoHabitacionData = new TipoHabitacionData(conexion);
-            listaTiposHabitacion =(ArrayList)tipoHabitacionData.mostrarTipoHabitacion();
-            
-            
+           
             //Método encargado de llenar el combobox
             cargarTiposHabitacionEnComboBox();
             
-            
-            
-            
-            
+             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaTipoHabitacion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -180,25 +173,15 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(3, 3, 3)
-                                                .addComponent(jTFCategoriaTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTFCantidadCamasTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabel3)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jTFCategoriaTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jTFCantPersonasTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTFPrecioNocheTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addComponent(jTFTipoCamaTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 254, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -212,7 +195,14 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
                                         .addGap(85, 85, 85)
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(88, 88, 88)
+                                        .addComponent(jTFTipoCamaTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(jLabel5)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jTFCantidadCamasTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
@@ -269,86 +259,37 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
 
     //cargar nuevos tipos de habitacion al hacer click en nuevo
     private void jBNuevoTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoTipoHabitacionActionPerformed
-        
-        
-        int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
-        String nombreTipoHabitacion=jTFCategoriaTipoHabitacion.getText();
-        String nombreTipoCama = jTFTipoCamaTipoHabitacion.getText();
-        int cantidadCamas = Integer.parseInt(jTFCantidadCamasTipoHabitacion.getText());
-        int cantMaxPersonas= Integer.parseInt(jTFCantPersonasTipoHabitacion.getText());
-        double precioPorNoche= Double.parseDouble(jTFPrecioNocheTipoHabitacion.getText());
-       
-        
-        TipoHabitacion tipoHabitacion= new TipoHabitacion(idTipoHabitacion, nombreTipoHabitacion, cantMaxPersonas, precioPorNoche, nombreTipoCama, cantidadCamas);
-        tipoHabitacionData.agregarTipoHabitacion(tipoHabitacion);
-        limpiarComboBox();
-        
+     botonNuevo();
     }//GEN-LAST:event_jBNuevoTipoHabitacionActionPerformed
 
     
      //Borrar un tipo de habitacion seleccionado
     private void jBBorrarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarTipoHabitacionActionPerformed
-      int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
-        
-        tipoHabitacionData.eliminarTipoHabitacion(idTipoHabitacion);
-        
-        limpiarComboBox();
+     botonBorrar();
     }//GEN-LAST:event_jBBorrarTipoHabitacionActionPerformed
 
     
      //COMBOBOX Tipos de Habitacion
     private void jCBTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoHabitacionActionPerformed
-        
-        
-       cargarDatosDesdeElComboBox();
-       
-       
-       
-        
-        
-        
+      cargarDatosDesdeElComboBox();  
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
-
+        
     
     //actualizar los tipos de habitacion 
     private void jBActualizarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarTipoHabitacionActionPerformed
-
-        int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
-        String nombreTipoHabitacion=jTFCategoriaTipoHabitacion.getText();
-        String nombreTipoCama = jTFTipoCamaTipoHabitacion.getText();
-        int cantidadCamas = Integer.parseInt(jTFCantidadCamasTipoHabitacion.getText());
-        int cantMaxPersonas= Integer.parseInt(jTFCantPersonasTipoHabitacion.getText());
-        double precioPorNoche= Double.parseDouble(jTFPrecioNocheTipoHabitacion.getText());
-
-        TipoHabitacion tipoHabitacion= new TipoHabitacion(idTipoHabitacion, nombreTipoHabitacion, cantMaxPersonas, precioPorNoche, nombreTipoCama, cantidadCamas);
-        tipoHabitacionData.cambiarTipoHabitacion(tipoHabitacion);
-        
-       
-        limpiarComboBox();
-        
-        
-        
+    botonActualizar();
     }//GEN-LAST:event_jBActualizarTipoHabitacionActionPerformed
 
     //actualizar solamente el precio 
     private void jBActualizarPrecioTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarPrecioTipoHabitacionActionPerformed
-       int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
-       double precioPorNoche= Double.parseDouble(jTFPrecioNocheTipoHabitacion.getText());
-        tipoHabitacionData.cambiarPrecioTipoHabitacion(precioPorNoche, idTipoHabitacion);
-        limpiarComboBox();
+       botonActPrecio();
         
     }//GEN-LAST:event_jBActualizarPrecioTipoHabitacionActionPerformed
 
     //limpia la interfaz  
     private void jBLimpiarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarTipoHabitacionActionPerformed
         
-        jTFCodigoTipoHabitacion.setText("");
-        jTFCategoriaTipoHabitacion.setText("");
-        jTFTipoCamaTipoHabitacion.setText("");
-        jTFCantidadCamasTipoHabitacion.setText("");
-        jTFCantPersonasTipoHabitacion.setText("");
-        jTFPrecioNocheTipoHabitacion.setText("");
-            
+       limpiar();
     }//GEN-LAST:event_jBLimpiarTipoHabitacionActionPerformed
 
    
@@ -381,7 +322,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         //sacar el id y pasarlo a int, buscar con el id en la base de datos y sacarlo como un tipoHabitacion completo
         int idTipoHabitacion= Integer.parseInt(selectedItemComboBox.substring(0, 2).trim());
       
-       TipoHabitacion tH=(tipoHabitacionData.mostrarTipoHabitacion(idTipoHabitacion));
+       TipoHabitacion tH=(tipoHabitacionData.buscarTipoHabitacion(idTipoHabitacion));
     
         return tH;
     }
@@ -409,11 +350,91 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         
     }
     
+    public void limpiar(){
+        jTFCodigoTipoHabitacion.setText("");
+        jTFCategoriaTipoHabitacion.setText("");
+        jTFTipoCamaTipoHabitacion.setText("");
+        jTFCantidadCamasTipoHabitacion.setText("");
+        jTFCantPersonasTipoHabitacion.setText("");
+        jTFPrecioNocheTipoHabitacion.setText("");
+            
+    }
     
-    
-    
-    
-    
+    public boolean textFieldVacios(){
+    boolean vacio=jTFCodigoTipoHabitacion.getText().equals("") && 
+     jTFCategoriaTipoHabitacion.getText().equals("") &&
+     jTFTipoCamaTipoHabitacion.getText().equals("") &&
+     jTFCantidadCamasTipoHabitacion.getText().equals("") &&
+     jTFCantPersonasTipoHabitacion.getText().equals("") &&
+     jTFPrecioNocheTipoHabitacion.getText().equals("");
+            
+            return vacio;
+    }
+
+//metodos para botones
+   public void botonBorrar(){
+   int rta=0;
+        if(!textFieldVacios())
+     {   
+        if(JOptionPane.showConfirmDialog(this, "Esta por BORRAR un Tipo de Habitación. ¿Desea continuar?", "ADVERTENCIA",0 )==0){
+        int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
+        
+        rta=tipoHabitacionData.borrarTipoHabitacion(idTipoHabitacion);
+        limpiarComboBox();
+        if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
+            else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
+        }
+         }else{
+         JOptionPane.showMessageDialog(this, "Completar DATOS ");
+     }
+   }    
+   public void botonNuevo(){
+        int rta=0;
+     
+     if(!textFieldVacios())
+     { 
+        int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
+        String nombreTipoHabitacion=jTFCategoriaTipoHabitacion.getText();
+        String nombreTipoCama = jTFTipoCamaTipoHabitacion.getText();
+        int cantidadCamas = Integer.parseInt(jTFCantidadCamasTipoHabitacion.getText());
+        int cantMaxPersonas= Integer.parseInt(jTFCantPersonasTipoHabitacion.getText());
+        double precioPorNoche= Double.parseDouble(jTFPrecioNocheTipoHabitacion.getText());
+        TipoHabitacion tipoHabitacion= new TipoHabitacion(idTipoHabitacion, nombreTipoHabitacion, cantMaxPersonas, precioPorNoche, nombreTipoCama, cantidadCamas);
+        rta=tipoHabitacionData.cargarTipoHabitacion(tipoHabitacion);
+        limpiarComboBox();
+        if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
+            else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
+     }else{
+         JOptionPane.showMessageDialog(this, "Completar DATOS ");
+     }
+   }
+   public void botonActualizar(){
+       int rta=0;
+    if(!textFieldVacios())
+     { 
+        int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
+        String nombreTipoHabitacion=jTFCategoriaTipoHabitacion.getText();
+        String nombreTipoCama = jTFTipoCamaTipoHabitacion.getText();
+        int cantidadCamas = Integer.parseInt(jTFCantidadCamasTipoHabitacion.getText());
+        int cantMaxPersonas= Integer.parseInt(jTFCantPersonasTipoHabitacion.getText());
+        double precioPorNoche= Double.parseDouble(jTFPrecioNocheTipoHabitacion.getText());
+
+        TipoHabitacion tipoHabitacion= new TipoHabitacion(idTipoHabitacion, nombreTipoHabitacion, cantMaxPersonas, precioPorNoche, nombreTipoCama, cantidadCamas);
+        rta=tipoHabitacionData.actualizarTipoHabitacion(tipoHabitacion);
+        if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
+            else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
+       
+        limpiarComboBox();
+      }else{
+         JOptionPane.showMessageDialog(this, "Completar DATOS ");
+     }   
+   }
+   public void botonActPrecio(){
+       int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
+       double precioPorNoche= Double.parseDouble(jTFPrecioNocheTipoHabitacion.getText());
+        tipoHabitacionData.cambiarPrecioTipoHabitacion(precioPorNoche, idTipoHabitacion);
+        limpiarComboBox();
+   }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarPrecioTipoHabitacion;

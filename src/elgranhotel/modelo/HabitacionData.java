@@ -15,9 +15,7 @@ import java.util.List;
 
 public class HabitacionData {
     private Connection connection = null;
-    private Conexion conexion;
-    private TipoHabitacionData tipoHabitacionData;
-    
+
 
 
 //constructor toma una conexion
@@ -66,7 +64,7 @@ public class HabitacionData {
                habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
                habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
                habitacion.setPisoHabitacion(resultSet.getInt("pisoHabitacion"));
-               habitacion.setTipoHabitacion(mostrarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"), conexion));
+               habitacion.setTipoHabitacion(buscarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"), conexion));
             }      
             statement.close();
         } catch (SQLException ex) {
@@ -125,7 +123,7 @@ public List<Habitacion> obtenerHabitaciones(Conexion conexion){
                 habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
                 habitacion.setPisoHabitacion(resultSet.getInt("pisoHabitacion"));
                 habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
-                TipoHabitacion tH=mostrarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"), conexion);
+                TipoHabitacion tH=buscarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"), conexion);
                 habitacion.setTipoHabitacion(tH);
                 habitaciones.add(habitacion);
              }
@@ -137,9 +135,9 @@ public List<Habitacion> obtenerHabitaciones(Conexion conexion){
     return habitaciones;
 }
 
-public TipoHabitacion mostrarTipoHabitacion(int idTipoHabitacion, Conexion conexion) {
+public TipoHabitacion buscarTipoHabitacion(int idTipoHabitacion, Conexion conexion) {
        TipoHabitacionData tipohabitacionData = new TipoHabitacionData(conexion);
-       TipoHabitacion th= tipohabitacionData.mostrarTipoHabitacion(idTipoHabitacion);
+       TipoHabitacion th= tipohabitacionData.buscarTipoHabitacion(idTipoHabitacion);
         
         return th;
     }

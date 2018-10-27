@@ -587,7 +587,7 @@ System.out.println( "output: " + output );
       
    public void precioReserva(JTextField jtf, int idTipoHabitacion, Conexion conexion){
         
-         TipoHabitacion tpHabSelec=habitacionData.mostrarTipoHabitacion(idTipoHabitacion, conexion);
+         TipoHabitacion tpHabSelec=habitacionData.buscarTipoHabitacion(idTipoHabitacion, conexion);
                   
          int dias=Integer.parseInt(jTFDiasReserva.getText());
          double precioXnoche=tpHabSelec.getPrecioNocheTipoHabitacion();
@@ -596,7 +596,7 @@ System.out.println( "output: " + output );
 }
 
    public void setCantPersonas(JTextField jtf, int idTipoHabitacion, Conexion conexion){
-       TipoHabitacion tpHabSelec=habitacionData.mostrarTipoHabitacion(idTipoHabitacion, conexion);
+       TipoHabitacion tpHabSelec=habitacionData.buscarTipoHabitacion(idTipoHabitacion, conexion);
        int cantP= tpHabSelec.getCantPersonasTipoHabitacion();
        jtf.setText(cantP+"");
    }

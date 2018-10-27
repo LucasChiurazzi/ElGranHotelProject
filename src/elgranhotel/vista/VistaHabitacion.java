@@ -258,8 +258,7 @@ private ReservaData reservaData;
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         int rta=0;
-        TipoHabitacion th;
-        
+                
         if(!campoPiso.getText().equals("") &&  !jTFNroHabitacion.getText().equals(""))
         {
             int nro= Integer.parseInt(jTFNroHabitacion.getText());
@@ -357,7 +356,8 @@ private ReservaData reservaData;
     private void JRBLibreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBLibreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JRBLibreActionPerformed
-public void borraFilasTabla(){
+
+    public void borraFilasTabla(){
 
     int a =modelo.getRowCount()-1;
     System.out.println("Tabla "+a);
@@ -367,7 +367,7 @@ public void borraFilasTabla(){
     }
 }
 
-public void mostrarHabitacion(Habitacion habitacion){
+    public void mostrarHabitacion(Habitacion habitacion){
 
  String id= String.valueOf(habitacion.getNumeroHabitacion());
  jTFNroHabitacion.setText(id); 
@@ -397,7 +397,8 @@ public void mostrarHabitacion(Habitacion habitacion){
  jCBTipoHabitacion.setSelectedItem(idTH+" "+tipoTH);
 
 }
-public void limpiar(){
+
+    public void limpiar(){
     limpiarComboBox();
     cargarTiposHabitacionEnComboBox();
     borraFilasTabla();
@@ -407,11 +408,11 @@ public void limpiar(){
     JRBLibre.setSelected(false);
   }
 
- public  TipoHabitacion searchDeStringATipoHabitacion(String selectedItemComboBox){
+    public  TipoHabitacion searchDeStringATipoHabitacion(String selectedItemComboBox){
         //sacar el id y pasarlo a int, buscar con el id en la base de datos y sacarlo como un tipoHabitacion completo
         int idTipoHabitacion= Integer.parseInt(selectedItemComboBox.substring(0, 2).trim());
       
-       TipoHabitacion tH=(tipoHabitacionData.mostrarTipoHabitacion(idTipoHabitacion));
+       TipoHabitacion tH=(tipoHabitacionData.buscarTipoHabitacion(idTipoHabitacion));
     
         return tH;
     }
@@ -426,7 +427,22 @@ public void limpiar(){
           
             }
     }
+   
+    public void limpiarComboBox(){
+        
+        jCBTipoHabitacion.removeAllItems();
+       
+     }
     
+    public TipoHabitacion deJCBaTipo(JComboBox jcomobox){
+        
+        String objetCb= (String)jcomobox.getSelectedItem();
+        TipoHabitacion tpHabSelec=searchDeStringATipoHabitacion(objetCb);
+        
+         return tpHabSelec;
+    }
+    
+        
    /* public void cargarTiposHabitacionEnComboBoxXCP(){
     //Carga los tipos de habitacion  al ComboBox
     
@@ -442,22 +458,6 @@ public void limpiar(){
             }
     }
     */
-   
-    public void limpiarComboBox(){
-        
-        jCBTipoHabitacion.removeAllItems();
-       
-     }
-    
-    
-    public TipoHabitacion deJCBaTipo(JComboBox jcomobox){
-        
-        String objetCb= (String)jcomobox.getSelectedItem();
-        TipoHabitacion tpHabSelec=searchDeStringATipoHabitacion(objetCb);
-        
-         return tpHabSelec;
-    }
-    
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton JRBLibre;
