@@ -45,6 +45,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private List<Habitacion> listaHabitaciones;
     private Conexion conexion;
     private HuespedData huespedData;
+    private HuespedData huespedData1;
     private ArrayList<Huesped> listaHuespedes;
     private Reserva reserva;
     private ReservaData reservaData;
@@ -489,18 +490,24 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             //guardar dni
 
             conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
-            
-            huespedData=new HuespedData(conexion);
-            Huesped h = huespedData.mostrarHuesped(Long.parseLong(jTHuespedReserva.getText()));
+            //System.out.println("aca1");
+            huespedData1=new HuespedData(conexion);
+            System.out.println("aca2");
+            long dniPase=Long.parseLong(jTHuespedReserva.getText().substring(0, 8).trim());
+            System.out.println(dniPase);
+            Huesped h = huespedData1.mostrarHuesped(dniPase);
+            System.out.println("aca3");
             //buscar huesped por ese dni
             ReservaData rd=new ReservaData(conexion);
+            System.out.println("aca4");
             rd.finReserva(h);
+            System.out.println("por cargartablahabitacion");
             //habitacion pasa a libre (0), reserva pasa a inactiva (0)
-            cargatablaHabitacionesSeguntipo(); 
+             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+            cargatablaHabitacionesSeguntipo();
     
 
 
@@ -585,13 +592,19 @@ cargarDias();
     
     //metodos tabla
     public void cargatablaHabitacionesSeguntipo(){
+        System.out.println("antes de borrar");
     borraFilasTabla();
-    
+        System.out.println("despues de borrar");
     LocalDate fechaInicioHR= fromPickerToLocalDate(jXDPInicioReserva);
+        System.out.println("cargo fechaini");
     LocalDate fechaFinHR = fromPickerToLocalDate(jXDPFinReserva);
+        System.out.println("cargo fecha salida");
     reservaData =new ReservaData(conexion);
+        System.out.println("reservadata");
     habitacionData= new HabitacionData(conexion);
-    listaHabitaciones= new ArrayList<>();  
+        System.out.println("habitaciondata");
+    listaHabitaciones= new ArrayList<>(); 
+        System.out.println("listahabitaciones");
    
      
     //hasta aca ok
@@ -604,14 +617,16 @@ cargarDias();
     if(h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())
         listaHabitaciones.add(h);
      }*/
-    
+        System.out.println("aca entro?");
     
     List<Habitacion> todasLasHabitaciones= habitacionData.obtenerHabitaciones(conexion);
-    
+         System.out.println("todaslashabitaciones");
     todasLasHabitaciones.stream().filter((h) -> (h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())).forEachOrdered((h) -> {
+         System.out.println("filter");
         listaHabitaciones.add(h);
+        System.out.println("agregar ");
         });
-
+        System.out.println("y aca");
    List<Reserva> reservas= reservaData.obtenerReservas();
    List<Integer> numerosHABOrrar= new ArrayList<>();
     for (Reserva r:reservas){

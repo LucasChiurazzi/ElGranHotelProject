@@ -192,4 +192,38 @@ public class TipoHabitacionData {
     
    }
    
+   //muestra un tipo de habitacion filtrado por su codigo o id.   
+   public TipoHabitacion buscarTipoHabitacion(int idTipoHabitacion){
+       TipoHabitacion tipoHabitacion= null;
+ 
+       try{
+       String sql= "SELECT * FROM tipohabitacion \n WHERE idTipoHabitacion = " +idTipoHabitacion + ";";
+          
+       PreparedStatement st = connection.prepareStatement(sql);
+       
+       ResultSet rs = st.executeQuery();
+                
+      while (rs.next()){
+           tipoHabitacion = new TipoHabitacion();
+           tipoHabitacion.setIdTipoHabitacion(rs.getInt("idTipoHabitacion"));
+           tipoHabitacion.setCategoriaTipoHabitacion(rs.getString("categoriaTipoHabitacion"));
+           tipoHabitacion.setCantPersonasTipoHabitacion(rs.getInt("cantPersonasTipoHabitacion"));
+           tipoHabitacion.setPrecioNocheTipoHabitacion(rs.getDouble("precioNocheTipoHabitacion"));
+           tipoHabitacion.setTipoCamaTipoHabitacion(rs.getString("tipoCamaTipoHabitacion"));
+           tipoHabitacion.setCantidadCamasTipoHabitacion(rs.getInt("cantCamasTipoHabitacion"));
+
+               
+           }
+       
+       
+       st.close();
+       
+      } catch (SQLException ex) {
+            System.out.println("Error al obtener los tipoHabitaciones: " + ex.getMessage());
+        }
+             
+       
+       return tipoHabitacion;
+    }
+   
 }

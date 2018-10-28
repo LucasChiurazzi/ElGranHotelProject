@@ -38,7 +38,8 @@ public class HabitacionData {
     
     //creo una nueva habitacion
         
-    public void agregarHabitacion(Habitacion habitacion){try {
+    public void agregarHabitacion(Habitacion habitacion){
+        try {
                      
             String sql = "INSERT INTO habitacion (numeroHabitacion, pisoHabitacion, estadoHabitacion, idTipoHabitacion) VALUES ( ? , ? , ? , ? , ?);";
 
@@ -156,37 +157,38 @@ public Habitacion mostrarHabitacion(int numeroHabitacion){
     
     }
 
-    public List<Habitacion> obtenerHabitaciones(){
-        List<Habitacion> habitaciones = new ArrayList<Habitacion>();
-            
-
-        try {
-            String sql = "SELECT * FROM Habitacion;";
+    public List<Habitacion> obtenerHabitaciones(Conexion conexion){
+     Habitacion habitacion;
+     List<Habitacion> habitaciones= new ArrayList<>();
+     try {
+            String sql = "SELECT * FROM habitacion;";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            Habitacion habitacion;
             while(resultSet.next()){
-                habitacion = new Habitacion();
+                habitacion= new Habitacion();
                 habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
                 habitacion.setPiso(resultSet.getInt("pisoHabitacion"));
                 habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
-                TipoHabitacion th=mostrarTipoHabitacion(resultSet.getInt("idTipoHabitacion"));
-                habitacion.setTipoHabitacion(th);
-                
+                TipoHabitacion tH=buscarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"), conexion);
+                habitacion.setTipoHabitacion(tH);
                 habitaciones.add(habitacion);
-            }      
-            statement.close();
-        } catch (SQLException ex) {
-            System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
+             }
+             statement.close();
+            } catch (SQLException ex) {
+            System.out.println("Error al obtener las Habitaciones: " + ex.getMessage());
         }
+     
+    return habitaciones;
+}
+
+   public TipoHabitacion buscarTipoHabitacion(int idTipoHabitacion, Conexion conexion) {
+       TipoHabitacionData tipohabitacionData = new TipoHabitacionData(conexion);
+       TipoHabitacion th= tipohabitacionData.buscarTipoHabitacion(idTipoHabitacion);
         
-        
-        return habitaciones;
+        return th;
     }
 
-    public List<Habitacion> obtenerHabitaciones(Conexion conexion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 }
 
 
