@@ -492,7 +492,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             
             huespedData=new HuespedData(conexion);
             Huesped h = huespedData.mostrarHuesped(Long.parseLong(jTHuespedReserva.getText()));
-            buscar huesped por ese dni
+            //buscar huesped por ese dni
             ReservaData rd=new ReservaData(conexion);
             rd.finReserva(h);
             //habitacion pasa a libre (0), reserva pasa a inactiva (0)
