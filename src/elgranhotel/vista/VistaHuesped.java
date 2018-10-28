@@ -259,23 +259,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         filaBusquedaDni[0][4] =String.valueOf(Vhuesped.getCelularHuesped());
         
         jtDni.setText("");
-       /* 
-        //listaHuespedes = (ArrayList<Huesped>)huespedData.obtenerHuespedes();
-        
-        String fila[][]= new String [listaHuespedes.size()][5];
-        int i;
-        for (i=0; i<listaHuespedes.size(); i++){
-       
-         fila[i][0] = String.valueOf(listaHuespedes.get(i).getDniHuesped());
-         fila[i][1] = String.valueOf(listaHuespedes.get(i).getNombreHuesped());
-         fila[i][2] = String.valueOf(listaHuespedes.get(i).getDomicilioHuesped());
-         fila[i][3] = String.valueOf(listaHuespedes.get(i).getCorreoHuesped());
-         fila[i][4] = String.valueOf(listaHuespedes.get(i).getCelularHuesped());
-        }
-// for (Reserva h: listaReserva){  
-       //           System.out.println((Arrays.toString(new Object[]{h.getIdReserva(),h.getFechaInicioReserva(),h.getFechaFinReserva(),h.getEstadoReserva(),h.getHuesped().getDniHuesped(),h.getHabitacion().getNumeroHabitacion()})));
 
-       // } */
       jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
            filaBusquedaDni,
             new String [] {

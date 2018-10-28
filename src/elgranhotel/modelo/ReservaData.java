@@ -137,6 +137,52 @@ public class ReservaData {
         return reservas;
     }
     
+      public void finReserva(Huesped huesped){
+         try {
+            //busco por dni huesped las reservas que hizo
+            List<Reserva> listaReservasHuesped= this.buscarReserva(huesped.getDniHuesped());
+            
+            //controlar si fecha hoy >= fecha fin reserva
+            LocalDate fechaHoy = LocalDate.now();
+           
+            //1 es la fila y 6 son las columnas
+            String filaBusquedaHabitaciones[][]=new String[listaReservasHuesped.size()][6];
+             int i;
+             for (i=0; i<listaReservasHuesped.size(); i++){
+               filaBusquedaHabitaciones[i][0] = String.valueOf(listaReservasHuesped.get(i).getIdReserva());
+             //filaBusquedaDni[i][1] = String.valueOf(listaBuscarReservaDni.get(i).getFechaInicioReserva());
+               filaBusquedaHabitaciones[i][2] = String.valueOf(listaReservasHuesped.get(i).getFechaFinReserva());
+             //filaBusquedaDni[i][3] = String.valueOf(listaBuscarReservaDni.get(i).getEstadoReserva());
+             //filaBusquedaDni[i][4] = String.valueOf(listaBuscarReservaDni.get(i).getHuesped().getDniHuesped());
+            // filaBusquedaDni[i][5] = String.valueOf(listaBuscarReservaDni.get(i).getHabitacion().getNumeroHabitacion());
+
+                 //si la fecha de hoy es mayor o igual que la fecha de salida
+                 if(fechaHoy.isAfter(listaReservasHuesped.get(i).getFechaFinReserva()) || fechaHoy.equals(listaReservasHuesped.get(i).getFechaFinReserva()))
+                 {
+                     //la habitacion y la reserva pasan a estar libre(0)
+                    String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 0 , habitacion.estadoHabitacion= 0  WHERE reserva.idReserva= ? ;";
+
+                    PreparedStatement statement = connection.prepareStatement(sql);
+                       
+                    statement.setInt(1, listaReservasHuesped.get(i).getIdReserva());
+            
+                    statement.executeUpdate();
+            
+                    statement.close();
+                 }
+                 
+                 
+                 
+            
+            }
+            
+            
+    
+        } catch (SQLException ex) {            System.out.println("Error al actualizar una reserva: " + ex.getMessage());
+        }
+    }
+    
+    
      public void hacerReserva(Reserva reserva){
         try {
             
