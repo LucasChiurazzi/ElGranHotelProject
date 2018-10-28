@@ -73,6 +73,7 @@ public class DialogoReservaHuesped extends javax.swing.JDialog {
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel12.setText("ERROR AL BUSCAR HUESPED");
+        jLabel12.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

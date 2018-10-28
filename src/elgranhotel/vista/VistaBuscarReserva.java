@@ -32,6 +32,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -48,7 +50,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     private List<Reserva> listaBuscarReservaDni;
     private List<Reserva> listaBuscarReservaFecha;
     private HabitacionData habitacionData;
-    
+    DefaultTableModel modelo;
     
     
     /**
@@ -368,20 +370,6 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
   } catch (ClassNotFoundException ex) {
         Logger.getLogger(VistaBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
    }
-        
-        
-        //if(huesped==null){
-           // DialogoReservaHuesped dialogo= new DialogoReservaHuesped(new javax.swing.JFrame(), true);
-
-            // guarda el dni en una variable en el jdialog para usar en huesped
-           // dialogo.setDniHuesped(dni);
-          //  dialogo.setVisible(true);
-
-        //} else{
-
-          //  jTHuespedReserva.setText(huesped.getDniHuesped()+" - "+huesped.getNombreHuesped());
-
-        //}
 
     }//GEN-LAST:event_jBBuscarHuespedReservaActionPerformed
 

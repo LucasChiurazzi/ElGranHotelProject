@@ -95,7 +95,8 @@ public class ReservaData {
         
         return huespedes;
     }   
-         public List<Reserva> buscarReserva(long dni){
+    
+    public List<Reserva> buscarReserva(long dni){
         //recibo un huesped
         //busco en la base de datos si el dniHuesped esta en alguna reserva y en
         //alguna habitacion
@@ -133,7 +134,6 @@ public class ReservaData {
         return reservas;
     }
 
-   
     public List<Reserva> buscarReserva(LocalDate fecha){
         //recibo una fecha de inicio de la reserva
         //busco en la base de datos si hay alguna reserva para esa fecha 
@@ -212,7 +212,8 @@ public class ReservaData {
         return reservas;
 }
     
-    public void hacerReserva(Reserva reserva){
+    public int hacerReserva(Reserva reserva){
+       int rta=0;
         try {
             
             String sql = "INSERT INTO reserva (fechaInicioReserva, fechaFinReserva, estadoReserva, dniHuesped, numeroHabitacion) VALUES ( ? , ? , ? , ? , ? );";
@@ -225,7 +226,7 @@ public class ReservaData {
             statement.setLong(4, reserva.getHuesped().getDniHuesped());
             statement.setInt(5, reserva.getHabitacion().getNumeroHabitacion());
             
-            statement.executeUpdate();
+            rta=statement.executeUpdate();
             
             ResultSet rs = statement.getGeneratedKeys();
             
@@ -240,10 +241,11 @@ public class ReservaData {
         } catch (SQLException ex) {
             System.out.println("Error al insertar una reserva: " + ex.getMessage());
         }
+      return rta;
     }
     
-    public void modificarReserva(Reserva reserva){
-            
+    public int modificarReserva(Reserva reserva){
+       int rta=0;     
         try {
             
             String sql = "UPDATE reserva SET fechaInicioReserva= ? ,fechaFinReserva= ? ,estadoReserva= ? ,dniHuesped= ? ,numeroHabitacion= ?  WHERE idReserva= ?;";
@@ -258,39 +260,35 @@ public class ReservaData {
             statement.setInt(5, reserva.getHabitacion().getNumeroHabitacion());
             statement.setInt(6, reserva.getIdReserva());
             
-            statement.executeUpdate();
-            
-            
-            
+            rta=statement.executeUpdate();
             statement.close();
     
         } catch (SQLException ex) {
             System.out.println("Error al actualizar una reserva: " + ex.getMessage());
         }
         
-        
+        return rta;
     }
-    
     //borra una reserva
-    public void cancelarReserva(int idReserva){
-         try {
+    public int cancelarReserva(int idReserva){
+        int rta=0;
+        try {
             
             String sql = "DELETE FROM reserva \n WHERE idReserva =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idReserva);
                        
-            statement.executeUpdate();
+            rta=statement.executeUpdate();
              
             statement.close();
     
         } catch (SQLException ex) {
             System.out.println("Error al borrar un tipo de Habitacion: " + ex.getMessage());
         }
-   
+   return rta;
     }
-     
-    
+        
     public Huesped mostrarHuesped(long dni) {
         try {
             conexion= new Conexion("jdbc:mysql://localhost/hotel", "root", "");
@@ -311,11 +309,10 @@ public class ReservaData {
         HabitacionData habitacionData = new HabitacionData(conexion);
         return habitacionData.buscarHabitacion(idHabitacion, conexion);
     }
-    //innecesario?
-    //modifica el estado de una reserva 1 activa por lo que debe tomar una reserva como parametro
-    
+       
     public void finReserva(Huesped huesped){
-         try {
+        
+        try {
             
             String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 0 , habitacion.estadoHabitacion= 0  WHERE huesped.dniHuesped= ? ;";
 
@@ -327,7 +324,8 @@ public class ReservaData {
             
             statement.close();
     
-        } catch (SQLException ex) {            System.out.println("Error al actualizar una reserva: " + ex.getMessage());
+        } catch (SQLException ex) {     
+            System.out.println("Error al actualizar una reserva: " + ex.getMessage());
         }
     }
    

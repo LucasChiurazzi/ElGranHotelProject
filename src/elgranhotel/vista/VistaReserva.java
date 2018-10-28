@@ -5,6 +5,7 @@
  */
 package elgranhotel.vista;
 
+import elgranhotel.controlador.ControladorReserva;
 import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.Habitacion;
 import elgranhotel.modelo.HabitacionData;
@@ -26,8 +27,10 @@ import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 import java.util.List;
+import javax.swing.JInternalFrame;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import org.jdesktop.swingx.JXDatePicker;
@@ -52,6 +55,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private DefaultTableModel modeloReserva;
     private Habitacion habitacion;
     private HabitacionData habitacionData;
+    private ControladorReserva controlador;
     
    
     
@@ -66,8 +70,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         
           try {   
             conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
-            
-             modeloReserva=new DefaultTableModel();
+            controlador= new ControladorReserva();
+            modeloReserva=new DefaultTableModel();
             
             tipoHabitacionData = new TipoHabitacionData(conexion);
             huespedData= new HuespedData(conexion);
@@ -77,11 +81,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                        
             //Método encargado de llenar el combobox
            cargarTiposHabitacionEnComboBox();
-          
-           armaCabeceraTabla();
-            
+           
            
          
+           
+           armaCabeceraTabla();
+           
+           
+          
             
             
             
@@ -408,43 +415,20 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
     //Busca un huesped para la reserva, si el huesped ya esta cargado desplega el dni y el nombre, recibe DNI
     private void jBBuscarHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarHuespedReservaActionPerformed
-        
-        // Busca el huesped con el dni, si el huesped es null abre un dialgo para poder cargar en la vista huesped
-        
-         long dni=Long.parseLong(jTHuespedReserva.getText().substring(0, 8).trim());
-          
-         Huesped huesped= (Huesped)huespedData.mostrarHuesped(dni);
-        
-         if(huesped==null){
-         DialogoReservaHuesped dialogo= new DialogoReservaHuesped(new javax.swing.JFrame(), true);
-        
-        // guarda el dni en una variable en el jdialog para usar en huesped 
-        dialogo.setDniHuesped(dni);
-        dialogo.setVisible(true);  
-        dialogo.setLocation(1000, 1000);
-        dispose();
-        
-         } else{
-             
-            jTHuespedReserva.setText(huesped.getDniHuesped()+" - "+huesped.getNombreHuesped());
-              
-         }                         
+       
+       controlador.buscarHuesped(jTHuespedReserva, this);  
+       
         
     }//GEN-LAST:event_jBBuscarHuespedReservaActionPerformed
    
     //Crea una nueva reserva
     private void jBConfitmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfitmarReservaActionPerformed
-    long dni= Long.parseLong(jTHuespedReserva.getText().substring(0,8).trim());
-              
-    /*SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-    String toLocalDate= formater.format(jXDPInicioReserva.getDate());
-    LocalDate fechaInicio= LocalDate.parse(toLocalDate);
-    
-    SimpleDateFormat formater2 = new SimpleDateFormat("yyyy-MM-dd");
-    String toLocalDateFin= formater2.format(jXDPFinReserva.getDate());
-    LocalDate fechaFin = LocalDate.parse(toLocalDateFin);
-     */
-    
+        
+        botonConfirmar();
+        
+   
+      /*  
+        long dni= Long.parseLong(jTHuespedReserva.getText().substring(0,8).trim());
     LocalDate fechaInicio= fromPickerToLocalDate(jXDPInicioReserva);
     LocalDate fechaFin = fromPickerToLocalDate(jXDPFinReserva);
     int filaSeleccionada= jTHabitacionesReserva.getSelectedRow();
@@ -468,9 +452,10 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             
             JOptionPane.showMessageDialog(escritorio, "La reserva se guardo correctamente");
         }
+        */
           
     }//GEN-LAST:event_jBConfitmarReservaActionPerformed
-
+    
     
     private void jBCargarPopUpHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarPopUpHuespedReservaActionPerformed
 
@@ -634,7 +619,7 @@ cargarDias();
     }
     
     public void armaCabeceraTabla(){
-  
+       
         ArrayList<Object> columnas=new ArrayList<>();
         columnas.add("Numero Habitacion");
         columnas.add("Piso");
@@ -668,7 +653,7 @@ modeloReserva.removeRow(i );
     }
           
      //cargar dias en diasreserva
-     public void cargarDias(){
+    public void cargarDias(){
     LocalDate fechaInicio= fromPickerToLocalDate(jXDPInicioReserva);
     LocalDate fechaFin = fromPickerToLocalDate(jXDPFinReserva);
        
@@ -698,6 +683,27 @@ modeloReserva.removeRow(i );
         
     return fechaInLD;
    }
+     
+     public boolean datosvacios(){
+       boolean hayDatosVacios=   
+               jTHuespedReserva.getText().equals("") &&
+               jTFDiasReserva.getText().equals("") &&
+               jTFCantPersonasReserva.getText().equals("");
+         
+         return hayDatosVacios;
+     }
+     
+     //metodos para botones
+     public void botonConfirmar(){ int rta=0;
+       
+       if(!datosvacios()) {
+           rta=controlador.confirmarReserva(jTHuespedReserva, jTHabitacionesReserva, jXDPFinReserva, jXDPFinReserva, modeloReserva, conexion);
+           if(rta==2) {JOptionPane.showMessageDialog(this, "La reserva se guardo correctamente");}
+           else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
+       }else{
+           JOptionPane.showMessageDialog(this, "Completar DATOS ");
+       }
+     }
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
