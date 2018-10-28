@@ -18,38 +18,40 @@ public class Habitacion {
         this.estadoHabitacion = estadoHabitacion;
         this.tipoHabitacion = tipoHabitacion;
     }
-
-    public int getNumeroHabitacion() {
-        return numeroHabitacion;
-    }
-
-    public int getPisoHabitacion() {
-        return pisoHabitacion;
-    }
-
-    public boolean getEstadoHabitacion() {
+    
+    public boolean getEstadoHabitacion(){
         return estadoHabitacion;
     }
-
-    public TipoHabitacion getTipoHabitacion() {
-        return tipoHabitacion;
+    
+    public void setEstadoHabitacion(boolean estadoHabitacion){
+        this.estadoHabitacion = estadoHabitacion;
+    }
+    
+    public int getNumeroHabitacion() {
+        return numeroHabitacion;
     }
 
     public void setNumeroHabitacion(int numeroHabitacion) {
         this.numeroHabitacion = numeroHabitacion;
     }
 
-    public void setEstadoHabitacion(boolean estadoHabitacion) {
-        this.estadoHabitacion = estadoHabitacion;
+    public int getPisoHabitacion() {
+        return pisoHabitacion;
+    }
+
+    public void setPisoHabitacion(int pisoHabitacion) {
+        this.pisoHabitacion = pisoHabitacion;
+    }
+
+    public TipoHabitacion getTipoHabitacion() {
+        return tipoHabitacion;
     }
 
     public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
         this.tipoHabitacion = tipoHabitacion;
     }
- 
-    public void setPiso(int pisoHabitacion) {
-       this.pisoHabitacion = pisoHabitacion;
-    }
+
+
     
 }
 

@@ -95,9 +95,57 @@ public class TipoHabitacionData {
        
        return tipoHabitaciones;
     }
+//agrega los tipos de habitacion   
+   public int cargarTipoHabitacion(TipoHabitacion tipoHabitacion){
+       int rta=0; 
+       try {
+            
+            String sql = "INSERT INTO  tipohabitacion ( idTipoHabitacion, categoriaTipoHabitacion, cantPersonasTipoHabitacion, "
+                    + "precioNocheTipoHabitacion, tipoCamaTipoHabitacion, cantCamasTipoHabitacion) VALUES ( ? , ? , ? , ? , ? , ? );";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            statement.setInt(1, tipoHabitacion.getIdTipoHabitacion());
+            statement.setString(2, tipoHabitacion.getCategoriaTipoHabitacion());
+            statement.setInt(3, tipoHabitacion.getCantPersonasTipoHabitacion());
+            statement.setDouble(4, tipoHabitacion.getPrecioNocheTipoHabitacion());
+            statement.setString(5, tipoHabitacion.getTipoCamaTipoHabitacion());
+            statement.setInt(6, tipoHabitacion.getCantidadCamasTipoHabitacion());
+            rta=statement.executeUpdate();
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al crear un tipo de habitacion: " + ex.getMessage());
+        }
+       return rta;
+    }
+ public int actualizarTipoHabitacion (TipoHabitacion tipoHabitacion){
+    int rta=0;
+        try {
+            
+            String sql = "UPDATE tipohabitacion SET categoriaTipoHabitacion= ? , "
+                    + "cantPersonasTipoHabitacion = ? , precioNocheTipoHabitacion= ? , tipoCamaTipoHabitacion= ? , cantCamasTipoHabitacion= ? \n"
+                    + "WHERE idTipoHabitacion = ? ;";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            statement.setString(1, tipoHabitacion.getCategoriaTipoHabitacion());
+            statement.setInt(2, tipoHabitacion.getCantPersonasTipoHabitacion());
+            statement.setDouble(3, tipoHabitacion.getPrecioNocheTipoHabitacion());
+            statement.setString(4, tipoHabitacion.getTipoCamaTipoHabitacion());
+            statement.setInt(5, tipoHabitacion.getCantidadCamasTipoHabitacion());
+            statement.setInt(6, tipoHabitacion.getIdTipoHabitacion());
+            rta=statement.executeUpdate();
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar un tipo de habitacion: " + ex.getMessage());
+        }
+    return rta;
+} 
 
 //elimina un tipo de habitacion con su id
-       public void eliminarTipoHabitacion (int idTipoHabitacion){
+     /*  public void eliminarTipoHabitacion (int idTipoHabitacion){
     try {
             
             String sql = "DELETE FROM tipohabitacion WHERE idTipoHabitacion =?;";
@@ -114,8 +162,27 @@ public class TipoHabitacionData {
         }
    
    
-}
+}*/
 
+    
+    //elimina un tipo de habitacion con su id
+    public int borrarTipoHabitacion (int idTipoHabitacion){
+    int rta=0;
+    try {
+            
+            String sql = "DELETE FROM tipohabitacion \n WHERE idTipoHabitacion =?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, idTipoHabitacion);
+            rta=statement.executeUpdate();
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al borrar un tipo de Habitacion: " + ex.getMessage());
+        }
+   
+   return rta;
+}
 //modifica los tipos de habitacion    
    public void cambiarTipoHabitacion (TipoHabitacion tipoHabitacion){
     
