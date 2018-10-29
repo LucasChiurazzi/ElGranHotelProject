@@ -326,7 +326,7 @@ private ReservaData reservaData;
             habitacion=new Habitacion(id,piso,estado,th);
             thAux= habitacionData.buscarHabitacion(id, conexion);
             if(thAux!=null)
-            {
+            { 
                 rta=habitacionData.actualizarHabitacion(habitacion);
                 if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
                 else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
@@ -341,6 +341,7 @@ private ReservaData reservaData;
     private void botonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarActionPerformed
         borraFilasTabla();
         listaHabitacion=(ArrayList)habitacionData.obtenerHabitaciones(conexion);
+        
         for(Habitacion m:listaHabitacion)
         modelo.addRow(new Object[]{m.getNumeroHabitacion(), m.getPisoHabitacion(), m.getEstadoHabitacion(),m.getTipoHabitacion().getIdTipoHabitacion()  });
     }//GEN-LAST:event_botonListarActionPerformed

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,6 +143,19 @@ public TipoHabitacion buscarTipoHabitacion(int idTipoHabitacion, Conexion conexi
         return th;
     }
     
+
+public boolean ocupada(Habitacion h, LocalDate fechaInicioReserva, LocalDate fechaFinReserva){
+    boolean ocupada= false;
+    LocalDate fechaHoy= LocalDate.now();
+    if(fechaInicioReserva.isBefore(fechaHoy.plusDays(1)) || fechaInicioReserva.equals(fechaHoy.plusDays(1))&& fechaFinReserva.isAfter(fechaHoy.plusDays(1)) || fechaFinReserva.equals(fechaHoy.plusDays(1))){
+          ocupada=true;
+          h.setEstadoHabitacion(ocupada);
+          this.actualizarHabitacion(h);
+                            }
+    
+    
+    return ocupada;
+}
 
 /*public List<Habitacion> obtenerHabitacionesXTipo(int idTipoHabitacion){
         List<Habitacion> habitaciones = new ArrayList<Habitacion>();

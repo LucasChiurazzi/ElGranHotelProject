@@ -255,7 +255,6 @@
     <Component class="javax.swing.JRadioButton" name="JRBLibre">
       <Properties>
         <Property name="text" type="java.lang.String" value="Libre"/>
-        <Property name="actionCommand" type="java.lang.String" value="Libre"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JRBLibreActionPerformed"/>

@@ -130,7 +130,7 @@ public void buscarReservaXhuesped(JTextField jtfhuesped, JTable jtable){
 public int confirmarReserva(JTextField jtfhuesped, JTable jtable,JXDatePicker jxdI, JXDatePicker jxdF, DefaultTableModel modeloReserva, Conexion conexion){
     
     int rtaR=0;
-    int rtaH=0;
+    
     
     long dni= Long.parseLong(jtfhuesped.getText().substring(0,8).trim());
     LocalDate fechaInicio= fromPickerToLocalDate(jxdI);
@@ -153,12 +153,14 @@ public int confirmarReserva(JTextField jtfhuesped, JTable jtable,JXDatePicker jx
                 //carga la reserva con los datos
                 //el estado es por defecto true
             reserva= new Reserva(fechaInicio, fechaFin, true, huesped, h);
-            h.setEstadoHabitacion(true);
+            habitacionData.ocupada(h, fechaInicio, fechaFin);   
+            
             rtaR=reservaData.hacerReserva(reserva);
-            rtaH=habitacionData.actualizarHabitacion(h);
+            
+           
            
         }
-  return rtaR + rtaH;        
+  return rtaR;        
 }
 
 
