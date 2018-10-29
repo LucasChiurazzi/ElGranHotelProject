@@ -137,109 +137,61 @@ public class ReservaData {
         return reservas;
     }
     
-      public void finReserva(){
+public void finReserva(){
          try {
-             System.out.println("aqui en try");
+             
             //busco por dni huesped las reservas que hizo
             List<Reserva> listaReservas= this.obtenerReservas();
-             System.out.println("listareservas");
-            //controlar si fecha hoy >= fecha fin reserva
+           
+            //obtengo la fecha de hoy
             LocalDate fechaHoy = LocalDate.now();
-             System.out.println("la fecha de hoy es: "+fechaHoy);
-            //1 es la fila y 6 son las columnas
-            String filaBusquedaHabitaciones[][]=new String[listaReservas.size()][6];
-             int i;
-             System.out.println("el tamanio lista es: "+listaReservas.size());
-             for (i=0; i<listaReservas.size(); i++){
-               filaBusquedaHabitaciones[i][0] = String.valueOf(listaReservas.get(i).getIdReserva());
-               filaBusquedaHabitaciones[i][1]= String.valueOf(listaReservas.get(i).getFechaInicioReserva());
-               filaBusquedaHabitaciones[i][2] = String.valueOf(listaReservas.get(i).getFechaFinReserva());
-               filaBusquedaHabitaciones[i][3] = String.valueOf(listaReservas.get(i).getEstadoReserva());
-               filaBusquedaHabitaciones[i][4] = String.valueOf(listaReservas.get(i).getHuesped().getDniHuesped());
-               filaBusquedaHabitaciones[i][5] = String.valueOf(listaReservas.get(i).getHabitacion().getNumeroHabitacion());
-               System.out.println("estoy en for");
-               //por alguna razon me guarda la fecha menos 1 dia
-                LocalDate fechaAComparar=LocalDate.parse(filaBusquedaHabitaciones[i][2]);
-                
-                 System.out.println("la fecha es"+fechaAComparar);
-                 //si la fecha de hoy es mayor o igual que la fecha de salida, le sumo 1 dia para que sea igual que en la base de datos
-                 if(fechaHoy.isAfter(fechaAComparar.plusDays(1)) || fechaHoy.equals(fechaAComparar.plusDays(1)))
+
+            for(Reserva r:listaReservas){
+               LocalDate fechaAComparar=r.getFechaFinReserva();
+               if(fechaHoy.isAfter(fechaAComparar.plusDays(1)) || fechaHoy.equals(fechaAComparar.plusDays(1)))
                  {
-                     System.out.println("se cumplio el if");
-                     System.out.println("fechafin"+fechaAComparar.plusDays(1));
                      //la habitacion y la reserva pasan a estar libre(0)
                     String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 0 , habitacion.estadoHabitacion= 0  WHERE reserva.idReserva= ? ;";
 
                     PreparedStatement statement = connection.prepareStatement(sql);
-                       
-                    statement.setInt(1, listaReservas.get(i).getIdReserva());
-                     System.out.println("numero reserva"+listaReservas.get(i).getIdReserva());
+                    statement.setInt(1, r.getIdReserva());
+                    System.out.println("numero reserva"+r.getIdReserva());
                     statement.executeUpdate();
-            
+                    
                     statement.close();
                  }
-                 
-                 System.out.println("estoy aca");
-                 
-            
-            }
-                System.out.println("sali del for");
-            
-    
-        } catch (SQLException ex) {            System.out.println("Error al actualizar una reserva: " + ex.getMessage());
+               
+             }
+         }catch (SQLException ex) {            System.out.println("Error al actualizar una reserva: " + ex.getMessage());
         }
-    }
+}
       
       public void finReserva(Huesped huesped){
          try {
-             System.out.println("aqui en try");
+             
             //busco por dni huesped las reservas que hizo
             List<Reserva> listaReservasHuesped= this.buscarReserva(huesped.getDniHuesped());
-             System.out.println("listareservashuespedd");
-            //controlar si fecha hoy >= fecha fin reserva
+           
+            //obtengo la fecha de hoy
             LocalDate fechaHoy = LocalDate.now();
-             System.out.println("la fecha de hoy es: "+fechaHoy);
-            //1 es la fila y 6 son las columnas
-            String filaBusquedaHabitaciones[][]=new String[listaReservasHuesped.size()][6];
-             int i;
-             System.out.println("el tamanio lista es: "+listaReservasHuesped.size());
-             for (i=0; i<listaReservasHuesped.size(); i++){
-               filaBusquedaHabitaciones[i][0] = String.valueOf(listaReservasHuesped.get(i).getIdReserva());
-               filaBusquedaHabitaciones[i][1]= String.valueOf(listaReservasHuesped.get(i).getFechaInicioReserva());
-               filaBusquedaHabitaciones[i][2] = String.valueOf(listaReservasHuesped.get(i).getFechaFinReserva());
-               filaBusquedaHabitaciones[i][3] = String.valueOf(listaReservasHuesped.get(i).getEstadoReserva());
-               filaBusquedaHabitaciones[i][4] = String.valueOf(listaReservasHuesped.get(i).getHuesped().getDniHuesped());
-               filaBusquedaHabitaciones[i][5] = String.valueOf(listaReservasHuesped.get(i).getHabitacion().getNumeroHabitacion());
-               System.out.println("estoy en for");
-               //por alguna razon me guarda la fecha menos 1 dia
-                LocalDate fechaAComparar=LocalDate.parse(filaBusquedaHabitaciones[i][2]);
-                
-                 System.out.println("la fecha es"+fechaAComparar);
-                 //si la fecha de hoy es mayor o igual que la fecha de salida, le sumo 1 dia para que sea igual que en la base de datos
-                 if(fechaHoy.isAfter(fechaAComparar.plusDays(1)) || fechaHoy.equals(fechaAComparar.plusDays(1)))
+
+            for(Reserva r:listaReservasHuesped){
+               LocalDate fechaAComparar=r.getFechaFinReserva();
+               if(fechaHoy.isAfter(fechaAComparar.plusDays(1)) || fechaHoy.equals(fechaAComparar.plusDays(1)))
                  {
-                     System.out.println("se cumplio el if");
-                     System.out.println("fechafin"+fechaAComparar.plusDays(1));
                      //la habitacion y la reserva pasan a estar libre(0)
                     String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 0 , habitacion.estadoHabitacion= 0  WHERE reserva.idReserva= ? ;";
 
                     PreparedStatement statement = connection.prepareStatement(sql);
-                       
-                    statement.setInt(1, listaReservasHuesped.get(i).getIdReserva());
-                     System.out.println("numero reserva"+listaReservasHuesped.get(i).getIdReserva());
+                    statement.setInt(1, r.getIdReserva());
+                    System.out.println("numero reserva"+r.getIdReserva());
                     statement.executeUpdate();
-            
+                    
                     statement.close();
                  }
-                 
-                 System.out.println("estoy aca");
-                 
-            
-            }
-                System.out.println("sali del for");
-            
-    
-        } catch (SQLException ex) {            System.out.println("Error al actualizar una reserva: " + ex.getMessage());
+               
+             }
+         }catch (SQLException ex) {System.out.println("Error al actualizar una reserva: " + ex.getMessage());
         }
     }
     
