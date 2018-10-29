@@ -448,9 +448,15 @@ public class VistaReserva extends javax.swing.JInternalFrame {
            Huesped huesped= huespedData.mostrarHuesped(dni);
                 //carga la reserva con los datos
                 //el estado es por defecto true
+                 LocalDate fechaDeHoy = LocalDate.now();
+               
             reserva= new Reserva(fechaInicio, fechaFin, true, huesped, h);
-            h.setEstadoHabitacion(true);
-                        
+                 if(fechaDeHoy.isBefore(fechaInicio)){
+                        h.setEstadoHabitacion(false);
+                 }else{
+                        h.setEstadoHabitacion(true);
+                 }
+                 
             reservaData.hacerReserva(reserva);
             // revisar forma
             //habitacionData.actualizarHabitacion(h);
@@ -501,7 +507,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFDiasReservaActionPerformed
 
     private void jXDPFinReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDPFinReservaActionPerformed
-cargarDias();       
+        cargarDias();       
     }//GEN-LAST:event_jXDPFinReservaActionPerformed
 
     private void jCBTipoHabitacionReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoHabitacionReservaActionPerformed
@@ -671,7 +677,11 @@ modeloReserva.removeRow(i );
      public void cargarDias(){
     LocalDate fechaInicio= fromPickerToLocalDate(jXDPInicioReserva);
     LocalDate fechaFin = fromPickerToLocalDate(jXDPFinReserva);
-       
+    if(fechaFin.isBefore(fechaInicio) || fechaInicio.isAfter(fechaFin)){
+        //si fecha fin es menor a fecha inicio o si fecha inicio es mayor que fecha fin
+        System.out.println("No se puede realizar la reserva, revisar fecha");
+        //si llegamos con los tiempos estaria bueno que muestre un cartel con jOptionPane
+    }   
     long diasReserva=fechaInicio.until(fechaFin, DAYS);
     System.out.println(diasReserva);
     jTFDiasReserva.setText(diasReserva +"");

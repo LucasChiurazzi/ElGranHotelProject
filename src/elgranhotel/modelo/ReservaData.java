@@ -146,8 +146,22 @@ public class ReservaData {
             LocalDate fechaHoy = LocalDate.now();
 
             for(Reserva r:listaReservasHuesped){
-               LocalDate fechaAComparar=r.getFechaFinReserva();
-               if(fechaHoy.isAfter(fechaAComparar.plusDays(1)) || fechaHoy.equals(fechaAComparar.plusDays(1)))
+               LocalDate fechaFinAComparar=r.getFechaFinReserva();
+               LocalDate fechaInicioAComparar=r.getFechaInicioReserva();
+               if(fechaHoy.isEqual(fechaInicioAComparar.plusDays(1)))
+               {
+                   //si la fecha de hoy es igual a la fecha de inicio de reserva
+                   String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 1 , habitacion.estadoHabitacion= 1  WHERE reserva.idReserva= ? ;";
+
+                    PreparedStatement statement = connection.prepareStatement(sql);
+                    statement.setInt(1, r.getIdReserva());
+       
+                    statement.executeUpdate();
+                    
+                    statement.close();
+                   
+               }
+               if(fechaHoy.isAfter(fechaFinAComparar.plusDays(1)) || fechaHoy.equals(fechaFinAComparar.plusDays(1)))
                  {
                      //la habitacion y la reserva pasan a estar libre(0)
                     String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 0 , habitacion.estadoHabitacion= 0  WHERE reserva.idReserva= ? ;";
@@ -159,17 +173,16 @@ public class ReservaData {
                     
                     statement.close();
                  }
-                if(fechaHoy.isBefore(fechaAComparar.plusDays(1)))
+                if(fechaHoy.isBefore(fechaInicioAComparar.plusDays(1)) && fechaHoy.isBefore(fechaFinAComparar.plusDays(1)))
                  {
-                   //si la habitacion se repitio con la misma persona
-                   //vemos si la fecha fin reserva es mayor que la de hoy
-                   //entonces le digo al estado habitacion que este ocupado(1)
+                   //si la persona quiere reservar a futuro, se hace la reserva pero la habitacion hoy esta libre
               
-                     String sql = "UPDATE habitacion SET habitacion.estadoHabitacion=1  WHERE habitacion.numeroHabitacion= ?;";
+                     String sql = "UPDATE habitacion SET habitacion.estadoHabitacion=0  WHERE habitacion.numeroHabitacion= ?;";
 
                     PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setInt(1, r.getHabitacion().getNumeroHabitacion());
-     
+                     System.out.println("n habitacion"+r.getHabitacion().getNumeroHabitacion());
+                     System.out.println("estado habitacion"+r.getHabitacion().getEstadoHabitacion());
                     statement.executeUpdate();
                     
                     statement.close();
