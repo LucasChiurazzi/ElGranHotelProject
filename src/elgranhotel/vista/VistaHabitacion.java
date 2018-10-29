@@ -338,12 +338,7 @@ private ReservaData reservaData;
     }//GEN-LAST:event_botonActualizarActionPerformed
 
     private void botonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarActionPerformed
-       //creo rd que es el objeto de la clase ReservaData
-        ReservaData rd=new ReservaData(conexion);
-        //uso el metodo finReserva donde busca todas las reservas
-        //y de ahi veo si la reserva esta finalizada la pasa a inactiva(0)
-        //y habitacion pasa a libre(0)
-        rd.finReserva();
+
         
         borraFilasTabla();
         listaHabitacion=(ArrayList)habitacionData.obtenerHabitaciones(conexion);
