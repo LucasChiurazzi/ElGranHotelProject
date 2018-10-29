@@ -112,16 +112,11 @@ public int guardarHabitacion(Habitacion habitacion){
        try {
             
             String sql = "UPDATE habitacion SET  pisoHabitacion = ?, estadoHabitacion = ?, idTipoHabitacion = ? WHERE numeroHabitacion = ?;";
-// where tipode habitacion id??
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, habitacion.getPisoHabitacion());
-            System.out.println("piso"+habitacion.getPisoHabitacion());
             statement.setBoolean(2, habitacion.getEstadoHabitacion());
-            System.out.println("estado "+habitacion.getEstadoHabitacion());
             statement.setInt(3, habitacion.getTipoHabitacion().getIdTipoHabitacion());
-            System.out.println("tipo "+habitacion.getTipoHabitacion().getIdTipoHabitacion());
             statement.setInt(4, habitacion.getNumeroHabitacion());
-            System.out.println("numero"+habitacion.getNumeroHabitacion());
             
             statement.executeUpdate();
             

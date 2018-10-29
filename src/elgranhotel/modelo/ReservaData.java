@@ -102,8 +102,7 @@ public class ReservaData {
         //busco en la base de datos si hay alguna reserva para esa fecha 
         //alguna habitacion
         List<Reserva> reservas = new ArrayList<>();
-        System.out.println(fechaI);
-        System.out.println(fechaF);
+
         //List<Huesped> huespedes = new ArrayList<Huesped>();
         
         try {
@@ -142,7 +141,7 @@ public void finReserva(){
              
             //busco por dni huesped las reservas que hizo
             List<Reserva> listaReservas= this.obtenerReservas();
-           
+      
             //obtengo la fecha de hoy
             LocalDate fechaHoy = LocalDate.now();
 
@@ -155,7 +154,7 @@ public void finReserva(){
 
                     PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setInt(1, r.getIdReserva());
-                    System.out.println("numero reserva"+r.getIdReserva());
+                
                     statement.executeUpdate();
                     
                     statement.close();
@@ -168,7 +167,7 @@ public void finReserva(){
       
       public void finReserva(Huesped huesped){
          try {
-             
+
             //busco por dni huesped las reservas que hizo
             List<Reserva> listaReservasHuesped= this.buscarReserva(huesped.getDniHuesped());
            
@@ -184,10 +183,26 @@ public void finReserva(){
 
                     PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setInt(1, r.getIdReserva());
-                    System.out.println("numero reserva"+r.getIdReserva());
+       
                     statement.executeUpdate();
                     
                     statement.close();
+                 }
+                if(fechaHoy.isBefore(fechaAComparar.plusDays(1)))
+                 {
+                   //si la habitacion se repitio con la misma persona
+                   //vemos si la fecha fin reserva es mayor que la de hoy
+                   //entonces le digo al estado habitacion que este ocupado(1)
+              
+                     String sql = "UPDATE habitacion SET habitacion.estadoHabitacion=1  WHERE habitacion.numeroHabitacion= ?;";
+
+                    PreparedStatement statement = connection.prepareStatement(sql);
+                    statement.setInt(1, r.getHabitacion().getNumeroHabitacion());
+     
+                    statement.executeUpdate();
+                    
+                    statement.close();
+                   
                  }
                
              }

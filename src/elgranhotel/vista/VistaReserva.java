@@ -291,9 +291,9 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(194, 194, 194)
+                                .addGap(220, 220, 220)
                                 .addComponent(jBConfitmarReserva)
-                                .addGap(48, 48, 48)
+                                .addGap(22, 22, 22)
                                 .addComponent(jBLimpiarReserva))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
@@ -455,6 +455,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             // revisar forma
             //habitacionData.actualizarHabitacion(h);
             habitacionData.cambiarHabitacion(h);
+            reservaData.finReserva(huesped);
             JOptionPane.showMessageDialog(escritorio, "La reserva se guardo correctamente");
         }
           
@@ -485,28 +486,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     //carga la lista de habitaciones segun el tipo
     private void jBBuscarHabitacionesReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarHabitacionesReservaActionPerformed
         
-     
-        try {
-            //guardar dni
-
-            conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
-            //System.out.println("aca1");
-            huespedData1=new HuespedData(conexion);
-            System.out.println("aca2");
-            long dniPase=Long.parseLong(jTHuespedReserva.getText().substring(0, 8).trim());
-            System.out.println(dniPase);
-            Huesped h = huespedData1.mostrarHuesped(dniPase);
-            System.out.println("aca3");
-            //buscar huesped por ese dni
-            ReservaData rd=new ReservaData(conexion);
-            System.out.println("aca4");
-            rd.finReserva(h);
-            System.out.println("por cargartablahabitacion");
-            //habitacion pasa a libre (0), reserva pasa a inactiva (0)
-             
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaReserva.class.getName()).log(Level.SEVERE, null, ex);
-        }
             cargatablaHabitacionesSeguntipo();
     
 
@@ -592,19 +571,19 @@ cargarDias();
     
     //metodos tabla
     public void cargatablaHabitacionesSeguntipo(){
-        System.out.println("antes de borrar");
+        
     borraFilasTabla();
-        System.out.println("despues de borrar");
+        
     LocalDate fechaInicioHR= fromPickerToLocalDate(jXDPInicioReserva);
-        System.out.println("cargo fechaini");
+        
     LocalDate fechaFinHR = fromPickerToLocalDate(jXDPFinReserva);
-        System.out.println("cargo fecha salida");
+       
     reservaData =new ReservaData(conexion);
-        System.out.println("reservadata");
+     
     habitacionData= new HabitacionData(conexion);
-        System.out.println("habitaciondata");
+       
     listaHabitaciones= new ArrayList<>(); 
-        System.out.println("listahabitaciones");
+     
    
      
     //hasta aca ok
@@ -617,16 +596,16 @@ cargarDias();
     if(h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())
         listaHabitaciones.add(h);
      }*/
-        System.out.println("aca entro?");
+    
     
     List<Habitacion> todasLasHabitaciones= habitacionData.obtenerHabitaciones(conexion);
-         System.out.println("todaslashabitaciones");
+
     todasLasHabitaciones.stream().filter((h) -> (h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())).forEachOrdered((h) -> {
-         System.out.println("filter");
+
         listaHabitaciones.add(h);
-        System.out.println("agregar ");
+    
         });
-        System.out.println("y aca");
+   
    List<Reserva> reservas= reservaData.obtenerReservas();
    List<Integer> numerosHABOrrar= new ArrayList<>();
     for (Reserva r:reservas){
