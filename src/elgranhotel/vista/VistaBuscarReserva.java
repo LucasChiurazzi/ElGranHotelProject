@@ -355,7 +355,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
          filaBusquedaDni[i][0] = String.valueOf(listaBuscarReservaDni.get(i).getIdReserva());
          filaBusquedaDni[i][1] = String.valueOf(listaBuscarReservaDni.get(i).getFechaInicioReserva().plusDays(1));
          filaBusquedaDni[i][2] = String.valueOf(listaBuscarReservaDni.get(i).getFechaFinReserva().plusDays(1));
-         filaBusquedaDni[i][3] = String.valueOf(listaBuscarReservaDni.get(i).getEstadoReserva());
+         filaBusquedaDni[i][3] = estadoReserva(listaBuscarReservaDni.get(i).getEstadoReserva());
          filaBusquedaDni[i][4] = String.valueOf(listaBuscarReservaDni.get(i).getHuesped().getDniHuesped());
          filaBusquedaDni[i][5] = String.valueOf(listaBuscarReservaDni.get(i).getHabitacion().getNumeroHabitacion());
 
@@ -527,7 +527,7 @@ System.out.println( "output: " + output );
          filaBusquedaFecha[i][0] = String.valueOf(listaBuscarReservaFecha.get(i).getIdReserva());
          filaBusquedaFecha[i][1] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaInicioReserva().plusDays(1));
          filaBusquedaFecha[i][2] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaFinReserva().plusDays(1));
-         filaBusquedaFecha[i][3] = String.valueOf(listaBuscarReservaFecha.get(i).getEstadoReserva());
+         filaBusquedaFecha[i][3] = estadoReserva(listaBuscarReservaFecha.get(i).getEstadoReserva());
          filaBusquedaFecha[i][4] = String.valueOf(listaBuscarReservaFecha.get(i).getHuesped().getDniHuesped());
          filaBusquedaFecha[i][5] = String.valueOf(listaBuscarReservaFecha.get(i).getHabitacion().getNumeroHabitacion());
 
@@ -588,6 +588,16 @@ System.out.println( "output: " + output );
        int cantP= tpHabSelec.getCantPersonasTipoHabitacion();
        jtf.setText(cantP+"");
    }
+   
+  public String estadoReserva(Boolean buleano){
+  String estado;
+  if(buleano){
+  estado= "ACTIVA";
+  }else{
+  estado= "INACTIVA";
+  }
+  return estado;
+  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarReserva1;

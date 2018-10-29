@@ -81,19 +81,9 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                        
             //Método encargado de llenar el combobox
            cargarTiposHabitacionEnComboBox();
-           
-           
-         
-           
            armaCabeceraTabla();
            
-           
-          
-            
-            
-            
-            
-        } catch (ClassNotFoundException ex) {
+           } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaTipoHabitacion.class.getName()).log(Level.SEVERE, null, ex);
         }
         

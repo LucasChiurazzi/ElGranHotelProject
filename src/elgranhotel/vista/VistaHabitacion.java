@@ -459,6 +459,8 @@ private ReservaData reservaData;
             }
     }
     */
+    
+    
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton JRBLibre;
