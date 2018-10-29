@@ -140,12 +140,12 @@ public class ReservaData {
          try {
 
             //busco por dni huesped las reservas que hizo
-            List<Reserva> listaReservasHuesped= this.buscarReserva(huesped.getDniHuesped());
-           
+            //List<Reserva> listaReservasHuesped= this.buscarReserva(huesped.getDniHuesped());
+            List<Reserva> listaReservas=this.obtenerReservas();
             //obtengo la fecha de hoy
             LocalDate fechaHoy = LocalDate.now();
 
-            for(Reserva r:listaReservasHuesped){
+            for(Reserva r:listaReservas){
                LocalDate fechaFinAComparar=r.getFechaFinReserva();
                LocalDate fechaInicioAComparar=r.getFechaInicioReserva();
                if(fechaHoy.isEqual(fechaInicioAComparar.plusDays(1)))
