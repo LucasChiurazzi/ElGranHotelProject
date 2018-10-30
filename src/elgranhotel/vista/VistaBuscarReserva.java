@@ -2,13 +2,6 @@ package elgranhotel.vista;
 
 
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
@@ -27,11 +20,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Lucas
- */
+
 public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     private TipoHabitacionData tipoHabitacionData;
     private List<TipoHabitacion> listaTiposHabitacion;
@@ -42,7 +33,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     private Reserva reserva;
     private List<Reserva> listaBuscarReservaDni;
     private List<Reserva> listaBuscarReservaFecha;
-    
+    private DefaultTableModel modeloReserva;
     
     
     /**
@@ -60,15 +51,30 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
             
             listaTiposHabitacion =(ArrayList)tipoHabitacionData.mostrarTipoHabitacion();
                        
-               
+             armaCabeceraTabla();   
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+      
+   
       
     }
-    
+        public void armaCabeceraTabla(){
+  
+        ArrayList<Object> columnas=new ArrayList<>();
+        columnas.add("Id Reserva");
+        columnas.add("Fecha Ingreso");
+        columnas.add("Fecha Salida");
+        columnas.add("Estado");
+        columnas.add("Huesped");
+        columnas.add("Habitación");
+        for(Object it:columnas){
+        
+            modeloReserva.addColumn(it);
+        }
+        jTableBuscarReservaPorHuesped.setModel(modeloReserva);
+  }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -329,26 +335,29 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         reservaData = new ReservaData(conexion);
         listaBuscarReservaDni = reservaData.buscarReserva(dni);
         
-        //1 es la fila y 6 son las columnas
-        String filaBusquedaDni[][]=new String[listaBuscarReservaDni.size()][6];
-        int i;
-        for (i=0; i<listaBuscarReservaDni.size(); i++){
-       
-         filaBusquedaDni[i][0] = String.valueOf(listaBuscarReservaDni.get(i).getIdReserva());
-         filaBusquedaDni[i][1] = String.valueOf(listaBuscarReservaDni.get(i).getFechaInicioReserva());
-         filaBusquedaDni[i][2] = String.valueOf(listaBuscarReservaDni.get(i).getFechaFinReserva());
-         filaBusquedaDni[i][3] = String.valueOf(listaBuscarReservaDni.get(i).getEstadoReserva());
-         filaBusquedaDni[i][4] = String.valueOf(listaBuscarReservaDni.get(i).getHuesped().getDniHuesped());
-         filaBusquedaDni[i][5] = String.valueOf(listaBuscarReservaDni.get(i).getHabitacion().getNumeroHabitacion());
-
+        for(Reserva r:listaBuscarReservaDni){
+            modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), r.getEstadoReserva(), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
         }
+        //1 es la fila y 6 son las columnas
+        //String filaBusquedaDni[][]=new String[listaBuscarReservaDni.size()][6];
+        //int i;
+        //for (i=0; i<listaBuscarReservaDni.size(); i++){
+       
+      //   filaBusquedaDni[i][0] = String.valueOf(listaBuscarReservaDni.get(i).getIdReserva());
+      //   filaBusquedaDni[i][1] = String.valueOf(listaBuscarReservaDni.get(i).getFechaInicioReserva());
+      //   filaBusquedaDni[i][2] = String.valueOf(listaBuscarReservaDni.get(i).getFechaFinReserva());
+       //  filaBusquedaDni[i][3] = String.valueOf(listaBuscarReservaDni.get(i).getEstadoReserva());
+       //  filaBusquedaDni[i][4] = String.valueOf(listaBuscarReservaDni.get(i).getHuesped().getDniHuesped());
+        // filaBusquedaDni[i][5] = String.valueOf(listaBuscarReservaDni.get(i).getHabitacion().getNumeroHabitacion());
+
+        //}
       
-      jTableBuscarReservaPorHuesped.setModel(new javax.swing.table.DefaultTableModel(
-            filaBusquedaDni,
-            new String [] {
-                "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
-            }
-        ));    
+  //    jTableBuscarReservaPorHuesped.setModel(new javax.swing.table.DefaultTableModel(
+    //        filaBusquedaDni,
+    //        new String [] {
+    //            "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
+    //        }
+   //     ));    
   } catch (ClassNotFoundException ex) {
         Logger.getLogger(VistaBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
    }
@@ -497,13 +506,16 @@ System.out.println( "output: " + output );
         listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB);
         
         //1 es la fila y 6 son las columnas
-            System.out.println(listaBuscarReservaFecha.size());
-        String filaBusquedaFecha[][]=new String[listaBuscarReservaFecha.size()][6];
-        int i;
-            System.out.println("aqui");
+        //    System.out.println(listaBuscarReservaFecha.size());
+        for(Reserva r:listaBuscarReservaFecha){
+            modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), r.getEstadoReserva(), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
+        }
+        //String filaBusquedaFecha[][]=new String[listaBuscarReservaFecha.size()][6];
+       // int i;
+        //    System.out.println("aqui");
         //muestro los valores en tabla
-        for (i=0; i<listaBuscarReservaFecha.size(); i++){
-       
+      //  for (i=0; i<listaBuscarReservaFecha.size(); i++){
+     /*  
          filaBusquedaFecha[i][0] = String.valueOf(listaBuscarReservaFecha.get(i).getIdReserva());
          filaBusquedaFecha[i][1] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaInicioReserva());
          filaBusquedaFecha[i][2] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaFinReserva());
@@ -518,7 +530,7 @@ System.out.println( "output: " + output );
             new String [] {
                 "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
             }
-        ));    
+        ));    */
   } catch (ClassNotFoundException ex) {
         Logger.getLogger(VistaBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
    }

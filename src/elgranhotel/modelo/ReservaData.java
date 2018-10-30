@@ -232,13 +232,22 @@ public class ReservaData {
         return huespedData.mostrarHuesped(dni);
         
     }
-    
-    public Habitacion mostrarHabitacion(int id){
+    public Habitacion mostrarHabitacion(int idHabitacion) {
+        try {
+            conexion= new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
+        }
+        HabitacionData habitacionData = new HabitacionData(conexion);
+        return habitacionData.buscarHabitacion(idHabitacion, conexion);
+    }
+       
+   /* public Habitacion mostrarHabitacion(int id){
     
         HabitacionData habitacionData=new HabitacionData(conexion);
-        return habitacionData.mostrarHabitacion(id);
+        return habitacionData.buscarHabitacion(id);
     
-    } 
+    }*/ 
     
    
      

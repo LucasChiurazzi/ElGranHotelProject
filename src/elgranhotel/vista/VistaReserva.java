@@ -442,7 +442,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             int numeroHabitacion= (Integer)modeloReserva.getValueAt(filaSeleccionada,0);
            
             //HABITACION seleccionada por la lista, filtrada del data por el numeroHabitacion
-           Habitacion h= habitacionData.mostrarHabitacion(numeroHabitacion);
+           Habitacion h= habitacionData.buscarHabitacion(numeroHabitacion,conexion);
            
                //HUESPED
            Huesped huesped= huespedData.mostrarHuesped(dni);
@@ -458,9 +458,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                  }
                  
             reservaData.hacerReserva(reserva);
-            // revisar forma
-            //habitacionData.actualizarHabitacion(h);
-            habitacionData.cambiarHabitacion(h);
+  
+            habitacionData.actualizarHabitacion(h);
             reservaData.finReserva(huesped);
             JOptionPane.showMessageDialog(escritorio, "La reserva se guardo correctamente");
         }
@@ -668,7 +667,7 @@ modeloReserva.removeRow(i );
         //sacar el id y pasarlo a int, buscar con el id en la base de datos y sacarlo como un tipoHabitacion completo
         int idTipoHabitacion= Integer.parseInt(selectedItemComboBox.substring(0, 2).trim());
       
-       TipoHabitacion tH=(tipoHabitacionData.mostrarTipoHabitacion(idTipoHabitacion));
+       TipoHabitacion tH=(tipoHabitacionData.buscarTipoHabitacion(idTipoHabitacion));
     
         return tH;
     }
