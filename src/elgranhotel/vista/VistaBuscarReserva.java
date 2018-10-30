@@ -557,14 +557,15 @@ System.out.println( "output: " + output );
     }//GEN-LAST:event_jTFDiasReservaActionPerformed
 
     
-     public void cargarDias(LocalDate fechaInicio, LocalDate fechaFin){
+    public void cargarDias(LocalDate fechaInicio, LocalDate fechaFin){
 
     long diasReserva=fechaInicio.until(fechaFin, DAYS);
     System.out.println(diasReserva);
     jTFDiasReserva.setText(diasReserva +"");
        
      }
-      public LocalDate fromPickerToLocalDate(JXDatePicker datePicker){
+    
+    public LocalDate fromPickerToLocalDate(JXDatePicker datePicker){
     SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
     
     String toLocalDate= formater.format(datePicker.getDate());
@@ -573,7 +574,7 @@ System.out.println( "output: " + output );
     return fechaInLD;
    }
       
-   public void precioReserva(JTextField jtf, int idTipoHabitacion, Conexion conexion){
+    public void precioReserva(JTextField jtf, int idTipoHabitacion, Conexion conexion){
         
          TipoHabitacion tpHabSelec=habitacionData.buscarTipoHabitacion(idTipoHabitacion, conexion);
                   
@@ -583,13 +584,13 @@ System.out.println( "output: " + output );
          jtf.setText(monto + "");
 }
 
-   public void setCantPersonas(JTextField jtf, int idTipoHabitacion, Conexion conexion){
+    public void setCantPersonas(JTextField jtf, int idTipoHabitacion, Conexion conexion){
        TipoHabitacion tpHabSelec=habitacionData.buscarTipoHabitacion(idTipoHabitacion, conexion);
        int cantP= tpHabSelec.getCantPersonasTipoHabitacion();
        jtf.setText(cantP+"");
    }
    
-  public String estadoReserva(Boolean buleano){
+    public String estadoReserva(Boolean buleano){
   String estado;
   if(buleano){
   estado= "ACTIVA";

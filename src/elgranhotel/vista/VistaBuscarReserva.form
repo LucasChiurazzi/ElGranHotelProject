@@ -327,6 +327,9 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableBuscarReservaPorHuespedMouseClicked"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="VistaBuscarReserva_jTableBuscarReservaPorHuesped"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

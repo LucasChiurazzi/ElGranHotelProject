@@ -76,7 +76,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Gestion Yipos De Habitacion - El Gran Hotel 1.0");
+        setTitle("Gestion Tipos De Habitacion - El Gran Hotel 1.0");
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setText("TIPOS DE HABITACION");
@@ -376,13 +376,12 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
    int rta=0;
         if(!textFieldVacios())
      {   
-        if(JOptionPane.showConfirmDialog(this, "Esta por BORRAR un Tipo de Habitación. ¿Desea continuar?", "ADVERTENCIA",0 )==0){
-        int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
-        
-        rta=tipoHabitacionData.borrarTipoHabitacion(idTipoHabitacion);
-        limpiarComboBox();
-        if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
-            else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
+         if(JOptionPane.showConfirmDialog(this, "Esta por BORRAR un Tipo de Habitación. ¿Desea continuar?", "ADVERTENCIA",0 )==0){
+            int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
+              rta=tipoHabitacionData.borrarTipoHabitacion(idTipoHabitacion);
+            limpiarComboBox();
+                if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
+                    else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
         }
          }else{
          JOptionPane.showMessageDialog(this, "Completar DATOS ");

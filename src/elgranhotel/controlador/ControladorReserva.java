@@ -154,7 +154,7 @@ public int confirmarReserva(JTextField jtfhuesped, JTable jtable,JXDatePicker jx
                 //el estado es por defecto true
             reserva= new Reserva(fechaInicio, fechaFin, true, huesped, h);
             habitacionData.ocupada(h, fechaInicio, fechaFin);   
-            
+             reservaData.finReserva();
             rtaR=reservaData.hacerReserva(reserva);
             
            

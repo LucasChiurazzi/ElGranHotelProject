@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class VistaHuesped extends javax.swing.JInternalFrame {
@@ -21,6 +22,8 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
       private Conexion conexion;
       private Huesped vhuesped;
       private List<Huesped> listaHuespedes;
+      DefaultTableModel modelo;
+      
     /**
      * Creates new form VistaHuesped1
      */
@@ -115,13 +118,13 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
 
         jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Dni", "Nombre", "Domicilio", "Correo", "Celuar"
             }
         ));
         jTableHuesped.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -395,6 +398,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         
     }
     
+  
    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
