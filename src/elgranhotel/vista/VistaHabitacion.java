@@ -79,7 +79,9 @@ private ReservaData reservaData;
         Tabla = new javax.swing.JTable();
         jCBTipoHabitacion = new javax.swing.JComboBox<>();
         jTFEstadoHabitacion = new javax.swing.JTextField();
-        JRBLibre = new javax.swing.JRadioButton();
+        jRBLibre = new javax.swing.JRadioButton();
+        jRBOcupada = new javax.swing.JRadioButton();
+        jCBLibre = new javax.swing.JCheckBox();
 
         setClosable(true);
         setMaximizable(true);
@@ -159,12 +161,21 @@ private ReservaData reservaData;
 
         jTFEstadoHabitacion.setEnabled(false);
 
-        JRBLibre.setText("Libre");
-        JRBLibre.addActionListener(new java.awt.event.ActionListener() {
+        jRBLibre.setText("Libre");
+        jRBLibre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JRBLibreActionPerformed(evt);
+                jRBLibreActionPerformed(evt);
             }
         });
+
+        jRBOcupada.setText("Ocupada");
+        jRBOcupada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBOcupadaActionPerformed(evt);
+            }
+        });
+
+        jCBLibre.setText("Libre");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,8 +224,14 @@ private ReservaData reservaData;
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jTFEstadoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(JRBLibre)))))))
+                                        .addComponent(jCBLibre)))))))
                 .addGap(17, 17, 17))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addComponent(jRBLibre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRBOcupada)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +244,7 @@ private ReservaData reservaData;
                             .addComponent(jLabel8)
                             .addComponent(jTFNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(JRBLibre)))
+                            .addComponent(jCBLibre)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
@@ -239,7 +256,11 @@ private ReservaData reservaData;
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRBLibre)
+                    .addComponent(jRBOcupada))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonGuardar)
                     .addComponent(botonListar)
@@ -319,7 +340,7 @@ private ReservaData reservaData;
         {
             int id=Integer.parseInt(jTFNroHabitacion.getText());
             int piso=Integer.parseInt(campoPiso.getText());
-            boolean estado=!JRBLibre.isSelected();
+            boolean estado=!jCBLibre.isSelected();
              th=deJCBaTipo(jCBTipoHabitacion);
             
             habitacion=new Habitacion(id,piso,estado,th);
@@ -354,9 +375,16 @@ private ReservaData reservaData;
 
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
 
-    private void JRBLibreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBLibreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JRBLibreActionPerformed
+    private void jRBLibreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBLibreActionPerformed
+    //al presionar el radio boton libre
+    jRBOcupada.setSelected(false);
+    cargaDatos(false);
+    }//GEN-LAST:event_jRBLibreActionPerformed
+
+    private void jRBOcupadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBOcupadaActionPerformed
+    jRBLibre.setSelected(false);
+    cargaDatos(true);
+    }//GEN-LAST:event_jRBOcupadaActionPerformed
 
     public void borraFilasTabla(){
 
@@ -388,9 +416,9 @@ private ReservaData reservaData;
  boolean estado=habitacion.getEstadoHabitacion();
   if(estado && rH.getFechaFinReserva().plusDays(1).isAfter(hoy) && rH.getFechaInicioReserva().plusDays(1).isBefore(hoy) ||rH.getFechaFinReserva().plusDays(1).equals(hoy) || rH.getFechaInicioReserva().plusDays(1).isBefore(hoy)) {
      jTFEstadoHabitacion.setText("OCUPADA");
-         JRBLibre.setSelected(false);
+         jCBLibre.setSelected(false);
  }else {jTFEstadoHabitacion.setText("LIBRE");
-     JRBLibre.setSelected(true);}
+     jCBLibre.setSelected(true);}
  
  
  String idTH= String.valueOf(habitacion.getTipoHabitacion().getIdTipoHabitacion());
@@ -406,7 +434,7 @@ private ReservaData reservaData;
     jTFNroHabitacion.setText("");
     campoPiso.setText("");
     jTFEstadoHabitacion.setText("");
-    JRBLibre.setSelected(false);
+    jCBLibre.setSelected(false);
   }
 
     public  TipoHabitacion searchDeStringATipoHabitacion(String selectedItemComboBox){
@@ -442,7 +470,14 @@ private ReservaData reservaData;
         
          return tpHabSelec;
     }
-    
+   public void cargaDatos(Boolean evento){
+       borraFilasTabla();
+       listaHabitacion=(ArrayList)habitacionData.obtenerHabitacionesSi(evento,conexion);
+     
+       for(Habitacion h:listaHabitacion){
+           modelo.addRow(new Object[]{h.getNumeroHabitacion(), h.getPisoHabitacion(), h.getEstadoHabitacion(), h.getTipoHabitacion().getCategoriaTipoHabitacion()});
+       }
+   } 
         
    /* public void cargarTiposHabitacionEnComboBoxXCP(){
     //Carga los tipos de habitacion  al ComboBox
@@ -461,7 +496,6 @@ private ReservaData reservaData;
     */
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton JRBLibre;
     private javax.swing.JTable Tabla;
     private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonBorrar;
@@ -470,12 +504,15 @@ private ReservaData reservaData;
     private javax.swing.JButton botonLimpiar;
     private javax.swing.JButton botonListar;
     private javax.swing.JTextField campoPiso;
+    private javax.swing.JCheckBox jCBLibre;
     private javax.swing.JComboBox<String> jCBTipoHabitacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JRadioButton jRBLibre;
+    private javax.swing.JRadioButton jRBOcupada;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFEstadoHabitacion;
     private javax.swing.JTextField jTFNroHabitacion;
