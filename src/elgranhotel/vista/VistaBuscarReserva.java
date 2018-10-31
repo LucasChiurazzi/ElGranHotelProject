@@ -49,8 +49,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
           //  huespedData= new HuespedData(conexion);
             reservaData= new ReservaData(conexion);
             
-          //  listaTiposHabitacion =(ArrayList)tipoHabitacionData.mostrarTipoHabitacion();
-                System.out.println("aca1");       
+          //  listaTiposHabitacion =(ArrayList)tipoHabitacionData.mostrarTipoHabitacion();      
              armaCabeceraTabla();  
              
             // cargaDatos();
@@ -348,8 +347,8 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
  //  }
         
         
-        //if(huesped==null){
-           // DialogoReservaHuesped dialogo= new DialogoReservaHuesped(new javax.swing.JFrame(), true);
+       // if(huesped==null){
+       // DialogoReservaHuesped dialogo= new DialogoReservaHuesped(new javax.swing.JFrame(), true);
 
             // guarda el dni en una variable en el jdialog para usar en huesped
            // dialogo.setDniHuesped(dni);
@@ -416,10 +415,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
      
      
      //para modificar fecha
-     
-     
      /*
-     
      String input = "Mon Jun 18 00:00:00 IST 2012";
 DateTimeFormatter f = DateTimeFormatter.ofPattern( "E MMM dd HH:mm:ss z uuuu" )
                                        .withLocale( Locale.US );
@@ -439,72 +435,13 @@ System.out.println( "ld: " + ld );
 System.out.println( "output: " + output );
      
      */
-     
-     
     }//GEN-LAST:event_jTableBuscarReservaPorHuespedMouseClicked
 
     private void jBBuscarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarFechaActionPerformed
-      
-       
-/*       
-       String finput = "Mon Jun 18 00:00:00 IST 2012";
-DateTimeFormatter f = DateTimeFormatter.ofPattern( "E MMM dd HH:mm:ss z uuuu" )
-                                       .withLocale( Locale.US );
-ZonedDateTime zdt = ZonedDateTime.parse( input , f );
-
-Extract a date-only object, a LocalDate, without any time-of-day and without any time zone.
-
-LocalDate ld = zdt.toLocalDate();
-DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern( "dd/MM/uuuu" );
-String output = ld.format( fLocalDate) ;
-
-Dump to console.
-
-System.out.println( "input: " + input );
-System.out.println( "zdt: " + zdt );
-System.out.println( "ld: " + ld );
-System.out.println( "output: " + output );
-       */
-       
+             
         //controlar que fecha inicio sea menor o igual que fecha fin
        cargaDatos();
-
-        //consulto en db
-        
-        
-        //1 es la fila y 6 son las columnas
-        //    System.out.println(listaBuscarReservaFecha.size());
-       
-        //String filaBusquedaFecha[][]=new String[listaBuscarReservaFecha.size()][6];
-       // int i;
-        //    System.out.println("aqui");
-        //muestro los valores en tabla
-      //  for (i=0; i<listaBuscarReservaFecha.size(); i++){
-     /*  
-         filaBusquedaFecha[i][0] = String.valueOf(listaBuscarReservaFecha.get(i).getIdReserva());
-         filaBusquedaFecha[i][1] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaInicioReserva());
-         filaBusquedaFecha[i][2] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaFinReserva());
-         filaBusquedaFecha[i][3] = String.valueOf(listaBuscarReservaFecha.get(i).getEstadoReserva());
-         filaBusquedaFecha[i][4] = String.valueOf(listaBuscarReservaFecha.get(i).getHuesped().getDniHuesped());
-         filaBusquedaFecha[i][5] = String.valueOf(listaBuscarReservaFecha.get(i).getHabitacion().getNumeroHabitacion());
-
-        }
-      
-      jTableBuscarReservaPorHuesped.setModel(new javax.swing.table.DefaultTableModel(
-            filaBusquedaFecha,
-            new String [] {
-                "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
-            }
-        ));    */
- 
-        
-        
-        
-        //si selecciono me llena el jxdatepiker esta hecho esto en evento clic
-        
-        
-        
-        
+        //si selecciono me llena el jxdatepiker esta hecho esto en evento clic        
     }//GEN-LAST:event_jBBuscarFechaActionPerformed
 
      public void armaCabeceraTabla(){
@@ -516,9 +453,7 @@ System.out.println( "output: " + output );
         columnas.add("Estado");
         columnas.add("Huesped");
         columnas.add("Habitación");
-         System.out.println("aca2");
         for(Object it: columnas){
-            System.out.println("aca en for");
             modeloReserva.addColumn(it);
         }
         jTableBuscarReservaPorHuesped.setModel(modeloReserva);
@@ -555,10 +490,8 @@ System.out.println( "output: " + output );
       int a =modeloReserva.getRowCount()-1; //se le resta 1 por que no cuenta la columna de titulos
          //uso for que inicie en el valor de a y va disminuyendo hasta ser igual a 0
         for(int i=a;i>=0;i--){
-            
             //limpieza de tabla
-            modeloReserva.removeRow(i );
-            
+            modeloReserva.removeRow(i ); 
         }
      }
     // Variables declaration - do not modify//GEN-BEGIN:variables
