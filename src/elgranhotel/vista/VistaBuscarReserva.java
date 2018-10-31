@@ -9,8 +9,8 @@ import elgranhotel.modelo.Reserva;
 import elgranhotel.modelo.ReservaData;
 import elgranhotel.modelo.TipoHabitacion;
 import elgranhotel.modelo.TipoHabitacionData;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,14 +44,16 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         
           try {   
             conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+             modeloReserva=new DefaultTableModel();
+          //  tipoHabitacionData = new TipoHabitacionData(conexion);
+          //  huespedData= new HuespedData(conexion);
+            reservaData= new ReservaData(conexion);
             
-            tipoHabitacionData = new TipoHabitacionData(conexion);
-            huespedData= new HuespedData(conexion);
-            
-            
-            listaTiposHabitacion =(ArrayList)tipoHabitacionData.mostrarTipoHabitacion();
-                       
-             armaCabeceraTabla();   
+          //  listaTiposHabitacion =(ArrayList)tipoHabitacionData.mostrarTipoHabitacion();
+                System.out.println("aca1");       
+             armaCabeceraTabla();  
+             
+            // cargaDatos();
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,21 +62,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
    
       
     }
-        public void armaCabeceraTabla(){
-  
-        ArrayList<Object> columnas=new ArrayList<>();
-        columnas.add("Id Reserva");
-        columnas.add("Fecha Ingreso");
-        columnas.add("Fecha Salida");
-        columnas.add("Estado");
-        columnas.add("Huesped");
-        columnas.add("Habitación");
-        for(Object it:columnas){
-        
-            modeloReserva.addColumn(it);
-        }
-        jTableBuscarReservaPorHuesped.setModel(modeloReserva);
-  }   
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -151,13 +139,10 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
 
         jTableBuscarReservaPorHuesped.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
+                "Título 1", "Título 2", "Título 3", "Título 4", "Título 5", "Título 6"
             }
         ));
         jTableBuscarReservaPorHuesped.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -324,15 +309,15 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     private void jBBuscarHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarHuespedReservaActionPerformed
 
         // Busca el huesped con el dni, si el huesped es null abre un dialgo para poder cargar en la vista huesped
-
+        borraFilasTabla();
         long dni=Long.parseLong(jTHuespedReserva.getText());
 
         //Huesped huesped= (Huesped)huespedData.mostrarHuesped(dni);
           //ReservaData rd = new ReservaData();
-                  try {
-        conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+       //           try {
+      //  conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
         
-        reservaData = new ReservaData(conexion);
+        //reservaData = new ReservaData(conexion);
         listaBuscarReservaDni = reservaData.buscarReserva(dni);
         
         for(Reserva r:listaBuscarReservaDni){
@@ -358,9 +343,9 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     //            "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
     //        }
    //     ));    
-  } catch (ClassNotFoundException ex) {
-        Logger.getLogger(VistaBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
-   }
+ // } catch (ClassNotFoundException ex) {
+ //       Logger.getLogger(VistaBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
+ //  }
         
         
         //if(huesped==null){
@@ -459,18 +444,7 @@ System.out.println( "output: " + output );
     }//GEN-LAST:event_jTableBuscarReservaPorHuespedMouseClicked
 
     private void jBBuscarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarFechaActionPerformed
-       //recibo ambas fechas
-       String fechaIBuscar=jXDPInicioReserva.getDate().toString();
-       String fechaFBuscar=jXDPFinReserva.getDate().toString();
-       
-       //convertirlas  aaaa-mm-dd
-       
-       DateTimeFormatter f = DateTimeFormatter.ofPattern( "E MMM dd HH:mm:ss z uuuu" ).withLocale( Locale.US );
-       ZonedDateTime zdtInicio = ZonedDateTime.parse( fechaIBuscar , f );
-       ZonedDateTime zdtFin = ZonedDateTime.parse( fechaFBuscar , f );
-      //System.out.println(zdt);
-       LocalDate fechaIDB = zdtInicio.toLocalDate();
-       LocalDate fechaFDB = zdtFin.toLocalDate();
+      
        
 /*       
        String finput = "Mon Jun 18 00:00:00 IST 2012";
@@ -493,23 +467,14 @@ System.out.println( "output: " + output );
        */
        
         //controlar que fecha inicio sea menor o igual que fecha fin
-       
+       cargaDatos();
 
         //consulto en db
-        try {
-        conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
         
-        reservaData = new ReservaData(conexion);
-        System.out.println("aqui1");
-            System.out.println(fechaIDB);
-            System.out.println(fechaFDB);
-        listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB);
         
         //1 es la fila y 6 son las columnas
         //    System.out.println(listaBuscarReservaFecha.size());
-        for(Reserva r:listaBuscarReservaFecha){
-            modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), r.getEstadoReserva(), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
-        }
+       
         //String filaBusquedaFecha[][]=new String[listaBuscarReservaFecha.size()][6];
        // int i;
         //    System.out.println("aqui");
@@ -531,9 +496,7 @@ System.out.println( "output: " + output );
                 "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
             }
         ));    */
-  } catch (ClassNotFoundException ex) {
-        Logger.getLogger(VistaBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
-   }
+ 
         
         
         
@@ -544,7 +507,60 @@ System.out.println( "output: " + output );
         
     }//GEN-LAST:event_jBBuscarFechaActionPerformed
 
+     public void armaCabeceraTabla(){
+  
+        ArrayList<Object> columnas=new ArrayList<>();
+        columnas.add("Id Reserva");
+        columnas.add("Fecha Ingreso");
+        columnas.add("Fecha Salida");
+        columnas.add("Estado");
+        columnas.add("Huesped");
+        columnas.add("Habitación");
+         System.out.println("aca2");
+        for(Object it: columnas){
+            System.out.println("aca en for");
+            modeloReserva.addColumn(it);
+        }
+        jTableBuscarReservaPorHuesped.setModel(modeloReserva);
+  }
+     public void cargaDatos(){
+       borraFilasTabla();      
+    //recibo ambas fechas
+       String fechaIBuscar=jXDPInicioReserva.getDate().toString();
+       String fechaFBuscar=jXDPFinReserva.getDate().toString();
+       
+       //convertirlas  aaaa-mm-dd
+       
+       DateTimeFormatter f = DateTimeFormatter.ofPattern( "E MMM dd HH:mm:ss z uuuu" ).withLocale( Locale.US );
+       ZonedDateTime zdtInicio = ZonedDateTime.parse( fechaIBuscar , f );
+       ZonedDateTime zdtFin = ZonedDateTime.parse( fechaFBuscar , f );
+ 
+       LocalDate fechaIDB = zdtInicio.toLocalDate();
+       LocalDate fechaFDB = zdtFin.toLocalDate();
+  
+        
+        //reservaData = new ReservaData(conexion);
+            System.out.println(fechaIDB);
+            System.out.println(fechaFDB);
+        listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB);     
+        for(Reserva r:listaBuscarReservaFecha){
+            modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), r.getEstadoReserva(), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
+        }
+               
+ 
+     }
+     
+     public void borraFilasTabla(){
 
+      int a =modeloReserva.getRowCount()-1; //se le resta 1 por que no cuenta la columna de titulos
+         //uso for que inicie en el valor de a y va disminuyendo hasta ser igual a 0
+        for(int i=a;i>=0;i--){
+            
+            //limpieza de tabla
+            modeloReserva.removeRow(i );
+            
+        }
+     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarReserva1;
     private javax.swing.JButton jBBorrarReserva;
@@ -574,4 +590,6 @@ System.out.println( "output: " + output );
     private org.jdesktop.swingx.JXDatePicker jXDPFinReserva;
     private org.jdesktop.swingx.JXDatePicker jXDPInicioReserva;
     // End of variables declaration//GEN-END:variables
+
+    
 }
