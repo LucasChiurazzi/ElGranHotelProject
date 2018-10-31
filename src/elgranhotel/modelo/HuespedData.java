@@ -122,15 +122,19 @@ public class HuespedData {
         return huesped;
     }
     
-    public List<Huesped> obtenerHuespedes(){
-        List<Huesped> huespedes = new ArrayList<Huesped>();
+//muestro todos los huespedes
+     public List<Huesped> mostrarHuespedes(){
+      List<Huesped> huespedes = new ArrayList<>();
             
 
         try {
-            String sql = "SELECT * FROM huesped;";
+            String sql = "SELECT * FROM huesped; " ;
             PreparedStatement statement = connection.prepareStatement(sql);
+            
             ResultSet resultSet = statement.executeQuery();
-            Huesped huesped;
+            
+             Huesped huesped;
+            
             while(resultSet.next()){
                 huesped = new Huesped();
                 huesped.setDniHuesped(resultSet.getLong("dniHuesped"));
@@ -140,7 +144,10 @@ public class HuespedData {
                 huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
 
                 huespedes.add(huesped);
+               
             }      
+            
+            
             statement.close();
         } catch (SQLException ex) {
             System.out.println("Error al obtener los huespedes: " + ex.getMessage());
@@ -149,6 +156,7 @@ public class HuespedData {
         
         return huespedes;
     }
+    
     
 }
     

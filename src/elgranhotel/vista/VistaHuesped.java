@@ -5,37 +5,38 @@
  */
 package elgranhotel.vista;
 
+
 import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
-import java.util.ArrayList;
+import static elgranhotel.vista.Principal.escritorio;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Hugo
- */
+
 public class VistaHuesped extends javax.swing.JInternalFrame {
-    private HuespedData huespedData;
-    private Huesped Vhuesped;
-    private Conexion conexion;
-    private List<Huesped> listaHuesped;
-    //private ArrayList<Huesped> listaHuespedes;
-
+      private HuespedData huespedData;
+      private Conexion conexion;
+      private Huesped vhuesped;
+      private List<Huesped> listaHuespedes;
+      DefaultTableModel modelo;
+      
     /**
-     * Creates new form VistaHuesped
+     * Creates new form VistaHuesped1
      */
     public VistaHuesped() {
         initComponents();
+        
         try {
         conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
         huespedData= new HuespedData(conexion);
         
     } catch (ClassNotFoundException ex) {
         Logger.getLogger(VistaHuesped.class.getName()).log(Level.SEVERE, null, ex);
-    }
+}
     }
 
     /**
@@ -47,37 +48,33 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jetiquetaHusped = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jtDni = new javax.swing.JTextField();
         jtNombre = new javax.swing.JTextField();
         jtDomicilio = new javax.swing.JTextField();
         jtCorreo = new javax.swing.JTextField();
         jtCelular = new javax.swing.JTextField();
         jBtGuardar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jBtModificar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jBtBorrar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jBtBuscarDniHuesped = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHuesped = new javax.swing.JTable();
+        jBbuscarTodosH = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
+        jtDni = new javax.swing.JFormattedTextField();
 
-        setPreferredSize(new java.awt.Dimension(800, 577));
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Gestion de Huespedes- El Gran Hotel 1.0");
 
-        jetiquetaHusped.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jetiquetaHusped.setText("                                        Huesped");
-        jetiquetaHusped.setToolTipText("");
-
-        jLabel1.setText("DNI");
-
-        jLabel2.setText("Nombre");
-
-        jLabel3.setText("Domicilio");
-
-        jLabel4.setText("Correo");
+        jLabel6.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel6.setText("HUESPED");
 
         jLabel5.setText("Celular");
 
@@ -90,6 +87,8 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("DNI");
+
         jBtModificar.setText("Modificar");
         jBtModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,12 +96,18 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setText("Nombre");
+
         jBtBorrar.setText("Borrar");
         jBtBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtBorrarActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("Domicilio");
+
+        jLabel4.setText("Correo");
 
         jBtBuscarDniHuesped.setText("Buscar");
         jBtBuscarDniHuesped.addActionListener(new java.awt.event.ActionListener() {
@@ -119,88 +124,128 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Dni", "Nombre", "Domicilio", "Correo", "Celular"
+                "Dni", "Nombre", "Domicilio", "Correo", "Celuar"
             }
         ));
+        jTableHuesped.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableHuespedMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableHuesped);
+
+        jBbuscarTodosH.setText("Todos");
+        jBbuscarTodosH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarTodosHActionPerformed(evt);
+            }
+        });
+
+        jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
+
+        try {
+            jtDni.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jetiquetaHusped, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jBtGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtModificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtBorrar))
+                                .addGap(166, 166, 166)
+                                .addComponent(jLabel6))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(43, 43, 43)
-                        .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtBuscarDniHuesped))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 307, Short.MAX_VALUE))
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jBtBuscarDniHuesped)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jBbuscarTodosH))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addGap(24, 24, 24)
+                                                .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jBtGuardar)
+                                                .addGap(45, 45, 45)
+                                                .addComponent(jBtModificar)))
+                                        .addGap(24, 24, 24)
+                                        .addComponent(jBtBorrar)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(jBLimpiar)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jetiquetaHusped, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtBuscarDniHuesped))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtBuscarDniHuesped)
+                        .addComponent(jBbuscarTodosH))
+                    .addComponent(jtDni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(21, 21, 21)
+                    .addComponent(jLabel3)
+                    .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
                     .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtGuardar)
                     .addComponent(jBtModificar)
-                    .addComponent(jBtBorrar)))
+                    .addComponent(jBtBorrar)
+                    .addComponent(jBLimpiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -211,69 +256,161 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         String domicilio=jtDomicilio.getText();
         String correo=jtCorreo.getText();
         String celular=jtCelular.getText();
+
+        vhuesped=new Huesped(dni,nombre,domicilio,correo,celular);
+        huespedData.crearHuesped(vhuesped);
        
-        Huesped huesped=new Huesped(dni,nombre,domicilio,correo,celular);
-        huespedData.crearHuesped(huesped);
+        
+        JOptionPane.showMessageDialog(escritorio, "El Huesped se guardo correctamente");
+        
+        VistaReserva vr=new VistaReserva();
+        Principal.escritorio.add(vr);
+        vr.toFront();
+        vr.setVisible(true);
+        // toma el dni que buscaron en reserva y lo setea en el text field de dni 
+        vr.jTHuespedReserva.setText(dni+" "+vhuesped.getNombreHuesped());
+      
+        dispose();
         
         
+
     }//GEN-LAST:event_jBtGuardarActionPerformed
 
     private void jBtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtModificarActionPerformed
-         if (jtDni.getText()!=null){
-            long dni=Long.parseLong(jtDni.getText()); 
+        if (jtDni.getText()!=null){
+            long dni=Long.parseLong(jtDni.getText());
             String nombre=jtNombre.getText();
             String domicilio=jtDomicilio.getText();
             String correo=jtCorreo.getText();
             String celular=jtCelular.getText();
-          
-             Huesped huesped=new Huesped(dni,nombre,domicilio,correo,celular);
-             huespedData.modificarHuesped(huesped);
+
+            vhuesped=new Huesped(dni,nombre,domicilio,correo,celular);
+            huespedData.modificarHuesped(vhuesped);
+        }
     }//GEN-LAST:event_jBtModificarActionPerformed
-    }
+
     private void jBtBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBorrarActionPerformed
         long dni=Long.parseLong(jtDni.getText());
         huespedData.eliminarHuesped(dni);
     }//GEN-LAST:event_jBtBorrarActionPerformed
 
     private void jBtBuscarDniHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBuscarDniHuespedActionPerformed
-        //almaceno dni
-        //me conecto en un try
-        //hago la consulta
-        //devuelvo la busqueda en la tabla
-        
-         long dniHuesped;
+       
+        long dniHuesped;
         dniHuesped = Long.parseLong(jtDni.getText());
-        //mostrarConsulta();
-        try {
-        conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
         
-        huespedData= new HuespedData(conexion);
-        Vhuesped = huespedData.mostrarHuesped(dniHuesped);
+        if (jtDni.getText()!=null){
+                         
+            vhuesped= huespedData.mostrarHuesped(dniHuesped);
+            jtNombre.setText(vhuesped.getNombreHuesped());
+            jtDomicilio.setText(vhuesped.getDomicilioHuesped());
+            jtCorreo.setText(vhuesped.getCorreoHuesped());
+            jtCelular.setText(vhuesped.getCelularHuesped());
+          
+        //mostrarConsulta();
+                
+        vhuesped = huespedData.mostrarHuesped(dniHuesped);
         //1 es la fila y 5 son las columnas
         String filaBusquedaDni[][]=new String[1][5];
         
-        filaBusquedaDni[0][0] =String.valueOf(Vhuesped.getDniHuesped());
-        filaBusquedaDni[0][1] =String.valueOf(Vhuesped.getNombreHuesped());
-        filaBusquedaDni[0][2] =String.valueOf(Vhuesped.getDomicilioHuesped());
-        filaBusquedaDni[0][3] =String.valueOf(Vhuesped.getCorreoHuesped());
-        filaBusquedaDni[0][4] =String.valueOf(Vhuesped.getCelularHuesped());
-        
-        jtDni.setText("");
-
-      jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
+        filaBusquedaDni[0][0] =String.valueOf(vhuesped.getDniHuesped());
+        filaBusquedaDni[0][1] =String.valueOf(vhuesped.getNombreHuesped());
+        filaBusquedaDni[0][2] =String.valueOf(vhuesped.getDomicilioHuesped());
+        filaBusquedaDni[0][3] =String.valueOf(vhuesped.getCorreoHuesped());
+        filaBusquedaDni[0][4] =String.valueOf(vhuesped.getCelularHuesped());
+       
+        jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
            filaBusquedaDni,
             new String [] {
                "DNI Huesped", "nombre", "domicilio" , "Correo", "celular"
             }
-        ));     
-  } catch (ClassNotFoundException ex) {
-        Logger.getLogger(VistaHuesped.class.getName()).log(Level.SEVERE, null, ex);
-   }
+            )
+        );
+        }
         
+  
+        
+         
     }//GEN-LAST:event_jBtBuscarDniHuespedActionPerformed
 
+    private void jBbuscarTodosHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarTodosHActionPerformed
+       
+        //hago la consulta
+        //devuelvo la busqueda en la tabla
+        listaHuespedes = huespedData.mostrarHuespedes();
+        System.out.println(listaHuespedes);
+        
+        String fila[][]= new String [listaHuespedes.size()][5];
+        int i;
+        for (i=0; i<listaHuespedes.size(); i++){
+       
+         fila[i][0] = String.valueOf(listaHuespedes.get(i).getDniHuesped());
+         fila[i][1] = String.valueOf(listaHuespedes.get(i).getNombreHuesped());
+         fila[i][2] = String.valueOf(listaHuespedes.get(i).getDomicilioHuesped());
+         fila[i][3] = String.valueOf(listaHuespedes.get(i).getCorreoHuesped());
+         fila[i][4] = String.valueOf(listaHuespedes.get(i).getCelularHuesped());
+        }
+        // for (Reserva h: listaReserva){  
+       //           System.out.println((Arrays.toString(new Object[]{h.getIdReserva(),h.getFechaInicioReserva(),h.getFechaFinReserva(),h.getEstadoReserva(),h.getHuesped().getDniHuesped(),h.getHabitacion().getNumeroHabitacion()})));
+       // }
+      jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
+           fila,
+            new String [] {
+               "DNI" , "Nombre", "Domicilio" , "Correo", "Celular"
+            }
+            )
+      );     
+    }//GEN-LAST:event_jBbuscarTodosHActionPerformed
+
+    private void jTableHuespedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHuespedMouseClicked
+       
+        cargarDatosDesdeTabla();
+        
+        
+    }//GEN-LAST:event_jTableHuespedMouseClicked
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiar();
+        
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    
+    public void cargarDatosDesdeTabla(){
+    
+         //obtener fila seleccionada    
+        int row = jTableHuesped.getSelectedRow();
+        
+        //Creo variables que van a almacenar lo que hay en la fila
+        String dni=jTableHuesped.getValueAt(row, 0).toString();
+        String nombre=jTableHuesped.getValueAt(row, 1).toString();
+        String domicilio=jTableHuesped.getValueAt(row, 2).toString();
+        String correo=jTableHuesped.getValueAt(row, 3).toString();
+        String celular=jTableHuesped.getValueAt(row, 4).toString();
+        //inserto en textfield
+         jtDni.setText(dni);
+         jtNombre.setText(nombre);
+         jtDomicilio.setText(domicilio);
+         jtCorreo.setText(correo);
+         jtCelular.setText(celular);
+       
+    
+    }
+
+    public void limpiar(){
+         jtDni.setText("");
+         jtNombre.setText("");
+         jtDomicilio.setText("");
+         jtCorreo.setText("");
+         jtCelular.setText("");
+        
+    }
+    
+  
+   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBLimpiar;
+    private javax.swing.JButton jBbuscarTodosH;
     private javax.swing.JButton jBtBorrar;
     private javax.swing.JButton jBtBuscarDniHuesped;
     private javax.swing.JButton jBtGuardar;
@@ -283,12 +420,12 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableHuesped;
-    private javax.swing.JLabel jetiquetaHusped;
     private javax.swing.JTextField jtCelular;
     private javax.swing.JTextField jtCorreo;
-    public javax.swing.JTextField jtDni;
+    public static javax.swing.JFormattedTextField jtDni;
     private javax.swing.JTextField jtDomicilio;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
