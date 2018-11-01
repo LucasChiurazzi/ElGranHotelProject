@@ -26,7 +26,8 @@ public class HuespedData {
     //metodos
     
     //creo un nuevo huesped
-    public void crearHuesped(Huesped huesped){
+    public int crearHuesped(Huesped huesped){
+        int rta=0;
         try {
             
             String sql = "INSERT INTO huesped (dniHuesped, nombreHuesped, domicilioHuesped, correoHuesped, celularHuesped) VALUES ( ? , ? , ? , ? , ?);";
@@ -38,7 +39,7 @@ public class HuespedData {
             statement.setString(4, huesped.getCorreoHuesped());
             statement.setString(5, huesped.getCelularHuesped());
             
-            statement.executeUpdate();
+            rta=statement.executeUpdate();
             
             
             statement.close();
@@ -46,10 +47,11 @@ public class HuespedData {
         } catch (SQLException ex) {
             System.out.println("Error al insertar un huesped: " + ex.getMessage());
         }
+        return rta;
     }
     //modifico todos los campos de un huesped
-    public void modificarHuesped(Huesped huesped){
-    
+    public int modificarHuesped(Huesped huesped){
+        int rta=0;
         try {
             
             String sql = "UPDATE huesped SET nombreHuesped = ?, domicilioHuesped = ? , correoHuesped = ? , celularHuesped = ? WHERE dniHuesped = ?;";
@@ -60,32 +62,33 @@ public class HuespedData {
             statement.setString(3, huesped.getCorreoHuesped());
             statement.setString(4, huesped.getCelularHuesped());
             statement.setLong(5, huesped.getDniHuesped());
-            statement.executeUpdate();
+            rta=statement.executeUpdate();
             
             statement.close();
     
         } catch (SQLException ex) {
             System.out.println("Error al actualizar un huesped: " + ex.getMessage());
         }
-    
+    return rta;
 }
     //elimino huesped filtrando por dni
-    public void eliminarHuesped(long dni){
-    try {
+    public int eliminarHuesped(long dni){
+     int rta=0;
+     try {
             
             String sql = "DELETE FROM huesped WHERE dniHuesped =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, dni);
                        
-            statement.executeUpdate();
+            rta=statement.executeUpdate();
              
             statement.close();
     
         } catch (SQLException ex) {
             System.out.println("Error al borrar un huesped: " + ex.getMessage());
         }
-        
+        return rta;
     
     }
     //muestro huesped filtrado por dni

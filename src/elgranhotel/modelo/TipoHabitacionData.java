@@ -35,7 +35,7 @@ public class TipoHabitacionData {
        TipoHabitacion tipoHabitacion= null;
  
        try{
-       String sql= "SELECT * FROM tipohabitacion \n WHERE idTipoHabitacion = " +idTipoHabitacion + ";";
+       String sql= "SELECT * FROM tipohabitacion WHERE idTipoHabitacion = " +idTipoHabitacion + ";";
           
        PreparedStatement st = connection.prepareStatement(sql);
        
@@ -125,7 +125,7 @@ public class TipoHabitacionData {
         try {
             
             String sql = "UPDATE tipohabitacion SET categoriaTipoHabitacion= ? , "
-                    + "cantPersonasTipoHabitacion = ? , precioNocheTipoHabitacion= ? , tipoCamaTipoHabitacion= ? , cantCamasTipoHabitacion= ? \n"
+                    +"cantPersonasTipoHabitacion = ? , precioNocheTipoHabitacion= ? , tipoCamaTipoHabitacion= ? , cantCamasTipoHabitacion= ? \n"
                     + "WHERE idTipoHabitacion = ? ;";
 
             PreparedStatement statement = connection.prepareStatement(sql);

@@ -25,7 +25,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
       private List<Huesped> listaHuespedes;
       private DefaultTableModel modeloHuesped;
       private String opcion;
-      
+      private long dniHuesped;
     /**
      * Creates new form VistaHuesped1
      */
@@ -251,57 +251,25 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtGuardarActionPerformed
-        long dni= Long.parseLong(jtDni.getText());
-        String nombre=jtNombre.getText();
-        String domicilio=jtDomicilio.getText();
-        String correo=jtCorreo.getText();
-        String celular=jtCelular.getText();
-
-        huesped=new Huesped(dni,nombre,domicilio,correo,celular);
-        huespedData.crearHuesped(huesped);
-       
+        //cargo un huesped nuevo y me direcciona a vista reserva
+        botonGuardar();
         
-        JOptionPane.showMessageDialog(escritorio, "El Huesped se guardo correctamente");
-        
-        VistaReserva vr=new VistaReserva();
-        Principal.escritorio.add(vr);
-        vr.toFront();
-        vr.setVisible(true);
-        // toma el dni que buscaron en reserva y lo setea en el text field de dni 
-        vr.jTHuespedReserva.setText(dni+" "+huesped.getNombreHuesped());
-      
-        dispose();
-        
-        
-
     }//GEN-LAST:event_jBtGuardarActionPerformed
 
     private void jBtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtModificarActionPerformed
-        if (jtDni.getText()!=null){
-            long dni=Long.parseLong(jtDni.getText());
-            String nombre=jtNombre.getText();
-            String domicilio=jtDomicilio.getText();
-            String correo=jtCorreo.getText();
-            String celular=jtCelular.getText();
-
-            huesped=new Huesped(dni,nombre,domicilio,correo,celular);
-            huespedData.modificarHuesped(huesped);
-        }
-            JOptionPane.showMessageDialog(escritorio, "Se ha Modificado un Huesped.");
-            borraFilasTabla();
+       //actualizo información de un huesped
+        botonActualizar();
     }//GEN-LAST:event_jBtModificarActionPerformed
 
     private void jBtBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBorrarActionPerformed
         //elimino un huesped
-        long dni=Long.parseLong(jtDni.getText());
-        huespedData.eliminarHuesped(dni);
-        JOptionPane.showMessageDialog(escritorio, "Se ha borrado un Huesped.");
-        borraFilasTabla();
+        botonBorrar();
+        
     }//GEN-LAST:event_jBtBorrarActionPerformed
 
     private void jBtBuscarDniHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBuscarDniHuespedActionPerformed
         //declaro y recibo dni
-        long dniHuesped;
+        //long dniHuesped;
         dniHuesped = Long.parseLong(jtDni.getText());
         
         //si el campo dni no esta vacio, inserto los valores en el formulario
@@ -412,10 +380,102 @@ public void armaCabeceraTabla(){
             modeloHuesped.removeRow(i ); 
         }
      }
-    
-  
+    public boolean textFieldVacios()
+    {
+     boolean vacio=jtDni.getText().equals("") && 
+     jtNombre.getText().equals("") &&
+     jtDomicilio.getText().equals("") &&
+     jtCorreo.getText().equals("") &&
+     jtCelular.getText().equals("");
+            
+            return vacio;
+    }
+      //metodos para botones
+   public void botonBorrar(){
+   int rta=0;
+        if(!textFieldVacios())
+        {   
+            if(JOptionPane.showConfirmDialog(this, "Esta por BORRAR un Huesped. ¿Desea continuar?", "ADVERTENCIA",0 )==0)
+            {
+                dniHuesped = Integer.parseInt(jtDni.getText());
+        
+                rta=huespedData.eliminarHuesped(dniHuesped);
+        
+                if(rta==1)
+                {
+                    JOptionPane.showMessageDialog(this, "Operación EXITOSA");
+                    borraFilasTabla();
+                }else 
+                {
+                 JOptionPane.showMessageDialog(this, "FALLÓ la operación");
+                }
+             }
+        }else{
+                JOptionPane.showMessageDialog(this, "Completar DATOS ");
+              }
+   }
    
+    public void botonGuardar(){
+        int rta=0;
+     
+     if(!textFieldVacios())
+     { 
+        dniHuesped= Long.parseLong(jtDni.getText());
+        String nombre=jtNombre.getText();
+        String domicilio=jtDomicilio.getText();
+        String correo=jtCorreo.getText();
+        String celular=jtCelular.getText();
+        huesped=new Huesped(dniHuesped,nombre,domicilio,correo,celular);
+        rta=huespedData.crearHuesped(huesped);
+        
+                if(rta==1)
+                 {
+                    JOptionPane.showMessageDialog(this, "Se creo un Nuevo Huesped");
+                    VistaReserva vr=new VistaReserva();
+                    Principal.escritorio.add(vr);
+                    vr.toFront();
+                    vr.setVisible(true);
+                    // toma el dni que buscaron en reserva y lo setea en el text field de dni 
+                    vr.jTHuespedReserva.setText(dniHuesped+" "+huesped.getNombreHuesped());
+      
+                    dispose();
+                 }else
+                    {
+                     JOptionPane.showMessageDialog(this, "FALLÓ la operación");
+                    }
+     }else
+        {
+             JOptionPane.showMessageDialog(this, "Completar DATOS ");
+        }
+   }
     
+    public void botonActualizar(){
+       int rta=0;
+    if(!textFieldVacios())
+     { 
+         long dni=Long.parseLong(jtDni.getText());
+         String nombre=jtNombre.getText();
+         String domicilio=jtDomicilio.getText();
+         String correo=jtCorreo.getText();
+         String celular=jtCelular.getText();
+
+         huesped=new Huesped(dni,nombre,domicilio,correo,celular);
+         rta=huespedData.modificarHuesped(huesped);
+         
+                if(rta==1)
+                {
+                        JOptionPane.showMessageDialog(this, "Se ha Modificado un Huesped");
+                        borraFilasTabla();
+                }else
+                   {
+                         JOptionPane.showMessageDialog(this, "FALLÓ la operación");
+                   }
+      }else
+           {
+                JOptionPane.showMessageDialog(this, "Completar DATOS ");
+           }   
+   }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBbuscarTodosH;
