@@ -121,13 +121,10 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
 
         jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Dni", "Nombre", "Domicilio", "Correo", "Celuar"
+                "Título 1", "Título 2", "Título 3", "Título 4"
             }
         ));
         jTableHuesped.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -222,8 +219,8 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtBuscarDniHuesped)
                     .addComponent(jBbuscarTodosH)
-                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 24, Short.MAX_VALUE)
+                    .addComponent(jtDni))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -292,16 +289,17 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtModificarActionPerformed
 
     private void jBtBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBorrarActionPerformed
+        //elimino un huesped
         long dni=Long.parseLong(jtDni.getText());
         huespedData.eliminarHuesped(dni);
     }//GEN-LAST:event_jBtBorrarActionPerformed
 
     private void jBtBuscarDniHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBuscarDniHuespedActionPerformed
-        borraFilasTabla();
+        //declaro y recibo dni
         long dniHuesped;
         dniHuesped = Long.parseLong(jtDni.getText());
-      
         
+        //si el campo dni no esta vacio, inserto los valores en el formulario
         if (jtDni.getText()!=null){
                          
             vhuesped= huespedData.mostrarHuesped(dniHuesped);
@@ -311,7 +309,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             jtCelular.setText(vhuesped.getCelularHuesped());
           
             opcion="buscarDni";
-        
+            //cargo datos en la tabla
             cargarDatos(opcion); 
         
         }
@@ -322,23 +320,21 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtBuscarDniHuespedActionPerformed
 
     private void jBbuscarTodosHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarTodosHActionPerformed
-       
-        //hago la consulta
-        //devuelvo la busqueda en la tabla
-        borraFilasTabla();
+       //boton buscar
         opcion="buscarTodos";
         cargarDatos(opcion);
         
     }//GEN-LAST:event_jBbuscarTodosHActionPerformed
 
     private void jTableHuespedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHuespedMouseClicked
-       
+        //clic en alguna fila de la tabla
         cargarDatosDesdeTabla();
         
         
     }//GEN-LAST:event_jTableHuespedMouseClicked
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        //limpieza de campos
         limpiar();
         
     }//GEN-LAST:event_jBLimpiarActionPerformed
@@ -360,60 +356,16 @@ public void armaCabeceraTabla(){
     public void cargarDatos(String opcion){
         borraFilasTabla();
         if(opcion=="buscarDni"){
-       
+            listaHuespedes.removeAll(listaHuespedes);
             listaHuespedes.add(huespedData.mostrarHuesped(Long.parseLong(jtDni.getText())));
         }          
-
-          
-/*         
-            
-//1 es la fila y 5 son las columnas
-        String filaBusquedaDni[][]=new String[1][5];
-        
-        filaBusquedaDni[0][0] =String.valueOf(vhuesped.getDniHuesped());
-        filaBusquedaDni[0][1] =String.valueOf(vhuesped.getNombreHuesped());
-        filaBusquedaDni[0][2] =String.valueOf(vhuesped.getDomicilioHuesped());
-        filaBusquedaDni[0][3] =String.valueOf(vhuesped.getCorreoHuesped());
-        filaBusquedaDni[0][4] =String.valueOf(vhuesped.getCelularHuesped());
-       
-        jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
-           filaBusquedaDni,
-            new String [] {
-               "DNI Huesped", "nombre", "domicilio" , "Correo", "celular"
-            }
-            )
-        ); */
-        
         if(opcion=="buscarTodos"){
+            listaHuespedes.removeAll(listaHuespedes);
             listaHuespedes = huespedData.mostrarHuespedes();
         }
-            for(Huesped h:listaHuespedes){
-                modeloHuesped.addRow(new Object[]{h.getDniHuesped(), h.getNombreHuesped(), h.getDomicilioHuesped(), h.getCorreoHuesped(), h.getCelularHuesped()});
-            }
-        /*
-        String fila[][]= new String [listaHuespedes.size()][5];
-        int i;
-        for (i=0; i<listaHuespedes.size(); i++){
-       
-         fila[i][0] = String.valueOf(listaHuespedes.get(i).getDniHuesped());
-         fila[i][1] = String.valueOf(listaHuespedes.get(i).getNombreHuesped());
-         fila[i][2] = String.valueOf(listaHuespedes.get(i).getDomicilioHuesped());
-         fila[i][3] = String.valueOf(listaHuespedes.get(i).getCorreoHuesped());
-         fila[i][4] = String.valueOf(listaHuespedes.get(i).getCelularHuesped());
-        }
-        // for (Reserva h: listaReserva){  
-       //           System.out.println((Arrays.toString(new Object[]{h.getIdReserva(),h.getFechaInicioReserva(),h.getFechaFinReserva(),h.getEstadoReserva(),h.getHuesped().getDniHuesped(),h.getHabitacion().getNumeroHabitacion()})));
-       // }
-      jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
-           fila,
-            new String [] {
-               "DNI" , "Nombre", "Domicilio" , "Correo", "Celular"
-            }
-            )
-      );  */    
-        
-        
-        
+        for(Huesped h:listaHuespedes){
+            modeloHuesped.addRow(new Object[]{h.getDniHuesped(), h.getNombreHuesped(), h.getDomicilioHuesped(), h.getCorreoHuesped(), h.getCelularHuesped()});
+        }        
     }
 
     public void cargarDatosDesdeTabla(){
@@ -448,9 +400,8 @@ public void armaCabeceraTabla(){
     
       public void borraFilasTabla(){
 
-      int a =modeloHuesped.getRowCount()-1; //se le resta 1 por que no cuenta la columna de titulos
+      int a =modeloHuesped.getRowCount()-1; 
          //uso for que inicie en el valor de a y va disminuyendo hasta ser igual a 0
-          System.out.println("a vale "+a);
          for(int i=a;i>=0;i--){
             //limpieza de tabla
             modeloHuesped.removeRow(i ); 
