@@ -215,11 +215,12 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtBuscarDniHuesped)
-                    .addComponent(jBbuscarTodosH)
-                    .addComponent(jtDni))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtDni, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtBuscarDniHuesped)
+                        .addComponent(jBbuscarTodosH)))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -286,12 +287,16 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             vhuesped=new Huesped(dni,nombre,domicilio,correo,celular);
             huespedData.modificarHuesped(vhuesped);
         }
+            JOptionPane.showMessageDialog(escritorio, "Se ha Modificado un Huesped.");
+            borraFilasTabla();
     }//GEN-LAST:event_jBtModificarActionPerformed
 
     private void jBtBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBorrarActionPerformed
         //elimino un huesped
         long dni=Long.parseLong(jtDni.getText());
         huespedData.eliminarHuesped(dni);
+        JOptionPane.showMessageDialog(escritorio, "Se ha borrado un Huesped.");
+        borraFilasTabla();
     }//GEN-LAST:event_jBtBorrarActionPerformed
 
     private void jBtBuscarDniHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBuscarDniHuespedActionPerformed
