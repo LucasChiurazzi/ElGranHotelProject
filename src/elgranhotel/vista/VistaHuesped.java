@@ -23,7 +23,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
       private Conexion conexion;
       private Huesped huesped;
       private List<Huesped> listaHuespedes;
-      DefaultTableModel modeloHuesped;
+      private DefaultTableModel modeloHuesped;
       private String opcion;
       
     /**
