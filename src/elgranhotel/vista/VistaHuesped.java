@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class VistaHuesped extends javax.swing.JInternalFrame {
       private HuespedData huespedData;
       private Conexion conexion;
-      private Huesped vhuesped;
+      private Huesped huesped;
       private List<Huesped> listaHuespedes;
       DefaultTableModel modeloHuesped;
       private String opcion;
@@ -257,8 +257,8 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         String correo=jtCorreo.getText();
         String celular=jtCelular.getText();
 
-        vhuesped=new Huesped(dni,nombre,domicilio,correo,celular);
-        huespedData.crearHuesped(vhuesped);
+        huesped=new Huesped(dni,nombre,domicilio,correo,celular);
+        huespedData.crearHuesped(huesped);
        
         
         JOptionPane.showMessageDialog(escritorio, "El Huesped se guardo correctamente");
@@ -268,7 +268,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         vr.toFront();
         vr.setVisible(true);
         // toma el dni que buscaron en reserva y lo setea en el text field de dni 
-        vr.jTHuespedReserva.setText(dni+" "+vhuesped.getNombreHuesped());
+        vr.jTHuespedReserva.setText(dni+" "+huesped.getNombreHuesped());
       
         dispose();
         
@@ -284,8 +284,8 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             String correo=jtCorreo.getText();
             String celular=jtCelular.getText();
 
-            vhuesped=new Huesped(dni,nombre,domicilio,correo,celular);
-            huespedData.modificarHuesped(vhuesped);
+            huesped=new Huesped(dni,nombre,domicilio,correo,celular);
+            huespedData.modificarHuesped(huesped);
         }
             JOptionPane.showMessageDialog(escritorio, "Se ha Modificado un Huesped.");
             borraFilasTabla();
@@ -307,11 +307,11 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         //si el campo dni no esta vacio, inserto los valores en el formulario
         if (jtDni.getText()!=null){
                          
-            vhuesped= huespedData.mostrarHuesped(dniHuesped);
-            jtNombre.setText(vhuesped.getNombreHuesped());
-            jtDomicilio.setText(vhuesped.getDomicilioHuesped());
-            jtCorreo.setText(vhuesped.getCorreoHuesped());
-            jtCelular.setText(vhuesped.getCelularHuesped());
+            huesped= huespedData.mostrarHuesped(dniHuesped);
+            jtNombre.setText(huesped.getNombreHuesped());
+            jtDomicilio.setText(huesped.getDomicilioHuesped());
+            jtCorreo.setText(huesped.getCorreoHuesped());
+            jtCelular.setText(huesped.getCelularHuesped());
           
             opcion="buscarDni";
             //cargo datos en la tabla
