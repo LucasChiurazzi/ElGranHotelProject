@@ -678,7 +678,7 @@ modeloReserva.removeRow(i );
     LocalDate fechaFin = fromPickerToLocalDate(jXDPFinReserva);
     if(fechaFin.isBefore(fechaInicio) || fechaInicio.isAfter(fechaFin)){
         //si fecha fin es menor a fecha inicio o si fecha inicio es mayor que fecha fin
-        System.out.println("No se puede realizar la reserva, revisar fecha");
+        JOptionPane.showMessageDialog(this, "No se puede realizar la reserva, revisar fecha");
         //si llegamos con los tiempos estaria bueno que muestre un cartel con jOptionPane
     }   
     long diasReserva=fechaInicio.until(fechaFin, DAYS);
