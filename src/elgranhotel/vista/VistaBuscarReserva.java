@@ -426,7 +426,7 @@ System.out.println( "output: " + output );
         System.out.println("aqui1");
             System.out.println(fechaIDB);
             System.out.println(fechaFDB);
-        listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB);
+        listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB, conexion);
         
         //1 es la fila y 6 son las columnas
             System.out.println(listaBuscarReservaFecha.size());
@@ -514,7 +514,7 @@ System.out.println( "output: " + output );
 
         long dni=Long.parseLong(jTHuespedReserva.getText());
         reservaData = new ReservaData(conexion);
-        listaBuscarReservaDni = reservaData.buscarReserva(dni);
+        listaBuscarReservaDni = reservaData.buscarReserva(dni,  conexion);
         
         //1 es la fila y 6 son las columnas
         String filaBusquedaDni[][]=new String[listaBuscarReservaDni.size()][6];

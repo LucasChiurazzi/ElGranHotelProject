@@ -101,10 +101,13 @@ public class HuespedData {
             
 
         try {
-            String sql = "SELECT * FROM huesped WHERE dniHuesped = "+ dni + " ;" ;
+            String sql = "SELECT * FROM huesped WHERE dniHuesped = ? ;" ;
             PreparedStatement statement = connection.prepareStatement(sql);
-            
+           
+            statement.setLong(1, dni);
             ResultSet resultSet = statement.executeQuery();
+            
+            
             
             
             

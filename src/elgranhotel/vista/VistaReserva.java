@@ -523,7 +523,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             // revisar forma
             //habitacionData.actualizarHabitacion(h);
             habitacionData.actualizarHabitacion(h);
-            reservaData.finReserva();
+            reservaData.finReserva( conexion);
            if(rta==1) {JOptionPane.showMessageDialog(this, "La Reserva se GUARDO correctamente");}
             else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
         }
@@ -573,10 +573,16 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     
         });
    
-   List<Reserva> reservas= reservaData.obtenerReservas();
+   List<Reserva> reservas= reservaData.obtenerReservas( conexion);
    List<Integer> numerosHABOrrar= new ArrayList<>();
     for (Reserva r:reservas){
-        if(r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR)  && r.getFechaFinReserva().plusDays(1).isEqual(fechaFinHR) ||r.getFechaInicioReserva().plusDays(1).isAfter(fechaInicioHR) && r.getFechaFinReserva().plusDays(1).isBefore(fechaFinHR) ){
+        if(     (r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR) ||
+                r.getFechaInicioReserva().plusDays(1).isBefore(fechaInicioHR)) &&
+                (r.getFechaFinReserva().plusDays(1).isAfter(fechaFinHR)|| 
+                r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR)) )
+        
+        
+        {
            int numeroH=r.getHabitacion().getNumeroHabitacion();
            numerosHABOrrar.add((Integer)numeroH);
            }

@@ -32,7 +32,7 @@ public class ReservaData {
 
    
     //copiado de Hugo
-    public List<Reserva> obtenerReservas(){
+    public List<Reserva> obtenerReservas( Conexion conexion){
         List<Reserva> reservas = new ArrayList<>();
             
 
@@ -50,11 +50,11 @@ public class ReservaData {
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
                
-                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"), conexion);
                
                 reserva.setHuesped(huesped);
                 
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"), conexion);
                
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
@@ -96,7 +96,7 @@ public class ReservaData {
         return huespedes;
     }   
     
-    public List<Reserva> buscarReserva(long dni){
+    public List<Reserva> buscarReserva(long dni,  Conexion conexion){
         //recibo un huesped
         //busco en la base de datos si el dniHuesped esta en alguna reserva y en
         //alguna habitacion
@@ -117,9 +117,9 @@ public class ReservaData {
                 reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
-                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"), conexion);
                 reserva.setHuesped(huesped);
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"), conexion);
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
@@ -134,7 +134,7 @@ public class ReservaData {
         return reservas;
     }
 
-    public List<Reserva> buscarReserva(LocalDate fechaI, LocalDate fechaF){
+    public List<Reserva> buscarReserva(LocalDate fechaI, LocalDate fechaF,  Conexion conexion){
         //recibo una fecha de inicio de la reserva
         //busco en la base de datos si hay alguna reserva para esa fecha 
         //alguna habitacion
@@ -156,9 +156,9 @@ public class ReservaData {
                 reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
-                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"), conexion);
                 reserva.setHuesped(huesped);
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"), conexion);
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
@@ -250,23 +250,15 @@ public class ReservaData {
    return rta;
     }
         
-    public Huesped mostrarHuesped(long dni) {
-        try {
-            conexion= new Conexion("jdbc:mysql://localhost/hotel", "root", "");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
-        }
+    public Huesped mostrarHuesped(long dni, Conexion conexion) {
+       
         HuespedData huespedData = new HuespedData(conexion);
         
         return huespedData.mostrarHuesped(dni);
     }
 
-    public Habitacion mostrarHabitacion(int idHabitacion) {
-        try {
-            conexion= new Conexion("jdbc:mysql://localhost/hotel", "root", "");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
-        }
+    public Habitacion mostrarHabitacion(int idHabitacion, Conexion conexion) {
+      
         HabitacionData habitacionData = new HabitacionData(conexion);
         return habitacionData.buscarHabitacion(idHabitacion, conexion);
     }
@@ -275,7 +267,7 @@ public class ReservaData {
         int rta=0;
         try {
             
-            String sql = "UPDATE reserva r  INNER JOIN habitacion h  ON r.numeroHabitacion= h.numeroHabitacion SET r.estadoReserva= 0 , h.estadoHabitacion= 0  WHERE r.idHabitacion= ? ;";
+            String sql = "UPDATE reserva r  INNER JOIN habitacion h  ON r.numeroHabitacion= h.numeroHabitacion SET r.estadoReserva= 0 , h.estadoHabitacion= 0  WHERE r.numeroHabitacion= ? ;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
                        
@@ -291,12 +283,12 @@ public class ReservaData {
         return rta;
     }
     
-      public void finReserva(){
+      public void finReserva( Conexion conexion){
          try {
 
             //busco por dni huesped las reservas que hizo
             //List<Reserva> listaReservasHuesped= this.buscarReserva(huesped.getDniHuesped());
-            List<Reserva> listaReservas=this.obtenerReservas();
+            List<Reserva> listaReservas=this.obtenerReservas(conexion);
             //obtengo la fecha de hoy
             LocalDate fechaHoy = LocalDate.now();
 
