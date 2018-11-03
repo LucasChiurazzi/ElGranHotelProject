@@ -121,7 +121,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jCBTipoHabitacionReserva = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jBConfitmarReserva = new javax.swing.JButton();
+        jBConfirmarReserva = new javax.swing.JButton();
         jBBuscarHabitacionesReserva = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTHabitacionesReserva = new javax.swing.JTable();
@@ -222,10 +222,10 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Tipo de Habitacion");
 
-        jBConfitmarReserva.setText("Confirmar");
-        jBConfitmarReserva.addActionListener(new java.awt.event.ActionListener() {
+        jBConfirmarReserva.setText("Confirmar");
+        jBConfirmarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBConfitmarReservaActionPerformed(evt);
+                jBConfirmarReservaActionPerformed(evt);
             }
         });
 
@@ -292,7 +292,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(220, 220, 220)
-                                .addComponent(jBConfitmarReserva)
+                                .addComponent(jBConfirmarReserva)
                                 .addGap(22, 22, 22)
                                 .addComponent(jBLimpiarReserva))
                             .addGroup(layout.createSequentialGroup()
@@ -383,7 +383,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jBBuscarHabitacionesReserva)
-                            .addComponent(jBConfitmarReserva)
+                            .addComponent(jBConfirmarReserva)
                             .addComponent(jBLimpiarReserva)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -421,7 +421,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBBuscarHuespedReservaActionPerformed
    
     //Crea una nueva reserva
-    private void jBConfitmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfitmarReservaActionPerformed
+    private void jBConfirmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarReservaActionPerformed
     long dni= Long.parseLong(jTHuespedReserva.getText().substring(0,8).trim());
               
     /*SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
@@ -464,7 +464,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(escritorio, "La reserva se guardo correctamente");
         }
           
-    }//GEN-LAST:event_jBConfitmarReservaActionPerformed
+    }//GEN-LAST:event_jBConfirmarReservaActionPerformed
 
     
     private void jBCargarPopUpHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarPopUpHuespedReservaActionPerformed
@@ -679,8 +679,21 @@ modeloReserva.removeRow(i );
     if(fechaFin.isBefore(fechaInicio) || fechaInicio.isAfter(fechaFin)){
         //si fecha fin es menor a fecha inicio o si fecha inicio es mayor que fecha fin
         JOptionPane.showMessageDialog(this, "No se puede realizar la reserva, revisar fecha");
-        //si llegamos con los tiempos estaria bueno que muestre un cartel con jOptionPane
-    }   
+        jBBuscarTipoHabitacion.setEnabled(false);
+        jBConfirmarReserva.setEnabled(false);
+       
+    }else{ 
+         if(fechaInicio.isEqual(fechaFin)){
+        //Si fecha inicio es igual a fecha de salida no se puede reservar
+        JOptionPane.showMessageDialog(this, "No se puede realizar la reserva en el mismo dia");
+        jBBuscarTipoHabitacion.setEnabled(false);
+        jBConfirmarReserva.setEnabled(false);
+    }else{
+             jBBuscarTipoHabitacion.setEnabled(true);
+             jBConfirmarReserva.setEnabled(true);
+         }
+    }
+   
     long diasReserva=fechaInicio.until(fechaFin, DAYS);
     System.out.println(diasReserva);
     jTFDiasReserva.setText(diasReserva +"");
@@ -715,7 +728,7 @@ modeloReserva.removeRow(i );
     private javax.swing.JButton jBBuscarTipoHabitacion;
     private javax.swing.JButton jBCancelarPopUpHuespedReserva;
     private javax.swing.JButton jBCargarPopUpHuespedReserva;
-    private javax.swing.JButton jBConfitmarReserva;
+    private javax.swing.JButton jBConfirmarReserva;
     private javax.swing.JButton jBLimpiarReserva;
     private javax.swing.JComboBox<String> jCBTipoHabitacionReserva;
     private javax.swing.JDialog jDHuespedReserva;

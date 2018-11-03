@@ -115,7 +115,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
-                              <Component id="jBConfitmarReserva" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBConfirmarReserva" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="jBLimpiarReserva" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -228,7 +228,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jBBuscarHabitacionesReserva" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jBConfitmarReserva" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBConfirmarReserva" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBLimpiarReserva" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -308,12 +308,12 @@
         <Property name="text" type="java.lang.String" value="Tipo de Habitacion"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jBConfitmarReserva">
+    <Component class="javax.swing.JButton" name="jBConfirmarReserva">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBConfitmarReservaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBConfirmarReservaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBBuscarHabitacionesReserva">
