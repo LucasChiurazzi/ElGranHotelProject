@@ -576,16 +576,20 @@ public class VistaReserva extends javax.swing.JInternalFrame {
    List<Reserva> reservas= reservaData.obtenerReservas( conexion);
    List<Integer> numerosHABOrrar= new ArrayList<>();
     for (Reserva r:reservas){
-        if(     (r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR) ||
-                r.getFechaInicioReserva().plusDays(1).isBefore(fechaInicioHR)) &&
-                (r.getFechaFinReserva().plusDays(1).isAfter(fechaFinHR)|| 
-                r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR)) )
         
-        
-        {
+        if (estaDentroDelRango(fechaInicioHR, fechaFinHR, r.getFechaInicioReserva().plusDays(1)) || 
+                r.getFechaInicioReserva().plusDays(1).isBefore(fechaInicioHR) && r.getFechaFinReserva().plusDays(1).isAfter(fechaInicioHR)
+              ) 
+        {  
+            if(estaDentroDelRango(fechaInicioHR, fechaFinHR, r.getFechaFinReserva().plusDays(1)) || 
+                    r.getFechaFinReserva().plusDays(1).isAfter(fechaFinHR) && r.getFechaInicioReserva().plusDays(1).isBefore(fechaFinHR))
+            {
+          
+          
            int numeroH=r.getHabitacion().getNumeroHabitacion();
            numerosHABOrrar.add((Integer)numeroH);
            }
+        }     
     }
     
     int remove_h = -1;
@@ -735,10 +739,14 @@ modeloReserva.removeRow(i );
                jTHuespedReserva.getText().equals("") &&
                jTFDiasReserva.getText().equals("") &&
                jTFCantPersonasReserva.getText().equals("") &&
-             jTHabitacionesReserva.getSelectedRow()==-1;
+               jTHabitacionesReserva.getSelectedRow()==-1;
          
          return hayDatosVacios;
      } 
+     
+     boolean estaDentroDelRango(LocalDate inicio, LocalDate fin, LocalDate fecha) {
+        return !(fecha.isBefore(inicio) || fecha.isAfter(fin));
+}
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
