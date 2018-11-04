@@ -49,7 +49,7 @@ private ReservaData reservaData;
         modelo.addColumn("Numero");
         modelo.addColumn("Piso");
         modelo.addColumn("Estado");
-        modelo.addColumn("Id Tipo Habitacion");
+        modelo.addColumn("Tipo de Habitacion");
         this.tablaHabitacion.setModel(modelo);
        } 
         catch (ClassNotFoundException ex) {
@@ -80,6 +80,8 @@ private ReservaData reservaData;
         jCBTipoHabitacion = new javax.swing.JComboBox<>();
         jTFEstadoHabitacion = new javax.swing.JTextField();
         JRBLibre = new javax.swing.JRadioButton();
+        jRBLibre = new javax.swing.JRadioButton();
+        jRBOcupada = new javax.swing.JRadioButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -154,6 +156,9 @@ private ReservaData reservaData;
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaHabitacionMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaHabitacionMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tablaHabitacion);
 
@@ -172,16 +177,51 @@ private ReservaData reservaData;
             }
         });
 
+        jRBLibre.setText("Libre");
+        jRBLibre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBLibreActionPerformed(evt);
+            }
+        });
+
+        jRBOcupada.setText("Ocupada");
+        jRBOcupada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBOcupadaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(botonGuardar)
+                                .addGap(31, 31, 31)
+                                .addComponent(botonActualizar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonBorrar)
+                                .addGap(37, 37, 37)
+                                .addComponent(botonBuscar)
+                                .addGap(31, 31, 31)
+                                .addComponent(botonListar)
+                                .addGap(33, 33, 33)
+                                .addComponent(botonLimpiar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(211, 211, 211)
+                                .addComponent(jRBLibre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRBOcupada)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
@@ -189,38 +229,24 @@ private ReservaData reservaData;
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTFNroHabitacion, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                                    .addComponent(campoPiso)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(botonGuardar)
-                                .addGap(31, 31, 31)
-                                .addComponent(botonActualizar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
+                                    .addComponent(campoPiso))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(botonBorrar))
+                                    .addComponent(jLabel1)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(54, 54, 54)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel8)
-                                            .addComponent(jLabel4))))
-                                .addGap(9, 9, 9)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(botonBuscar)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(botonListar)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(botonLimpiar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTFEstadoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(JRBLibre)))))))
-                .addGap(17, 17, 17))
+                                            .addComponent(jLabel4))
+                                        .addGap(9, 9, 9)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jTFEstadoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(JRBLibre)))))
+                                .addGap(17, 17, 17)))
+                        .addGap(17, 17, 17))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +271,11 @@ private ReservaData reservaData;
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRBLibre)
+                    .addComponent(jRBOcupada))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonGuardar)
                     .addComponent(botonListar)
@@ -254,8 +284,8 @@ private ReservaData reservaData;
                     .addComponent(botonBuscar)
                     .addComponent(botonBorrar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -345,10 +375,7 @@ private ReservaData reservaData;
 
     private void botonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarActionPerformed
         borraFilasTabla();
-        listaHabitacion=(ArrayList)habitacionData.obtenerHabitaciones(conexion);
-        
-        for(Habitacion m:listaHabitacion)
-        modelo.addRow(new Object[]{m.getNumeroHabitacion(), m.getPisoHabitacion(), m.getEstadoHabitacion(),m.getTipoHabitacion().getIdTipoHabitacion()  });
+        cargarTabla();
     }//GEN-LAST:event_botonListarActionPerformed
 
     private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
@@ -359,13 +386,10 @@ private ReservaData reservaData;
       
        
         if(tablaHabitacion.getSelectedRowCount()>1){
-        multipleSelectTabla();
+         multipleSelectTabla();
          borraFilasTabla();
-        listaHabitacion=(ArrayList)habitacionData.obtenerHabitaciones(conexion);
-        
-        for(Habitacion m:listaHabitacion)
-        modelo.addRow(new Object[]{m.getNumeroHabitacion(), m.getPisoHabitacion(), m.getEstadoHabitacion(),m.getTipoHabitacion().getIdTipoHabitacion()  });}
-
+         cargarTabla();
+        }
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
 
     private void JRBLibreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBLibreActionPerformed
@@ -373,10 +397,43 @@ private ReservaData reservaData;
     }//GEN-LAST:event_JRBLibreActionPerformed
 
     private void tablaHabitacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaHabitacionMouseClicked
-    
-        
+
         
     }//GEN-LAST:event_tablaHabitacionMouseClicked
+
+    private void tablaHabitacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaHabitacionMousePressed
+       
+        //obtener fila seleccionada    
+        int row = tablaHabitacion.getSelectedRow();
+        
+        //Creo variables que van a almacenar lo que hay en la fila
+        String numero=tablaHabitacion.getValueAt(row, 0).toString();
+        String piso=tablaHabitacion.getValueAt(row, 1).toString();
+        String estado=tablaHabitacion.getValueAt(row, 2).toString();
+        int idTipoHab=Integer.parseInt(tablaHabitacion.getValueAt(row, 3).toString().substring(0,2).trim());
+       String tipoHab=tablaHabitacion.getValueAt(row, 3).toString();
+        //inserto en textfield
+       //numero Habitacion
+       jTFNroHabitacion.setText(numero);
+        //piso
+       campoPiso.setText(piso);
+        //estado
+       jTFEstadoHabitacion.setText(estado);
+      
+         jCBTipoHabitacion.setSelectedItem(tipoHab);
+        
+    }//GEN-LAST:event_tablaHabitacionMousePressed
+
+    private void jRBLibreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBLibreActionPerformed
+        //al presionar el radio boton libre
+        jRBOcupada.setSelected(false);
+        cargaDatos(false);
+    }//GEN-LAST:event_jRBLibreActionPerformed
+
+    private void jRBOcupadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBOcupadaActionPerformed
+        jRBLibre.setSelected(false);
+        cargaDatos(true);
+    }//GEN-LAST:event_jRBOcupadaActionPerformed
 
     public void borraFilasTabla(){
 
@@ -476,13 +533,33 @@ private ReservaData reservaData;
           Habitacion h= habitacionData.buscarHabitacion(n, conexion);
           h.setTipoHabitacion(tpHabSelec);
           habitacionData.actualizarHabitacion(h);
-          
-      }
-     
-      
-      
+          }
+    }
+  
+  public String estadoHabitacion(Boolean buleano){
+  String estado;
+  if(buleano){
+  estado= "OCUPADA";
+  }else{
+  estado= "LIBRE";
   }
+  return estado;
+  }
+  
+  
+  public void cargaDatos(Boolean evento){
+       borraFilasTabla();
+        cargarTabla();
+  } 
     
+  public void cargarTabla(){
+     listaHabitacion=(ArrayList)habitacionData.obtenerHabitaciones(conexion);
+        
+        for(Habitacion m:listaHabitacion)
+            
+        modelo.addRow(new Object[]{m.getNumeroHabitacion(), m.getPisoHabitacion(), estadoHabitacion(m.getEstadoHabitacion()),m.getTipoHabitacion().getIdTipoHabitacion()+" "+ m.getTipoHabitacion().getCategoriaTipoHabitacion() });
+   
+  }
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton JRBLibre;
@@ -499,6 +576,8 @@ private ReservaData reservaData;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JRadioButton jRBLibre;
+    private javax.swing.JRadioButton jRBOcupada;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFEstadoHabitacion;
     private javax.swing.JTextField jTFNroHabitacion;

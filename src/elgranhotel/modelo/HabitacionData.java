@@ -157,6 +157,30 @@ public boolean ocupada(Habitacion h, LocalDate fechaInicioReserva, LocalDate fec
     return ocupada;
 }
 
+public List<Habitacion> obtenerHabitacionesSi(Boolean condicion,Conexion conexion){
+     Habitacion habitacion;
+     List<Habitacion> habitaciones= new ArrayList<>();
+     try {
+            String sql = "SELECT * FROM habitacion WHERE habitacion.estadoHabitacion= ?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setBoolean(1, condicion);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                habitacion= new Habitacion();
+                habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
+                habitacion.setPisoHabitacion(resultSet.getInt("pisoHabitacion"));
+                habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
+                TipoHabitacion tH=buscarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"), conexion);
+                habitacion.setTipoHabitacion(tH);
+                habitaciones.add(habitacion);
+             }
+             statement.close();
+            } catch (SQLException ex) {
+            System.out.println("Error al obtener las Habitaciones: " + ex.getMessage());
+        }
+     
+    return habitaciones;
+}
 /*public List<Habitacion> obtenerHabitacionesXTipo(int idTipoHabitacion){
         List<Habitacion> habitaciones = new ArrayList<Habitacion>();
             
