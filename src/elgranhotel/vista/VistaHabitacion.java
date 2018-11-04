@@ -50,7 +50,7 @@ private ReservaData reservaData;
         modelo.addColumn("Piso");
         modelo.addColumn("Estado");
         modelo.addColumn("Id Tipo Habitacion");
-        this.Tabla.setModel(modelo);
+        this.tablaHabitacion.setModel(modelo);
        } 
         catch (ClassNotFoundException ex) {
         Logger.getLogger(VistaHabitacion.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,7 +76,7 @@ private ReservaData reservaData;
         botonListar = new javax.swing.JButton();
         botonLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla = new javax.swing.JTable();
+        tablaHabitacion = new javax.swing.JTable();
         jCBTipoHabitacion = new javax.swing.JComboBox<>();
         jTFEstadoHabitacion = new javax.swing.JTextField();
         JRBLibre = new javax.swing.JRadioButton();
@@ -138,7 +138,7 @@ private ReservaData reservaData;
             }
         });
 
-        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+        tablaHabitacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -149,7 +149,13 @@ private ReservaData reservaData;
 
             }
         ));
-        jScrollPane1.setViewportView(Tabla);
+        tablaHabitacion.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        tablaHabitacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaHabitacionMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaHabitacion);
 
         jCBTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +166,6 @@ private ReservaData reservaData;
         jTFEstadoHabitacion.setEnabled(false);
 
         JRBLibre.setText("Libre");
-        JRBLibre.setActionCommand("Libre");
         JRBLibre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JRBLibreActionPerformed(evt);
@@ -351,12 +356,27 @@ private ReservaData reservaData;
     }//GEN-LAST:event_botonLimpiarActionPerformed
 
     private void jCBTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoHabitacionActionPerformed
+      
+       
+        if(tablaHabitacion.getSelectedRowCount()>1){
+        multipleSelectTabla();
+         borraFilasTabla();
+        listaHabitacion=(ArrayList)habitacionData.obtenerHabitaciones(conexion);
+        
+        for(Habitacion m:listaHabitacion)
+        modelo.addRow(new Object[]{m.getNumeroHabitacion(), m.getPisoHabitacion(), m.getEstadoHabitacion(),m.getTipoHabitacion().getIdTipoHabitacion()  });}
 
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
 
     private void JRBLibreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBLibreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JRBLibreActionPerformed
+
+    private void tablaHabitacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaHabitacionMouseClicked
+    
+        
+        
+    }//GEN-LAST:event_tablaHabitacionMouseClicked
 
     public void borraFilasTabla(){
 
@@ -443,28 +463,29 @@ private ReservaData reservaData;
          return tpHabSelec;
     }
     
-        
-   /* public void cargarTiposHabitacionEnComboBoxXCP(){
-    //Carga los tipos de habitacion  al ComboBox
-    
-    //Limpiar comboBox
-    limpiarComboBox();
+  public void multipleSelectTabla(){
       
-    //le paso al combo box solo los tipos que correspondan
-    if(jCBTipoHabitacion.getItemCount()==0){
-     for(TipoHabitacion item: tipoHabitacionData.mostrarTipoHabitacion()){
-            jCBTipoHabitacion.addItem(item.getIdTipoHabitacion() +" "+ item.getCategoriaTipoHabitacion());
-                }
+      int[] numeroHabitacion =new int[tablaHabitacion.getSelectedRowCount()]; 
+      for(int j=tablaHabitacion.getSelectedRow(); j<tablaHabitacion.getSelectedRow() +tablaHabitacion.getSelectedRowCount();j++){ 
+          numeroHabitacion[j]= (int)tablaHabitacion.getValueAt(j, 0); 
+      } 
+      
+      TipoHabitacion tpHabSelec= deJCBaTipo(jCBTipoHabitacion);
+     
+      for(int n:numeroHabitacion) {
+          Habitacion h= habitacionData.buscarHabitacion(n, conexion);
+          h.setTipoHabitacion(tpHabSelec);
+          habitacionData.actualizarHabitacion(h);
           
-            }
-    }
-    */
-    
+      }
+     
+      
+      
+  }
     
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton JRBLibre;
-    private javax.swing.JTable Tabla;
     private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonBorrar;
     private javax.swing.JButton botonBuscar;
@@ -481,5 +502,6 @@ private ReservaData reservaData;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFEstadoHabitacion;
     private javax.swing.JTextField jTFNroHabitacion;
+    private javax.swing.JTable tablaHabitacion;
     // End of variables declaration//GEN-END:variables
 }
