@@ -559,7 +559,11 @@ private ReservaData reservaData;
   
     public void cargaDatos(Boolean evento){
        borraFilasTabla();
-        cargarTabla();
+        listaHabitacion=(ArrayList)habitacionData.obtenerHabitacionesSi(evento,conexion);
+         for(Habitacion m:listaHabitacion)
+            
+        modelo.addRow(new Object[]{m.getNumeroHabitacion(), m.getPisoHabitacion(), estadoHabitacion(m.getEstadoHabitacion()),m.getTipoHabitacion().getIdTipoHabitacion()+" "+ m.getTipoHabitacion().getCategoriaTipoHabitacion() });
+   
   } 
    
     public void cargarCabeceraTabla(){
