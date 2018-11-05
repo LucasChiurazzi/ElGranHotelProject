@@ -513,15 +513,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                  LocalDate fechaDeHoy = LocalDate.now();
                
             reserva= new Reserva(fechaInicio, fechaFin, true, huesped, h);
-                 if(fechaDeHoy.isBefore(fechaInicio)){
+           /*      if(fechaDeHoy.isBefore(fechaInicio)){
                         h.setEstadoHabitacion(false);
                  }else{
                         h.setEstadoHabitacion(true);
                  }
-                 
+             */
+            h.setEstadoHabitacion(true);
             rta=reservaData.hacerReserva(reserva);
-            // revisar forma
-            //habitacionData.actualizarHabitacion(h);
             habitacionData.actualizarHabitacion(h);
             reservaData.finReserva( conexion);
            if(rta==1) {JOptionPane.showMessageDialog(this, "La Reserva se GUARDO correctamente");}
@@ -576,16 +575,20 @@ public class VistaReserva extends javax.swing.JInternalFrame {
    List<Reserva> reservas= reservaData.obtenerReservas( conexion);
    List<Integer> numerosHABOrrar= new ArrayList<>();
     for (Reserva r:reservas){
-        if(     (r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR) ||
-                r.getFechaInicioReserva().plusDays(1).isBefore(fechaInicioHR)) &&
-                (r.getFechaFinReserva().plusDays(1).isAfter(fechaFinHR)|| 
-                r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR)) )
         
-        
-        {
+        if (estaDentroDelRango(fechaInicioHR, fechaFinHR, r.getFechaInicioReserva().plusDays(1)) || 
+                r.getFechaInicioReserva().plusDays(1).isBefore(fechaInicioHR) && r.getFechaFinReserva().plusDays(1).isAfter(fechaInicioHR)
+              ) 
+        {  
+            if(estaDentroDelRango(fechaInicioHR, fechaFinHR, r.getFechaFinReserva().plusDays(1)) || 
+                    r.getFechaFinReserva().plusDays(1).isAfter(fechaFinHR) && r.getFechaInicioReserva().plusDays(1).isBefore(fechaFinHR))
+            {
+          
+          
            int numeroH=r.getHabitacion().getNumeroHabitacion();
            numerosHABOrrar.add((Integer)numeroH);
            }
+        }     
     }
     
     int remove_h = -1;
@@ -747,11 +750,14 @@ modeloReserva.removeRow(i );
                jTHuespedReserva.getText().equals("") &&
                jTFDiasReserva.getText().equals("") &&
                jTFCantPersonasReserva.getText().equals("") &&
-             jTHabitacionesReserva.getSelectedRow()==-1;
+               jTHabitacionesReserva.getSelectedRow()==-1;
          
          return hayDatosVacios;
      } 
      
+     boolean estaDentroDelRango(LocalDate inicio, LocalDate fin, LocalDate fecha) {
+        return !(fecha.isBefore(inicio) || fecha.isAfter(fin));
+}   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBBuscarHabitacionesReserva;
