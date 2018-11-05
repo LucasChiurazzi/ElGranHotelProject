@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package elgranhotel.vista;
 
 import elgranhotel.modelo.Conexion;
@@ -17,7 +13,7 @@ import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
 import elgranhotel.modelo.Reserva;
 import elgranhotel.modelo.ReservaData;
-import static elgranhotel.vista.Principal.escritorio;
+//import static elgranhotel.vista.Principal.escritorio;
 import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
@@ -498,8 +494,9 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     LocalDate fechaFin = fromPickerToLocalDate(jXDPFinReserva);
     int filaSeleccionada= jTHabitacionesReserva.getSelectedRow();
         
+        //si seleccione alguna fila de la tabla
         if(filaSeleccionada!=-1){
-          
+            //obtengo el numero de la habitacion como int
             int numeroHabitacion= (Integer)modeloReserva.getValueAt(filaSeleccionada,0);
            
             //HABITACION seleccionada por la lista, filtrada del data por el numeroHabitacion
@@ -508,20 +505,18 @@ public class VistaReserva extends javax.swing.JInternalFrame {
            
                //HUESPED
            Huesped huesped= huespedData.mostrarHuesped(dni);
+                 //obtengo fecha de hoy
+                 LocalDate fechaDeHoy = LocalDate.now();
                 //carga la reserva con los datos
                 //el estado es por defecto true
-                 LocalDate fechaDeHoy = LocalDate.now();
-               
             reserva= new Reserva(fechaInicio, fechaFin, true, huesped, h);
-           /*      if(fechaDeHoy.isBefore(fechaInicio)){
-                        h.setEstadoHabitacion(false);
-                 }else{
-                        h.setEstadoHabitacion(true);
-                 }
-             */
+            //estado de habitacion ocupado
             h.setEstadoHabitacion(true);
+            //realizo la reserva
             rta=reservaData.hacerReserva(reserva);
+            //actualizo la informacion de la habitacion reservada
             habitacionData.actualizarHabitacion(h);
+            //invoco a finreserva para que finalize reservas con respecto al dia de hoy
             reservaData.finReserva( conexion);
            if(rta==1) {JOptionPane.showMessageDialog(this, "La Reserva se GUARDO correctamente");}
             else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
@@ -553,8 +548,9 @@ public class VistaReserva extends javax.swing.JInternalFrame {
    
      
     //hasta aca ok
-    
+    //obtengo el elemento seleccionado del combobox como string
     String objetCb= (String)jCBTipoHabitacionReserva.getSelectedItem();
+    //lo convierto a tipo habitacion
     TipoHabitacion tpHabSelec=searchDeStringATipoHabitacion(objetCb);
                   
      /*for (Iterator<Habitacion> it= tlhR.iterator(); it.hasNext();){
@@ -563,16 +559,17 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         listaHabitaciones.add(h);
      }*/
     
-    
+    //obtengo las habitaciones
     List<Habitacion> todasLasHabitaciones= habitacionData.obtenerHabitaciones(conexion);
-
+    //filtro habitaciones segun el tipo elegido
     todasLasHabitaciones.stream().filter((h) -> (h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())).forEachOrdered((h) -> {
-
+        //agrego las habitaciones del tipo de habitacion elegido
         listaHabitaciones.add(h);
     
         });
-   
+   //obtengo reservas
    List<Reserva> reservas= reservaData.obtenerReservas( conexion);
+   //creo lista donde tendre habitaciones a borrar
    List<Integer> numerosHABOrrar= new ArrayList<>();
     for (Reserva r:reservas){
         
@@ -583,14 +580,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             if(estaDentroDelRango(fechaInicioHR, fechaFinHR, r.getFechaFinReserva().plusDays(1)) || 
                     r.getFechaFinReserva().plusDays(1).isAfter(fechaFinHR) && r.getFechaInicioReserva().plusDays(1).isBefore(fechaFinHR))
             {
-          
-          
+            //si esta dentro del rango lo agrega a la lista    
            int numeroH=r.getHabitacion().getNumeroHabitacion();
            numerosHABOrrar.add((Integer)numeroH);
            }
         }     
     }
-    
+    //mediante este for voy recorriendo la listaHabitaciones y donde el numero habitacion coincida lo borra
+    //de la listaHabitaciones
     int remove_h = -1;
     for(int k=0;k< numerosHABOrrar.size();k++){
          for(int i=0;i<listaHabitaciones.size();i++){
@@ -603,6 +600,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             remove_h = -1;
         }
     }
+    //una vez pasado por el filtro de for, lo muestra en la tabla 
     for(Habitacion h:listaHabitaciones){
           
           modeloReserva.addRow(new Object[]{h.getNumeroHabitacion(), h.getPisoHabitacion(), h.getTipoHabitacion().getCategoriaTipoHabitacion(),h.getTipoHabitacion().getTipoCamaTipoHabitacion(), h.getTipoHabitacion().getCantidadCamasTipoHabitacion()});
@@ -621,7 +619,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     
     //metodos tabla
     public void armaCabeceraTabla(){
-  
+        //agrego el nombre de cada columna
         ArrayList<Object> columnas=new ArrayList<>();
         columnas.add("Numero Habitacion");
         columnas.add("Piso");
@@ -629,26 +627,29 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         columnas.add("Tipo Cama");
         columnas.add("Cant Camas");
         for(Object it:columnas){
-        
+            //mediante un for agrego las columnas a modeloReserva
             modeloReserva.addColumn(it);
         }
+        //aca ya le asigno a la tabla lo que le agregue a modeloReserva
         jTHabitacionesReserva.setModel(modeloReserva);
   }
     
     public void borraFilasTabla(){
-
+        //declaro entero a y le asigno la cantidad de filas que tiene el modelo reserva -1
    int a =modeloReserva.getRowCount()-1;
-
-for(int i=a;i>=0;i--){
-   
-modeloReserva.removeRow(i );
-}
+        //uso un for para eliminar las filas que consulte en un evento anterior
+    for(int i=a;i>=0;i--)
+    {
+        modeloReserva.removeRow(i );
+    }
 }
     
      //metodos combobox
     public void cargarTiposHabitacionEnComboBox(){
     //Carga los tipos de habitacion  al ComboBox
+    //si no tengo nada en el combobox de tipoHabitacion
     if(jCBTipoHabitacionReserva.getItemCount()==0){
+        //agrego mediante un for elementos al combobox
      for(TipoHabitacion item: tipoHabitacionData.mostrarTipoHabitacion()){
             jCBTipoHabitacionReserva.addItem(item.getIdTipoHabitacion() +" "+ item.getCategoriaTipoHabitacion());
                 }
@@ -658,13 +659,15 @@ modeloReserva.removeRow(i );
     
     public void cargarTiposHabitacionEnComboBoxXCP(){
     //Carga los tipos de habitacion  al ComboBox
-                 List<TipoHabitacion> resultado= new ArrayList<>();
-                  int cantPersonas= Integer.parseInt(0+jTFCantPersonasReserva.getText());
+    
+    //lista para agregar tipos de habitacion acorde al tipo
+    List<TipoHabitacion> resultado= new ArrayList<>(); 
+    int cantPersonas= Integer.parseInt(0+jTFCantPersonasReserva.getText());
         
-    //creo una lista de los tipos que tienen la cantidad de personas que me piden     
         
         for(TipoHabitacion tipo:tipoHabitacionData.mostrarTipoHabitacion()){
            if(tipo.getCantPersonasTipoHabitacion()==(cantPersonas)){
+               //agrego a la lista resultado la habitacion que cumple con la cantidad y tipo
             resultado.add(tipo);
             }
          }  
@@ -737,24 +740,31 @@ modeloReserva.removeRow(i );
 }
       
      public LocalDate fromPickerToLocalDate(JXDatePicker datePicker){
+         //con este metodo me encargo de dejar listo lo que obtengo de jxdatepicker
+         //para enviarlo a la base de datos con el estilo corrrespondiente
+         
+         //declaro el formato que debe llevar la fecha yyyy-MM-dd
     SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-    
+        //formateo lo que obtengo de jxDPicker
     String toLocalDate= formater.format(datePicker.getDate());
+        //convierto a localdate
     LocalDate fechaInLD= LocalDate.parse(toLocalDate);
-        
+        //devuelvo el valor ya list en yyyy-MM-dd
     return fechaInLD;
    }
      
      public boolean datosvacios(){
+         //si hay datos vacios
        boolean hayDatosVacios=   
                jTHuespedReserva.getText().equals("") &&
                jTFDiasReserva.getText().equals("") &&
                jTFCantPersonasReserva.getText().equals("") &&
                jTHabitacionesReserva.getSelectedRow()==-1;
-         
+         //devuelvo true en hayDatosVacios
          return hayDatosVacios;
      } 
      
+     //metodo para controlar fecha que se encuentre en elrango
      boolean estaDentroDelRango(LocalDate inicio, LocalDate fin, LocalDate fecha) {
         return !(fecha.isBefore(inicio) || fecha.isAfter(fin));
 }   
