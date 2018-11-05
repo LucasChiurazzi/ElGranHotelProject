@@ -472,7 +472,8 @@ private ReservaData reservaData;
     }
    public void cargaDatos(Boolean evento){
        borraFilasTabla();
-       listaHabitacion=(ArrayList)habitacionData.obtenerHabitacionesSi(evento,conexion);
+       
+      listaHabitacion=(ArrayList)habitacionData.obtenerHabitacionesSi(evento,conexion);
      
        for(Habitacion h:listaHabitacion){
            modelo.addRow(new Object[]{h.getNumeroHabitacion(), h.getPisoHabitacion(), h.getEstadoHabitacion(), h.getTipoHabitacion().getCategoriaTipoHabitacion()});
