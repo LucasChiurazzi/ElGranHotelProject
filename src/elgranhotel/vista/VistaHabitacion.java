@@ -404,7 +404,7 @@ private ReservaData reservaData;
  campoPiso.setText(piso);
 
  reservaData= new ReservaData(conexion);
- List <Reserva> reservasHabitacion= reservaData.obtenerReservas();
+ List <Reserva> reservasHabitacion= reservaData.obtenerReservas(conexion);
  LocalDate hoy=  LocalDate.now();
  Reserva rH = null;
  for (Reserva r:reservasHabitacion){

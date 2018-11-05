@@ -9,8 +9,6 @@ import elgranhotel.modelo.Reserva;
 import elgranhotel.modelo.ReservaData;
 import elgranhotel.modelo.TipoHabitacion;
 import elgranhotel.modelo.TipoHabitacionData;
-//import java.text.DateFormat;
-//import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -317,7 +315,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
       //  conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
         
         //reservaData = new ReservaData(conexion);
-        listaBuscarReservaDni = reservaData.buscarReserva(dni);
+        listaBuscarReservaDni = reservaData.buscarReserva(dni, conexion);
         
         for(Reserva r:listaBuscarReservaDni){
             modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), r.getEstadoReserva(), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
@@ -477,7 +475,7 @@ System.out.println( "output: " + output );
         //reservaData = new ReservaData(conexion);
             System.out.println(fechaIDB);
             System.out.println(fechaFDB);
-        listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB);     
+        listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB, conexion);     
         for(Reserva r:listaBuscarReservaFecha){
             modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), r.getEstadoReserva(), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
         }

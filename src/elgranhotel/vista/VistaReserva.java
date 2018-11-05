@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package elgranhotel.vista;
 
 import elgranhotel.modelo.Conexion;
@@ -61,7 +65,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     public VistaReserva() {
         initComponents();
         
-          try { 
+          try {   
             conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
             
              modeloReserva=new DefaultTableModel();
@@ -285,39 +289,26 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(12, 12, 12)
-                        .addComponent(jTHuespedReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jBBuscarHuespedReserva)
-                                        .addGap(27, 27, 27))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jBBuscarTipoHabitacion)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(220, 220, 220)
+                                .addGap(199, 199, 199)
                                 .addComponent(jBConfirmarReserva)
-                                .addGap(22, 22, 22)
+                                .addGap(43, 43, 43)
                                 .addComponent(jBLimpiarReserva))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
                                 .addComponent(jCBTipoHabitacionReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTFDiasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTFCantPersonasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBBuscarTipoHabitacion))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(jLabel11)
@@ -330,16 +321,26 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jXDPFinReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 529, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(12, 12, 12)
+                        .addComponent(jTHuespedReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFDiasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFCantPersonasReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jBBuscarHuespedReserva)
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -397,71 +398,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     //Busca un huesped para la reserva, si el huesped ya esta cargado desplega el dni y el nombre, recibe DNI
     private void jBBuscarHuespedReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarHuespedReservaActionPerformed
         
-        // Busca el huesped con el dni, si el huesped es null abre un dialgo para poder cargar en la vista huesped
-        
-         long dni=Long.parseLong(jTHuespedReserva.getText().substring(0, 8).trim());
-          
-         Huesped huesped= (Huesped)huespedData.mostrarHuesped(dni);
-        
-         if(huesped==null){
-         DialogoReservaHuesped dialogo= new DialogoReservaHuesped(new javax.swing.JFrame(), true);
-        
-        // guarda el dni en una variable en el jdialog para usar en huesped 
-        dialogo.setDniHuesped(dni);
-        dialogo.setVisible(true);       
-        dispose();
-        
-         } else{
-             
-            jTHuespedReserva.setText(huesped.getDniHuesped()+" - "+huesped.getNombreHuesped());
-              
-         }                         
+        botonBuscarHuesped();
         
     }//GEN-LAST:event_jBBuscarHuespedReservaActionPerformed
    
     //Crea una nueva reserva
     private void jBConfirmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarReservaActionPerformed
-    long dni= Long.parseLong(jTHuespedReserva.getText().substring(0,8).trim());
-              
-    /*SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-    String toLocalDate= formater.format(jXDPInicioReserva.getDate());
-    LocalDate fechaInicio= LocalDate.parse(toLocalDate);
     
-    SimpleDateFormat formater2 = new SimpleDateFormat("yyyy-MM-dd");
-    String toLocalDateFin= formater2.format(jXDPFinReserva.getDate());
-    LocalDate fechaFin = LocalDate.parse(toLocalDateFin);
-     */
-    
-    LocalDate fechaInicio= fromPickerToLocalDate(jXDPInicioReserva);
-    LocalDate fechaFin = fromPickerToLocalDate(jXDPFinReserva);
-    int filaSeleccionada= jTHabitacionesReserva.getSelectedRow();
-        
-        if(filaSeleccionada!=-1){
-          
-            int numeroHabitacion= (Integer)modeloReserva.getValueAt(filaSeleccionada,0);
-           
-            //HABITACION seleccionada por la lista, filtrada del data por el numeroHabitacion
-           Habitacion h= habitacionData.buscarHabitacion(numeroHabitacion,conexion);
-           
-               //HUESPED
-           Huesped huesped= huespedData.mostrarHuesped(dni);
-                //carga la reserva con los datos
-                //el estado es por defecto true
-                 LocalDate fechaDeHoy = LocalDate.now();
-               
-            reserva= new Reserva(fechaInicio, fechaFin, true, huesped, h);
-                 if(fechaDeHoy.isBefore(fechaInicio)){
-                        h.setEstadoHabitacion(false);
-                 }else{
-                        h.setEstadoHabitacion(true);
-                 }
-                 
-            reservaData.hacerReserva(reserva);
-  
-            habitacionData.actualizarHabitacion(h);
-            reservaData.finReserva(huesped);
-            JOptionPane.showMessageDialog(escritorio, "La reserva se guardo correctamente");
-        }
+        botonConfirmar();
           
     }//GEN-LAST:event_jBConfirmarReservaActionPerformed
 
@@ -477,8 +421,9 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
     
     private void jBBuscarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarTipoHabitacionActionPerformed
-       cargarTiposHabitacionEnComboBoxXCP();
-       precioReserva();
+       
+        botonBuscarCantPersonas();
+        
     }//GEN-LAST:event_jBBuscarTipoHabitacionActionPerformed
 
     private void jXDPInicioReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDPInicioReservaActionPerformed
@@ -490,13 +435,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     //carga la lista de habitaciones segun el tipo
     private void jBBuscarHabitacionesReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarHabitacionesReservaActionPerformed
         
-            cargatablaHabitacionesSeguntipo();
-    
-
-
-
-        
-        
+            botonHabitacionesDisponibles();
+            
     }//GEN-LAST:event_jBBuscarHabitacionesReservaActionPerformed
 
     private void jTFDiasReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDiasReservaActionPerformed
@@ -517,20 +457,192 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFCantPersonasReservaActionPerformed
 
     private void jBLimpiarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarReservaActionPerformed
-        limpiarComboBox();
-        cargarTiposHabitacionEnComboBox();
-        armaCabeceraTabla();
-        jTHuespedReserva.setText("");
-     
-        jTFDiasReserva.setText("");
-        jTFCantPersonasReserva.setText("");
-        jTFMontoReserva.setText("");
-        
+       
+       botonLimpiar(); 
         
     }//GEN-LAST:event_jBLimpiarReservaActionPerformed
 
+    //METODOS para botones
+    
+    public void botonBuscarHuesped(){
+        
+        // Busca el huesped con el dni, si el huesped es null abre un dialgo para poder cargar en la vista huesped
+        
+         long dni=Long.parseLong(jTHuespedReserva.getText().substring(0, 8).trim());
+          
+         Huesped huesped= (Huesped)huespedData.mostrarHuesped(dni);
+        
+         if(huesped==null){
+         DialogoReservaHuesped dialogo= new DialogoReservaHuesped(new javax.swing.JFrame(), true);
+        
+        // guarda el dni en una variable en el jdialog para usar en huesped 
+        dialogo.setDniHuesped(dni);
+        dialogo.setVisible(true);       
+        dispose();
+        
+         } else{
+             
+            jTHuespedReserva.setText(huesped.getDniHuesped()+" - "+huesped.getNombreHuesped());
+              
+         }                         
+        
+    }
+    
+    public void botonConfirmar(){
+     int rta=0;
+     
+     if(!datosvacios()){  
+    
+    long dni= Long.parseLong(jTHuespedReserva.getText().substring(0,8).trim());
+    LocalDate fechaInicio= fromPickerToLocalDate(jXDPInicioReserva);
+    LocalDate fechaFin = fromPickerToLocalDate(jXDPFinReserva);
+    int filaSeleccionada= jTHabitacionesReserva.getSelectedRow();
+        
+        if(filaSeleccionada!=-1){
+          
+            int numeroHabitacion= (Integer)modeloReserva.getValueAt(filaSeleccionada,0);
+           
+            //HABITACION seleccionada por la lista, filtrada del data por el numeroHabitacion
+           Habitacion h= habitacionData.buscarHabitacion(numeroHabitacion, conexion);
+                  
+           
+               //HUESPED
+           Huesped huesped= huespedData.mostrarHuesped(dni);
+                //carga la reserva con los datos
+                //el estado es por defecto true
+                 LocalDate fechaDeHoy = LocalDate.now();
+               
+            reserva= new Reserva(fechaInicio, fechaFin, true, huesped, h);
+                 if(fechaDeHoy.isBefore(fechaInicio)){
+                        h.setEstadoHabitacion(false);
+                 }else{
+                        h.setEstadoHabitacion(true);
+                 }
+                 
+            rta=reservaData.hacerReserva(reserva);
+            // revisar forma
+            //habitacionData.actualizarHabitacion(h);
+            habitacionData.actualizarHabitacion(h);
+            reservaData.finReserva( conexion);
+           if(rta==1) {JOptionPane.showMessageDialog(this, "La Reserva se GUARDO correctamente");}
+            else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
+        }
+        }else{
+         JOptionPane.showMessageDialog(this, "Completar DATOS ");
+   }
+    }
+    
+    public void botonBuscarCantPersonas(){
+        cargarTiposHabitacionEnComboBoxXCP();
+       precioReserva();
+    }
+        
+    public void botonHabitacionesDisponibles(){
+        
+    borraFilasTabla();
+        
+    LocalDate fechaInicioHR= fromPickerToLocalDate(jXDPInicioReserva);
+        
+    LocalDate fechaFinHR = fromPickerToLocalDate(jXDPFinReserva);
+       
+    reservaData =new ReservaData(conexion);
+     
+    habitacionData= new HabitacionData(conexion);
+       
+    listaHabitaciones= new ArrayList<>(); 
+     
+   
+     
+    //hasta aca ok
+    
+    String objetCb= (String)jCBTipoHabitacionReserva.getSelectedItem();
+    TipoHabitacion tpHabSelec=searchDeStringATipoHabitacion(objetCb);
+                  
+     /*for (Iterator<Habitacion> it= tlhR.iterator(); it.hasNext();){
+    Habitacion h= it.next();
+    if(h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())
+        listaHabitaciones.add(h);
+     }*/
+    
+    
+    List<Habitacion> todasLasHabitaciones= habitacionData.obtenerHabitaciones(conexion);
 
-    //metodos combobox
+    todasLasHabitaciones.stream().filter((h) -> (h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())).forEachOrdered((h) -> {
+
+        listaHabitaciones.add(h);
+    
+        });
+   
+   List<Reserva> reservas= reservaData.obtenerReservas( conexion);
+   List<Integer> numerosHABOrrar= new ArrayList<>();
+    for (Reserva r:reservas){
+        if(     (r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR) ||
+                r.getFechaInicioReserva().plusDays(1).isBefore(fechaInicioHR)) &&
+                (r.getFechaFinReserva().plusDays(1).isAfter(fechaFinHR)|| 
+                r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR)) )
+        
+        
+        {
+           int numeroH=r.getHabitacion().getNumeroHabitacion();
+           numerosHABOrrar.add((Integer)numeroH);
+           }
+    }
+    
+    int remove_h = -1;
+    for(int k=0;k< numerosHABOrrar.size();k++){
+         for(int i=0;i<listaHabitaciones.size();i++){
+            if(listaHabitaciones.get(i).getNumeroHabitacion()==(numerosHABOrrar.get(k))){
+                remove_h = i;
+            }
+        }
+        if(remove_h > -1){
+            listaHabitaciones.remove(remove_h);
+            remove_h = -1;
+        }
+    }
+    for(Habitacion h:listaHabitaciones){
+          
+          modeloReserva.addRow(new Object[]{h.getNumeroHabitacion(), h.getPisoHabitacion(), h.getTipoHabitacion().getCategoriaTipoHabitacion(),h.getTipoHabitacion().getTipoCamaTipoHabitacion(), h.getTipoHabitacion().getCantidadCamasTipoHabitacion()});
+        }
+    }
+    
+    public void botonLimpiar(){
+         limpiarComboBox();
+        cargarTiposHabitacionEnComboBox();
+        armaCabeceraTabla();
+        jTHuespedReserva.setText("");
+        jTFDiasReserva.setText("");
+        jTFCantPersonasReserva.setText("");
+        jTFMontoReserva.setText("");
+    }
+    
+    //metodos tabla
+    public void armaCabeceraTabla(){
+  
+        ArrayList<Object> columnas=new ArrayList<>();
+        columnas.add("Numero Habitacion");
+        columnas.add("Piso");
+        columnas.add("Tipo");
+        columnas.add("Tipo Cama");
+        columnas.add("Cant Camas");
+        for(Object it:columnas){
+        
+            modeloReserva.addColumn(it);
+        }
+        jTHabitacionesReserva.setModel(modeloReserva);
+  }
+    
+    public void borraFilasTabla(){
+
+   int a =modeloReserva.getRowCount()-1;
+
+for(int i=a;i>=0;i--){
+   
+modeloReserva.removeRow(i );
+}
+}
+    
+     //metodos combobox
     public void cargarTiposHabitacionEnComboBox(){
     //Carga los tipos de habitacion  al ComboBox
     if(jCBTipoHabitacionReserva.getItemCount()==0){
@@ -573,100 +685,12 @@ public class VistaReserva extends javax.swing.JInternalFrame {
        
      }
     
-    //metodos tabla
-    public void cargatablaHabitacionesSeguntipo(){
-        
-    borraFilasTabla();
-        
-    LocalDate fechaInicioHR= fromPickerToLocalDate(jXDPInicioReserva);
-        
-    LocalDate fechaFinHR = fromPickerToLocalDate(jXDPFinReserva);
-       
-    reservaData =new ReservaData(conexion);
-     
-    habitacionData= new HabitacionData(conexion);
-       
-    listaHabitaciones= new ArrayList<>(); 
-     
-   
-     
-    //hasta aca ok
-    
-    String objetCb= (String)jCBTipoHabitacionReserva.getSelectedItem();
-    TipoHabitacion tpHabSelec=searchDeStringATipoHabitacion(objetCb);
-                  
-     /*for (Iterator<Habitacion> it= tlhR.iterator(); it.hasNext();){
-    Habitacion h= it.next();
-    if(h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())
-        listaHabitaciones.add(h);
-     }*/
-    
-    
-    List<Habitacion> todasLasHabitaciones= habitacionData.obtenerHabitaciones(conexion);
-
-    todasLasHabitaciones.stream().filter((h) -> (h.getTipoHabitacion().getIdTipoHabitacion()==tpHabSelec.getIdTipoHabitacion())).forEachOrdered((h) -> {
-
-        listaHabitaciones.add(h);
-    
-        });
-   
-   List<Reserva> reservas= reservaData.obtenerReservas();
-   List<Integer> numerosHABOrrar= new ArrayList<>();
-    for (Reserva r:reservas){
-        if(r.getFechaInicioReserva().plusDays(1).equals(fechaInicioHR)  && r.getFechaFinReserva().plusDays(1).isEqual(fechaFinHR) ||r.getFechaInicioReserva().plusDays(1).isAfter(fechaInicioHR) && r.getFechaFinReserva().plusDays(1).isBefore(fechaFinHR) ){
-           int numeroH=r.getHabitacion().getNumeroHabitacion();
-           numerosHABOrrar.add((Integer)numeroH);
-           }
-    }
-    
-    int remove_h = -1;
-    for(int k=0;k< numerosHABOrrar.size();k++){
-         for(int i=0;i<listaHabitaciones.size();i++){
-            if(listaHabitaciones.get(i).getNumeroHabitacion()==(numerosHABOrrar.get(k))){
-                remove_h = i;
-            }
-        }
-        if(remove_h > -1){
-            listaHabitaciones.remove(remove_h);
-            remove_h = -1;
-        }
-    }
-    for(Habitacion h:listaHabitaciones){
-          
-          modeloReserva.addRow(new Object[]{h.getNumeroHabitacion(), h.getPisoHabitacion(), h.getTipoHabitacion().getCategoriaTipoHabitacion(),h.getTipoHabitacion().getTipoCamaTipoHabitacion(), h.getTipoHabitacion().getCantidadCamasTipoHabitacion()});
-        }
-    }
-    
-    public void armaCabeceraTabla(){
-  
-        ArrayList<Object> columnas=new ArrayList<>();
-        columnas.add("Numero Habitacion");
-        columnas.add("Piso");
-        columnas.add("Tipo");
-        columnas.add("Tipo Cama");
-        columnas.add("Cant Camas");
-        for(Object it:columnas){
-        
-            modeloReserva.addColumn(it);
-        }
-        jTHabitacionesReserva.setModel(modeloReserva);
-  }
-    
-    public void borraFilasTabla(){
-
-   int a =modeloReserva.getRowCount()-1;
-
-for(int i=a;i>=0;i--){
-   
-modeloReserva.removeRow(i );
-}
-}
-    
     public  TipoHabitacion searchDeStringATipoHabitacion(String selectedItemComboBox){
         //sacar el id y pasarlo a int, buscar con el id en la base de datos y sacarlo como un tipoHabitacion completo
         int idTipoHabitacion= Integer.parseInt(selectedItemComboBox.substring(0, 2).trim());
       
        TipoHabitacion tH=(tipoHabitacionData.buscarTipoHabitacion(idTipoHabitacion));
+               
     
         return tH;
     }
@@ -675,7 +699,7 @@ modeloReserva.removeRow(i );
      public void cargarDias(){
     LocalDate fechaInicio= fromPickerToLocalDate(jXDPInicioReserva);
     LocalDate fechaFin = fromPickerToLocalDate(jXDPFinReserva);
-    if(fechaFin.isBefore(fechaInicio) || fechaInicio.isAfter(fechaFin)){
+     if(fechaFin.isBefore(fechaInicio) || fechaInicio.isAfter(fechaFin)){
         //si fecha fin es menor a fecha inicio o si fecha inicio es mayor que fecha fin
         JOptionPane.showMessageDialog(this, "No se puede realizar la reserva, revisar fecha");
         jBBuscarTipoHabitacion.setEnabled(false);
@@ -691,8 +715,7 @@ modeloReserva.removeRow(i );
              jBBuscarTipoHabitacion.setEnabled(true);
              jBConfirmarReserva.setEnabled(true);
          }
-    }
-   
+    }  
     long diasReserva=fechaInicio.until(fechaFin, DAYS);
     System.out.println(diasReserva);
     jTFDiasReserva.setText(diasReserva +"");
@@ -709,8 +732,7 @@ modeloReserva.removeRow(i );
          double monto= dias*precioXnoche;
          jTFMontoReserva.setText(monto + "");
 }
-     
-     
+      
      public LocalDate fromPickerToLocalDate(JXDatePicker datePicker){
     SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
     
@@ -719,6 +741,16 @@ modeloReserva.removeRow(i );
         
     return fechaInLD;
    }
+     
+     public boolean datosvacios(){
+       boolean hayDatosVacios=   
+               jTHuespedReserva.getText().equals("") &&
+               jTFDiasReserva.getText().equals("") &&
+               jTFCantPersonasReserva.getText().equals("") &&
+             jTHabitacionesReserva.getSelectedRow()==-1;
+         
+         return hayDatosVacios;
+     } 
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

@@ -1,5 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 package elgranhotel.modelo;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +30,9 @@ public class ReservaData {
         }
     }
 
-      public List<Reserva> obtenerReservas(){
+   
+    //copiado de Hugo
+    public List<Reserva> obtenerReservas( Conexion conexion){
         List<Reserva> reservas = new ArrayList<>();
             
 
@@ -42,11 +50,12 @@ public class ReservaData {
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
                
-                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"), conexion);
                
                 reserva.setHuesped(huesped);
                 
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"), conexion);
+               
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
@@ -58,8 +67,36 @@ public class ReservaData {
         
         return reservas;
     }
+    //lista de todos los huespedes?
+    public List<Huesped> obtenerHuespedes(){
+        List<Huesped> huespedes = new ArrayList<>();
+            
+
+        try {
+            String sql = "SELECT * FROM huesped;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            Huesped huesped;
+            while(resultSet.next()){
+                huesped = new Huesped();
+                huesped.setDniHuesped(resultSet.getLong("dniHuesped"));
+                huesped.setNombreHuesped(resultSet.getString("nombreHuesped"));
+                huesped.setDomicilioHuesped(resultSet.getString("domicilioHuesped"));
+                huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
+                huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
+
+                huespedes.add(huesped);
+            }      
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los huespedes: " + ex.getMessage());
+        }
+        
+        
+        return huespedes;
+    }   
     
-    public List<Reserva> buscarReserva(long dni){
+    public List<Reserva> buscarReserva(long dni,  Conexion conexion){
         //recibo un huesped
         //busco en la base de datos si el dniHuesped esta en alguna reserva y en
         //alguna habitacion
@@ -80,9 +117,9 @@ public class ReservaData {
                 reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
-                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"), conexion);
                 reserva.setHuesped(huesped);
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"), conexion);
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
@@ -96,13 +133,13 @@ public class ReservaData {
         
         return reservas;
     }
-    
-    public List<Reserva> buscarReserva(LocalDate fechaI, LocalDate fechaF){
+
+    public List<Reserva> buscarReserva(LocalDate fechaI, LocalDate fechaF,  Conexion conexion){
         //recibo una fecha de inicio de la reserva
         //busco en la base de datos si hay alguna reserva para esa fecha 
         //alguna habitacion
         List<Reserva> reservas = new ArrayList<>();
-
+      
         //List<Huesped> huespedes = new ArrayList<Huesped>();
         
         try {
@@ -119,9 +156,9 @@ public class ReservaData {
                 reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
                 reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
                 reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
-                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"));
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"), conexion);
                 reserva.setHuesped(huesped);
-                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"));
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"), conexion);
                 reserva.setHabitacion(habitacion);
                 reservas.add(reserva);
             }      
@@ -134,14 +171,124 @@ public class ReservaData {
         
         
         return reservas;
-    }
+}
+    
+    public int hacerReserva(Reserva reserva){
+       int rta=0;
+        try {
+            
+            String sql = "INSERT INTO reserva (fechaInicioReserva, fechaFinReserva, estadoReserva, dniHuesped, numeroHabitacion) VALUES ( ? , ? , ? , ? , ? );";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            statement.setDate(1,  java.sql.Date.valueOf(reserva.getFechaInicioReserva()));
+            statement.setDate(2, java.sql.Date.valueOf(reserva.getFechaFinReserva()));
+            statement.setBoolean(3, reserva.getEstadoReserva());
+            statement.setLong(4, reserva.getHuesped().getDniHuesped());
+            statement.setInt(5, reserva.getHabitacion().getNumeroHabitacion());
+            
+            rta=statement.executeUpdate();
+            
+            ResultSet rs = statement.getGeneratedKeys();
+            
+             if (rs.next()) {
+                reserva.setIdReserva(rs.getInt(1));
+            } else {
+                System.out.println("No se pudo obtener el id luego de insertar una reserva");
+            }
           
-      public void finReserva(Huesped huesped){
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar una reserva: " + ex.getMessage());
+        }
+      return rta;
+    }
+    
+    public int modificarReserva(Reserva reserva){
+       int rta=0;     
+        try {
+            
+            String sql = "UPDATE reserva SET fechaInicioReserva= ? ,fechaFinReserva= ? ,estadoReserva= ? ,dniHuesped= ? ,numeroHabitacion= ?  WHERE idReserva= ?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+           
+            statement.setDate(1,  java.sql.Date.valueOf(reserva.getFechaInicioReserva()));
+            statement.setDate(2, java.sql.Date.valueOf(reserva.getFechaFinReserva()));
+            statement.setBoolean(3, reserva.getEstadoReserva());
+            statement.setLong(4, reserva.getHuesped().getDniHuesped());
+            statement.setInt(5, reserva.getHabitacion().getNumeroHabitacion());
+            statement.setInt(6, reserva.getIdReserva());
+            
+            rta=statement.executeUpdate();
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar una reserva: " + ex.getMessage());
+        }
+        
+        return rta;
+    }
+    //borra una reserva
+    public int cancelarReserva(int idReserva){
+        int rta=0;
+        try {
+            
+            String sql = "DELETE FROM reserva \n WHERE idReserva =?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idReserva);
+                       
+            rta=statement.executeUpdate();
+             
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al borrar un tipo de Habitacion: " + ex.getMessage());
+        }
+   return rta;
+    }
+        
+    public Huesped mostrarHuesped(long dni, Conexion conexion) {
+       
+        HuespedData huespedData = new HuespedData(conexion);
+        
+        return huespedData.mostrarHuesped(dni);
+    }
+
+    public Habitacion mostrarHabitacion(int idHabitacion, Conexion conexion) {
+      
+        HabitacionData habitacionData = new HabitacionData(conexion);
+        return habitacionData.buscarHabitacion(idHabitacion, conexion);
+    }
+       
+    public int finReserva(int idReserva){
+        int rta=0;
+        try {
+            
+            String sql = "UPDATE reserva r  INNER JOIN habitacion h  ON r.numeroHabitacion= h.numeroHabitacion SET r.estadoReserva= 0 , h.estadoHabitacion= 0  WHERE r.numeroHabitacion= ? ;";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+                       
+            statement.setInt(1, idReserva);
+            
+            rta=statement.executeUpdate();
+            
+            statement.close();
+    
+        } catch (SQLException ex) {     
+            System.out.println("Error al actualizar una reserva: " + ex.getMessage());
+        }
+        return rta;
+    }
+    
+      public void finReserva( Conexion conexion){
          try {
 
             //busco por dni huesped las reservas que hizo
             //List<Reserva> listaReservasHuesped= this.buscarReserva(huesped.getDniHuesped());
-            List<Reserva> listaReservas=this.obtenerReservas();
+            List<Reserva> listaReservas=this.obtenerReservas(conexion);
             //obtengo la fecha de hoy
             LocalDate fechaHoy = LocalDate.now();
 
@@ -193,63 +340,5 @@ public class ReservaData {
          }catch (SQLException ex) {System.out.println("Error al actualizar una reserva: " + ex.getMessage());
         }
     }
-    
-    
-     public void hacerReserva(Reserva reserva){
-        try {
-            
-            String sql = "INSERT INTO reserva (fechaInicioReserva, fechaFinReserva, estadoReserva, dniHuesped, numeroHabitacion) VALUES ( ? , ? , ? , ? , ? );";
-
-            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-            statement.setDate(1,  java.sql.Date.valueOf(reserva.getFechaInicioReserva()));
-            statement.setDate(2, java.sql.Date.valueOf(reserva.getFechaFinReserva()));
-            statement.setBoolean(3, reserva.getEstadoReserva());
-            statement.setLong(4, reserva.getHuesped().getDniHuesped());
-            statement.setInt(5, reserva.getHabitacion().getNumeroHabitacion());
-            
-            statement.executeUpdate();
-            
-            ResultSet rs = statement.getGeneratedKeys();
-            
-             if (rs.next()) {
-                reserva.setIdReserva(rs.getInt(1));
-            } else {
-                System.out.println("No se pudo obtener el id luego de insertar una reserva");
-            }
-          
-            statement.close();
-    
-        } catch (SQLException ex) {
-            System.out.println("Error al insertar una reserva: " + ex.getMessage());
-        }
-    }
-
-       public Huesped mostrarHuesped(long dni){
-    
-        HuespedData huespedData=new HuespedData(conexion);
-        
-        return huespedData.mostrarHuesped(dni);
-        
-    }
-    public Habitacion mostrarHabitacion(int idHabitacion) {
-        try {
-            conexion= new Conexion("jdbc:mysql://localhost/hotel", "root", "");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
-        }
-        HabitacionData habitacionData = new HabitacionData(conexion);
-        return habitacionData.buscarHabitacion(idHabitacion, conexion);
-    }
-       
-   /* public Habitacion mostrarHabitacion(int id){
-    
-        HabitacionData habitacionData=new HabitacionData(conexion);
-        return habitacionData.buscarHabitacion(id);
-    
-    }*/ 
-    
    
-     
-    
 }

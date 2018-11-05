@@ -3,7 +3,7 @@ package elgranhotel.vista;
 
 import elgranhotel.vista.VistaHabitacion;
 import elgranhotel.vista.VistaHuesped;
-import elgranhotel.vista.VistaReserva;
+
 //import elgranhotel.vista.VistaTipoHabitacion;
 
 public class Principal extends javax.swing.JFrame {
