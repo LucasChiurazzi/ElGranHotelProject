@@ -49,6 +49,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     private Reserva reserva;
     private List<Reserva> listaBuscarReservaDni;
     private List<Reserva> listaBuscarReservaFecha;
+    private List<Reserva> listaReservas;
     private HabitacionData habitacionData;
     DefaultTableModel modelo;
     
@@ -66,9 +67,11 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
             huespedData= new HuespedData(conexion);
             huespedData= new HuespedData(conexion);
             habitacionData= new HabitacionData(conexion);
+            reservaData = new ReservaData(conexion);
             
             listaTiposHabitacion =(ArrayList)tipoHabitacionData.mostrarTipoHabitacion();
                        
+            headtabla();
                
             
         } catch (ClassNotFoundException ex) {
@@ -115,6 +118,8 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         jXDPInicioReserva = new org.jdesktop.swingx.JXDatePicker();
         jXDPFinReserva = new org.jdesktop.swingx.JXDatePicker();
         jBCancelarReserva = new javax.swing.JButton();
+        rBFinalizadas = new javax.swing.JRadioButton();
+        rBActivas = new javax.swing.JRadioButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -214,6 +219,20 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
             }
         });
 
+        rBFinalizadas.setText("Finalizadas");
+        rBFinalizadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBFinalizadasActionPerformed(evt);
+            }
+        });
+
+        rBActivas.setText("Activas");
+        rBActivas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBActivasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -254,11 +273,13 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jTHuespedReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jBBuscarHuespedReserva))))))
+                                        .addComponent(jBBuscarHuespedReserva))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jLabel1))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,20 +306,33 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addComponent(jBActualizarReserva1)))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rBFinalizadas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rBActivas)
+                        .addGap(232, 232, 232))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addGap(17, 17, 17)
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rBFinalizadas)
+                            .addComponent(rBActivas))
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTHuespedReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,8 +367,11 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
                             .addComponent(jBActualizarReserva1)
                             .addComponent(jBLimpiarReserva)
                             .addComponent(jButton1)
-                            .addComponent(jBCancelarReserva))))
-                .addGap(21, 21, 21))
+                            .addComponent(jBCancelarReserva))
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -382,6 +419,18 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBLimpiarReservaActionPerformed
 
+    private void rBFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBFinalizadasActionPerformed
+        //al presionar el radio boton libre
+       rBActivas.setSelected(false);
+       cargarTablaSegun(false);
+    }//GEN-LAST:event_rBFinalizadasActionPerformed
+
+    private void rBActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBActivasActionPerformed
+        rBFinalizadas.setSelected(false);
+        cargarTablaSegun(true);
+       
+    }//GEN-LAST:event_rBActivasActionPerformed
+
     //metodos Botones
     public void botonBuscarXFecha(){
         //recibo ambas fechas
@@ -397,32 +446,12 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
        LocalDate fechaIDB = zdtInicio.toLocalDate();
        LocalDate fechaFDB = zdtFin.toLocalDate();
        
-/*       
-       String finput = "Mon Jun 18 00:00:00 IST 2012";
-DateTimeFormatter f = DateTimeFormatter.ofPattern( "E MMM dd HH:mm:ss z uuuu" )
-                                       .withLocale( Locale.US );
-ZonedDateTime zdt = ZonedDateTime.parse( input , f );
-
-Extract a date-only object, a LocalDate, without any time-of-day and without any time zone.
-
-LocalDate ld = zdt.toLocalDate();
-DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern( "dd/MM/uuuu" );
-String output = ld.format( fLocalDate) ;
-
-Dump to console.
-
-System.out.println( "input: " + input );
-System.out.println( "zdt: " + zdt );
-System.out.println( "ld: " + ld );
-System.out.println( "output: " + output );
-       */
-       
         //controlar que fecha inicio sea menor o igual que fecha fin
        
 
         //consulto en db
                
-        reservaData = new ReservaData(conexion);
+        
         System.out.println("aqui1");
             System.out.println(fechaIDB);
             System.out.println(fechaFDB);
@@ -513,7 +542,7 @@ System.out.println( "output: " + output );
         // Busca el huesped con el dni, si el huesped es null abre un dialgo para poder cargar en la vista huesped
 
         long dni=Long.parseLong(jTHuespedReserva.getText());
-        reservaData = new ReservaData(conexion);
+       
         listaBuscarReservaDni = reservaData.buscarReserva(dni,  conexion);
         
         //1 es la fila y 6 son las columnas
@@ -686,6 +715,35 @@ System.out.println( "output: " + output );
     return vacio;
     }
     
+      
+    public void cargarTablaSegun(Boolean bool){
+       borraFilasTabla();
+        listaReservas = reservaData.obtenerReservas(conexion); 
+        LocalDate hoy= LocalDate.now();
+        List<Reserva> finalizadas= new ArrayList<>();
+        List<Reserva> activas= new ArrayList<>();
+   
+        for(Reserva r:listaReservas){
+              if(r.getFechaFinReserva().plusDays(1).isEqual(hoy) || r.getFechaFinReserva().plusDays(1).isBefore(hoy)){
+               finalizadas.add(r);
+        
+            }else{
+                activas.add(r);
+                }
+          }
+        
+     if(bool){   
+     for(Reserva r:activas)   
+     modelo.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), estadoReserva(r.getEstadoReserva()), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
+     } if(!bool){
+     for(Reserva r:finalizadas)   
+     modelo.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), estadoReserva(r.getEstadoReserva()), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
+     
+     }
+            
+       
+  } 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarReserva1;
     private javax.swing.JButton jBBuscarFecha;
@@ -714,5 +772,7 @@ System.out.println( "output: " + output );
     private javax.swing.JTable jTableBuscarReservaPorHuesped;
     private org.jdesktop.swingx.JXDatePicker jXDPFinReserva;
     private org.jdesktop.swingx.JXDatePicker jXDPInicioReserva;
+    private javax.swing.JRadioButton rBActivas;
+    private javax.swing.JRadioButton rBFinalizadas;
     // End of variables declaration//GEN-END:variables
 }
