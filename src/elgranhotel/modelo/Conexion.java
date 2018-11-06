@@ -19,7 +19,7 @@ public class Conexion {
 
         //Aqui Cargamos las clases de mariadb que implementan JDBC
         Class.forName("org.mariadb.jdbc.Driver");
-
+       
     }
     
     public Connection getConexion() throws SQLException{

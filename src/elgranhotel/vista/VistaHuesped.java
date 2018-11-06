@@ -11,17 +11,21 @@ import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
 import static elgranhotel.vista.Principal.escritorio;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 
@@ -334,13 +338,21 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInformeActionPerformed
-    try {
-        JasperReport informe= JasperCompileManager.compileReport("InformeHuesped.jrxml");
-        JasperPrint imprimir= JasperFillManager.fillReport(informe, null, this.conexion.getConexion());
-        JasperViewer.viewReport(imprimir);
-    }catch(Exception e){
-        System.out.println(e.getMessage());
-    }
+        JasperReport informe;
+        JasperPrint imprimir;
+        try {
+        conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+        informe = (JasperReport) JRLoader.loadObjectFromFile("InformeHuesped.jasper");
+        imprimir = JasperFillManager.fillReport(informe, null, this.conexion.getConexion());
+        JasperViewer jViewer = new JasperViewer(imprimir,false); //Creamos la vista del Reporte
+        jViewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Le agregamos que se cierre solo el reporte cuando lo cierre el usuario
+        jViewer.setVisible(true); //Inicializamos la vista del informe
+        } catch (JRException ex) {
+            Logger.getLogger(java.security.Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+              Logger.getLogger(VistaHuesped.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    
     }//GEN-LAST:event_jBInformeActionPerformed
 public void armaCabeceraTabla(){
   

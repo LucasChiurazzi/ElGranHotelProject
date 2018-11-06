@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1150" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad360c84-4a97-4567-b44a-bd7ca7065773">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="1084"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT huesped.dniHuesped, huesped.nombreHuesped, huesped.domicilioHuesped, huesped.correoHuesped, huesped.celularHuesped, reserva.fechaInicioReserva, reserva.fechaFinReserva, habitacion.numeroHabitacion, habitacion.pisoHabitacion, tipohabitacion.categoriaTipoHabitacion, tipohabitacion.precioNocheTipoHabitacion, tipohabitacion.cantPersonasTipoHabitacion, tipohabitacion.tipoCamaTipoHabitacion, tipohabitacion.cantCamasTipoHabitacion FROM huesped, reserva, habitacion, tipohabitacion WHERE huesped.dniHuesped=reserva.dniHuesped AND reserva.numeroHabitacion=habitacion.numeroHabitacion AND habitacion.IdTipoHabitacion=tipohabitacion.idTipoHabitacion ORDER BY huesped.dniHuesped ASC;]]>
@@ -54,14 +54,14 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="223" y="10" width="68" height="22" uuid="b0936961-a916-4225-b8e3-cfcdc0e206dc"/>
+				<reportElement x="520" y="10" width="68" height="22" uuid="b0936961-a916-4225-b8e3-cfcdc0e206dc"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[INFORME]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="166" y="32" width="247" height="20" uuid="4344a79e-b24a-4619-bdc6-55785137ee92"/>
+				<reportElement x="468" y="32" width="179" height="20" uuid="4344a79e-b24a-4619-bdc6-55785137ee92"/>
 				<text><![CDATA[Nuestros Huespedes de "El gran Hotel".]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
@@ -79,7 +79,7 @@
 			<staticText>
 				<reportElement x="-12" y="14" width="448" height="20" uuid="4276f91c-5717-4285-80ac-04fefb9a6913"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[|                                                         HUESPED                                                                 |]]></text>
+				<text><![CDATA[|                                                         HUESPED                                                                                |]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="425" y="14" width="203" height="20" uuid="24a20234-dc6f-4de1-b32f-3a5cd4ec18ec"/>
@@ -93,7 +93,7 @@
 			<staticText>
 				<reportElement x="722" y="14" width="374" height="20" uuid="9924c979-17e0-45fe-8e1e-d1aeafb17970"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[TIPO DE HABITACIÓN                                                      |]]></text>
+				<text><![CDATA[TIPO DE HABITACIÓN                                                             |]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
