@@ -17,8 +17,6 @@ import elgranhotel.modelo.HuespedData;
 import elgranhotel.modelo.Reserva;
 import elgranhotel.modelo.ReservaData;
 import elgranhotel.modelo.TipoHabitacion;
-import elgranhotel.modelo.TipoHabitacionData;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
@@ -40,18 +38,17 @@ import org.jdesktop.swingx.JXDatePicker;
  * @author Lucas
  */
 public class VistaBuscarReserva extends javax.swing.JInternalFrame {
-    private TipoHabitacionData tipoHabitacionData;
-    private List<TipoHabitacion> listaTiposHabitacion;
+    
+    
     private Conexion conexion;
     private HuespedData huespedData;
-    private ArrayList<Huesped> listaHuespedes;
     private ReservaData reservaData;
     private Reserva reserva;
     private List<Reserva> listaBuscarReservaDni;
     private List<Reserva> listaBuscarReservaFecha;
     private List<Reserva> listaReservas;
     private HabitacionData habitacionData;
-    DefaultTableModel modelo;
+    private DefaultTableModel modeloReserva;
     
     
     /**
@@ -63,15 +60,15 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
           try {   
             conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
             
-            tipoHabitacionData = new TipoHabitacionData(conexion);
+            modeloReserva=new DefaultTableModel();
             huespedData= new HuespedData(conexion);
             huespedData= new HuespedData(conexion);
             habitacionData= new HabitacionData(conexion);
             reservaData = new ReservaData(conexion);
             
-            listaTiposHabitacion =(ArrayList)tipoHabitacionData.mostrarTipoHabitacion();
+           
                        
-            headtabla();
+            armaCabeceraTabla();
                
             
         } catch (ClassNotFoundException ex) {
@@ -455,32 +452,11 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         System.out.println("aqui1");
             System.out.println(fechaIDB);
             System.out.println(fechaFDB);
-        listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB, conexion);
+       listaBuscarReservaFecha = reservaData.buscarReserva(fechaIDB, fechaFDB, conexion);     
         
-        //1 es la fila y 6 son las columnas
-            System.out.println(listaBuscarReservaFecha.size());
-        String filaBusquedaFecha[][]=new String[listaBuscarReservaFecha.size()][6];
-        int i;
-            System.out.println("aqui");
-        //muestro los valores en tabla
-        for (i=0; i<listaBuscarReservaFecha.size(); i++){
-       
-         filaBusquedaFecha[i][0] = String.valueOf(listaBuscarReservaFecha.get(i).getIdReserva());
-         filaBusquedaFecha[i][1] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaInicioReserva());
-         filaBusquedaFecha[i][2] = String.valueOf(listaBuscarReservaFecha.get(i).getFechaFinReserva());
-         filaBusquedaFecha[i][3] = estadoReserva(listaBuscarReservaFecha.get(i).getEstadoReserva());
-         filaBusquedaFecha[i][4] = String.valueOf(listaBuscarReservaFecha.get(i).getHuesped().getDniHuesped());
-         filaBusquedaFecha[i][5] = String.valueOf(listaBuscarReservaFecha.get(i).getHabitacion().getNumeroHabitacion());
-
+       for(Reserva r:listaBuscarReservaFecha){
+            modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), estadoReserva(r.getEstadoReserva()), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
         }
-      
-      jTableBuscarReservaPorHuesped.setModel(new javax.swing.table.DefaultTableModel(
-            filaBusquedaFecha,
-            new String [] {
-                "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
-            }
-        ));    
-  
         //si selecciono me llena el jxdatepiker esta hecho esto en evento clic
         
     }
@@ -540,32 +516,16 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     
     public void botonBuscarXHuesped(){
         // Busca el huesped con el dni, si el huesped es null abre un dialgo para poder cargar en la vista huesped
-
+        borraFilasTabla();  
         long dni=Long.parseLong(jTHuespedReserva.getText());
        
         listaBuscarReservaDni = reservaData.buscarReserva(dni,  conexion);
         
-        //1 es la fila y 6 son las columnas
-        String filaBusquedaDni[][]=new String[listaBuscarReservaDni.size()][6];
-        int i;
-        for (i=0; i<listaBuscarReservaDni.size(); i++){
-       
-         filaBusquedaDni[i][0] = String.valueOf(listaBuscarReservaDni.get(i).getIdReserva());
-         filaBusquedaDni[i][1] = String.valueOf(listaBuscarReservaDni.get(i).getFechaInicioReserva());
-         filaBusquedaDni[i][2] = String.valueOf(listaBuscarReservaDni.get(i).getFechaFinReserva());
-         filaBusquedaDni[i][3] = estadoReserva(listaBuscarReservaDni.get(i).getEstadoReserva());
-         filaBusquedaDni[i][4] = String.valueOf(listaBuscarReservaDni.get(i).getHuesped().getDniHuesped());
-         filaBusquedaDni[i][5] = String.valueOf(listaBuscarReservaDni.get(i).getHabitacion().getNumeroHabitacion());
-
+         for(Reserva r:listaBuscarReservaDni){
+            modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), estadoReserva(r.getEstadoReserva()), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
         }
-      
-      jTableBuscarReservaPorHuesped.setModel(new javax.swing.table.DefaultTableModel(
-            filaBusquedaDni,
-            new String [] {
-                "Id Reserva", "Fecha Inicio", "Fecha Fin", "Estado", "Dni Huesped", "Habitacion"
-            }
-        ));    
- 
+        
+       
     }
     
     public void botonCancelar(){
@@ -628,7 +588,7 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     
     public void botonLimpiar(){
         
-        headtabla();
+        armaCabeceraTabla();
         borraFilasTabla();
         
         jTFEstadoReserva1.setText("");
@@ -686,23 +646,23 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
   return estado;
   }
 
-    public void headtabla(){
-         modelo=new DefaultTableModel();
-        modelo.addColumn("Id Reserva");
-        modelo.addColumn("Fecha Inicio");
-        modelo.addColumn("Fecha Fin");
-        modelo.addColumn("Estado");
-        modelo.addColumn("Dni Huesped");
-        modelo.addColumn("Habitacion");
-        this.jTableBuscarReservaPorHuesped.setModel(modelo);
+    public void armaCabeceraTabla(){
+     
+        modeloReserva.addColumn("Id Reserva");
+        modeloReserva.addColumn("Fecha Inicio");
+        modeloReserva.addColumn("Fecha Fin");
+        modeloReserva.addColumn("Estado");
+        modeloReserva.addColumn("Dni Huesped");
+        modeloReserva.addColumn("Habitacion");
+        this.jTableBuscarReservaPorHuesped.setModel( modeloReserva);
     }
   
     public void borraFilasTabla(){
 
-    int a =modelo.getRowCount()-1;
+    int a = modeloReserva.getRowCount()-1;
    
     for(int i=a;i>=0;i--){
-        modelo.removeRow(i);
+         modeloReserva.removeRow(i);
      
     }
 }
@@ -715,7 +675,6 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     return vacio;
     }
     
-      
     public void cargarTablaSegun(Boolean bool){
        borraFilasTabla();
         listaReservas = reservaData.obtenerReservas(conexion); 
@@ -734,10 +693,10 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
         
      if(bool){   
      for(Reserva r:activas)   
-     modelo.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), estadoReserva(r.getEstadoReserva()), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
+     modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), estadoReserva(r.getEstadoReserva()), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
      } if(!bool){
      for(Reserva r:finalizadas)   
-     modelo.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), estadoReserva(r.getEstadoReserva()), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
+     modeloReserva.addRow(new Object[]{r.getIdReserva(), r.getFechaInicioReserva(), r.getFechaFinReserva(), estadoReserva(r.getEstadoReserva()), r.getHuesped().getDniHuesped(), r.getHabitacion().getNumeroHabitacion()});
      
      }
             

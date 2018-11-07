@@ -6,8 +6,7 @@
 package elgranhotel.vista;
 
 
-import elgranhotel.auxveridicacion.EmailFormatter;
-import elgranhotel.auxveridicacion.EmailVerifier;
+
 import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
@@ -73,12 +72,6 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         jBLimpiar = new javax.swing.JButton();
         jtDni = new javax.swing.JFormattedTextField();
         jtCorreo = new javax.swing.JFormattedTextField();
-        jtCorreo.setValue("");
-        PropertyChangeSupport propertySupportpropertySupport = new PropertyChangeSupport(this);
-        EmailFormatter ef = new EmailFormatter();
-
-        DefaultFormatterFactory dff = new DefaultFormatterFactory(ef);
-        jtCorreo.setFormatterFactory(dff);
 
         setClosable(true);
         setMaximizable(true);
@@ -167,20 +160,6 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         }
         jtDni.setToolTipText("Ingrese Numero de DNI");
 
-        jtCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jtCorreoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtCorreoFocusLost(evt);
-            }
-        });
-        jtCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtCorreoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -220,11 +199,12 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jtDomicilio)
-                            .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(64, 64, 64))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jScrollPane1)
@@ -395,21 +375,6 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         limpiar();
         
     }//GEN-LAST:event_jBLimpiarActionPerformed
-
-    private void jtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCorreoActionPerformed
-
-    private void jtCorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCorreoFocusLost
-     if(!jtCorreo.getText().equals("")){
-jtCorreo.setInputVerifier(new EmailVerifier());
-}
-    
-    }//GEN-LAST:event_jtCorreoFocusLost
-
-    private void jtCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCorreoFocusGained
-   
-    }//GEN-LAST:event_jtCorreoFocusGained
 
     
     public void cargarDatosDesdeTabla(){

@@ -67,12 +67,14 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jtCelular" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="jtDomicilio" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jtCelular" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="jtCorreo" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jtDomicilio" max="32767" attributes="0"/>
-                          <Component id="jtCorreo" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -257,14 +259,8 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jtCorreo">
-      <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtCorreoFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtCorreoFocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtCorreoActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField()"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jtCorreo.setValue(&quot;&quot;);&#xa;PropertyChangeSupport propertySupportpropertySupport = new PropertyChangeSupport(this);     &#xa;      EmailFormatter ef = new EmailFormatter();&#xa; &#xa;      &#xa;      DefaultFormatterFactory dff = new DefaultFormatterFactory(ef);&#xa;jtCorreo.setFormatterFactory(dff);"/>
       </AuxValues>
     </Component>
   </SubComponents>
