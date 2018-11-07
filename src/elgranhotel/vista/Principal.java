@@ -3,8 +3,9 @@ package elgranhotel.vista;
 
 import elgranhotel.vista.VistaHabitacion;
 import elgranhotel.vista.VistaHuesped;
-
-//import elgranhotel.vista.VistaTipoHabitacion;
+import java.awt.Image;
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -22,7 +23,14 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorio = new javax.swing.JDesktopPane();
+        ImageIcon icono = new ImageIcon(getClass().getResource("fondo1.jpg"));
+        Image imagen = icono.getImage();
+        escritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g)
+            {
+                g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMenuItemSalir = new javax.swing.JMenuItem();
