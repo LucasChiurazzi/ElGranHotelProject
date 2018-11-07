@@ -410,10 +410,10 @@ private ReservaData reservaData;
     public void borraFilasTabla(){
 
     int a =modelo.getRowCount()-1;
-    System.out.println("Tabla "+a);
+    //System.out.println("Tabla "+a);
     for(int i=a;i>=0;i--){
         modelo.removeRow(i );
-        System.out.println("Tabla "+i);
+        //System.out.println("Tabla "+i);
     }
 }
 
@@ -474,7 +474,7 @@ private ReservaData reservaData;
                       rH= r;
                       }
                }
-               System.out.println(rH);
+               //System.out.println(rH);
             boolean estado=habitacion.getEstadoHabitacion();
              if(estado && rH.getFechaFinReserva().plusDays(1).isAfter(hoy) && rH.getFechaInicioReserva().plusDays(1).isBefore(hoy) ||rH.getFechaFinReserva().plusDays(1).equals(hoy) || rH.getFechaInicioReserva().plusDays(1).isBefore(hoy)) {
                 jTFEstadoHabitacion.setText("OCUPADA");
