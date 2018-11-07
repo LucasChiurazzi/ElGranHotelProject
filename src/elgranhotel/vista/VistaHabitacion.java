@@ -298,6 +298,9 @@ private ReservaData reservaData;
     private void botonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarActionPerformed
         borraFilasTabla();
         cargarTabla();
+        jRBOcupada.setSelected(false);
+          jRBLibre.setSelected(false);
+        
     }//GEN-LAST:event_botonListarActionPerformed
 
     private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
