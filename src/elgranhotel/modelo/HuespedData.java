@@ -12,11 +12,7 @@ import java.util.List;
 
 public class HuespedData {
     //atributo
-    
     private Connection connection = null;
-    private ReservaData reservaData;
-    private HabitacionData habitacionData;
-    private Conexion conexion;
 
     //constructor
     public HuespedData(Conexion conexion) {
@@ -26,15 +22,12 @@ public class HuespedData {
             System.out.println("Error al abrir al obtener la conexion");
         }
     }
-
-    HuespedData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     //metodos
     
     //creo un nuevo huesped
-    public void crearHuesped(Huesped huesped){
+    public int crearHuesped(Huesped huesped){
+        int rta=0;
         try {
             
             String sql = "INSERT INTO huesped (dniHuesped, nombreHuesped, domicilioHuesped, correoHuesped, celularHuesped) VALUES ( ? , ? , ? , ? , ?);";
@@ -46,17 +39,19 @@ public class HuespedData {
             statement.setString(4, huesped.getCorreoHuesped());
             statement.setString(5, huesped.getCelularHuesped());
             
-            statement.executeUpdate();
+            rta=statement.executeUpdate();
+            
             
             statement.close();
     
         } catch (SQLException ex) {
             System.out.println("Error al insertar un huesped: " + ex.getMessage());
         }
+        return rta;
     }
     //modifico todos los campos de un huesped
-    public void modificarHuesped(Huesped huesped){
-    
+    public int modificarHuesped(Huesped huesped){
+        int rta=0;
         try {
             
             String sql = "UPDATE huesped SET nombreHuesped = ?, domicilioHuesped = ? , correoHuesped = ? , celularHuesped = ? WHERE dniHuesped = ?;";
@@ -67,47 +62,45 @@ public class HuespedData {
             statement.setString(3, huesped.getCorreoHuesped());
             statement.setString(4, huesped.getCelularHuesped());
             statement.setLong(5, huesped.getDniHuesped());
-            statement.executeUpdate();
+            rta=statement.executeUpdate();
             
             statement.close();
     
         } catch (SQLException ex) {
             System.out.println("Error al actualizar un huesped: " + ex.getMessage());
         }
-    
+    return rta;
 }
     //elimino huesped filtrando por dni
-    public void eliminarHuesped(long dni){
-    try {
+    public int eliminarHuesped(long dni){
+     int rta=0;
+     try {
             
             String sql = "DELETE FROM huesped WHERE dniHuesped =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, dni);
                        
-            statement.executeUpdate();
+            rta=statement.executeUpdate();
              
             statement.close();
     
         } catch (SQLException ex) {
             System.out.println("Error al borrar un huesped: " + ex.getMessage());
         }
-        
+        return rta;
     
     }
     //muestro huesped filtrado por dni
     public Huesped mostrarHuesped(long dni){
-       Huesped huesped= null;
+        Huesped huesped=null;
             
 
         try {
             String sql = "SELECT * FROM huesped WHERE dniHuesped = ? ;" ;
             PreparedStatement statement = connection.prepareStatement(sql);
-           
             statement.setLong(1, dni);
             ResultSet resultSet = statement.executeQuery();
-            
-            
             
             
             
@@ -119,7 +112,7 @@ public class HuespedData {
                 huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
                 huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
 
-               
+            
             }      
             
             
@@ -131,7 +124,8 @@ public class HuespedData {
         
         return huesped;
     }
-    //muestro todos los huespedes
+    
+//muestro todos los huespedes
      public List<Huesped> mostrarHuespedes(){
       List<Huesped> huespedes = new ArrayList<>();
             
@@ -141,6 +135,7 @@ public class HuespedData {
             PreparedStatement statement = connection.prepareStatement(sql);
             
             ResultSet resultSet = statement.executeQuery();
+            
             
              Huesped huesped;
             
@@ -165,44 +160,49 @@ public class HuespedData {
         
         return huespedes;
     }
-    
-    
-    //muestra una lista de todos los huespedes en el hotel
-    public List<Huesped> mostrarHuespedesActivos(){
-        List<Huesped> huespedes = new ArrayList<>();
+   /* public List<Object> InformeHuesped(long dni){
+      List<Object> reservasHuesped = new ArrayList<>();
             
 
         try {
-            String sql = "SELECT huesped.dniHuesped, huesped.nombreHuesped, huesped.celularHuesped, habitacion.numeroHabitacion, reserva.fechaFinReserva FROM huesped, habitacion, reserva WHERE huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion AND habitacion.estadoHabitacion= 1 ;" ;
-            
+            String sql = "SELECT reserva.fechaInicioReserva, reserva.fechaFinReserva, habitacion.numeroHabitacion, habitacion.pisoHabitacion, tipohabitacion.categoriaTipoHabitacion, tipohabitacion.precioNocheTipoHabitacion, tipohabitacion.cantPersonasTipoHabitacion, tipohabitacion.tipoCamaTipoHabitacion, tipohabitacion.cantCamasTipoHabitacion FROM huesped, reserva, habitacion, tipohabitacion WHERE huesped.dniHuesped=reserva.dniHuesped AND reserva.numeroHabitacion=habitacion.numeroHabitacion AND habitacion.IdTipoHabitacion=tipohabitacion.idTipoHabitacion AND huesped.dniHuesped= ? ORDER BY huesped.dniHuesped ASC; ; " ;
             PreparedStatement statement = connection.prepareStatement(sql);
-            
+            statement.setLong(1, dni);
             ResultSet resultSet = statement.executeQuery();
             
-            Huesped huesped;
-            
+            Reserva reserva;
+            Habitacion habitacion;
+            TipoHabitacion tipoHabitacion;
             while(resultSet.next()){
-                huesped = new Huesped();
-                huesped.setDniHuesped(resultSet.getLong("dniHuesped"));
-                huesped.setNombreHuesped(resultSet.getString("nombreHuesped"));
-                huesped.setDomicilioHuesped(resultSet.getString("domicilioHuesped"));
-                huesped.setCorreoHuesped(resultSet.getString("correoHuesped"));
-                huesped.setCelularHuesped(resultSet.getString("celularHuesped"));
-
-               
-                huespedes.add(huesped);
+                reserva = new Reserva();
+                habitacion= new Habitacion();
+                tipoHabitacion = new TipoHabitacion();
+                reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
+                reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
+                //huesped.setDomicilioHuesped(resultSet.getString("estadoReserva"));
+                habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
+                habitacion.setPisoHabitacion(resultSet.getInt("pisoHabitacion"));
+                tipoHabitacion.setCategoriaTipoHabitacion(resultSet.getString("categoriaTipoHabitacion"));
+                tipoHabitacion.setPrecioNocheTipoHabitacion(resultSet.getDouble("precioNocheTipoHabitacion"));
+                tipoHabitacion.setCantPersonasTipoHabitacion(resultSet.getInt("cantPersonasTipoHabitacion"));
+                tipoHabitacion.setTipoCamaTipoHabitacion(resultSet.getString("tipoCamaTipoHabitacion"));
+                tipoHabitacion.setCantidadCamasTipoHabitacion(resultSet.getInt("cantCamasTipoHabitacion"));
+                reservasHuesped.add(reserva);
+                reservasHuesped.add(habitacion);
+                reservasHuesped.add(tipoHabitacion);
+                
             }      
             
             
             statement.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener los huespedes: " + ex.getMessage());
+            System.out.println("Error al generar informe del huesped: " + ex.getMessage());
         }
         
         
-        return huespedes;
+        return reservasHuesped;
     }
-    
+    */
     
 }
     
