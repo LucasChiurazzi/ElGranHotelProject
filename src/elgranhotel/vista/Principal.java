@@ -38,6 +38,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("El Gran Hotel 1.0-Grupo 7");
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         escritorio.setPreferredSize(new java.awt.Dimension(800, 577));
 

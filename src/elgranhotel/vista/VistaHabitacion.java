@@ -333,7 +333,9 @@ private ReservaData reservaData;
     private void jCBTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoHabitacionActionPerformed
       
         //si hay muchas selecciones en la tabla se puede cambiar el tipo seleccionandolo en el combobox
+         
         if(tablaHabitacion.getSelectedRowCount()>1){
+          
          multipleSelectTabla();
          borraFilasTabla();
          cargarTabla();
@@ -460,10 +462,10 @@ private ReservaData reservaData;
      
     int a =modelo.getRowCount()-1;
    
-    System.out.println("Tabla "+a);
+   
     for(int i=a;i>=0;i--){
         modelo.removeRow(i );
-        System.out.println("Tabla "+i);
+      
     }
 }
 
@@ -575,11 +577,16 @@ private ReservaData reservaData;
     
     public void multipleSelectTabla(){
       
-      int[] numeroHabitacion =new int[tablaHabitacion.getSelectedRowCount()]; 
-      for(int i=tablaHabitacion.getSelectedRow(); i<tablaHabitacion.getSelectedRow() +tablaHabitacion.getSelectedRowCount();i++){ 
-          numeroHabitacion[i]= (int)tablaHabitacion.getValueAt(i, 0); 
-      } 
       
+       List<Integer> numeroHabitacion= new ArrayList<>();
+        
+      for(int i=tablaHabitacion.getSelectedRow(); i<tablaHabitacion.getSelectedRow() + tablaHabitacion.getSelectedRowCount(); i++){ 
+          
+         //filas[i]= (int)tablaHabitacion.getValueAt(i, 0); 
+         numeroHabitacion.add((Integer)tablaHabitacion.getValueAt(i, 0));
+         
+           } 
+       
       TipoHabitacion tpHabSelec= deJCBaTipo(jCBTipoHabitacion);
      
       for(int n:numeroHabitacion) {
@@ -587,6 +594,7 @@ private ReservaData reservaData;
           h.setTipoHabitacion(tpHabSelec);
           habitacionData.actualizarHabitacion(h);
           }
+      
     }
   
     public String estadoHabitacion(Boolean buleano){
