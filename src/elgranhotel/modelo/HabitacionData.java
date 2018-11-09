@@ -31,7 +31,7 @@ public class HabitacionData {
          int rta=0;
     try {
                      
-            String sql = "INSERT INTO habitacion (numeroHabitacion, pisoHabitacion, estadoHabitacion, IdTipoHabitacion) VALUES ( ? , ? , ? , ? ) ;";
+            String sql = "INSERT INTO habitacion (numeroHabitacion, pisoHabitacion, estadoHabitacion, idTipoHabitacion) VALUES ( ? , ? , ? , ? ) ;";
             
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, habitacion.getNumeroHabitacion());
@@ -61,7 +61,7 @@ public class HabitacionData {
                habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
                habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
                habitacion.setPisoHabitacion(resultSet.getInt("pisoHabitacion"));
-               habitacion.setTipoHabitacion(buscarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"), conexion));
+               habitacion.setTipoHabitacion(buscarTipoHabitacion(resultSet.getInt("idTipoHabitacion"), conexion));
             }      
             statement.close();
         } catch (SQLException ex) {
@@ -75,7 +75,7 @@ public class HabitacionData {
     int rta=0;
        try {
             
-            String sql = "UPDATE habitacion SET  pisoHabitacion = ?, estadoHabitacion = ?, IdTipoHabitacion = ? WHERE numeroHabitacion = ? ;";
+            String sql = "UPDATE habitacion SET  pisoHabitacion = ?, estadoHabitacion = ?, idTipoHabitacion = ? WHERE numeroHabitacion = ? ;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, habitacion.getPisoHabitacion());
@@ -120,7 +120,7 @@ public List<Habitacion> obtenerHabitaciones(Conexion conexion){
                 habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
                 habitacion.setPisoHabitacion(resultSet.getInt("pisoHabitacion"));
                 habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
-                TipoHabitacion tH=buscarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"), conexion);
+                TipoHabitacion tH=buscarTipoHabitacion(resultSet.getInt("idTipoHabitacion"), conexion);
                 habitacion.setTipoHabitacion(tH);
                 habitaciones.add(habitacion);
              }
@@ -145,7 +145,7 @@ public List<Habitacion> obtenerHabitacionesSi(Boolean condicion,Conexion conexio
                 habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
                 habitacion.setPisoHabitacion(resultSet.getInt("pisoHabitacion"));
                 habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
-                TipoHabitacion tH=buscarTipoHabitacion(resultSet.getInt("IdTipoHabitacion"), conexion);
+                TipoHabitacion tH=buscarTipoHabitacion(resultSet.getInt("idTipoHabitacion"), conexion);
                 habitacion.setTipoHabitacion(tH);
                 habitaciones.add(habitacion);
              }

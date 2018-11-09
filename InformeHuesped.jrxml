@@ -19,7 +19,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT reserva.fechaInicioReserva, reserva.fechaFinReserva, habitacion.numeroHabitacion, habitacion.pisoHabitacion, tipohabitacion.categoriaTipoHabitacion, tipohabitacion.precioNocheTipoHabitacion, tipohabitacion.cantPersonasTipoHabitacion, tipohabitacion.tipoCamaTipoHabitacion, tipohabitacion.cantCamasTipoHabitacion FROM huesped, reserva, habitacion, tipohabitacion WHERE huesped.dniHuesped=reserva.dniHuesped AND reserva.numeroHabitacion=habitacion.numeroHabitacion AND habitacion.IdTipoHabitacion=tipohabitacion.idTipoHabitacion AND huesped.dniHuesped=$P{parametroDni} ORDER BY reserva.fechaInicioReserva ASC;]]>
+		<![CDATA[SELECT reserva.fechaInicioReserva, reserva.fechaFinReserva, habitacion.numeroHabitacion, habitacion.pisoHabitacion, tipohabitacion.categoriaTipoHabitacion, tipohabitacion.precioNocheTipoHabitacion, tipohabitacion.cantPersonasTipoHabitacion, tipohabitacion.tipoCamaTipoHabitacion, tipohabitacion.cantCamasTipoHabitacion FROM huesped, reserva, habitacion, tipohabitacion WHERE huesped.dniHuesped=reserva.dniHuesped AND reserva.numeroHabitacion=habitacion.numeroHabitacion AND habitacion.idTipoHabitacion=tipohabitacion.idTipoHabitacion AND huesped.dniHuesped=$P{parametroDni} ORDER BY reserva.fechaInicioReserva ASC;]]>
 	</queryString>
 	<field name="fechaInicioReserva" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
