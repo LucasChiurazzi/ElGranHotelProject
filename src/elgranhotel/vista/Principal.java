@@ -2,15 +2,41 @@
 package elgranhotel.vista;
 
 //import elgranhotel.vista.VistaHabitacion;
-import elgranhotel.vista.VistaHuesped;
-import elgranhotel.vista.VistaReserva;
-import elgranhotel.vista.VistaTipoHabitacion;
+import elgranhotel.modelo.Conexion;
+import elgranhotel.modelo.ReservaData;
+import elgranhotel.modelo.RunnableClass;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Principal extends javax.swing.JFrame {
-
+    
+    private Conexion conexion;
+    private ReservaData reservaData;
     
     public Principal() {
         initComponents();
+        finReservaAutomatico();
+          
+        try {
+            conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+            reservaData= new ReservaData(conexion);
+            
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+                
+       
+        
     }
 
     /**
@@ -211,6 +237,25 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(vistaBuscarReserva);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+          
+    public void finReservaAutomatico(){
+       
+        
+       /* LocalDateTime localNow = LocalDateTime.now();
+        ZoneId currentZone = ZoneId.of("Argentina");
+        ZonedDateTime zonedNow = ZonedDateTime.of(localNow, currentZone);
+        ZonedDateTime zonedNext5 ;
+        zonedNext5 = zonedNow.withHour(0).withMinute(0).withSecond(0);
+        if(zonedNow.compareTo(zonedNext5) > 0)
+            zonedNext5 = zonedNext5.plusDays(1);
+
+        Duration duration = Duration.between(zonedNow, zonedNext5);
+        long initalDelay = duration.getSeconds();*/
+
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(new RunnableClass(conexion) , 0, 24*60*60, TimeUnit.SECONDS);
+    }
+    
     /**
      * @param args the command line arguments
      */

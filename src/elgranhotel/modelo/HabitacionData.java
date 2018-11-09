@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,8 +109,7 @@ public class HabitacionData {
     return rta;   
 }
 
-// que es mejor un metodo que filtre
-//o filtrar dsp de obtener la data?? MEtodo que filtre puede servir para cualquier parametro
+//recibe conexion porque buscartipohabitacion porque tipo habitacion data necesita una conexion
 public List<Habitacion> obtenerHabitaciones(Conexion conexion){
      Habitacion habitacion;
      List<Habitacion> habitaciones= new ArrayList<>();
@@ -142,20 +140,7 @@ public TipoHabitacion buscarTipoHabitacion(int idTipoHabitacion, Conexion conexi
         
         return th;
     }
-    
 
-public boolean ocupada(Habitacion h, LocalDate fechaInicioReserva, LocalDate fechaFinReserva){
-    boolean ocupada= false;
-    LocalDate fechaHoy= LocalDate.now();
-    if(fechaInicioReserva.isBefore(fechaHoy.plusDays(1)) || fechaInicioReserva.equals(fechaHoy.plusDays(1))&& fechaFinReserva.isAfter(fechaHoy.plusDays(1)) || fechaFinReserva.equals(fechaHoy.plusDays(1))){
-          ocupada=true;
-          h.setEstadoHabitacion(ocupada);
-          this.actualizarHabitacion(h);
-                            }
-    
-    
-    return ocupada;
-}
 
 public List<Habitacion> obtenerHabitacionesSi(Boolean condicion,Conexion conexion){
      Habitacion habitacion;
@@ -181,34 +166,7 @@ public List<Habitacion> obtenerHabitacionesSi(Boolean condicion,Conexion conexio
      
     return habitaciones;
 }
-/*public List<Habitacion> obtenerHabitacionesXTipo(int idTipoHabitacion){
-        List<Habitacion> habitaciones = new ArrayList<Habitacion>();
-            
 
-        try {
-            String sql = "SELECT * FROM habitacion WHERE idTipoHabitacion=" + idTipoHabitacion + ";";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-            Habitacion habitacion;
-            while(resultSet.next()){
-                habitacion = new Habitacion();
-                habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
-                habitacion.setPisoHabitacion(resultSet.getInt("pisoHabitacion"));
-                habitacion.setEstadoHabitacion(resultSet.getBoolean("estadoHabitacion"));
-                TipoHabitacion th=mostrarTipoHabitacion(resultSet.getInt(idTipoHabitacion), conexion);
-                habitacion.setTipoHabitacion(th);
-                
-                habitaciones.add(habitacion);
-            }      
-            statement.close();
-        } catch (SQLException ex) {
-            System.out.println("Error al obtener las habitaciones: " + ex.getMessage());
-        }
-        
-        
-        return habitaciones;
-    }
-*/
 }
 
 

@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,49 +159,6 @@ public class HuespedData {
         
         return huespedes;
     }
-   /* public List<Object> InformeHuesped(long dni){
-      List<Object> reservasHuesped = new ArrayList<>();
-            
-
-        try {
-            String sql = "SELECT reserva.fechaInicioReserva, reserva.fechaFinReserva, habitacion.numeroHabitacion, habitacion.pisoHabitacion, tipohabitacion.categoriaTipoHabitacion, tipohabitacion.precioNocheTipoHabitacion, tipohabitacion.cantPersonasTipoHabitacion, tipohabitacion.tipoCamaTipoHabitacion, tipohabitacion.cantCamasTipoHabitacion FROM huesped, reserva, habitacion, tipohabitacion WHERE huesped.dniHuesped=reserva.dniHuesped AND reserva.numeroHabitacion=habitacion.numeroHabitacion AND habitacion.IdTipoHabitacion=tipohabitacion.idTipoHabitacion AND huesped.dniHuesped= ? ORDER BY huesped.dniHuesped ASC; ; " ;
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, dni);
-            ResultSet resultSet = statement.executeQuery();
-            
-            Reserva reserva;
-            Habitacion habitacion;
-            TipoHabitacion tipoHabitacion;
-            while(resultSet.next()){
-                reserva = new Reserva();
-                habitacion= new Habitacion();
-                tipoHabitacion = new TipoHabitacion();
-                reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
-                reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
-                //huesped.setDomicilioHuesped(resultSet.getString("estadoReserva"));
-                habitacion.setNumeroHabitacion(resultSet.getInt("numeroHabitacion"));
-                habitacion.setPisoHabitacion(resultSet.getInt("pisoHabitacion"));
-                tipoHabitacion.setCategoriaTipoHabitacion(resultSet.getString("categoriaTipoHabitacion"));
-                tipoHabitacion.setPrecioNocheTipoHabitacion(resultSet.getDouble("precioNocheTipoHabitacion"));
-                tipoHabitacion.setCantPersonasTipoHabitacion(resultSet.getInt("cantPersonasTipoHabitacion"));
-                tipoHabitacion.setTipoCamaTipoHabitacion(resultSet.getString("tipoCamaTipoHabitacion"));
-                tipoHabitacion.setCantidadCamasTipoHabitacion(resultSet.getInt("cantCamasTipoHabitacion"));
-                reservasHuesped.add(reserva);
-                reservasHuesped.add(habitacion);
-                reservasHuesped.add(tipoHabitacion);
-                
-            }      
-            
-            
-            statement.close();
-        } catch (SQLException ex) {
-            System.out.println("Error al generar informe del huesped: " + ex.getMessage());
-        }
-        
-        
-        return reservasHuesped;
-    }
-    */
-    
+   
 }
     

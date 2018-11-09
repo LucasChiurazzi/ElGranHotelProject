@@ -283,62 +283,82 @@ public class ReservaData {
         return rta;
     }
     
-      public void finReserva( Conexion conexion){
-         try {
+   public List<Reserva> obtenerReservasActivas( Conexion conexion){
+        List<Reserva> reservas = new ArrayList<>();
+            
 
-            //busco por dni huesped las reservas que hizo
-            //List<Reserva> listaReservasHuesped= this.buscarReserva(huesped.getDniHuesped());
-            List<Reserva> listaReservas=this.obtenerReservas(conexion);
-            //obtengo la fecha de hoy
+        try {
+            String sql = "SELECT * FROM reserva WHERE estadoReserva=1;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            Reserva reserva;
+     
+            while(resultSet.next()){
+                reserva = new Reserva();
+               
+                reserva.setIdReserva(resultSet.getInt("idReserva"));
+                reserva.setFechaInicioReserva(resultSet.getDate("fechaInicioReserva").toLocalDate());
+                reserva.setFechaFinReserva(resultSet.getDate("fechaFinReserva").toLocalDate());
+                reserva.setEstadoReserva(resultSet.getBoolean("estadoReserva"));
+               
+                Huesped huesped=mostrarHuesped(resultSet.getLong("dniHuesped"), conexion);
+               
+                reserva.setHuesped(huesped);
+                
+                Habitacion habitacion=mostrarHabitacion(resultSet.getInt("numeroHabitacion"), conexion);
+               
+                reserva.setHabitacion(habitacion);
+                reservas.add(reserva);
+            }      
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener las reservas: " + ex.getMessage());
+        }
+        
+        
+        return reservas;
+    }
+    public int finReserva( Conexion conexion){
+        int rta=0; 
+        try {
+             //busco las reservas activas y las guardo en una lista
+            List<Reserva> listaReservas=this.obtenerReservasActivas(conexion);
+           
+            //obtengo la fecha de hoy 
             LocalDate fechaHoy = LocalDate.now();
-
+               
             for(Reserva r:listaReservas){
                LocalDate fechaFinAComparar=r.getFechaFinReserva();
                LocalDate fechaInicioAComparar=r.getFechaInicioReserva();
-               if(fechaHoy.isEqual(fechaInicioAComparar.plusDays(1)))
+
+               if(fechaHoy.isEqual(fechaFinAComparar.plusDays(1)))
                {
-                   //si la fecha de hoy es igual a la fecha de inicio de reserva
-                   String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 1 , habitacion.estadoHabitacion= 1  WHERE reserva.idReserva= ? ;";
+                   String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 0, habitacion.estadoHabitacion=0 WHERE reserva.idReserva= ? ;";
 
                     PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setInt(1, r.getIdReserva());
        
-                    statement.executeUpdate();
+                    rta=statement.executeUpdate();
                     
                     statement.close();
-                   
                }
-               if(fechaHoy.isAfter(fechaFinAComparar.plusDays(1)) || fechaHoy.equals(fechaFinAComparar.plusDays(1)))
-                 {
-                     //la habitacion y la reserva pasan a estar libre(0)
-                    String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 0 , habitacion.estadoHabitacion= 0  WHERE reserva.idReserva= ? ;";
+                if(fechaHoy.isEqual(fechaInicioAComparar.plusDays(1)))
+               {
+                   String sql = "UPDATE reserva INNER JOIN  huesped  INNER JOIN habitacion  ON huesped.dniHuesped= reserva.dniHuesped AND reserva.numeroHabitacion= habitacion.numeroHabitacion SET reserva.estadoReserva= 1, habitacion.estadoHabitacion=1 WHERE reserva.idReserva= ? ;";
 
                     PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setInt(1, r.getIdReserva());
        
-                    statement.executeUpdate();
+                    rta=statement.executeUpdate();
                     
                     statement.close();
-                 }
-                if(fechaHoy.isBefore(fechaInicioAComparar.plusDays(1)) && fechaHoy.isBefore(fechaFinAComparar.plusDays(1)))
-                 {
-                   //si la persona quiere reservar a futuro, se hace la reserva pero la habitacion hoy esta libre
-              
-                     String sql = "UPDATE habitacion SET habitacion.estadoHabitacion=0  WHERE habitacion.numeroHabitacion= ?;";
-
-                    PreparedStatement statement = connection.prepareStatement(sql);
-                    statement.setInt(1, r.getHabitacion().getNumeroHabitacion());
-                     System.out.println("n habitacion"+r.getHabitacion().getNumeroHabitacion());
-                     System.out.println("estado habitacion"+r.getHabitacion().getEstadoHabitacion());
-                    statement.executeUpdate();
-                    
-                    statement.close();
-                   
-                 }
-               
+               }
+        
              }
          }catch (SQLException ex) {System.out.println("Error al actualizar una reserva: " + ex.getMessage());
         }
+        return rta;
     }
+      
    
 }

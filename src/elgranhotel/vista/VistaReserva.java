@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package elgranhotel.vista;
 
 import elgranhotel.modelo.Conexion;
@@ -17,18 +13,12 @@ import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
 import elgranhotel.modelo.Reserva;
 import elgranhotel.modelo.ReservaData;
-import static elgranhotel.vista.Principal.escritorio;
 import java.text.SimpleDateFormat;
-
 import java.time.LocalDate;
-
 import static java.time.temporal.ChronoUnit.DAYS;
-
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 import org.jdesktop.swingx.JXDatePicker;
 
 
@@ -39,20 +29,20 @@ import org.jdesktop.swingx.JXDatePicker;
  */
 public class VistaReserva extends javax.swing.JInternalFrame {
     
-    private TipoHabitacion tipoHabitacion;
+    //private TipoHabitacion tipoHabitacion;
     private TipoHabitacionData tipoHabitacionData;
     private List<TipoHabitacion> listaTiposHabitacion;
     private List<Habitacion> listaHabitaciones;
     private Conexion conexion;
     private HuespedData huespedData;
-    private HuespedData huespedData1;
-    private ArrayList<Huesped> listaHuespedes;
+    //private HuespedData huespedData1;
+    //private ArrayList<Huesped> listaHuespedes;
     private Reserva reserva;
     private ReservaData reservaData;
     private DefaultTableModel modeloReserva;
-    private Habitacion habitacion;
+   // private Habitacion habitacion;
     private HabitacionData habitacionData;
-    private List<Reserva> listaReservas;
+   // private List<Reserva> listaReservas;
     
    
     
@@ -523,7 +513,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             // revisar forma
             //habitacionData.actualizarHabitacion(h);
             habitacionData.actualizarHabitacion(h);
-            reservaData.finReserva( conexion);
+           
            if(rta==1) {JOptionPane.showMessageDialog(this, "La Reserva se GUARDO correctamente");}
             else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
         }
