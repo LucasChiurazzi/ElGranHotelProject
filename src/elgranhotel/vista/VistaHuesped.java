@@ -4,24 +4,48 @@ package elgranhotel.vista;
 import elgranhotel.modelo.Conexion;
 import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 public class VistaHuesped extends javax.swing.JInternalFrame {
-    private HuespedData huespedData;
-    private Conexion conexion;
-
-    
+      private HuespedData huespedData;
+      private Conexion conexion;
+      private Huesped huesped;
+      private List<Huesped> listaHuespedes;
+      private DefaultTableModel modeloHuesped;
+      private String opcion;
+      private long dniHuesped;
+    /**
+     * Creates new form VistaHuesped1
+     */
     public VistaHuesped() {
         initComponents();
+        
         try {
         conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+        modeloHuesped=new DefaultTableModel();
         huespedData= new HuespedData(conexion);
+        listaHuespedes=new ArrayList<>();
+        armaCabeceraTabla();
         
     } catch (ClassNotFoundException ex) {
         Logger.getLogger(VistaHuesped.class.getName()).log(Level.SEVERE, null, ex);
-    }
+}
     }
 
     /**
@@ -33,38 +57,36 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jetiquetaHusped = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jtDni = new javax.swing.JTextField();
-        jtNombre = new javax.swing.JTextField();
         jtDomicilio = new javax.swing.JTextField();
         jtCorreo = new javax.swing.JTextField();
         jtCelular = new javax.swing.JTextField();
         jBtGuardar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jBtModificar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jBtBorrar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jBtBuscarDniHuesped = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableHuesped = new javax.swing.JTable();
+        jBbuscarTodosH = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
+        jtDni = new javax.swing.JFormattedTextField();
+        jtNombre = new javax.swing.JTextField();
+        jBInforme = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(800, 577));
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Gestion de Huespedes- El Gran Hotel 1.0");
 
-        jetiquetaHusped.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jetiquetaHusped.setText("                                        Huesped");
-        jetiquetaHusped.setToolTipText("");
-
-        jLabel1.setText("DNI");
-
-        jLabel2.setText("Nombre");
-
-        jLabel3.setText("Domicilio");
-
-        jLabel4.setText("Correo");
+        jLabel6.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel6.setText("HUESPED");
 
         jLabel5.setText("Celular");
-
-        jtNombre.setToolTipText("");
 
         jBtGuardar.setText("Guardar");
         jBtGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -73,12 +95,16 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("DNI");
+
         jBtModificar.setText("Modificar");
         jBtModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtModificarActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("Nombre");
 
         jBtBorrar.setText("Borrar");
         jBtBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,118 +113,424 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setText("Domicilio");
+
+        jLabel4.setText("Correo");
+
+        jBtBuscarDniHuesped.setText("Buscar");
+        jBtBuscarDniHuesped.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtBuscarDniHuespedActionPerformed(evt);
+            }
+        });
+
+        jTableHuesped.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Título 1", "Título 2", "Título 3", "Título 4"
+            }
+        ));
+        jTableHuesped.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableHuespedMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableHuesped);
+
+        jBbuscarTodosH.setText("Todos");
+        jBbuscarTodosH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarTodosHActionPerformed(evt);
+            }
+        });
+
+        jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
+
+        try {
+            jtDni.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jBInforme.setText("Informe");
+        jBInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBInformeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jetiquetaHusped, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18)
-                            .addComponent(jtCorreo))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jtDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBtGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtModificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtBorrar))
-                            .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(383, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jBtBuscarDniHuesped)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBInforme))
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(31, 31, 31)
+                                .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBtGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtModificar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtBorrar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBbuscarTodosH)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBLimpiar)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jetiquetaHusped, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtDomicilio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
+                    .addComponent(jtDni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtBuscarDniHuesped)
+                        .addComponent(jBInforme)))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
                     .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtGuardar)
                     .addComponent(jBtModificar)
-                    .addComponent(jBtBorrar))
-                .addContainerGap())
+                    .addComponent(jBtBorrar)
+                    .addComponent(jBLimpiar)
+                    .addComponent(jBbuscarTodosH))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtGuardarActionPerformed
-        long dni= Long.parseLong(jtDni.getText());
-        String nombre=jtNombre.getText();
-        String domicilio=jtDomicilio.getText();
-        String correo=jtCorreo.getText();
-        String celular=jtCelular.getText();
-       
-        Huesped huesped=new Huesped(dni,nombre,domicilio,correo,celular);
-        huespedData.crearHuesped(huesped);
-        
+        //cargo un huesped nuevo y me direcciona a vista reserva
+        botonGuardar();
         
     }//GEN-LAST:event_jBtGuardarActionPerformed
 
     private void jBtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtModificarActionPerformed
-         if (jtDni.getText()!=null){
-            long dni=Long.parseLong(jtDni.getText()); 
-            String nombre=jtNombre.getText();
-            String domicilio=jtDomicilio.getText();
-            String correo=jtCorreo.getText();
-            String celular=jtCelular.getText();
-          
-             Huesped huesped=new Huesped(dni,nombre,domicilio,correo,celular);
-             huespedData.modificarHuesped(huesped);
+       //actualizo información de un huesped
+        botonActualizar();
     }//GEN-LAST:event_jBtModificarActionPerformed
-    }
+
     private void jBtBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBorrarActionPerformed
-        long dni=Long.parseLong(jtDni.getText());
-        huespedData.eliminarHuesped(dni);
+        //elimino un huesped
+        botonBorrar();
+        
     }//GEN-LAST:event_jBtBorrarActionPerformed
 
+    private void jBtBuscarDniHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtBuscarDniHuespedActionPerformed
+        botonBuscar();
+        
+  
+        
+         
+    }//GEN-LAST:event_jBtBuscarDniHuespedActionPerformed
+
+    private void jBbuscarTodosHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarTodosHActionPerformed
+       //boton buscar
+        opcion="buscarTodos";
+        cargarDatos(opcion);
+        
+    }//GEN-LAST:event_jBbuscarTodosHActionPerformed
+
+    private void jTableHuespedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHuespedMouseClicked
+        //clic en alguna fila de la tabla
+        cargarDatosDesdeTabla();
+        
+        
+    }//GEN-LAST:event_jTableHuespedMouseClicked
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        //limpieza de campos
+        limpiar();
+        
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jBInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInformeActionPerformed
+       botonInforme();
     
+    }//GEN-LAST:event_jBInformeActionPerformed
+public void armaCabeceraTabla(){
+  
+        ArrayList<Object> columnas=new ArrayList<>();
+        columnas.add("DNI");
+        columnas.add("Nombre");
+        columnas.add("Domicilio");
+        columnas.add("Correo");
+        columnas.add("Celular");
+        for(Object it: columnas){
+            modeloHuesped.addColumn(it);
+        }
+        jTableHuesped.setModel(modeloHuesped);
+  }
+    
+    public void cargarDatos(String opcion){
+        borraFilasTabla();
+        if(opcion=="buscarDni"){
+            listaHuespedes.removeAll(listaHuespedes);
+            listaHuespedes.add(huespedData.mostrarHuesped(Long.parseLong(jtDni.getText())));
+        }          
+        if(opcion=="buscarTodos"){
+            listaHuespedes.removeAll(listaHuespedes);
+            listaHuespedes = huespedData.mostrarHuespedes();
+        }
+        for(Huesped h:listaHuespedes){
+            modeloHuesped.addRow(new Object[]{h.getDniHuesped(), h.getNombreHuesped(), h.getDomicilioHuesped(), h.getCorreoHuesped(), h.getCelularHuesped()});
+        }        
+    }
+
+    public void cargarDatosDesdeTabla(){
+        
+         //obtener fila seleccionada    
+        int row = jTableHuesped.getSelectedRow();
+        
+        //Creo variables que van a almacenar lo que hay en la fila
+        String dni=jTableHuesped.getValueAt(row, 0).toString();
+        String nombre=jTableHuesped.getValueAt(row, 1).toString();
+        String domicilio=jTableHuesped.getValueAt(row, 2).toString();
+        String correo=jTableHuesped.getValueAt(row, 3).toString();
+        String celular=jTableHuesped.getValueAt(row, 4).toString();
+        //inserto en textfield
+         jtDni.setText(dni);
+         jtNombre.setText(nombre);
+         jtDomicilio.setText(domicilio);
+         jtCorreo.setText(correo);
+         jtCelular.setText(celular);
+       
+    
+    }
+
+    public void limpiar(){
+         jtDni.setText("");
+         jtNombre.setText("");
+         jtDomicilio.setText("");
+         jtCorreo.setText("");
+         jtCelular.setText("");
+        
+    }
+    
+      public void borraFilasTabla(){
+
+      int a =modeloHuesped.getRowCount()-1; 
+         //uso for que inicie en el valor de a y va disminuyendo hasta ser igual a 0
+         for(int i=a;i>=0;i--){
+            //limpieza de tabla
+            modeloHuesped.removeRow(i ); 
+        }
+     }
+    public boolean textFieldVacios()
+    {
+     boolean vacio=jtDni.getText().equals("") && 
+     jtNombre.getText().equals("") &&
+     jtDomicilio.getText().equals("") &&
+     jtCorreo.getText().equals("") &&
+     jtCelular.getText().equals("");
+            
+            return vacio;
+    }
+      //metodos para botones
+   public void botonBorrar(){
+   int rta=0;
+        if(!textFieldVacios())
+        {   
+            if(JOptionPane.showConfirmDialog(this, "Esta por BORRAR un Huesped. ¿Desea continuar?", "ADVERTENCIA",0 )==0)
+            {
+                dniHuesped = Integer.parseInt(jtDni.getText());
+        
+                rta=huespedData.eliminarHuesped(dniHuesped);
+        
+                if(rta==1)
+                {
+                    JOptionPane.showMessageDialog(this, "Operación EXITOSA");
+                    borraFilasTabla();
+                }else 
+                {
+                 JOptionPane.showMessageDialog(this, "FALLÓ la operación");
+                }
+             }
+        }else{
+                JOptionPane.showMessageDialog(this, "Completar DATOS ");
+              }
+   }
+   
+    public void botonGuardar(){
+        int rta=0;
+     
+     if(!textFieldVacios())
+     { 
+        dniHuesped= Long.parseLong(jtDni.getText());
+        String nombre=jtNombre.getText();
+        String domicilio=jtDomicilio.getText();
+        String correo=jtCorreo.getText();
+        String celular=jtCelular.getText();
+        huesped=new Huesped(dniHuesped,nombre,domicilio,correo,celular);
+        rta=huespedData.crearHuesped(huesped);
+        
+                if(rta==1)
+                 {
+                    JOptionPane.showMessageDialog(this, "Se creo un Nuevo Huesped");
+                    VistaReserva vr=new VistaReserva();
+                    Principal.escritorio.add(vr);
+                    vr.toFront();
+                    vr.setVisible(true);
+                    // toma el dni que buscaron en reserva y lo setea en el text field de dni 
+                    vr.jTHuespedReserva.setText(dniHuesped+" "+huesped.getNombreHuesped());
+      
+                    dispose();
+                 }else
+                    {
+                     JOptionPane.showMessageDialog(this, "FALLÓ la operación");
+                    }
+     }else
+        {
+             JOptionPane.showMessageDialog(this, "Completar DATOS ");
+        }
+   }
+    
+    public void botonActualizar(){
+       int rta=0;
+    if(!textFieldVacios())
+     { 
+         long dni=Long.parseLong(jtDni.getText());
+         String nombre=jtNombre.getText();
+         String domicilio=jtDomicilio.getText();
+         String correo=jtCorreo.getText();
+         String celular=jtCelular.getText();
+
+         huesped=new Huesped(dni,nombre,domicilio,correo,celular);
+         rta=huespedData.modificarHuesped(huesped);
+         
+                if(rta==1)
+                {
+                        JOptionPane.showMessageDialog(this, "Se ha Modificado un Huesped");
+                        borraFilasTabla();
+                }else
+                   {
+                         JOptionPane.showMessageDialog(this, "FALLÓ la operación");
+                   }
+      }else
+           {
+                JOptionPane.showMessageDialog(this, "Completar DATOS ");
+           }   
+   }
+    public void botonBuscar(){
+    //declaro y recibo dni
+        //long dniHuesped;
+        dniHuesped = Long.parseLong(jtDni.getText());
+        
+        //si el campo dni no esta vacio, inserto los valores en el formulario
+        if (jtDni.getText()!=null){
+                         
+            huesped= huespedData.mostrarHuesped(dniHuesped);
+            jtNombre.setText(huesped.getNombreHuesped());
+            jtDomicilio.setText(huesped.getDomicilioHuesped());
+            jtCorreo.setText(huesped.getCorreoHuesped());
+            jtCelular.setText(huesped.getCelularHuesped());
+          
+            opcion="buscarDni";
+            //cargo datos en la tabla
+            cargarDatos(opcion); 
+        
+        }
+    }
+    
+    public void botonInforme(){
+        
+        dniHuesped=Long.parseLong(jtDni.getText());
+        
+        JasperReport informe;
+        JasperPrint imprimir;
+        try {
+        
+                         
+            huesped= huespedData.mostrarHuesped(dniHuesped);
+            Map parametros = new HashMap();
+            parametros.put("parametroDni", String.valueOf(dniHuesped));
+            parametros.put("parametroNombre", huesped.getNombreHuesped());
+            parametros.put("parametroDomicilio", huesped.getDomicilioHuesped());
+            parametros.put("parametroCorreo", huesped.getCorreoHuesped());
+            parametros.put("parametroCelular", huesped.getCelularHuesped());
+        
+        conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+        //informe = JasperCompileManager.compileReport("InformeHuesped.jasper");
+         informe = (JasperReport) JRLoader.loadObjectFromFile("InformeHuesped.jasper");
+        imprimir = JasperFillManager.fillReport(informe, parametros , this.conexion.getConexion());
+        JasperViewer jViewer = new JasperViewer(imprimir,false); //Creamos la vista del Reporte
+        jViewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Le agregamos que se cierre solo el reporte cuando lo cierre el usuario
+        jViewer.setVisible(true); //Inicializamos la vista del informe
+        } catch (JRException ex) {
+            Logger.getLogger(java.security.Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+              Logger.getLogger(VistaHuesped.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBInforme;
+    private javax.swing.JButton jBLimpiar;
+    private javax.swing.JButton jBbuscarTodosH;
     private javax.swing.JButton jBtBorrar;
+    private javax.swing.JButton jBtBuscarDniHuesped;
     private javax.swing.JButton jBtGuardar;
     private javax.swing.JButton jBtModificar;
     private javax.swing.JLabel jLabel1;
@@ -206,10 +538,12 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jetiquetaHusped;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableHuesped;
     private javax.swing.JTextField jtCelular;
     private javax.swing.JTextField jtCorreo;
-    private javax.swing.JTextField jtDni;
+    public static javax.swing.JFormattedTextField jtDni;
     private javax.swing.JTextField jtDomicilio;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
