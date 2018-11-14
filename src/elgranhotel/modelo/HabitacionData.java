@@ -12,9 +12,8 @@ import java.util.List;
 
 public class HabitacionData {
     private Connection connection = null;
-
-
-
+    
+    
 //constructor toma una conexion
     public HabitacionData (Conexion conexion) {
         
@@ -90,7 +89,7 @@ public class HabitacionData {
         }
     return rta; 
     }
-//elimino habitacion filtrando por dni
+//elimino habitacion filtrando por el numero de la habitacion
  public int borrarHabitacion(int numeroHabitacion){
     int rta=0;
     try {
@@ -106,8 +105,7 @@ public class HabitacionData {
     return rta;   
 }
 
-// que es mejor un metodo que filtre
-//o filtrar dsp de obtener la data?? MEtodo que filtre puede servir para cualquier parametro
+//obtengo las habitaciones existentes de la entidad habitacion
 public List<Habitacion> obtenerHabitaciones(Conexion conexion){
      Habitacion habitacion;
      List<Habitacion> habitaciones= new ArrayList<>();
@@ -132,6 +130,7 @@ public List<Habitacion> obtenerHabitaciones(Conexion conexion){
     return habitaciones;
 }
 
+//obtengo habitaciones segun condicion, 1 si esta ocupada y 0 si esta libre
 public List<Habitacion> obtenerHabitacionesSi(Boolean condicion,Conexion conexion){
      Habitacion habitacion;
      List<Habitacion> habitaciones= new ArrayList<>();
@@ -157,6 +156,7 @@ public List<Habitacion> obtenerHabitacionesSi(Boolean condicion,Conexion conexio
     return habitaciones;
 }
 
+//busco un tipo de habitacion en la clase TipoHabitacionData
 public TipoHabitacion buscarTipoHabitacion(int idTipoHabitacion, Conexion conexion) {
        TipoHabitacionData tipohabitacionData = new TipoHabitacionData(conexion);
        TipoHabitacion th= tipohabitacionData.buscarTipoHabitacion(idTipoHabitacion);

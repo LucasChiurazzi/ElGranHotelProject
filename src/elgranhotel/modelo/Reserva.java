@@ -1,4 +1,3 @@
-
 package elgranhotel.modelo;
 
 import java.time.LocalDate;
@@ -22,7 +21,7 @@ public class Reserva {
         this.huesped = huesped;
         this.habitacion = habitacion;
     }
-
+    //constructor2
     public Reserva(LocalDate fechaInicioReserva, LocalDate fechaFinReserva, boolean estadoReserva, Huesped huesped, Habitacion habitacion) {
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaFinReserva = fechaFinReserva;
@@ -30,12 +29,12 @@ public class Reserva {
         this.huesped = huesped;
         this.habitacion = habitacion;
     }
-
+    //constructor3
     public Reserva() {
     }
 
     
-    
+    //getters y setters
     public int getIdReserva() {
         return idReserva;
     }
@@ -83,7 +82,5 @@ public class Reserva {
     public void setHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
     }
-    
-    
-    
+ 
 }

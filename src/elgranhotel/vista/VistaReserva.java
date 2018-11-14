@@ -13,26 +13,16 @@ import elgranhotel.modelo.Huesped;
 import elgranhotel.modelo.HuespedData;
 import elgranhotel.modelo.Reserva;
 import elgranhotel.modelo.ReservaData;
-//import static elgranhotel.vista.Principal.escritorio;
 import java.text.SimpleDateFormat;
-
 import java.time.LocalDate;
-
 import static java.time.temporal.ChronoUnit.DAYS;
-
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 import org.jdesktop.swingx.JXDatePicker;
 
 
 
-/**
- *
- * @author Lucas
- */
 public class VistaReserva extends javax.swing.JInternalFrame {
     
     private TipoHabitacion tipoHabitacion;

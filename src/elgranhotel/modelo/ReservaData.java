@@ -1,7 +1,4 @@
-
-
 package elgranhotel.modelo;
-
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,8 +23,7 @@ public class ReservaData {
         }
     }
 
-   
-    //copiado de Hugo
+    //veo el historial de reservas
     public List<Reserva> obtenerReservas( Conexion conexion){
         List<Reserva> reservas = new ArrayList<>();
             
@@ -63,7 +59,7 @@ public class ReservaData {
         
         return reservas;
     }
-    //lista de todos los huespedes?
+    //lista de todos los huespedes
     public List<Huesped> obtenerHuespedes(){
         List<Huesped> huespedes = new ArrayList<>();
             
@@ -92,12 +88,12 @@ public class ReservaData {
         return huespedes;
     }   
     
+    //busco reservas realizadas por el dni del huesped
     public List<Reserva> buscarReserva(long dni,  Conexion conexion){
         //recibo un huesped
         //busco en la base de datos si el dniHuesped esta en alguna reserva y en
         //alguna habitacion
         List<Reserva> reservas = new ArrayList<>();
-        //List<Huesped> huespedes = new ArrayList<Huesped>();
         
         try {
             String sql = "SELECT * FROM reserva, huesped, habitacion WHERE reserva.dniHuesped=huesped.dniHuesped AND habitacion.numeroHabitacion=reserva.numeroHabitacion AND reserva.dniHuesped = "+ dni + ";" ;
@@ -129,7 +125,7 @@ public class ReservaData {
         
         return reservas;
     }
-
+    //busco reservas por fecha de inicio y fin
     public List<Reserva> buscarReserva(LocalDate fechaI, LocalDate fechaF,  Conexion conexion){
         //recibo una fecha de inicio de la reserva
         //busco en la base de datos si hay alguna reserva para esa fecha 
@@ -258,7 +254,7 @@ public class ReservaData {
         HabitacionData habitacionData = new HabitacionData(conexion);
         return habitacionData.buscarHabitacion(idHabitacion, conexion);
     }
-       
+    //metodo utilizado en vista buscar reserva
     public int finReserva(int idReserva){
         int rta=0;
         try {
@@ -278,7 +274,9 @@ public class ReservaData {
         }
         return rta;
     }
-        public List<Reserva> obtenerReservasActivas( Conexion conexion){
+    
+    //conn este metodos buscamos reservas con estado true
+    public List<Reserva> obtenerReservasActivas( Conexion conexion){
         List<Reserva> reservas = new ArrayList<>();
             
 
