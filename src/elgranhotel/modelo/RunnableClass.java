@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package elgranhotel.modelo;
 
 import elgranhotel.vista.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Lucas
- */
+
 public class RunnableClass implements Runnable{
     private Conexion conexion;
     private ReservaData reservaData;
@@ -20,7 +12,6 @@ public class RunnableClass implements Runnable{
     public RunnableClass(Conexion conexion) {
         this.conexion = conexion;
     }
-    
     
 
     @Override

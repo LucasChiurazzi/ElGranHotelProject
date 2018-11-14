@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package elgranhotel.modelo;
 
 import java.sql.Connection;
@@ -12,10 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Lucas
- */
+
 public class TipoHabitacionData {
     
    private Connection connection= null;
@@ -35,7 +27,7 @@ public class TipoHabitacionData {
        TipoHabitacion tipoHabitacion= null;
  
        try{
-       String sql= "SELECT * FROM tipohabitacion \n WHERE idTipoHabitacion = " +idTipoHabitacion + ";";
+       String sql= "SELECT * FROM tipohabitacion WHERE idTipoHabitacion = " +idTipoHabitacion + ";";
           
        PreparedStatement st = connection.prepareStatement(sql);
        
@@ -105,7 +97,7 @@ public class TipoHabitacionData {
     int rta=0;
     try {
             
-            String sql = "DELETE FROM tipohabitacion \n WHERE idTipoHabitacion =?;";
+            String sql = "DELETE FROM tipohabitacion WHERE idTipoHabitacion =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, idTipoHabitacion);
@@ -125,7 +117,7 @@ public class TipoHabitacionData {
         try {
             
             String sql = "UPDATE tipohabitacion SET categoriaTipoHabitacion= ? , "
-                    + "cantPersonasTipoHabitacion = ? , precioNocheTipoHabitacion= ? , tipoCamaTipoHabitacion= ? , cantCamasTipoHabitacion= ? \n"
+                    +"cantPersonasTipoHabitacion = ? , precioNocheTipoHabitacion= ? , tipoCamaTipoHabitacion= ? , cantCamasTipoHabitacion= ? \n"
                     + "WHERE idTipoHabitacion = ? ;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -175,7 +167,7 @@ public class TipoHabitacionData {
        int rta=0;
        try {
             
-            String sql = "UPDATE tipohabitacion SET precioNocheTipoHabitacion= ? \n WHERE idTipoHabitacion = ? ;";
+            String sql = "UPDATE tipohabitacion SET precioNocheTipoHabitacion= ? WHERE idTipoHabitacion = ? ;";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setDouble(1, precio);

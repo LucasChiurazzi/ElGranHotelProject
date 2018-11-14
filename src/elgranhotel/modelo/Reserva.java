@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package elgranhotel.modelo;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author Lucas
- */
+
 public class Reserva {
     //atributos
-    private int idReserva= -1;
+    private int idReserva;
     private LocalDate fechaInicioReserva;
     private LocalDate fechaFinReserva;
     private boolean estadoReserva;
@@ -29,26 +21,24 @@ public class Reserva {
         this.huesped = huesped;
         this.habitacion = habitacion;
     }
-
-    
+    //constructor2
     public Reserva(LocalDate fechaInicioReserva, LocalDate fechaFinReserva, boolean estadoReserva, Huesped huesped, Habitacion habitacion) {
-        this.idReserva = -1;
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaFinReserva = fechaFinReserva;
         this.estadoReserva = estadoReserva;
         this.huesped = huesped;
         this.habitacion = habitacion;
     }
-
+    //constructor3
     public Reserva() {
-    this.idReserva= -1;
     }
-    
 
+    
+    //getters y setters
     public int getIdReserva() {
         return idReserva;
     }
-    
+
     public LocalDate getFechaInicioReserva() {
         return fechaInicioReserva;
     }
@@ -92,7 +82,5 @@ public class Reserva {
     public void setHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
     }
-    
-    
-    
+ 
 }

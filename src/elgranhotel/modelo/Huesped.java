@@ -1,15 +1,16 @@
 
 package elgranhotel.modelo;
 
-//atributos
+
 public class Huesped {
+    //atributos
     private long dniHuesped;
     private String nombreHuesped;
     private String domicilioHuesped;
     private String correoHuesped;
     private String celularHuesped;
 
-// constructor
+// constructor1
 public Huesped(long dniHuesped, String nombreHuesped, String domicilioHuesped, String correoHuesped, String celularHuesped){
     this.dniHuesped=dniHuesped;
     this.nombreHuesped=nombreHuesped;
@@ -17,7 +18,7 @@ public Huesped(long dniHuesped, String nombreHuesped, String domicilioHuesped, S
     this.correoHuesped=correoHuesped;
     this.celularHuesped=celularHuesped;
 } 
-
+// constructor2
 public Huesped(){
 }
 

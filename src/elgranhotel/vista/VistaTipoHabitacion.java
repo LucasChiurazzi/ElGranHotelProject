@@ -76,7 +76,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Gestion Tipos De Habitacion - El Gran Hotel 1.0");
+        setTitle("Gestión Tipos De Habitacion - El Gran Hotel 1.0");
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setText("TIPOS DE HABITACION");
@@ -123,7 +123,7 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel7.setText("PRECIO X NOCHE");
+        jLabel7.setText("Precio Por Noche");
 
         jCBTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,17 +131,17 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setText("NOMBRE");
+        jLabel3.setText("Nombre");
 
-        jLabel4.setText("CANTIDAD MAX PERSONAS");
+        jLabel4.setText("Cantiadad Max de Personas");
 
-        jLabel5.setText("CANTIDAD DE CAMAS");
+        jLabel5.setText("Cantiadad De Camas");
 
-        jLabel6.setText("TIPO DE CAMA");
+        jLabel6.setText("Tipo de Cama");
 
         jTFPrecioNocheTipoHabitacion.setToolTipText("Ingrese el precio, puede usar decimales.");
 
-        jLabel8.setText("CODIGO");
+        jLabel8.setText("Codigo");
 
         jTFCodigoTipoHabitacion.setToolTipText("Ingrese Nro Codigo");
 
@@ -158,62 +158,65 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBActualizarPrecioTipoHabitacion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4))
-                                .addGap(12, 12, 12)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel3)
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jTFCategoriaTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTFCantPersonasTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTFPrecioNocheTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(165, 165, 165)
-                                        .addComponent(jLabel1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jTFCodigoTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(85, 85, 85)
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(88, 88, 88)
-                                        .addComponent(jTFTipoCamaTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)
                                         .addComponent(jLabel5)
-                                        .addGap(36, 36, 36)
-                                        .addComponent(jTFCantidadCamasTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(28, 28, 28))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTFCantidadCamasTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTFCategoriaTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(40, 40, 40))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTFCantPersonasTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTFPrecioNocheTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(165, 165, 165)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(40, 40, 40)
+                                .addComponent(jTFCodigoTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCBTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(88, 88, 88)
+                                .addComponent(jTFTipoCamaTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 185, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jBLimpiarTipoHabitacion)
-                .addGap(56, 56, 56)
-                .addComponent(jBBorrarTipoHabitacion)
-                .addGap(66, 66, 66)
-                .addComponent(jBActualizarTipoHabitacion)
-                .addGap(55, 55, 55)
-                .addComponent(jBNuevoTipoHabitacion)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(464, 464, 464)
+                        .addComponent(jBActualizarPrecioTipoHabitacion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jBLimpiarTipoHabitacion)
+                        .addGap(56, 56, 56)
+                        .addComponent(jBBorrarTipoHabitacion)
+                        .addGap(66, 66, 66)
+                        .addComponent(jBActualizarTipoHabitacion)
+                        .addGap(55, 55, 55)
+                        .addComponent(jBNuevoTipoHabitacion)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -245,13 +248,13 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
                     .addComponent(jTFPrecioNocheTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBActualizarPrecioTipoHabitacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBBorrarTipoHabitacion)
                     .addComponent(jBActualizarTipoHabitacion)
                     .addComponent(jBNuevoTipoHabitacion)
                     .addComponent(jBLimpiarTipoHabitacion))
-                .addContainerGap())
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -376,12 +379,13 @@ public class VistaTipoHabitacion extends javax.swing.JInternalFrame {
    int rta=0;
         if(!textFieldVacios())
      {   
-         if(JOptionPane.showConfirmDialog(this, "Esta por BORRAR un Tipo de Habitación. ¿Desea continuar?", "ADVERTENCIA",0 )==0){
-            int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
-              rta=tipoHabitacionData.borrarTipoHabitacion(idTipoHabitacion);
-            limpiarComboBox();
-                if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
-                    else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
+        if(JOptionPane.showConfirmDialog(this, "Esta por BORRAR un Tipo de Habitación. ¿Desea continuar?", "ADVERTENCIA",0 )==0){
+        int idTipoHabitacion = Integer.parseInt(jTFCodigoTipoHabitacion.getText());
+        
+        rta=tipoHabitacionData.borrarTipoHabitacion(idTipoHabitacion);
+        limpiarComboBox();
+        if(rta==1) {JOptionPane.showMessageDialog(this, "Operación EXITOSA");}
+            else {JOptionPane.showMessageDialog(this, "FALLÓ la operación");}
         }
          }else{
          JOptionPane.showMessageDialog(this, "Completar DATOS ");

@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package elgranhotel.modelo;
 
-/**
- *
- * @author Lucas
- */
+
 public class TipoHabitacion {
     //atributos
     private int idTipoHabitacion;
@@ -20,12 +12,7 @@ public class TipoHabitacion {
     private String tipoCamaTipoHabitacion;
     private int cantidadCamasTipoHabitacion;
 
-    
-    //constructores
-    public TipoHabitacion() {
-    }
-
-    
+    //constructor1
     public TipoHabitacion(int idTipoHabitacion, String categoriaTipoHabitacion, int cantPersonasTipoHabitacion, double precioNocheTipoHabitacion, String tipoCamaTipoHabitacion, int cantidadCamasTipoHabitacion) {
         this.idTipoHabitacion = idTipoHabitacion;
         this.categoriaTipoHabitacion = categoriaTipoHabitacion;
@@ -34,6 +21,11 @@ public class TipoHabitacion {
         this.tipoCamaTipoHabitacion = tipoCamaTipoHabitacion;
         this.cantidadCamasTipoHabitacion = cantidadCamasTipoHabitacion;
     }
+    
+    //constructor2
+    public TipoHabitacion() {
+    }
+
 
     
     //getters
@@ -87,15 +79,5 @@ public class TipoHabitacion {
 
     public void setCantidadCamasTipoHabitacion(int cantidadCamasTipoHabitacion) {
         this.cantidadCamasTipoHabitacion = cantidadCamasTipoHabitacion;
-    }
-    
-
-
-  
-
-    
- 
-    
-    
-    
+    }   
 }
