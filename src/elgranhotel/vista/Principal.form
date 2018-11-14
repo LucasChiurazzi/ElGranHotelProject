@@ -29,7 +29,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuABMHuesped">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ABM Huesped"/>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Huespedes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuABMHuespedActionPerformed"/>
@@ -67,7 +67,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuABMHabitacion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ABM Habitaci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Habitaciones"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuABMHabitacionActionPerformed"/>
@@ -85,7 +85,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemABMTipoHabitacion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ABM tipo Habitacion"/>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de tipos de Habitaci&#xf3;n"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemABMTipoHabitacionActionPerformed"/>

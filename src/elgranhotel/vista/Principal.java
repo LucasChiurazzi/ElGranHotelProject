@@ -19,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
     private ReservaData reservaData;
     
     public Principal() {
+        
         initComponents();
         finReservaAutomatico();
           
@@ -97,7 +98,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jMenuABMHuesped.setText("ABM Huesped");
+        jMenuABMHuesped.setText("Gestión de Huespedes");
         jMenuABMHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuABMHuespedActionPerformed(evt);
@@ -129,7 +130,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuHabitacion.setText("Habitación");
 
-        jMenuABMHabitacion.setText("ABM Habitación");
+        jMenuABMHabitacion.setText("Gestión de Habitaciones");
         jMenuABMHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuABMHabitacionActionPerformed(evt);
@@ -146,7 +147,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItemABMTipoHabitacion.setText("ABM tipo Habitacion");
+        jMenuItemABMTipoHabitacion.setText("Gestión de tipos de Habitación");
         jMenuItemABMTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemABMTipoHabitacionActionPerformed(evt);
