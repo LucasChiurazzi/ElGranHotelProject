@@ -477,9 +477,14 @@ public void armaCabeceraTabla(){
            }   
    }
     public void botonBuscar(){
-    
-        if("".equals(jtDni.getText())){
         
+       
+     
+     
+        if(jtDni.getText().equals("        ")){
+            JOptionPane.showMessageDialog(this, "Completar DNI ");
+       
+    } else {     
         dniHuesped = Long.parseLong(jtDni.getText());
         huesped= huespedData.mostrarHuesped(dniHuesped);
         //si el campo dni no esta vacio, inserto los valores en el formulario
@@ -497,7 +502,6 @@ public void armaCabeceraTabla(){
         }else{
             JOptionPane.showMessageDialog(this, "No hay ningún Huesped cargado para este DNI");
         }
-    } else  { JOptionPane.showMessageDialog(this, "Completar DNI ");
             }
       
     }
