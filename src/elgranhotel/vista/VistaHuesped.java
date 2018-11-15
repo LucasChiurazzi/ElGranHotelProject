@@ -382,7 +382,7 @@ public void armaCabeceraTabla(){
      }
     public boolean textFieldVacios()
     {
-     boolean vacio=jtDni.getText()==null && 
+     boolean vacio=jtDni.getText().equals("        ") && 
      jtNombre.getText().equals("") &&
      jtDomicilio.getText().equals("") &&
      jtCorreo.getText().equals("") &&
@@ -393,7 +393,7 @@ public void armaCabeceraTabla(){
       //metodos para botones
    public void botonBorrar(){
    int rta=0;
-        if(textFieldVacios())
+        if(!textFieldVacios())
         {   
             if(JOptionPane.showConfirmDialog(this, "Esta por BORRAR un Huesped. ¿Desea continuar?", "ADVERTENCIA",0 )==0)
             {
