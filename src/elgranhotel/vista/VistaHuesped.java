@@ -308,7 +308,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInformeActionPerformed
-       botonInforme();
+       botonInforme(conexion);
     
     }//GEN-LAST:event_jBInformeActionPerformed
 public void armaCabeceraTabla(){
@@ -502,7 +502,7 @@ public void armaCabeceraTabla(){
       
     }
     
-    public void botonInforme(){
+    public void botonInforme(Conexion conexion){
         
         dniHuesped=Long.parseLong(jtDni.getText());
         
@@ -519,16 +519,16 @@ public void armaCabeceraTabla(){
             parametros.put("parametroCorreo", huesped.getCorreoHuesped());
             parametros.put("parametroCelular", huesped.getCelularHuesped());
         
-        conexion = new Conexion("jdbc:mysql://localhost/hotel", "root", "");
+       
         //informe = JasperCompileManager.compileReport("InformeHuesped.jasper");
          informe = (JasperReport) JRLoader.loadObjectFromFile("InformeHuesped.jasper");
-        imprimir = JasperFillManager.fillReport(informe, parametros , this.conexion.getConexion());
+        imprimir = JasperFillManager.fillReport(informe, parametros , conexion.getConexion());
         JasperViewer jViewer = new JasperViewer(imprimir,false); //Creamos la vista del Reporte
         jViewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Le agregamos que se cierre solo el reporte cuando lo cierre el usuario
         jViewer.setVisible(true); //Inicializamos la vista del informe
         } catch (JRException ex) {
             Logger.getLogger(java.security.Principal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
               Logger.getLogger(VistaHuesped.class.getName()).log(Level.SEVERE, null, ex);
           }
     }
