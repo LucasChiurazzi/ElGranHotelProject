@@ -572,7 +572,6 @@ public class VistaBuscarReserva extends javax.swing.JInternalFrame {
     
     public void botonLimpiar(){
         
-        armaCabeceraTabla();
         borraFilasTabla();
         
         jTFEstadoReserva1.setText("");
