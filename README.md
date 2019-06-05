@@ -1,2 +1,2 @@
 # ElGranHotelProject
-Grupo 7
+Es un sistema completo funcional para utilizar en cualquier hotel.
